@@ -100,3 +100,9 @@ composer install
 ```bash
 cp .env.example .env
 ```
+
+-   Generate an app encryption key
+
+```bash
+php artisan key:generate
+```
