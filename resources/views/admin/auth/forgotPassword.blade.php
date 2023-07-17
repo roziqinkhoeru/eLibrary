@@ -1,4 +1,4 @@
-@extends('admin.auth.authLayout')
+@extends('admin.auth.layout')
 
 @section('authContent')
     <div class="container container-login container-transparent animated fadeIn">
@@ -32,7 +32,7 @@
 
         function submitForgotPasswordAjax(isResend) {
             $.ajax({
-                url: "{{ route('admin.forgotPassword') }}",
+                url: "#",
                 type: "POST",
                 data: {
                     email: $('#email').val(),
@@ -48,7 +48,7 @@
                     });
                     if (isResend) {
                         $('#resend_link').html(
-                            'Masih belum menerima email?<br/>Periksa spam Anda atau <a href="{{ route('admin.password.forgot') }}">coba alamat email lain</a>.'
+                            'Masih belum menerima email?<br/>Periksa spam Anda atau <a href="#">coba alamat email lain</a>.'
                         );
                     } else {
                         $('#forgotPasswordSuccess').html(

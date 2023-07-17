@@ -1,4 +1,4 @@
-@extends('admin.auth.authLayout')
+@extends('admin.auth.layout')
 
 @section('authContent')
     <div class="container container-login container-transparent animated fadeIn">
@@ -6,8 +6,8 @@
             <h3 class="text-center">Reset Password</h3>
             <form class="login-form" action="{{ url('reset-password') }}" method="POST" id="resetPasswordAdmin">
                 @csrf
-                <input hidden type="text" name="token" id="token" value="{{ $token }}">
-                <input hidden type="email" name="email" id="email" value="{{ $email }}">
+                {{-- <input hidden type="text" name="token" id="token" value="{{ $token }}"> --}}
+                {{-- <input hidden type="email" name="email" id="email" value="{{ $email }}"> --}}
                 {{-- new password --}}
                 <div class="form-group">
                     <label for="password" class="placeholder"><b>Password</b></label>
@@ -72,7 +72,7 @@
                 $('#resetPasswordButton').html('<i class="fas fa-circle-notch text-lg spinners-2"></i>');
                 $('#resetPasswordButton').prop('disabled', true);
                 $.ajax({
-                    url: "{{ route('resetPassword') }}",
+                    url: "#,
                     type: "POST",
                     data: {
                         email: $('#email').val(),

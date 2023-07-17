@@ -2,12 +2,12 @@
 
 @section('authContent')
     <div class="container container-login container-transparent animated fadeIn">
-        <h3 class="text-center">Masuk sebagai Admin</h3>
+        <h3 class="text-center">Masuk sebagai Petugas</h3>
         <form class="login-form" action="#" id="loginAdminForm">
-            {{-- username --}}
+            {{-- email --}}
             <div class="form-group">
-                <label for="username" class="placeholder"><b>Username</b></label>
-                <input id="username" name="username" type="text" class="form-control" id="username" required>
+                <label for="email" class="placeholder"><b>Email</b></label>
+                <input id="email" name="email" type="email" class="form-control" id="email" required>
             </div>
             {{-- password --}}
             <div class="form-group">
@@ -36,17 +36,19 @@
     <script>
         $('#loginAdminForm').validate({
             rules: {
-                username: {
+                email: {
                     required: true,
+                    email: true,
                 },
                 password: {
                     required: true,
                 }
             },
             messages: {
-                username: {
-                    required: '<i class="fas fa-exclamation-circle mr-1 text-sm icon-error"></i>Username tidak boleh kosong',
-                },
+                email: {
+                    required: '<i class="fas fa-exclamation-circle mr-1 text-sm icon-error"></i>Email tidak boleh kosong',
+                    email: '<i class="fas fa-exclamation-circle mr-1 text-sm icon-error"></i>Email tidak valid',
+                }
                 password: {
                     required: '<i class="fas fa-exclamation-circle mr-1 text-sm icon-error"></i>Kata sandi tidak boleh kosong',
                 },
@@ -58,7 +60,7 @@
                     url: "{{ url('/admin/login') }}",
                     type: "POST",
                     data: {
-                        username: $('#username').val(),
+                        email: $('#email').val(),
                         password: $('#password').val(),
                         _token: "{{ csrf_token() }}"
                     },
