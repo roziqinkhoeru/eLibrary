@@ -80,7 +80,7 @@ git clone https://github.com/roziqinkhoeru/eLibrary.git
 -   Enter into your project
 
 ```bash
-cd .\umkmplus\
+cd .\eLibrary\
 ```
 
 -   Move to development branch
