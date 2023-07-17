@@ -3,29 +3,19 @@
         <nav class="pull-left">
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('dashboard') }}">
-                        UMKMPlus
+                    <a class="nav-link" href="#">
+                        Perpus Digital
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('category') }}">
-                        UMKMPlus Category
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('mentor') }}">
-                        UMKMPlus Mentor
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/blog">
-                        UMKMPlus Blog
+                    <a class="nav-link" href="#">
+                        E-Book
                     </a>
                 </li>
             </ul>
         </nav>
         <div class="copyright ml-auto">
-            2023, made with <i class="fa fa-heart heart text-danger"></i> by Team UMKMPlus
+            2023, made with <i class="fa fa-heart heart text-danger"></i> by Team Perpus Digital
         </div>
     </div>
 </footer>
