@@ -34,134 +34,32 @@
                     <div class="quick-actions-items">
                         <div class="row m-0">
                             {{-- dashboard --}}
-                            @if (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 1)
-                                <a class="col-6 col-md-4 p-0" href="{{ route('admin.dashboard') }}">
-                                    <div class="quick-actions-item">
-                                        <div class="avatar-item rounded-circle" style="background: #6861ce">
-                                            <i class="fas fa-home"></i>
-                                        </div>
-                                        <span class="text">Dashboard</span>
+                            <a class="col-6 col-md-4 p-0" href="/admin/dashboard">
+                                <div class="quick-actions-item">
+                                    <div class="avatar-item rounded-circle" style="background: #6861ce">
+                                        <i class="fas fa-home"></i>
                                     </div>
-                                </a>
-                            @elseif (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 2)
-                                <a class="col-6 col-md-4 p-0" href="{{ route('mentor.dashboard') }}">
-                                    <div class="quick-actions-item">
-                                        <div class="avatar-item rounded-circle" style="background: #6861ce">
-                                            <i class="fas fa-home"></i>
-                                        </div>
-                                        <span class="text">Dashboard</span>
-                                    </div>
-                                </a>
-                            @endif
+                                    <span class="text">Dashboard</span>
+                                </div>
+                            </a>
                             {{-- course --}}
-                            @if (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 1)
-                                <a class="col-6 col-md-4 p-0" href="{{ route('admin.course') }}">
-                                    <div class="quick-actions-item">
-                                        <div class="avatar-item bg-dark rounded-circle">
-                                            <i class="fas fa-book"></i>
-                                        </div>
-                                        <span class="text">Kelas</span>
+                            <a class="col-6 col-md-4 p-0" href="#">
+                                <div class="quick-actions-item">
+                                    <div class="avatar-item bg-dark rounded-circle">
+                                        <i class="fas fa-book"></i>
                                     </div>
-                                </a>
-                            @elseif (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 2)
-                                <a class="col-6 col-md-4 p-0" href="{{ route('mentor.course') }}">
-                                    <div class="quick-actions-item">
-                                        <div class="avatar-item bg-dark rounded-circle">
-                                            <i class="fas fa-book"></i>
-                                        </div>
-                                        <span class="text">Kelas</span>
-                                    </div>
-                                </a>
-                            @endif
-                            {{-- mentor --}}
-                            @if (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 1)
-                                <a class="col-6 col-md-4 p-0" href="{{ route('admin.mentor') }}">
-                                    <div class="quick-actions-item">
-                                        <div class="avatar-item bg-success rounded-circle">
-                                            <i class="fas fa-chalkboard-teacher"></i>
-                                        </div>
-                                        <span class="text">Mentor</span>
-                                    </div>
-                                </a>
-                            @endif
+                                    <span class="text">Kelas</span>
+                                </div>
+                            </a>
                             {{-- student --}}
-                            @if (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 1)
-                                <a class="col-6 col-md-4 p-0" href="{{ route('admin.student') }}">
-                                    <div class="quick-actions-item">
-                                        <div class="avatar-item bg-danger rounded-circle">
-                                            <i class="fas fa-user-graduate"></i>
-                                        </div>
-                                        <span class="text">Siswa</span>
+                            <a class="col-6 col-md-4 p-0" href="#">
+                                <div class="quick-actions-item">
+                                    <div class="avatar-item bg-danger rounded-circle">
+                                        <i class="fas fa-user-graduate"></i>
                                     </div>
-                                </a>
-                            @elseif (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 2)
-                                <a class="col-6 col-md-4 p-0" href="{{ route('mentor.student') }}">
-                                    <div class="quick-actions-item">
-                                        <div class="avatar-item bg-danger rounded-circle">
-                                            <i class="fas fa-user-graduate"></i>
-                                        </div>
-                                        <span class="text">Siswa</span>
-                                    </div>
-                                </a>
-                            @endif
-                            {{-- application --}}
-                            @if (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 1)
-                                <a class="col-6 col-md-4 p-0" href="{{ route('admin.mentor.application') }}">
-                                    <div class="quick-actions-item">
-                                        <div class="avatar-item bg-warning rounded-circle">
-                                            <i class="fas fa-id-badge"></i>
-                                        </div>
-                                        <span class="text">Pendaftar Mentor</span>
-                                    </div>
-                                </a>
-                            @endif
-                            {{-- code discount --}}
-                            @if (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 2)
-                                <a class="col-6 col-md-4 p-0" href="{{ route('mentor.discount') }}">
-                                    <div class="quick-actions-item">
-                                        <div class="avatar-item bg-warning rounded-circle">
-                                            <i class="fas fa-ticket-alt"></i>
-                                        </div>
-                                        <span class="text">Kode Diskon</span>
-                                    </div>
-                                </a>
-                            @endif
-                            {{-- blog --}}
-                            @if (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 1)
-                                <a class="col-6 col-md-4 p-0" href="/admin/blog">
-                                    <div class="quick-actions-item">
-                                        <div class="avatar-item bg-info rounded-circle">
-                                            <i class="fas fa-pen-alt"></i>
-                                        </div>
-                                        <span class="text">Blog</span>
-                                    </div>
-                                </a>
-                                <a class="col-6 col-md-4 p-0" href="/admin/withdraw">
-                                    <div class="quick-actions-item">
-                                        <div class="avatar-item bg-green rounded-circle">
-                                            <i class="fas fa-money-bill"></i>
-                                        </div>
-                                        <span class="text">Keuangan</span>
-                                    </div>
-                                </a>
-                            @elseif (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 2)
-                                <a class="col-6 col-md-4 p-0" href="/mentor/blog">
-                                    <div class="quick-actions-item">
-                                        <div class="avatar-item bg-info rounded-circle">
-                                            <i class="fas fa-pen-alt"></i>
-                                        </div>
-                                        <span class="text">Blog</span>
-                                    </div>
-                                </a>
-                                <a class="col-6 col-md-4 p-0" href="/mentor/withdraw">
-                                    <div class="quick-actions-item">
-                                        <div class="avatar-item bg-green rounded-circle">
-                                            <i class="fas fa-money-bill"></i>
-                                        </div>
-                                        <span class="text">Keuangan</span>
-                                    </div>
-                                </a>
-                            @endif
+                                    <span class="text">Siswa</span>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -171,13 +69,8 @@
         <li class="nav-item dropdown hidden-caret">
             <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                 <div class="avatar-sm">
-                    @if (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 1)
-                        <img src="{{ asset('assets/template/admin/img/profile.jpg') }}" alt="admin-profile"
-                            class="avatar-img rounded-circle">
-                    @elseif (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 2)
-                        <img src="{{ asset('storage/' . auth()->user()->customer->profile_picture) }}"
-                            alt="{{ auth()->user()->username }}-profile" class="avatar-img rounded-circle">
-                    @endif
+                    <img src="{{ asset('assets/template/admin/img/profile.jpg') }}" alt="admin-profile"
+                        class="avatar-img rounded-circle">
                 </div>
             </a>
             <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -185,31 +78,21 @@
                     <li>
                         <div class="user-box">
                             <div class="avatar-lg">
-                                @if (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 1)
-                                    <img src="{{ asset('assets/template/admin/img/profile.jpg') }}"
-                                        alt="admin-profile" class="avatar-img rounded">
-                                @elseif (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 2)
-                                    <img src="{{ asset('storage/' . auth()->user()->customer->profile_picture) }}"
-                                        alt="{{ auth()->user()->username }}-profile" class="avatar-img rounded">
-                                @endif
+                                <img src="{{ asset('assets/template/admin/img/profile.jpg') }}" alt="admin-profile"
+                                    class="avatar-img rounded">
                             </div>
                             <div class="u-text">
-                                <h4>{{ Auth::user()->username }}</h4>
-                                <p class="text-muted">{{ Auth::user()->email }}</p>
-                                @if (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 1)
-                                    <a href="/admin/profile" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
-                                @elseif (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 2)
-                                    <a href="/mentor/profile" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
-                                @endif
+                                {{-- <h4>{{ Auth::user()->username }}</h4> --}}
+                                {{-- <p class="text-muted">{{ Auth::user()->email }}</p> --}}
+                                <a href="/admin/profile" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ route('dashboard') }}">Home</a>
+                        <a class="dropdown-item" href="#">Home</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item hover-logout" href="{{ url('logout') }}"
-                            onclick="logout()">Logout</a>
+                        <a class="dropdown-item hover-logout" href="{{ url('logout') }}" onclick="logout()">Logout</a>
                     </li>
                 </div>
             </ul>
@@ -235,7 +118,7 @@
                     'Anda telah keluar dari akun ini.',
                     'success'
                 )
-                window.location.href = "{{ route('logout') }}";
+                window.location.href = "logout";
             }
         })
     }
