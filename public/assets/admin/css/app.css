@@ -55,8 +55,6 @@
     color: #6861ce;
 }
 
-/* MENTOR */
-/* index */
 .badge.badge-category {
     padding: 4px 5px !important;
     border-radius: 4px !important;
@@ -92,23 +90,9 @@
     font-weight: 500;
 }
 
-/* BLOG */
-/* create */
-#contentWrapper .ck.ck-content.ck-editor__editable {
-    min-height: 240px !important;
-}
 .btn-delete-image {
     font-weight: 600;
     letter-spacing: 0.02em;
     font-size: 10.5px !important;
     text-transform: uppercase;
-}
-
-/* COURSE */
-/* edit */
-.file-pdf-info {
-    margin-bottom: 12px;
-}
-.file-pdf-info img {
-    height: 64px;
 }
