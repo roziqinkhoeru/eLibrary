@@ -43,7 +43,7 @@
                                 </div>
                             </a>
                             {{-- course --}}
-                            <a class="col-6 col-md-4 p-0" href="#">
+                            <a class="col-6 col-md-4 p-0" href="/admin/classes">
                                 <div class="quick-actions-item">
                                     <div class="avatar-item bg-dark rounded-circle">
                                         <i class="fas fa-book"></i>
@@ -52,7 +52,7 @@
                                 </div>
                             </a>
                             {{-- student --}}
-                            <a class="col-6 col-md-4 p-0" href="#">
+                            <a class="col-6 col-md-4 p-0" href="/admin/student">
                                 <div class="quick-actions-item">
                                     <div class="avatar-item bg-danger rounded-circle">
                                         <i class="fas fa-user-graduate"></i>

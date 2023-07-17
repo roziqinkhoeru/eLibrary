@@ -38,7 +38,7 @@
             </a>
         </li>
         <li class="nav-item @if ($currentNav == 'course') active @endif">
-            <a href="#">
+            <a href="/admin/classes">
                 <i class="fas fa-book"></i>
                 <p>Kelas</p>
             </a>
