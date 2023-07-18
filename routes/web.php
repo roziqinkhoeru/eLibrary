@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,30 +22,41 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-// auth admin
-Route::get('/admin/login', function () {
-    return view('admin.auth.login', [
-        'title' => 'Login | Perpus Digital'
-    ]);
+// Auth
+Route::controller(LoginController::class)->group(function () {
+    // auth admin
+    Route::get('/admin/login', 'adminLogin')->name('admin.login');
+    Route::post('/admin/login', 'adminAuthenticate')->name('admin.login.authenticate');
+    Route::get('/logout', 'logout')->name('logout');
+
+    // auth student
+    Route::get('/login', 'login')->name('login');
 });
-Route::get('/admin/forgot-password', function () {
-    return view('admin.auth.forgotPassword', [
-        'title' => 'Lupa Password | Perpus Digital'
-    ]);
+
+// forgot password
+Route::controller(PasswordResetLinkController::class)->group(function () {
+    // admin forgot password
+    Route::get('/admin/forgot-password', 'adminCreate')->name('admin.forgot.password.create');
+    Route::post('/admin/forgot-password', 'adminStore')->name('admin.forgot.password.store');
 });
-Route::get('/admin/reset-password', function () {
-    return view('admin.auth.resetPassword', [
-        'title' => 'Reset Password | Perpus Digital'
-    ]);
+
+// reset password
+Route::controller(NewPasswordController::class)->group(function () {
+    Route::get('/reset-password/{token}', 'create')->name('password.reset');
+    Route::post('/reset-password', 'store')->name('password.reset.store');
+});
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::group(['middleware' => ['checkRole:admin']], function () {
+        Route::controller(AdminController::class)->group(function () {
+            Route::get('/admin/dashboard', 'index')->name('admin.dashboard');
+            Route::get('/admin/student', 'student')->name('admin.student');
+            Route::get('/admin/classes', 'classes')->name('admin.classes');
+        });
+    });
 });
 
 // admin
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard', [
-        'title' => 'Dashboard Admin | Perpus Digital',
-        'currentNav' => 'dashboard'
-    ]);
-});
 Route::get('/admin/student', function () {
     return view('admin.students.index', [
         'title' => 'Data Siswa | Perpus Digital',

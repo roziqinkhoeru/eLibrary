@@ -4,7 +4,7 @@
     <div class="container container-login container-transparent animated fadeIn">
         <div id="forgotPasswordContent">
             <h3 class="text-center">Lupa kata sandi Anda?</h3>
-            <form class="login-form" action="#" id="forgotPasswordAdminForm">
+            <form class="login-form" id="forgotPasswordAdminForm">
                 {{-- email --}}
                 <div class="form-group">
                     <label for="email" class="placeholder"><b>Email</b></label>
@@ -32,7 +32,7 @@
 
         function submitForgotPasswordAjax(isResend) {
             $.ajax({
-                url: "#",
+                url: "{{ route('admin.forgot.password.store') }}",
                 type: "POST",
                 data: {
                     email: $('#email').val(),
@@ -76,6 +76,7 @@
                 error: function(xhr, status, error) {
                     $('#forgotPasswordButton').html('Kirim tautan');
                     $('#forgotPasswordButton').prop('disabled', false);
+                    console.log(xhr.responseJSON);
                     if (xhr.responseJSON)
                         Swal.fire({
                             icon: 'error',
