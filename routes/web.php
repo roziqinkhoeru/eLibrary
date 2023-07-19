@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controller\Admin\StudentController;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Route;
 
@@ -50,9 +51,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['checkRole:admin']], function () {
         Route::controller(AdminController::class)->group(function () {
             Route::get('/admin/dashboard', 'index')->name('admin.dashboard');
+            Route::get('/admin/classes', 'classes')->name('admin.classes');
+        });
+        Route::controller(StudentController::class)->group(function () {
             Route::get('/admin/student', 'student')->name('admin.student');
             Route::get('/admin/student/data', 'getStudent')->name('admin.student.data');
-            Route::get('/admin/classes', 'classes')->name('admin.classes');
         });
     });
 });

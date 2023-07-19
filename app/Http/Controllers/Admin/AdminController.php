@@ -6,6 +6,7 @@ use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -16,29 +17,5 @@ class AdminController extends Controller
             'currentNav' => 'dashboard'
         ];
         return view('admin.dashboard', $data);
-    }
-
-    public function student()
-    {
-        $data = [
-            'title' => 'Data Siswa | Perpus Digital',
-            'currentNav' => 'student'
-        ];
-
-        return view('admin.students.index', $data);
-    }
-
-    public function getStudent()
-    {
-        $students = Student::with('class_school:id,name', 'user:student_id,email')
-            ->join('transactions', 'transactions.student_id', '=', 'students.nis')
-            ->where('transactions.status', "pinjam")
-            ->get();
-        // dd($students);
-
-        return ResponseFormatter::success([
-            'students' => $students
-        ],
-        'Data Siswa Berhasil Diambil');
     }
 }
