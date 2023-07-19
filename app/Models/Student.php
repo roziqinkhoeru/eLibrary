@@ -12,8 +12,13 @@ class Student extends Model
     protected $guarded = [];
 
     // relation
-    public function class()
+    public function class_school()
     {
-        return $this->belongsTo(Classes::class, 'class_id', 'id');
+        return $this->belongsTo(ClassSchool::class, 'class_school_id');
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'student_id', 'nis');
     }
 }

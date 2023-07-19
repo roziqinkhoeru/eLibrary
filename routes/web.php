@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::controller(AdminController::class)->group(function () {
             Route::get('/admin/dashboard', 'index')->name('admin.dashboard');
             Route::get('/admin/student', 'student')->name('admin.student');
+            Route::get('/admin/student/data', 'getStudent')->name('admin.student.data');
             Route::get('/admin/classes', 'classes')->name('admin.classes');
         });
     });
