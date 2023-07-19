@@ -49,6 +49,17 @@ Route::controller(NewPasswordController::class)->group(function () {
     Route::post('/reset-password', 'store')->name('password.reset.store');
 });
 
+Route::get('/admin/book', function () {
+    return view('admin.book.index', [
+        'title' => 'Buku Perpustakaan | Perpus Digital',
+        'currentNav' => 'book'
+    ]);
+});
+Route::get('/admin/ebook', function () {
+    return view('admin.book.ebook', [
+        'title' => 'E-Book | Perpus Digital',
+        'currentNav' => 'book'
+
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['checkRole:admin']], function () {
         Route::controller(AdminController::class)->group(function () {
@@ -71,9 +82,21 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 // admin
-Route::get('/admin/classes', function () {
-    return view('admin.classes.index', [
-        'title' => 'Data Kelas | Perpus Digital',
-        'currentNav' => 'course'
+Route::get('/admin/book/create', function () {
+    return view('admin.book.addBook', [
+        'title' => 'Tambah Buku | Perpus Digital',
+        'currentNav' => 'book'
     ]);
 });
+// Route::get('/admin/student', function () {
+//     return view('admin.students.index', [
+//         'title' => 'Data Siswa | Perpus Digital',
+//         'currentNav' => 'student'
+//     ]);
+// });
+// Route::get('/admin/classes', function () {
+//     return view('admin.classes.index', [
+//         'title' => 'Data Kelas | Perpus Digital',
+//         'currentNav' => 'course'
+//     ]);
+// });

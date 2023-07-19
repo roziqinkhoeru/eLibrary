@@ -42,24 +42,42 @@
                                     <span class="text">Dashboard</span>
                                 </div>
                             </a>
+                            {{-- book --}}
+                            <a class="col-6 col-md-4 p-0" href="/admin/book">
+                                <div class="quick-actions-item">
+                                    <div class="avatar-item bg-info rounded-circle">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <span class="text">Buku</span>
+                                </div>
+                            </a>
+                            {{-- ebook --}}
+                            <a class="col-6 col-md-4 p-0" href="/admin/ebook">
+                                <div class="quick-actions-item">
+                                    <div class="avatar-item bg-warning rounded-circle">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <span class="text">E-Book</span>
+                                </div>
+                            </a>
                             {{-- course --}}
-                            <a class="col-6 col-md-4 p-0" href="/admin/classes">
+                            {{-- <a class="col-6 col-md-4 p-0" href="/admin/classes">
                                 <div class="quick-actions-item">
                                     <div class="avatar-item bg-dark rounded-circle">
                                         <i class="fas fa-book"></i>
                                     </div>
                                     <span class="text">Kelas</span>
                                 </div>
-                            </a>
+                            </a> --}}
                             {{-- student --}}
-                            <a class="col-6 col-md-4 p-0" href="/admin/student">
+                            {{-- <a class="col-6 col-md-4 p-0" href="/admin/student">
                                 <div class="quick-actions-item">
                                     <div class="avatar-item bg-danger rounded-circle">
                                         <i class="fas fa-user-graduate"></i>
                                     </div>
                                     <span class="text">Siswa</span>
                                 </div>
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
                 </div>
