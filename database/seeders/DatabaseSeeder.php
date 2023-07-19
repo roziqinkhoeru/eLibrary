@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             OfficerSeeder::class,
             UserSeeder::class,
             StudentSeeder::class,
+            TransactionSeeder::class,
         ]);
     }
 }

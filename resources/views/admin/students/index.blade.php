@@ -51,63 +51,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td class="text-center">1</td>
-                                            <td class="text-center">
-                                                <img src="{{ asset('assets/template/admin/img/profile.jpg') }}"
-                                                    alt="pas foto" class="img-fluid rounded-circle" width="50"
-                                                    height="50">
-                                            </td>
-                                            <td>123456789</td>
-                                            <td>John Doe</td>
-                                            <td class="text-center space-nowrap">XII RPL 1</td>
-                                            <td>doejohn@email.com</td>
-                                            <td>08123456789</td>
-                                            <td>Malang, 01 Januari 2000</td>
-                                            <td>Laki-laki</td>
-                                            <td>Jl. Raya Malang</td>
-                                            <td class="space-nowrap text-center">
-                                                <a href="#" class="btn btn-primary btn-sm">Detail</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">2</td>
-                                            <td class="text-center">
-                                                <img src="{{ asset('assets/template/admin/img/profile.jpg') }}"
-                                                    alt="pas foto" class="img-fluid rounded-circle" width="50"
-                                                    height="50">
-                                            </td>
-                                            <td>123456789</td>
-                                            <td>James Doe</td>
-                                            <td class="text-center space-nowrap">XII TKJ 1</td>
-                                            <td>doejames@email.com</td>
-                                            <td>08123456789</td>
-                                            <td>Malang, 01 Januari 2000</td>
-                                            <td>Laki-laki</td>
-                                            <td>Jl. Raya Malang</td>
-                                            <td class="space-nowrap text-center">
-                                                <a href="#" class="btn btn-primary btn-sm">Detail</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">3</td>
-                                            <td class="text-center">
-                                                <img src="{{ asset('assets/template/admin/img/profile.jpg') }}"
-                                                    alt="pas foto" class="img-fluid rounded-circle" width="50"
-                                                    height="50">
-                                            </td>
-                                            <td>123456789</td>
-                                            <td>Jane Doe</td>
-                                            <td class="text-center space-nowrap">XII MM 1</td>
-                                            <td>doejane@email.com</td>
-                                            <td>08123456789</td>
-                                            <td>Malang, 01 Januari 2000</td>
-                                            <td>Perempuan</td>
-                                            <td>Jl. Raya Malang</td>
-                                            <td class="space-nowrap text-center">
-                                                <a href="#" class="btn btn-primary btn-sm">Detail</a>
-                                            </td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -122,53 +65,90 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            $('#studentTable').DataTable({
-                columnDefs: [{
-                    targets: 'filter-none',
-                    orderable: false,
-                }, ],
-                language: {
-                    "sEmptyTable": "Tidak ada data yang tersedia di tabel",
-                    "sInfo": "Menampilkan _START_ hingga _END_ dari _TOTAL_ entri",
-                    "sInfoEmpty": "Menampilkan 0 hingga 0 dari 0 entri",
-                    "sInfoFiltered": "(disaring dari total _MAX_ entri)",
-                    "sInfoPostFix": "",
-                    "sInfoThousands": ",",
-                    "sLengthMenu": "Tampilkan _MENU_ entri",
-                    "sLoadingRecords": "Memuat...",
-                    "sProcessing": "Memproses...",
-                    "sSearch": "Cari:",
-                    "sZeroRecords": "Tidak ditemukan data yang cocok",
-                    "oPaginate": {
-                        "sFirst": "Pertama",
-                        "sLast": "Terakhir",
-                        "sNext": "Berikutnya",
-                        "sPrevious": "Sebelumnya"
-                    },
-                    "oAria": {
-                        "sSortAscending": ": aktifkan untuk mengurutkan kolom secara naik",
-                        "sSortDescending": ": aktifkan untuk mengurutkan kolom secara menurun"
-                    },
-                    "select": {
-                        "rows": {
-                            "_": "Terpilih %d baris",
-                            "0": "Klik sebuah baris untuk memilih",
-                            "1": "Terpilih 1 baris"
-                        }
-                    },
-                    "buttons": {
-                        "print": "Cetak",
-                        "copy": "Salin",
-                        "copyTitle": "Salin ke papan klip",
-                        "copySuccess": {
-                            "_": "%d baris disalin",
-                            "1": "1 baris disalin"
-                        }
-                    },
-                },
-                lengthMenu: [5, 10, 25, 50, 100],
-                pageLength: 10, // default page length
-            });
+            getStudents();
         });
+
+        const studentTable = $('#studentTable').DataTable({
+            columnDefs: [{
+                targets: 'filter-none',
+                orderable: false,
+            }, ],
+            language: {
+                "sEmptyTable": "Tidak ada data yang tersedia di tabel",
+                "sInfo": "Menampilkan _START_ hingga _END_ dari _TOTAL_ entri",
+                "sInfoEmpty": "Menampilkan 0 hingga 0 dari 0 entri",
+                "sInfoFiltered": "(disaring dari total _MAX_ entri)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ",",
+                "sLengthMenu": "Tampilkan _MENU_ entri",
+                "sLoadingRecords": "Memuat...",
+                "sProcessing": "Memproses...",
+                "sSearch": "Cari:",
+                "sZeroRecords": "Tidak ditemukan data yang cocok",
+                "oPaginate": {
+                    "sFirst": "Pertama",
+                    "sLast": "Terakhir",
+                    "sNext": "Berikutnya",
+                    "sPrevious": "Sebelumnya"
+                },
+                "oAria": {
+                    "sSortAscending": ": aktifkan untuk mengurutkan kolom secara naik",
+                    "sSortDescending": ": aktifkan untuk mengurutkan kolom secara menurun"
+                },
+                "select": {
+                    "rows": {
+                        "_": "Terpilih %d baris",
+                        "0": "Klik sebuah baris untuk memilih",
+                        "1": "Terpilih 1 baris"
+                    }
+                },
+                "buttons": {
+                    "print": "Cetak",
+                    "copy": "Salin",
+                    "copyTitle": "Salin ke papan klip",
+                    "copySuccess": {
+                        "_": "%d baris disalin",
+                        "1": "1 baris disalin"
+                    }
+                },
+            },
+            lengthMenu: [5, 10, 25, 50, 100],
+            pageLength: 10, // default page length
+        });
+
+        function getStudents() {
+            $.ajax({
+                type: "GET",
+                url: "{{ route('admin.student.data') }}",
+                success: function(response) {
+                    if (response.data.students.length > 0) {
+                        $.each(response.data.students, function(index, student) {
+                            var rowData = [
+                                index + 1,
+                                `<img src="{{ asset('assets/${student.profile_picture}') }}"
+                                                    alt="pas foto" class="img-fluid rounded-circle" width="50"
+                                                    height="50">`,
+                                student.nis,
+                                student.name,
+                                student.class_school.name,
+                                student.user.email,
+                                student.phone_number,
+                                student.date_of_birth,
+                                student.gender,
+                                student.address,
+                                `<a href="#" class="btn btn-primary btn-sm">Detail</a>`
+                            ];
+
+                            var rowNode = studentTable.row.add(rowData)
+                                .draw(
+                                    false).node();
+
+                            $(rowNode).find('td').eq(4).addClass('space-nowrap text-center');
+                            $(rowNode).find('td').eq(10).addClass('space-nowrap text-center');
+                        });
+                    }
+                }
+            });
+        }
     </script>
 @endsection

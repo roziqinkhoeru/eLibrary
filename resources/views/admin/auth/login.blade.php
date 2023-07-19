@@ -3,7 +3,7 @@
 @section('authContent')
     <div class="container container-login container-transparent animated fadeIn">
         <h3 class="text-center">Masuk sebagai Petugas</h3>
-        <form class="login-form" action="#" id="loginAdminForm">
+        <form class="login-form" id="loginAdminForm">
             {{-- email --}}
             <div class="form-group">
                 <label for="email" class="placeholder"><b>Email</b></label>
@@ -12,7 +12,7 @@
             {{-- password --}}
             <div class="form-group">
                 <label for="password" class="placeholder"><b>Password</b></label>
-                <a href="/admin/forgot-password" class="link float-right">Forget Password ?</a>
+                <a href="{{ route('admin.forgot.password.create') }}" class="link float-right">Forget Password ?</a>
                 <div class="position-relative">
                     <input id="password" name="password" id="password" type="password" class="form-control" required>
                     <div class="show-password">
@@ -48,7 +48,7 @@
                 email: {
                     required: '<i class="fas fa-exclamation-circle mr-1 text-sm icon-error"></i>Email tidak boleh kosong',
                     email: '<i class="fas fa-exclamation-circle mr-1 text-sm icon-error"></i>Email tidak valid',
-                }
+                },
                 password: {
                     required: '<i class="fas fa-exclamation-circle mr-1 text-sm icon-error"></i>Kata sandi tidak boleh kosong',
                 },
@@ -57,7 +57,7 @@
                 $('#loginButton').html('<i class="fas fa-circle-notch text-lg spinners-2"></i>');
                 $('#loginButton').prop('disabled', true);
                 $.ajax({
-                    url: "{{ url('/admin/login') }}",
+                    url: "{{ route('admin.login.authenticate') }}",
                     type: "POST",
                     data: {
                         email: $('#email').val(),

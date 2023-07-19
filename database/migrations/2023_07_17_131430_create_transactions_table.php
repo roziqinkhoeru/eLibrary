@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign('officer_id')->references('nip')->on('officers')->onUpdate('cascade')->onDelete('cascade');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
+            $table->dateTime('return_date')->nullable();
             $table->enum('status', ['pinjam', 'kembali']);
             $table->integer('penalty')->default(0);
             $table->timestamps();

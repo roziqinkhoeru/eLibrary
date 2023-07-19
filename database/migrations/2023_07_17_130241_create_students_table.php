@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('phone_number', 15);
             $table->date('date_of_birth');
             $table->string('profile_picture', 255)->nullable();
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
