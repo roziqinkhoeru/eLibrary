@@ -11,6 +11,28 @@ use Illuminate\Support\Facades\Validator;
 
 class BookController extends Controller
 {
+    public function index()
+    {
+        $data = [
+            'title' => 'Data Buku | Perpus Digital',
+            'currentNav' => 'book'
+        ];
+
+        return view('admin.books.index', $data);
+    }
+
+    public function getBook()
+    {
+        $books = Book::with('category:id,name')
+            ->select('id', 'category_id', 'isbn', 'title', 'author', 'publisher', 'year', 'stock', 'type', 'cover')
+            ->get();
+
+        return ResponseFormatter::success(
+            [
+                'books' => $books
+            ], 'Data Buku Berhasil Diambil'
+        );
+    }
     public function create()
     {
         $data = [
