@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('stock');
             $table->string('cover', 255)->nullable();
             $table->enum('type', ['online', 'offline']);
+            $table->string('file', 255)->nullable();
             $table->timestamps();
         });
     }
