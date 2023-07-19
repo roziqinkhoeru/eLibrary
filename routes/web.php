@@ -5,6 +5,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controller\Admin\StudentController;
+use App\Http\Controllers\Admin\BookController;
+use App\Http\Controllers\Admin\TransactionController;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Route;
 
@@ -56,6 +58,14 @@ Route::group(['middleware' => ['auth']], function () {
         Route::controller(StudentController::class)->group(function () {
             Route::get('/admin/student', 'student')->name('admin.student');
             Route::get('/admin/student/data', 'getStudent')->name('admin.student.data');
+        });
+        Route::controller(TransactionController::class)->group(function () {
+            Route::get('/admin/transaction', 'transaction')->name('admin.transaction');
+            Route::get('/admin/transaction/data', 'getTransaction')->name('admin.transaction.data');
+        });
+        Route::controller(BookController::class)->group(function () {
+            Route::get('/admin/book', 'book')->name('admin.book');
+            Route::get('/admin/book/data', 'getBook')->name('admin.book.data');
         });
     });
 });

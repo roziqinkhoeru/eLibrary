@@ -27,6 +27,8 @@ class BookController extends Controller
             ->select('id', 'category_id', 'isbn', 'title', 'author', 'publisher', 'year', 'stock', 'type', 'cover')
             ->get();
 
+        dd($books);
+
         return ResponseFormatter::success(
             [
                 'books' => $books
