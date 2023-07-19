@@ -1,0 +1,18 @@
+@media screen and (max-width: 1199px) {
+    /* DATATABLE */
+    #bookTable_length,
+    #bookTable_filter,
+    #bookTable_category,
+    #eBookTable_length,
+    #eBookTable_filter,
+    #eBookTable_category {
+        text-align: center !important;
+        margin-top: 8px !important;
+        margin-bottom: 7px !important;
+    }
+
+    .bookTable_category_wrapper,
+    .eBookTable_category_wrapper {
+        text-align: center;
+    }
+}
