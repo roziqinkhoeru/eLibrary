@@ -37,12 +37,40 @@
                 <p>Dashboard</p>
             </a>
         </li>
-        <li class="nav-item @if ($currentNav == 'course') active @endif">
+        {{-- book --}}
+        <li class="nav-item @if ($currentNav == 'book') active @endif">
+            <a data-toggle="collapse" href="#bookMenu">
+                <i class="fas fa-book"></i>
+                <p>Buku</p>
+                <span class="caret"></span>
+            </a>
+            <div class="collapse" id="bookMenu">
+                <ul class="nav nav-collapse">
+                    <li>
+                        <a href="/admin/book">
+                            <span class="sub-item">Perpustakaan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/ebook">
+                            <span class="sub-item">E-Book</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/book/create">
+                            <span class="sub-item">Tambah Buku</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        {{-- classes --}}
+        {{-- <li class="nav-item @if ($currentNav == 'course') active @endif">
             <a href="/admin/classes">
                 <i class="fas fa-book"></i>
                 <p>Kelas</p>
             </a>
-        </li>
+        </li> --}}
         {{-- <li class="nav-section">
             <span class="sidebar-mini-icon">
                 <i class="fa fa-ellipsis-h"></i>
@@ -50,12 +78,12 @@
             <h4 class="text-section">Learning</h4>
         </li> --}}
         {{-- student --}}
-        <li class="nav-item @if ($currentNav == 'student') active @endif">
+        {{-- <li class="nav-item @if ($currentNav == 'student') active @endif">
             <a href="/admin/student">
                 <i class="fas fa-user-graduate"></i>
                 <p>Siswa</p>
             </a>
-        </li>
+        </li> --}}
         {{-- logout --}}
         <li class="nav-item">
             <a href="/logout" onclick="logout()" class="hover-logout">
