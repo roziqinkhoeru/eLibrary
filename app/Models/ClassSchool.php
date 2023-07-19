@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class ClassSchool extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    // relation
+    public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
 }
