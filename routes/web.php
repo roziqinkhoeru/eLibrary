@@ -57,12 +57,6 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 // admin
-Route::get('/admin/student', function () {
-    return view('admin.students.index', [
-        'title' => 'Data Siswa | Perpus Digital',
-        'currentNav' => 'student'
-    ]);
-});
 Route::get('/admin/classes', function () {
     return view('admin.classes.index', [
         'title' => 'Data Kelas | Perpus Digital',
