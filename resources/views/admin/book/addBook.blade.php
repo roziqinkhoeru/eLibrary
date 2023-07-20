@@ -40,8 +40,9 @@
                                 <div class="form-group form-show-validation row">
                                     <label for="id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">ID
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
-                                        <input type="number" class="form-control" id="id" name="id" required>
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
+                                        <input type="number" class="form-control" id="id" name="id"
+                                            placeholder="Masukkan ID Buku" required>
                                     </div>
                                 </div>
                                 {{-- Title --}}
@@ -49,7 +50,7 @@
                                     <label for="title" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Judul
                                         Buku
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="title" name="title"
                                             placeholder="Masukkan Judul Buku" required>
                                     </div>
@@ -58,7 +59,7 @@
                                 <div class="form-group form-show-validation row">
                                     <label for="isbn" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">ISBN
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="isbn" name="isbn"
                                             placeholder="Masukkan ISBN" required>
                                     </div>
@@ -68,7 +69,7 @@
                                     <label for="category_id"
                                         class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Kategori
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <select class="form-control" id="category_id" name="category_id" required>
                                             <option value="">Pilih Kategori</option>
                                             @foreach ($categories as $category)
@@ -81,7 +82,7 @@
                                 <div class="form-group form-show-validation row">
                                     <label for="publisher" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Penerbit
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="publisher" name="publisher"
                                             placeholder="Masukkan Nama Penerbit" required>
                                     </div>
@@ -90,7 +91,7 @@
                                 <div class="form-group form-show-validation row">
                                     <label for="author" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Pengarang
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="author" name="author"
                                             placeholder="Masukkan Nama Pengarang" required>
                                     </div>
@@ -100,7 +101,7 @@
                                     <label for="year" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Tahun
                                         Terbit
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="number" class="form-control" id="year" name="year"
                                             placeholder="Masukkan Tahun Terbit" required>
                                     </div>
@@ -110,7 +111,7 @@
                                     <label for="stock" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Jumlah
                                         Buku
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="number" class="form-control" id="stock" name="stock"
                                             placeholder="Masukkan Jumlah Buku" required>
                                     </div>
@@ -119,7 +120,7 @@
                                 <div class="form-group form-show-validation row">
                                     <label for="bookCover" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Cover
                                         Buku <span class="required-label">*</span></label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <div class="input-file input-file-image">
                                             <img class="img-upload-preview" width="240"
                                                 src="http://placehold.it/240x240" alt="Book Cover Preview"
@@ -146,7 +147,7 @@
                                     <label for="type" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Tipe
                                         Buku
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <select class="form-control" id="type" name="type" required>
                                             <option value="">Pilih Tipe Buku</option>
                                             <option value="offline">Buku</option>
@@ -165,9 +166,10 @@
                                             </div>
                                         </div>
                                         <div class="input-file input-file-image">
-                                            <input type="file" class="form-control form-control-file" id="ebook"
-                                                name="ebook" accept="application/pdf" required>
-                                            <label for="ebook" class="label-input-file btn btn-black btn-round mt-2">
+                                            <input type="file" class="form-control form-control-file" id="file"
+                                                name="file" accept="application/pdf" required>
+                                            <label for="file"
+                                                class="label-input-file btn btn-black btn-round mt-2 mr-3 btn-upload-image-sm">
                                                 <span class="btn-label">
                                                     <i class="fa fa-file-pdf"></i>
                                                 </span>
@@ -224,7 +226,7 @@
             const imagePreview = $('#imagePreview');
             const filePreview = $('#filePreview');
             const bookCover = $('#bookCover');
-            const eBook = $('#ebook');
+            const eBook = $('#file');
             const deleteImageBtn = $('#deleteImage');
             const deleteEbookBtn = $('#deleteEbook');
             const backToBookBtn = $('#backToBook');
@@ -233,7 +235,7 @@
             const storedEbook = localStorage.getItem('ebookPreview');
 
             function toggleEbookContainer(e) {
-                if (e === "2") {
+                if (e === "online") {
                     $("#uploadEbookContainer").show();
                 } else {
                     $("#uploadEbookContainer").hide();
