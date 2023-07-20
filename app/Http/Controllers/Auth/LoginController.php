@@ -45,12 +45,12 @@ class LoginController extends Controller
                 return $request->ajax()
                     ? ResponseFormatter::error(
                         [
-                            'error' => $validator->errors(),
+                            'error' => $validator->errors()->first(),
                         ],
                         'Harap isi form dengan benar',
                         400,
                     )
-                    : back()->with(['error' => $validator->errors()]);
+                    : back()->with(['error' => $validator->errors()->first()]);
             }
 
             $credentials = $request->only('email', 'password');
@@ -74,7 +74,7 @@ class LoginController extends Controller
                         )
                         : back()->withErrors($msg);
                 } else if ($role == 2) {
-                    $student = Student::where('nis', $user->student_id)->first();
+                $student = Student::where('nis', $user->student_id)->first();
                     // check if student is nonactive
                     if ($student->status == 0) {
                         // Logout
@@ -92,7 +92,7 @@ class LoginController extends Controller
                             )
                             : back()->withErrors($msg);
                     }
-                    $redirect = redirect('/student/dashboard');
+                    $redirect = redirect('/');
                     $request->session()->regenerate();
                     return $request->ajax() ? ResponseFormatter::success(['redirect' => $redirect->getTargetUrl()], 'Authenticated') : $redirect;
                 }

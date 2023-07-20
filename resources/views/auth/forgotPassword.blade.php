@@ -94,7 +94,7 @@
 
         function submitForgotPasswordAjax(isResend) {
             $.ajax({
-                url: "#",
+                url: "{{ route('password.store') }}",
                 type: "POST",
                 data: {
                     email: $('#email').val(),
