@@ -60,8 +60,6 @@
     <link rel="stylesheet" href="{{ asset('assets/template/css/spacing.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/template/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
-    {{-- Sweet alert --}}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     {{-- title --}}
     <title>{{ $title }}</title>
@@ -89,7 +87,30 @@
     </div>
     {{-- back to top end --}}
 
-    @yield('authContent')
+    <main class="full-container-center">
+        <section class="error__area pt-120 pb-120">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xxl-8">
+                        <div class="error__content text-center">
+                            <div class="error__content">
+                                <a href="/"><img src="{{ asset('assets/img/brand/eLibrary-letter-2.svg') }}"
+                                        alt="eLibrary letter logo"
+                                        style="margin-bottom: 30px; width: 200px; margin-top: 30px"></a>
+                                <h3 class="error__title" style="margin-bottom: 30px !important">{{ $header }}
+                                </h3>
+                                <p>{{ $message }}</p>
+
+                                <div class="error__btn">
+                                    <a href="/" class="tp-btn tp-btn-2 rounded-pill">Back to home</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     {{-- scripts --}}
     <script src="{{ asset('assets/template/js/vendor/jquery.js') }}"></script>

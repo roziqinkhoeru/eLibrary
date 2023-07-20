@@ -1,6 +1,6 @@
 <div class="logo-header" data-background-color="blue">
     <a href="/admin/dashboard" class="logo">
-        <img src="{{ asset('assets/img/brand/eLibrary-letter.svg') }}" alt="eLibrary-letter-logo" class="navbar-brand">
+        <img src="{{ asset('assets/img/brand/eLibrary-letter.svg') }}" alt="eLibrary letter logo" class="navbar-brand">
     </a>
     <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse"
         aria-expanded="false" aria-label="Toggle navigation">

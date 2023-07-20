@@ -126,7 +126,7 @@
                             var rowData = [
                                 index + 1,
                                 `<img src="{{ asset('assets/${student.profile_picture}') }}"
-                                                    alt="pas foto" class="img-fluid rounded-circle" width="50"
+                                                    alt="profile photo studentName" class="img-fluid rounded-circle" width="50"
                                                     height="50">`,
                                 student.nis,
                                 student.name,

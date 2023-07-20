@@ -225,7 +225,7 @@
                         $('#formAddBookButton').prop('disabled', false);
                         $.notify({
                             icon: 'flaticon-alarm-1',
-                            title: 'UMKMPlus Admin',
+                            title: 'Perpus Digital Admin',
                             message: response.meta.message,
                         }, {
                             type: 'secondary',
