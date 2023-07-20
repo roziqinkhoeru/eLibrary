@@ -52,12 +52,11 @@
                                             <th class="filter-none">Penerbit</th>
                                             <th class="filter-none">Pengarang</th>
                                             <th class="filter-none">Tahun Terbit</th>
-                                            <th class="filter-none">Jumlah Buku</th>
                                             <th class="text-center filter-none text-nowrap">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        {{-- <tr>
                                             <td class="text-center">1</td>
                                             <td class="text-center">
                                                 <div class="cover-book-image">
@@ -86,68 +85,7 @@
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td class="text-center">
-                                                <div class="cover-book-image">
-                                                    <a href="{{ asset('assets/img/dummy/Gold and Blue Elegant Simple Young Adult Fantasy Book Cover.png') }}"
-                                                        class="">
-                                                        <img src="{{ asset('assets/img/dummy/Gold and Blue Elegant Simple Young Adult Fantasy Book Cover.png') }}"
-                                                            class="img-fluid">
-                                                    </a>
-                                                </div>
-                                            </td>
-                                            <td class="">978-1-56619-909-5</td>
-                                            <td class="">IT</td>
-                                            <td class="">The Web Application Hacker's Handbook: Finding and Exploiting
-                                                Security</td>
-                                            <td>Marcus Doe</td>
-                                            <td>Dafid</td>
-                                            <td>2019</td>
-                                            <td>5</td>
-                                            <td class="text-center text-nowrap">
-                                                <a href="#" class="btn btn-warning btn-sm mr-2">
-                                                    <i class="fas fa-download"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-primary btn-sm mr-2">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-sm">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td class="text-center">
-                                                <div class="cover-book-image">
-                                                    <a href="{{ asset('assets/img/dummy/Fantasy Fiction Flames Ashes Book Cover.png') }}"
-                                                        class="">
-                                                        <img src="{{ asset('assets/img/dummy/Fantasy Fiction Flames Ashes Book Cover.png') }}"
-                                                            class="img-fluid">
-                                                    </a>
-                                                </div>
-                                            </td>
-                                            <td class="">978-1-56619-909-6</td>
-                                            <td class="">Fiksi</td>
-                                            <td class="">Fantasy Fiction Flames</td>
-                                            <td>Lincoln Doe</td>
-                                            <td>Lincoln</td>
-                                            <td>2019</td>
-                                            <td>5</td>
-                                            <td class="text-center text-nowrap">
-                                                <a href="#" class="btn btn-warning btn-sm mr-2">
-                                                    <i class="fas fa-download"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-primary btn-sm mr-2">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-sm">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                        </tr> --}}
                                     </tbody>
                                 </table>
                             </div>
@@ -162,66 +100,12 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            $('#eBookTable').DataTable({
-                columnDefs: [{
-                    targets: 'filter-none',
-                    orderable: false,
-                }, ],
-                language: {
-                    "sEmptyTable": "Tidak ada data yang tersedia di tabel",
-                    "sInfo": "Menampilkan _START_ hingga _END_ dari _TOTAL_ entri",
-                    "sInfoEmpty": "Menampilkan 0 hingga 0 dari 0 entri",
-                    "sInfoFiltered": "(disaring dari total _MAX_ entri)",
-                    "sInfoPostFix": "",
-                    "sInfoThousands": ",",
-                    "sLengthMenu": "Tampilkan _MENU_ entri",
-                    "sLoadingRecords": "Memuat...",
-                    "sProcessing": "Memproses...",
-                    "sSearch": "Cari:",
-                    "sSearchPlaceholder": "Masukkan Keyword...",
-                    "sZeroRecords": "Tidak ditemukan data yang cocok",
-                    "oPaginate": {
-                        "sFirst": "Pertama",
-                        "sLast": "Terakhir",
-                        "sNext": "Berikutnya",
-                        "sPrevious": "Sebelumnya"
-                    },
-                    "oAria": {
-                        "sSortAscending": ": aktifkan untuk mengurutkan kolom secara naik",
-                        "sSortDescending": ": aktifkan untuk mengurutkan kolom secara menurun"
-                    },
-                    "select": {
-                        "rows": {
-                            "_": "Terpilih %d baris",
-                            "0": "Klik sebuah baris untuk memilih",
-                            "1": "Terpilih 1 baris"
-                        }
-                    },
-                    "buttons": {
-                        "print": "Cetak",
-                        "copy": "Salin",
-                        "copyTitle": "Salin ke papan klip",
-                        "copySuccess": {
-                            "_": "%d baris disalin",
-                            "1": "1 baris disalin"
-                        }
-                    },
-                },
-                lengthMenu: [5, 10, 25, 50, 100],
-                pageLength: 10, // default page length
-                dom: "<'row pb-0 py-2'<'col-sm-12 col-xl-4'l><'col-sm-12 col-xl-8 eBookTable_category_wrapper'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row pt-2'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-            });
-
             // add button create report
             $('.eBookTable_category_wrapper').prepend(
                 `<div id="eBookTable_category" class="text-right mr-5">
                     <label class="text-nowrap" for="eBookTable_category">Kategori:
-                        <select name="eBookTable_category" id="eBookTable_category" class="form-control form-filter-datatable d-inline-block ml-1" aria-controls="eBookTable">
+                        <select name="eBookTable_category" onclick="getEBooks()" id="bookTable_category_select" class="form-control form-filter-datatable d-inline-block ml-1" aria-controls="eBookTable">
                             <option value="all">Semua Kategori</option>
-                            <option value="1">Kategori 1</option>
-                            <option value="2">Kategori 2</option>
                         </select></label>
                 </div>`
             );
@@ -243,6 +127,195 @@
                     }
                 }
             });
+
+            getCategories();
+            getEBooks();
         });
+
+        const eBookTable = $('#eBookTable').DataTable({
+            columnDefs: [{
+                targets: 'filter-none',
+                orderable: false,
+            }, ],
+            language: {
+                "sEmptyTable": "Tidak ada data yang tersedia di tabel",
+                "sInfo": "Menampilkan _START_ hingga _END_ dari _TOTAL_ entri",
+                "sInfoEmpty": "Menampilkan 0 hingga 0 dari 0 entri",
+                "sInfoFiltered": "(disaring dari total _MAX_ entri)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ",",
+                "sLengthMenu": "Tampilkan _MENU_ entri",
+                "sLoadingRecords": "Memuat...",
+                "sProcessing": "Memproses...",
+                "sSearch": "Cari:",
+                "sSearchPlaceholder": "Masukkan Keyword...",
+                "sZeroRecords": "Tidak ditemukan data yang cocok",
+                "oPaginate": {
+                    "sFirst": "Pertama",
+                    "sLast": "Terakhir",
+                    "sNext": "Berikutnya",
+                    "sPrevious": "Sebelumnya"
+                },
+                "oAria": {
+                    "sSortAscending": ": aktifkan untuk mengurutkan kolom secara naik",
+                    "sSortDescending": ": aktifkan untuk mengurutkan kolom secara menurun"
+                },
+                "select": {
+                    "rows": {
+                        "_": "Terpilih %d baris",
+                        "0": "Klik sebuah baris untuk memilih",
+                        "1": "Terpilih 1 baris"
+                    }
+                },
+                "buttons": {
+                    "print": "Cetak",
+                    "copy": "Salin",
+                    "copyTitle": "Salin ke papan klip",
+                    "copySuccess": {
+                        "_": "%d baris disalin",
+                        "1": "1 baris disalin"
+                    }
+                },
+            },
+            lengthMenu: [5, 10, 25, 50, 100],
+            pageLength: 10, // default page length
+            dom: "<'row pb-0 py-2'<'col-sm-12 col-xl-4'l><'col-sm-12 col-xl-8 eBookTable_category_wrapper'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row pt-2'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+        });
+
+        function getCategories() {
+            $.ajax({
+                type: "GET",
+                url: "{{ route('admin.book.category.data') }}",
+                dataType: "json",
+                success: function(response) {
+                    if (response.data.categories.length > 0) {
+                        $.each(response.data.categories, function(index, category) {
+                            $('#bookTable_category_select').append(
+                                `<option value="${category.id}">${category.name}</option>`
+                            );
+                        });
+                    }
+                },
+                error: function(response) {
+                    console.log(response);
+                }
+            });
+        }
+
+        function getEBooks() {
+            // showLoadingIndicator();
+            eBookTable.clear().draw();
+
+            $.ajax({
+                type: "GET",
+                url: "{{ route('admin.ebook.data') }}",
+                data: {
+                    category: $('#bookTable_category_select').val(),
+                },
+                dataType: "json",
+                success: function(response) {
+                    if (response.data.books.length > 0) {
+                        $.each(response.data.books, function(index, book) {
+                            var rowData = [
+                                index + 1,
+                                `<div class="cover-book-image">
+                                    <a href="{{ asset('storage/${book.cover}') }}"
+                                        class="">
+                                        <img src="{{ asset('storage/${book.cover}') }}"
+                                            class="img-fluid">
+                                    </a>
+                                </div>`,
+                                book.isbn,
+                                book.category.name,
+                                book.title,
+                                book.publisher,
+                                book.author,
+                                book.year,
+                                `<a href="#" class="btn btn-primary btn-sm mr-2">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <button onclick="deleteBook(${book.id})" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                </button>`,
+                            ];
+                            var rowNode = eBookTable.row.add(rowData).draw(
+                                    false)
+                                .node();
+
+                            $(rowNode).find('td').eq(0).addClass('text-center');
+                            $(rowNode).find('td').eq(1).addClass('text-center');
+                            $(rowNode).find('td').eq(9).addClass('text-center text-nowrap');
+                        });
+                    } else {
+                        htmlString = `<tr>
+                                        <td colspan="5" class="text-center">Tidak ada data yang tersedia di tabel</td>
+                                    </tr>`;
+                        $('#tableDataAttendance').html(htmlString);
+                    }
+                },
+                error: function(response) {
+                    console.log(response);
+                }
+            });
+        }
+
+
+        function deleteBook(id) {
+            swal({
+                dangerMode: true,
+                title: "Apakah anda yakin?",
+                text: "Data buku akan dihapus!",
+                icon: "warning",
+                buttons: ["Batal", "Hapus"],
+            }).then((result) => {
+                if (result) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: `{{ url('/admin/book/${id}') }}`,
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                        },
+                        success: function(response) {
+                            swal({
+                                    title: "Berhasil!",
+                                    text: response.meta.message,
+                                    icon: "success",
+                                    buttons: {
+                                        ok: "OK",
+                                    },
+                                })
+                                .then((value) => {
+                                    if (value === "ok") {
+                                        location.reload();
+                                    }
+                                });
+
+                            setTimeout(function() {
+                                location.reload();
+                            }, 4000);
+                        },
+                        error: function(xhr, status, error) {
+                            if (xhr.responseJSON) {
+                                swal({
+                                    title: "GAGAL!",
+                                    text: xhr.responseJSON.meta.message + ", Error : " + xhr
+                                        .responseJSON.data.error,
+                                    icon: "error",
+                                });
+                            } else {
+                                swal({
+                                    title: "GAGAL!",
+                                    text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " +
+                                        error,
+                                    icon: "error",
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        }
     </script>
 @endsection
