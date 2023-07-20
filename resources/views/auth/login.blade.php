@@ -62,13 +62,10 @@
                                             <label class="m-check-label" for="m-agree">Ingat saya
                                             </label>
                                         </div>
-                                        <div class="sign__forgot">
-                                            <a href="/forgot-password">Lupa kata sandi?</a>
-                                        </div>
                                     </div>
                                     <button id="loginButton" class="tp-btn w-100 rounded-pill">Masuk</button>
                                     <div class="sign__new text-center mt-20">
-                                        <p>Belum Punya Akun? <a href="/register">Daftar disini!</a></p>
+                                        <p>Lupa Kata Sandi? <a href="/forgot-password">Klik disini!</a></p>
                                     </div>
                                 </form>
                             </div>
