@@ -44,6 +44,7 @@
 }
 
 /* BOOK */
+/* index */
 table .cover-book-image img {
     max-height: 72px;
     min-height: 48px;
@@ -51,4 +52,11 @@ table .cover-book-image img {
     object-position: center;
     width: auto !important;
     max-width: max-content;
+}
+/* create */
+.file-pdf-info {
+    margin-bottom: 12px;
+}
+.file-pdf-info img {
+    height: 64px;
 }
