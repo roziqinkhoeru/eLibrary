@@ -21,9 +21,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 // Auth
 Route::controller(LoginController::class)->group(function () {
@@ -34,6 +31,7 @@ Route::controller(LoginController::class)->group(function () {
 
     // auth student
     Route::get('/login', 'login')->name('login');
+    Route::post('/login', 'authenticate')->name('login.authenticate');
 });
 
 // forgot password
@@ -41,10 +39,10 @@ Route::controller(PasswordResetLinkController::class)->group(function () {
     // admin forgot password
     Route::get('/admin/forgot-password', 'adminCreate')->name('admin.forgot.password.create');
     Route::post('/admin/forgot-password', 'adminStore')->name('admin.forgot.password.store');
-});
 
-Route::get('/forgot-password', function () {
-    return view('auth.forgotPassword', ['title' => 'Lupa Password | Perpus Digital', 'ptSection' => '54px',]);
+    // student
+    Route::get('/forgot-password', 'create')->name('password.request');
+    Route::post('/forgot-password', 'store')->name('password.store');
 });
 
 // reset password
@@ -54,6 +52,17 @@ Route::controller(NewPasswordController::class)->group(function () {
 });
 
 Route::group(['middleware' => ['auth']], function () {
+    // student
+    Route::group(['middleware' => ['checkRole:student']], function () {
+        Route::get('/', function () {
+            return view('admin.dashboard', [
+                'title' => 'Dashboard | Perpus Digital',
+                'currentNav' => 'dashboard'
+            ]);
+        });
+    });
+
+    // Admin
     Route::group(['middleware' => ['checkRole:admin']], function () {
         Route::controller(AdminController::class)->group(function () {
             Route::get('/admin/dashboard', 'index')->name('admin.dashboard');

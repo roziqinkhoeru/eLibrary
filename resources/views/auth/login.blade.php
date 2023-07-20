@@ -35,13 +35,13 @@
                                 <form action="{{ url('login') }}" method="POST" id="loginForm">
                                     @csrf
                                     <div class="sign__input-wrapper mb-22">
-                                        <label for="username">
-                                            <h5>Username</h5>
+                                        <label for="email">
+                                            <h5>Email</h5>
                                         </label>
                                         <div class="sign__input">
                                             <i class="fal fa-user icon-form"></i>
-                                            <input type="text" placeholder="Masukan username" name="username"
-                                                id="username" required value="" class="input-form">
+                                            <input type="text" placeholder="Masukan email" name="email"
+                                                id="email" required value="" class="input-form">
                                         </div>
                                     </div>
                                     <div class="sign__input-wrapper mb-15">
@@ -83,7 +83,7 @@
         // validate form
         $("#loginForm").validate({
             rules: {
-                username: {
+                email: {
                     required: true,
                 },
                 password: {
@@ -91,8 +91,8 @@
                 }
             },
             messages: {
-                username: {
-                    required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Username tidak boleh kosong',
+                email: {
+                    required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Email tidak boleh kosong',
                 },
                 password: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Kata sandi tidak boleh kosong',
@@ -105,7 +105,7 @@
                     url: "{{ url('login') }}",
                     type: "POST",
                     data: {
-                        username: $('#username').val(),
+                        email: $('#email').val(),
                         password: $('#password').val(),
                         _token: "{{ csrf_token() }}"
                     },
@@ -122,7 +122,7 @@
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'LOGIN GAGAL!',
-                                    text: "Mohon maaf username/password Anda tidak sesuai",
+                                    text: "Mohon maaf email/password Anda tidak sesuai",
                                 })
                                 location.reload()
                             } else {

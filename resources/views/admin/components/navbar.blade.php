@@ -121,17 +121,15 @@
 <script>
     function logout() {
         event.preventDefault();
-        Swal.fire({
+        swal({
+            dangerMode: true,
             title: 'Apakah anda yakin?',
             text: "Anda akan keluar dari akun ini!",
             icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, Keluar!'
+                buttons: ["Batal", "Ya, Keluar!"],
         }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire(
+            if (result) {
+                swal(
                     'Berhasil!',
                     'Anda telah keluar dari akun ini.',
                     'success'
