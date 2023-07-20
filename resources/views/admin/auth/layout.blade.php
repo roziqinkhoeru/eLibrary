@@ -70,7 +70,7 @@
                 <figure class="auth-image-wrapper">
                     {{-- <a href="{{ route('dashboard') }}"> --}}
                     <a href="/">
-                        <img src="{{ asset('assets/img/brand/eLibrary-letter-2.svg') }}" alt="eLibrary-letter-logo">
+                        <img src="{{ asset('assets/img/brand/eLibrary-letter-2.svg') }}" alt="eLibrary letter logo">
                     </a>
                 </figure>
             </div>
