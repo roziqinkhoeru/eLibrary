@@ -56,9 +56,14 @@ Route::get('/admin/book', function () {
     ]);
 });
 Route::get('/admin/ebook', function () {
-    return view('admin.book.ebook', [
-        'title' => 'E-Book | Perpus Digital',
-        'currentNav' => 'book'
+    return view(
+        'admin.book.ebook',
+        [
+            'title' => 'E-Book | Perpus Digital',
+            'currentNav' => 'book'
+        ]
+    );
+});
 
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['checkRole:admin']], function () {
