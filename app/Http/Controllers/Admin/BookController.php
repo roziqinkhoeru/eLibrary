@@ -5,34 +5,80 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class BookController extends Controller
 {
-    public function index()
+    public function book()
     {
         $data = [
-            'title' => 'Data Buku | Perpus Digital',
+            'title' => 'Buku Perpustakaan | Perpus Digital',
             'currentNav' => 'book'
         ];
 
-        return view('admin.books.index', $data);
+        return view('admin.book.index', $data);
     }
 
-    public function getBook()
+    public function getBook(Request $request)
     {
+        $category = $request->category;
         $books = Book::with('category:id,name')
-            ->select('id', 'category_id', 'isbn', 'title', 'author', 'publisher', 'year', 'stock', 'type', 'cover')
+            ->select('id', 'category_id', 'isbn', 'title', 'author', 'publisher', 'year', 'stock', 'cover')
+            ->where('type', 'offline')
+            ->when($category != 'all', function ($query) use ($category) {
+                return $query->where('category_id', $category);
+            })
             ->get();
-
-        dd($books);
 
         return ResponseFormatter::success(
             [
                 'books' => $books
-            ], 'Data Buku Berhasil Diambil'
+            ],
+            'Data Buku Berhasil Diambil'
+        );
+    }
+
+    public function ebook()
+    {
+        $data =
+            [
+                'title' => 'E-Book | Perpus Digital',
+                'currentNav' => 'book'
+            ];
+
+        return view('admin.book.ebook', $data);
+    }
+
+    public function getEBook(Request $request)
+    {
+        $category = $request->category;
+        $books = Book::with('category:id,name')
+            ->select('id', 'category_id', 'isbn', 'title', 'author', 'publisher', 'year', 'stock', 'cover')
+            ->where('type', 'online')
+            ->when($category != 'all', function ($query) use ($category) {
+                return $query->where('category_id', $category);
+            })
+            ->get();
+
+        return ResponseFormatter::success(
+            [
+                'books' => $books
+            ],
+            'Data Buku Berhasil Diambil'
+        );
+    }
+    public function getCategories()
+    {
+        $categories = Category::select('id', 'name')->get();
+
+        return ResponseFormatter::success(
+            [
+                'categories' => $categories
+            ],
+            'Data kategori berhasil diambil'
         );
     }
     public function create()

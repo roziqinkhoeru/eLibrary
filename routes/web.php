@@ -53,22 +53,6 @@ Route::controller(NewPasswordController::class)->group(function () {
     Route::post('/reset-password', 'store')->name('password.reset.store');
 });
 
-Route::get('/admin/book', function () {
-    return view('admin.book.index', [
-        'title' => 'Buku Perpustakaan | Perpus Digital',
-        'currentNav' => 'book'
-    ]);
-});
-Route::get('/admin/ebook', function () {
-    return view(
-        'admin.book.ebook',
-        [
-            'title' => 'E-Book | Perpus Digital',
-            'currentNav' => 'book'
-        ]
-    );
-});
-
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['checkRole:admin']], function () {
         Route::controller(AdminController::class)->group(function () {
@@ -86,6 +70,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::controller(BookController::class)->group(function () {
             Route::get('/admin/book', 'book')->name('admin.book');
             Route::get('/admin/book/data', 'getBook')->name('admin.book.data');
+            Route::get('/admin/book/category/data', 'getCategories')->name('admin.book.category.data');
+            Route::get('/admin/ebook', 'ebook')->name('admin.ebook');
+            Route::get('/admin/ebook/data', 'getEbook')->name('admin.ebook.data');
+            Route::get('/admin/book/create', 'create')->name('admin.book.create');
         });
     });
 });
