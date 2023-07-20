@@ -97,6 +97,12 @@ Route::get('/admin/book/create', function () {
         'currentNav' => 'book'
     ]);
 });
+Route::get('/admin/book/edit/bookName', function () {
+    return view('admin.book.edit', [
+        'title' => 'Edit Buku bookName | Perpus Digital',
+        'currentNav' => 'book'
+    ]);
+});
 // Route::get('/admin/student', function () {
 //     return view('admin.students.index', [
 //         'title' => 'Data Siswa | Perpus Digital',
