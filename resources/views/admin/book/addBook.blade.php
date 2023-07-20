@@ -157,7 +157,8 @@
                                         <div class="input-file input-file-image">
                                             <input type="file" class="form-control form-control-file" id="ebook"
                                                 name="ebook" accept="application/pdf" required>
-                                            <label for="ebook" class="label-input-file btn btn-black btn-round mt-2">
+                                            <label for="ebook"
+                                                class="label-input-file btn btn-black btn-round mt-2 mr-3 btn-upload-image-sm">
                                                 <span class="btn-label">
                                                     <i class="fa fa-file-pdf"></i>
                                                 </span>
@@ -283,49 +284,6 @@
                 window.location.href = "/admin/book";
             });
         });
-
-        function handleFileSelect(event) {
-            const filePreviewContainer = document.getElementById("filePreviewContainer");
-            filePreviewContainer.innerHTML = ""; // Clear previous previews
-
-            const files = event.target.files;
-            const file = files[0]; // Get the first selected file, if any
-
-            if (file) {
-                const reader = new FileReader();
-
-                // Asynchronous function to read and display the file
-                reader.onload = function(e) {
-                    const filePreview = document.createElement("div");
-                    filePreview.className = "file-preview";
-
-                    const img = document.createElement("img");
-                    img.src = e.target.result;
-                    img.style.maxWidth = "100px";
-                    img.style.maxHeight = "100px";
-                    filePreview.appendChild(img);
-
-                    const deleteButton = document.createElement("div");
-                    deleteButton.innerHTML = "Delete";
-                    deleteButton.className = "delete-button";
-                    deleteButton.addEventListener("click", function() {
-                        filePreviewContainer.removeChild(filePreview);
-                        ebookInput.value = null;
-                    });
-
-                    filePreview.appendChild(deleteButton);
-
-                    filePreviewContainer.appendChild(filePreview);
-                };
-
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // Attach event listener to the file input
-        const ebookInput = document.getElementById("ebook");
-        ebookInput.addEventListener("change", handleFileSelect);
-
 
         $("#formAddBook").validate({
             rules: {
