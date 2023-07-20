@@ -522,7 +522,7 @@ class StudentSeeder extends Seeder
                 'username' => $namaBelakang,
                 'email' => $namaBelakang.'@gmail.com',
                 'password' => bcrypt('student123'),
-                'role_id' => 1,
+                'role_id' => 2,
                 'student_id' => $student['nis'],
             ];
 
