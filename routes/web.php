@@ -43,6 +43,10 @@ Route::controller(PasswordResetLinkController::class)->group(function () {
     Route::post('/admin/forgot-password', 'adminStore')->name('admin.forgot.password.store');
 });
 
+Route::get('/forgot-password', function () {
+    return view('auth.forgotPassword', ['title' => 'Lupa Password | Perpus Digital', 'ptSection' => '54px',]);
+});
+
 // reset password
 Route::controller(NewPasswordController::class)->group(function () {
     Route::get('/reset-password/{token}', 'create')->name('password.reset');
