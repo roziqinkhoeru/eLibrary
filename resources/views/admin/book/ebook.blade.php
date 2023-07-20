@@ -221,9 +221,9 @@
                             var rowData = [
                                 index + 1,
                                 `<div class="cover-book-image">
-                                    <a href="{{ asset('assets/img/dummy/Brown modern history book cover.png') }}"
+                                    <a href="{{ asset('storage/${book.cover}') }}"
                                         class="">
-                                        <img src="{{ asset('assets/img/dummy/Brown modern history book cover.png') }}"
+                                        <img src="{{ asset('storage/${book.cover}') }}"
                                             class="img-fluid">
                                     </a>
                                 </div>`,
@@ -236,9 +236,9 @@
                                 `<a href="#" class="btn btn-primary btn-sm mr-2">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="#" class="btn btn-danger btn-sm">
+                                <button onclick="deleteBook(${book.id})" class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>
-                                </a>`,
+                                </button>`,
                             ];
                             var rowNode = eBookTable.row.add(rowData).draw(
                                     false)
@@ -257,6 +257,63 @@
                 },
                 error: function(response) {
                     console.log(response);
+                }
+            });
+        }
+
+
+        function deleteBook(id) {
+            swal({
+                dangerMode: true,
+                title: "Apakah anda yakin?",
+                text: "Data buku akan dihapus!",
+                icon: "warning",
+                buttons: ["Batal", "Hapus"],
+            }).then((result) => {
+                if (result) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: `{{ url('/admin/book/${id}') }}`,
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                        },
+                        success: function(response) {
+                            swal({
+                                    title: "Berhasil!",
+                                    text: response.meta.message,
+                                    icon: "success",
+                                    buttons: {
+                                        ok: "OK",
+                                    },
+                                })
+                                .then((value) => {
+                                    if (value === "ok") {
+                                        location.reload();
+                                    }
+                                });
+
+                            setTimeout(function() {
+                                location.reload();
+                            }, 4000);
+                        },
+                        error: function(xhr, status, error) {
+                            if (xhr.responseJSON) {
+                                swal({
+                                    title: "GAGAL!",
+                                    text: xhr.responseJSON.meta.message + ", Error : " + xhr
+                                        .responseJSON.data.error,
+                                    icon: "error",
+                                });
+                            } else {
+                                swal({
+                                    title: "GAGAL!",
+                                    text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " +
+                                        error,
+                                    icon: "error",
+                                });
+                            }
+                        }
+                    });
                 }
             });
         }

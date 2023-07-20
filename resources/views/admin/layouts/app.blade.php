@@ -178,7 +178,7 @@
     {{-- <script src="{{ asset('assets/template/admin/js/setting-demo.js') }}"></script>
     <script src="{{ asset('assets/template/admin/js/demo.js') }}"></script> --}}
     {{-- Sweet Alert --}}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
 
     <!-- Include CKEditor scripts and styles -->
     <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>

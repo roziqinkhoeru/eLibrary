@@ -83,17 +83,20 @@ class BookController extends Controller
     }
     public function create()
     {
+        $categories = Category::select('id', 'name')->get();
         $data = [
             'title' => 'Tambah Buku | Perpus Digital',
+            'categories' => $categories,
             'currentNav' => 'book'
         ];
 
-        return view('admin.books.create', $data);
+        return view('admin.book.addBook', $data);
     }
 
     public function store(Request $request)
     {
         $rules = [
+            'id' => 'required|unique:books,id',
             'category_id' => 'required',
             'isbn' => 'required',
             'title' => 'required',
@@ -108,13 +111,12 @@ class BookController extends Controller
         if ($request->type == 'online') {
             $rules['file'] = 'required|mimes:pdf|max:10240';
         }
-
         $validator = Validator::make($request->all(), $rules);
+        // dd($validator->fails());
 
         if ($validator->fails()) {
             return ResponseFormatter::error(
                 [
-                    'message' => 'Gagal menambahkan buku',
                     'error' => $validator->errors()->first(),
                 ],
                 'Gagal menambahkan buku',
@@ -124,6 +126,7 @@ class BookController extends Controller
 
         if ($request->type == 'online') {
             $book = Book::create([
+                'id' => $request->id,
                 'category_id' => $request->category_id,
                 'isbn' => $request->isbn,
                 'title' => $request->title,
@@ -137,6 +140,7 @@ class BookController extends Controller
             ]);
         } else {
             $book = Book::create([
+                'id' => $request->id,
                 'category_id' => $request->category_id,
                 'isbn' => $request->isbn,
                 'title' => $request->title,
@@ -149,17 +153,23 @@ class BookController extends Controller
             ]);
         }
 
+        if ($request->type == 'online') {
+            $redirect = route('admin.ebook');
+        } else {
+            $redirect = route('admin.book');
+        }
+
         if ($book) {
             return ResponseFormatter::success(
                 [
-                    'redirect' => route('admin.book',),
+                    'redirect' => $redirect,
                 ],
                 'Berhasil menambahkan buku'
             );
         } else {
             return ResponseFormatter::error(
                 [
-                    'message' => 'Gagal menambahkan buku',
+                    'error' => 'Gagal menambahkan buku',
                 ],
                 'Gagal menambahkan buku',
                 500

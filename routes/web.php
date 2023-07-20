@@ -74,17 +74,12 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/admin/ebook', 'ebook')->name('admin.ebook');
             Route::get('/admin/ebook/data', 'getEbook')->name('admin.ebook.data');
             Route::get('/admin/book/create', 'create')->name('admin.book.create');
+            Route::post('/admin/book', 'store')->name('admin.book.store');
+            Route::delete('/admin/book/{book:id}', 'destroy')->name('admin.book.destroy');
         });
     });
 });
 
-// admin
-Route::get('/admin/book/create', function () {
-    return view('admin.book.addBook', [
-        'title' => 'Tambah Buku | Perpus Digital',
-        'currentNav' => 'book'
-    ]);
-});
 // Route::get('/admin/student', function () {
 //     return view('admin.students.index', [
 //         'title' => 'Data Siswa | Perpus Digital',
