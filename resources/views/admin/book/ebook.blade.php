@@ -51,11 +51,12 @@
                                             <th class="">Judul</th>
                                             <th class="filter-none">Penerbit</th>
                                             <th class="filter-none">Pengarang</th>
-                                            <th class="filter-none">Tahun Terbit</th>
+                                            <th class="">Tahun Terbit</th>
+                                            <th class="">Jumlah Buku</th>
                                             <th class="text-center filter-none text-nowrap">Aksi</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="bookTableBody">
                                         {{-- <tr>
                                             <td class="text-center">1</td>
                                             <td class="text-center">
@@ -109,24 +110,6 @@
                         </select></label>
                 </div>`
             );
-
-            $('.cover-book-image').magnificPopup({
-                delegate: 'a',
-                type: 'image',
-                removalDelay: 300,
-                gallery: {
-                    enabled: false,
-                },
-                mainClass: 'mfp-with-zoom',
-                zoom: {
-                    enabled: true,
-                    duration: 300,
-                    easing: 'ease-in-out',
-                    opener: function(openerElement) {
-                        return openerElement.is('img') ? openerElement : openerElement.find('img');
-                    }
-                }
-            });
 
             getCategories();
             getEBooks();
@@ -184,6 +167,10 @@
                 "<'row pt-2'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
         });
 
+        const showLoadingIndicator = () => {
+            $('#bookTableBody').html(tableLoader(10, `{{ asset('assets/img/loader/Ellipsis-2s-48px.svg') }}`));
+        }
+
         function getCategories() {
             $.ajax({
                 type: "GET",
@@ -205,8 +192,8 @@
         }
 
         function getEBooks() {
-            // showLoadingIndicator();
             eBookTable.clear().draw();
+            // showLoadingIndicator();
 
             $.ajax({
                 type: "GET",
@@ -248,11 +235,27 @@
                             $(rowNode).find('td').eq(1).addClass('text-center');
                             $(rowNode).find('td').eq(9).addClass('text-center text-nowrap');
                         });
+
+                        $('.cover-book-image').magnificPopup({
+                            delegate: 'a',
+                            type: 'image',
+                            removalDelay: 300,
+                            gallery: {
+                                enabled: false,
+                            },
+                            mainClass: 'mfp-with-zoom',
+                            zoom: {
+                                enabled: true,
+                                duration: 300,
+                                easing: 'ease-in-out',
+                                opener: function(openerElement) {
+                                    return openerElement.is('img') ? openerElement : openerElement
+                                        .find('img');
+                                }
+                            }
+                        });
                     } else {
-                        htmlString = `<tr>
-                                        <td colspan="5" class="text-center">Tidak ada data yang tersedia di tabel</td>
-                                    </tr>`;
-                        $('#tableDataAttendance').html(htmlString);
+                        $('#bookTableBody').html(tableEmpty(10, 'e-book'));
                     }
                 },
                 error: function(response) {
@@ -260,7 +263,6 @@
                 }
             });
         }
-
 
         function deleteBook(id) {
             swal({

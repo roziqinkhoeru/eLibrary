@@ -51,8 +51,8 @@
                                             <th class="">Judul</th>
                                             <th class="filter-none">Penerbit</th>
                                             <th class="filter-none">Pengarang</th>
-                                            <th class="filter-none">Tahun Terbit</th>
-                                            <th class="filter-none">Jumlah Buku</th>
+                                            <th class="">Tahun Terbit</th>
+                                            <th class="">Jumlah Buku</th>
                                             <th class="text-center filter-none text-nowrap">Aksi</th>
                                         </tr>
                                     </thead>
