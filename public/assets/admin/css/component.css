@@ -12,6 +12,9 @@
 .btn-anchor:hover {
     color: #6861ce;
 }
+.btn-upload-image-sm {
+    padding: 8px 20px !important;
+}
 
 /* badge */
 .badge.badge-category {
