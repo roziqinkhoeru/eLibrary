@@ -5,7 +5,7 @@
         <div class="page-inner">
             {{-- header --}}
             <div class="page-header">
-                <h4 class="page-title">Tambah Buku</h4>
+                <h4 class="page-title">Edit Buku</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
                         <a href="/admin">
@@ -17,7 +17,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#">
-                            Form Tambah Buku
+                            Form Edit Buku
                         </a>
                     </li>
                 </ul>
@@ -28,53 +28,42 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">Form Tambah Buku</div>
+                            <div class="card-title">Form Edit Buku</div>
                             <div class="card-category">
-                                Form ini digunakan untuk menambah buku maupun e-book
+                                Form ini digunakan untuk mengubah data buku maupun e-book
                             </div>
                         </div>
-                        <form id="formAddBook" method="POST" enctype="multipart/form-data">
-                            @csrf
+                        <form id="formEditBook" action="" method="POST">
                             <div class="card-body">
-                                {{-- ID --}}
-                                <div class="form-group form-show-validation row">
-                                    <label for="id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">ID
-                                        <span class="required-label">*</span></label>
-                                    <div class="col-lg-6 col-md-9 col-sm-8">
-                                        <input type="number" class="form-control" id="id" name="id"
-                                            placeholder="Masukkan ID Buku" required>
-                                    </div>
-                                </div>
                                 {{-- Title --}}
                                 <div class="form-group form-show-validation row">
                                     <label for="title" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Judul
                                         Buku
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-6 col-md-9 col-sm-8">
+                                    <div class="col-lg-4 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="title" name="title"
-                                            placeholder="Masukkan Judul Buku" required>
+                                            placeholder="Masukkan Judul Buku" value="" required>
                                     </div>
                                 </div>
                                 {{-- ISBN --}}
                                 <div class="form-group form-show-validation row">
                                     <label for="isbn" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">ISBN
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-6 col-md-9 col-sm-8">
+                                    <div class="col-lg-4 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="isbn" name="isbn"
-                                            placeholder="Masukkan ISBN" required>
+                                            placeholder="Masukkan ISBN" value="" required>
                                     </div>
                                 </div>
                                 {{-- Kategori --}}
                                 <div class="form-group form-show-validation row">
-                                    <label for="category_id"
-                                        class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Kategori
+                                    <label for="category" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Kategori
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-6 col-md-9 col-sm-8">
-                                        <select class="form-control" id="category_id" name="category_id" required>
+                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                        <select class="form-control" id="category" name="category" required>
                                             <option value="">Pilih Kategori</option>
-                                            @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                            @endforeach
+                                            <option value="1">Kategori 1</option>
+                                            <option value="2">Kategori 2</option>
+                                            <option value="3">Kategori 3</option>
                                         </select>
                                     </div>
                                 </div>
@@ -82,18 +71,18 @@
                                 <div class="form-group form-show-validation row">
                                     <label for="publisher" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Penerbit
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-6 col-md-9 col-sm-8">
+                                    <div class="col-lg-4 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="publisher" name="publisher"
-                                            placeholder="Masukkan Nama Penerbit" required>
+                                            placeholder="Masukkan Nama Penerbit" value="" required>
                                     </div>
                                 </div>
                                 {{-- Pengarang --}}
                                 <div class="form-group form-show-validation row">
                                     <label for="author" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Pengarang
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-6 col-md-9 col-sm-8">
+                                    <div class="col-lg-4 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="author" name="author"
-                                            placeholder="Masukkan Nama Pengarang" required>
+                                            placeholder="Masukkan Nama Pengarang" value="" required>
                                     </div>
                                 </div>
                                 {{-- Tahun Terbit --}}
@@ -101,32 +90,32 @@
                                     <label for="year" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Tahun
                                         Terbit
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-6 col-md-9 col-sm-8">
+                                    <div class="col-lg-4 col-md-9 col-sm-8">
                                         <input type="number" class="form-control" id="year" name="year"
-                                            placeholder="Masukkan Tahun Terbit" required>
+                                            placeholder="Masukkan Tahun Terbit" value="" required>
                                     </div>
                                 </div>
                                 {{-- Jumlah Buku --}}
                                 <div class="form-group form-show-validation row">
-                                    <label for="stock" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Jumlah
+                                    <label for="qty" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Jumlah
                                         Buku
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-6 col-md-9 col-sm-8">
-                                        <input type="number" class="form-control" id="stock" name="stock"
-                                            placeholder="Masukkan Jumlah Buku" required>
+                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                        <input type="number" class="form-control" id="qty" name="qty"
+                                            placeholder="Masukkan Jumlah Buku" value="" required>
                                     </div>
                                 </div>
                                 {{-- cover --}}
                                 <div class="form-group form-show-validation row">
                                     <label for="bookCover" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Cover
                                         Buku <span class="required-label">*</span></label>
-                                    <div class="col-lg-6 col-md-9 col-sm-8">
+                                    <div class="col-lg-4 col-md-9 col-sm-8">
                                         <div class="input-file input-file-image">
                                             <img class="img-upload-preview" width="240"
                                                 src="http://placehold.it/240x240" alt="Book Cover Preview"
                                                 id="imagePreview">
                                             <input type="file" class="form-control form-control-file" id="bookCover"
-                                                name="bookCover" accept="image/*" required>
+                                                name="bookCover" accept="image/*" value="" required>
                                             <label for="bookCover"
                                                 class="label-input-file btn btn-black btn-round mt-2 mr-3 btn-upload-image-sm">
                                                 <span class="btn-label">
@@ -134,11 +123,6 @@
                                                 </span>
                                                 Upload Cover
                                             </label>
-                                            <button type="button" id="deleteImage"
-                                                class="btn btn-danger btn-round btn-upload-image-sm">
-                                                <span class="btn-label"><i class="fas fa-trash-alt"></i></span>
-                                                Hapus
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -147,17 +131,17 @@
                                     <label for="type" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Tipe
                                         Buku
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-6 col-md-9 col-sm-8">
+                                    <div class="col-lg-4 col-md-9 col-sm-8">
                                         <select class="form-control" id="type" name="type" required>
                                             <option value="">Pilih Tipe Buku</option>
-                                            <option value="offline">Buku</option>
-                                            <option value="online">E-Book</option>
+                                            <option value="1">Buku</option>
+                                            <option value="2" selected>E-Book</option>
                                         </select>
                                     </div>
                                 </div>
                                 {{-- upload ebook --}}
                                 <div class="form-group form-show-validation row" id="uploadEbookContainer">
-                                    <label for="file" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">File
+                                    <label for="ebook" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">File
                                         Info<span class="required-label">*</span></label>
                                     <div class="col-lg-6 col-md-9 col-sm-8">
                                         <div class="mb-2">
@@ -166,20 +150,14 @@
                                             </div>
                                         </div>
                                         <div class="input-file input-file-image">
-                                            <input type="file" class="form-control form-control-file" id="file"
-                                                name="file" accept="application/pdf" required>
-                                            <label for="file"
-                                                class="label-input-file btn btn-black btn-round mt-2 mr-3 btn-upload-image-sm">
+                                            <input type="file" class="form-control form-control-file" id="ebook"
+                                                name="ebook" accept="application/pdf" value="" required>
+                                            <label for="ebook" class="label-input-file btn btn-black btn-round mt-2 mr-3 btn-upload-image-sm">
                                                 <span class="btn-label">
                                                     <i class="fa fa-file-pdf"></i>
                                                 </span>
                                                 Unggah File Info
                                             </label>
-                                            <button type="button" id="deleteEbook"
-                                                class="btn btn-danger btn-round btn-upload-image-sm">
-                                                <span class="btn-label"><i class="fas fa-trash-alt"></i></span>
-                                                Hapus
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -189,7 +167,7 @@
                                     <div class="col-md-12 text-right">
                                         <button id="backToBook" class="btn btn-default btn-outline-dark"
                                             role="presentation">Batal</button>
-                                        <button class="btn btn-primary ml-3" id="formAddBookButton"
+                                        <button class="btn btn-primary ml-3" id="formEditBookButton"
                                             type="submit">Kirim</button>
                                     </div>
                                 </div>
@@ -203,39 +181,18 @@
 @endsection
 
 @section('script')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
-        integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.min.js"
-        integrity="sha512-6S5LYNn3ZJCIm0f9L6BCerqFlQ4f5MwNKq+EthDXabtaJvg3TuFLhpno9pcm+5Ynm6jdA9xfpQoMz2fcjVMk9g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        // Menambahkan aturan validasi kustom untuk ukuran maksimum file
-        $.validator.addMethod('maxfilesize', function(value, element, param) {
-            var maxSize = param;
-
-            if (element.files.length > 0) {
-                var fileSize = element.files[0].size; // Ukuran file dalam byte
-                return fileSize <= maxSize;
-            }
-
-            return true;
-        }, '');
         $(document).ready(function() {
             // define variable
             const imagePreview = $('#imagePreview');
             const filePreview = $('#filePreview');
             const bookCover = $('#bookCover');
-            const eBook = $('#file');
-            const deleteImageBtn = $('#deleteImage');
-            const deleteEbookBtn = $('#deleteEbook');
+            const eBook = $('#ebook');
             const backToBookBtn = $('#backToBook');
             const typeValue = $('#type').val();
-            const storedImage = localStorage.getItem('bookCoverPreview');
-            const storedEbook = localStorage.getItem('ebookPreview');
 
             function toggleEbookContainer(e) {
-                if (e === "online") {
+                if (e === "2") {
                     $("#uploadEbookContainer").show();
                 } else {
                     $("#uploadEbookContainer").hide();
@@ -248,25 +205,12 @@
                 toggleEbookContainer(selectedValue);
             });
 
-            if (storedImage) {
-                imagePreview.attr('src', storedImage);
-            }
-            if (storedEbook) {
-                filePreview.html(`<div class="text-sm-center">
-                                            <figure class="file-pdf-info">
-                                            <img src="{{ asset('assets/img/decoration/pdf.png') }}" alt="pdf-file-new">
-                                            </figure>
-                                            <p class="mb-0 line-clamp-max-w-320">${JSON.parse(storedEbook).name}</p>
-                                        </div>`);
-            }
-
             bookCover.on('change', function(event) {
                 const file = event.target.files[0];
                 const reader = new FileReader();
 
                 reader.onload = function(e) {
                     imagePreview.attr('src', e.target.result);
-                    localStorage.setItem('bookCoverPreview', e.target.result);
                 };
 
                 reader.readAsDataURL(file);
@@ -287,41 +231,22 @@
                                     </figure>
                                     <p class="mb-0 line-clamp-max-w-320">${fileEbook.name}</p>
                                 </div>`);
-                    localStorage.setItem('ebookPreview', JSON.stringify(fileEbook));
                 };
 
                 reader.readAsDataURL(file); // Read the file as a data URL (Base64)
             });
 
-            deleteImageBtn.on('click', function() {
-                bookCover.val(null);
-                imagePreview.attr('src',
-                    'http://placehold.it/240x240'); // Replace with your default image URL
-                localStorage.removeItem('bookCoverPreview');
-            });
-
-            deleteEbookBtn.on('click', function() {
-                eBook.val(null);
-                filePreview.html('');
-                localStorage.removeItem('ebookPreview');
-            });
-
             backToBookBtn.on('click', function() {
-                localStorage.removeItem('bookCoverPreview');
-                localStorage.removeItem('ebookPreview');
                 window.location.href = "/admin/book";
             });
         });
 
-        $("#formAddBook").validate({
+        $("#formEditBook").validate({
             rules: {
-                id: {
-                    required: true,
-                },
                 title: {
                     required: true,
                 },
-                category_id: {
+                category: {
                     required: true,
                 },
                 publisher: {
@@ -333,31 +258,24 @@
                 year: {
                     required: true,
                 },
-                stock: {
+                qty: {
                     required: true,
                 },
                 bookCover: {
                     required: true,
-                    maxfilesize: 2 * 1024 * 1024, // 2MB (dalam byte)
-                    extension: 'jpg|jpeg|png',
                 },
                 type: {
                     required: true,
                 },
-                file: {
-                    maxfilesize: 10 * 1024 * 1024, // 2MB (dalam byte)
-                    extension: 'pdf',
-                    required: ($('#type').val() == "online" ? true : false),
+                ebook: {
+                    required: true,
                 },
             },
             messages: {
-                id: {
-                    required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>ID buku tidak boleh kosong',
-                },
                 title: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Judul buku tidak boleh kosong',
                 },
-                category_id: {
+                category: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Kategori buku tidak boleh kosong',
                 },
                 publisher: {
@@ -369,37 +287,32 @@
                 year: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Tahun terbit buku tidak boleh kosong',
                 },
-                stock: {
+                qty: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Jumlah buku tidak boleh kosong',
                 },
                 bookCover: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Cover buku tidak boleh kosong',
-                    maxfilesize: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Ukuran file maksimal 2MB',
-                    extension: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Format file yang diperbolehkan hanya jpg, jpeg, dan png',
                 },
                 type: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Tipe buku tidak boleh kosong',
                 },
-                file: {
+                ebook: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>E-Book tidak boleh kosong',
-                    maxfilesize: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Ukuran file maksimal 10MB',
-                    extension: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Format file yang diperbolehkan hanya pdf',
                 },
             },
             submitHandler: function(form, event) {
                 event.preventDefault();
-                var formData = new FormData(form);
-                $('#formAddBookButton').html('<i class="fas fa-circle-notch text-lg spinners-2"></i>');
-                $('#formAddBookButton').prop('disabled', true);
+                $('#formEditBookButton').html('<i class="fas fa-circle-notch text-lg spinners-2"></i>');
+                $('#formEditBookButton').prop('disabled', true);
                 $.ajax({
-                    type: "POST",
-                    url: `{{ route('admin.book.store') }}`,
-                    data: formData,
-                    processData: false,
-                    contentType: false,
+                    type: "PUT",
+                    url: `#`,
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                    },
                     success: function(response) {
-                        $('#formAddBookButton').html('Kirim');
-                        $('#formAddBookButton').prop('disabled', false);
+                        $('#formEditBookButton').html('Terima');
+                        $('#formEditBookButton').prop('disabled', false);
                         $.notify({
                             icon: 'flaticon-alarm-1',
                             title: 'Perpus Digital Admin',
@@ -415,24 +328,22 @@
                         window.location.href = response.data.redirect
                     },
                     error: function(xhr, status, error) {
-                        console.log(xhr);
-                        $('#formAddBookButton').html('Kirim');
-                        $('#formAddBookButton').prop('disabled', false);
-                        if (xhr.responseJSON) {
-                            new swal({
-                                title: "GAGAL!",
-                                text: xhr.responseJSON.meta.message + " Error : " + xhr
+                        $('#formEditBookButton').html('Terima');
+                        $('#formEditBookButton').prop('disabled', false);
+                        if (xhr.responseJSON)
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'TAMBAH KELAS GAGAL!',
+                                text: xhr.responseJSON.meta.message + " Error: " + xhr
                                     .responseJSON.data.error,
-                                icon: "error",
-                            });
-                        } else {
-                            new swal({
-                                title: "GAGAL!",
-                                text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: ",
-                                error,
-                                icon: "error",
-                            });
-                        }
+                            })
+                        else
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'TAMBAH KELAS GAGAL!',
+                                text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " +
+                                    error,
+                            })
                         return false;
                     },
                 });

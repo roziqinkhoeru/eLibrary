@@ -183,6 +183,9 @@
     <!-- Include CKEditor scripts and styles -->
     <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
 
+    <script src="{{ asset('assets/js/empty.js') }}"></script>
+    <script src="{{ asset('assets/js/loader.js') }}"></script>
+
     @yield('script')
 </body>
 
