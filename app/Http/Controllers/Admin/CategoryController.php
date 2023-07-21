@@ -76,21 +76,21 @@ class CategoryController extends Controller
         }
     }
 
-    public function edit($id)
+    public function edit(Category $category)
     {
         $data = [
             'title' => 'Edit Kategori | Perpus Digital',
             'currentNav' => 'category',
-            'id' => $id
+            'category' => $category
         ];
 
-        return view('admin.categories.edit', $data);
+        return view('admin.category.edit', $data);
     }
 
     public function update(Request $request, Category $category)
     {
         $rules = [
-            'name' => 'required',
+            'name' => 'required|unique:categories,name',
             'description' => 'required'
         ];
 
@@ -116,6 +116,7 @@ class CategoryController extends Controller
         if ($category) {
             return ResponseFormatter::success(
                 [
+                    'redirect' => route('admin.category'),
                     'message' => 'Berhasil mengubah kategori'
                 ],
                 'Berhasil mengubah kategori'

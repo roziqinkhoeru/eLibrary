@@ -91,6 +91,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/admin/category', 'index')->name('admin.category');
             Route::get('/admin/category/create', 'create')->name('admin.category.create');
             Route::post('/admin/category', 'store')->name('admin.category.store');
+            Route::get('/admin/category/{category:slug}/edit', 'edit')->name('admin.category.edit');
+            Route::put('/admin/category/{category:slug}', 'update')->name('admin.category.update');
             Route::delete('/admin/category/{category:slug}', 'destroy')->name('admin.category.destroy');
         });
     });

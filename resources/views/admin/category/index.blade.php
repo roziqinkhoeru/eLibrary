@@ -57,7 +57,7 @@
                                                 <td>{{ $category->name }}</td>
                                                 <td>{{ $category->description }}</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-primary btn-sm mr-2">
+                                                    <a href="{{ url('/admin/category/'.$category->slug.'/edit') }}" class="btn btn-primary btn-sm mr-2">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <button onclick="deleteCategory('{{ $category->slug }}')" class="btn btn-danger btn-sm">

@@ -5,7 +5,7 @@
         <div class="page-inner">
             {{-- header --}}
             <div class="page-header">
-                <h4 class="page-title">Tambah Kategori</h4>
+                <h4 class="page-title">Ubah Kategori</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
                         <a href="/admin">
@@ -17,7 +17,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#">
-                            Form Tambah Kategori
+                            Form Ubah Kategori
                         </a>
                     </li>
                 </ul>
@@ -28,13 +28,14 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">Form Tambah Kategori</div>
+                            <div class="card-title">Form Ubah Kategori</div>
                             <div class="card-category">
-                                Form ini digunakan untuk menambah kategori
+                                Form ini digunakan untuk mengubah kategori
                             </div>
                         </div>
-                        <form id="formAddCategory" method="POST" >
+                        <form id="formAddCategory">
                             @csrf
+                            @method('PUT')
                             <div class="card-body">
                                 {{-- Name --}}
                                 <div class="form-group form-show-validation row">
@@ -43,7 +44,7 @@
                                         <span class="required-label">*</span></label>
                                     <div class="col-lg-4 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="name" name="name"
-                                            placeholder="Masukkan Judul Kategori" required>
+                                            placeholder="Masukkan Judul Kategori" value="{{ $category->name }}" required>
                                     </div>
                                 </div>
                                 {{-- Description --}}
@@ -51,7 +52,7 @@
                                     <label for="description" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Deskripsi
                                         <span class="required-label">*</span></label>
                                     <div class="col-lg-4 col-md-9 col-sm-8">
-                                        <input type="text" class="form-control" id="description" name="description"
+                                        <input type="text" class="form-control" id="description" name="description" value="{{ $category->description }}"
                                             placeholder="Masukkan Deskripsi" required>
                                     </div>
                                 </div>
@@ -109,7 +110,7 @@
                 $('#formAddCategoryButton').prop('disabled', true);
                 $.ajax({
                     type: "POST",
-                    url: `{{ route('admin.category.store') }}`,
+                    url: `{{ url('/admin/category/'. $category->slug) }}`,
                     data: formData,
                     processData: false,
                     contentType: false,
