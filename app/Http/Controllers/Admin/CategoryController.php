@@ -13,12 +13,14 @@ class CategoryController extends Controller
 {
     public function index()
     {
+        $categories = Category::get();
         $data = [
             'title' => 'Data Kategori | Perpus Digital',
-            'currentNav' => 'category'
+            'currentNav' => 'category',
+            'categories' => $categories
         ];
 
-        return view('admin.categories.index', $data);
+        return view('admin.category.index', $data);
     }
 
     public function create()
@@ -28,7 +30,7 @@ class CategoryController extends Controller
             'currentNav' => 'category'
         ];
 
-        return view('admin.categories.create', $data);
+        return view('admin.category.create', $data);
     }
 
     public function store(Request $request)
@@ -60,6 +62,7 @@ class CategoryController extends Controller
         if ($category) {
             return ResponseFormatter::success(
                 [
+                    'redirect' => route('admin.category'),
                     'message' => 'Berhasil menambahkan kategori'
                 ],
                 'Berhasil menambahkan kategori'
@@ -122,6 +125,27 @@ class CategoryController extends Controller
                 [
                     'message' => 'Gagal mengubah kategori'
                 ], 'Gagal mengubah kategori',
+            );
+        }
+    }
+
+    public function destroy(Category $category)
+    {
+        $category->delete();
+
+        if ($category) {
+            return ResponseFormatter::success(
+                [
+                    'redirect' => route('admin.category'),
+                    'message' => 'Berhasil menghapus kategori'
+                ],
+                'Berhasil menghapus kategori'
+            );
+        } else {
+            return ResponseFormatter::error(
+                [
+                    'message' => 'Gagal menghapus kategori'
+                ], 'Gagal menghapus kategori',
             );
         }
     }
