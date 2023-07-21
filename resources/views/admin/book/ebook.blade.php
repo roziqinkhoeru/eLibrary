@@ -261,7 +261,6 @@
             });
         }
 
-
         function deleteBook(id) {
             swal({
                 dangerMode: true,
