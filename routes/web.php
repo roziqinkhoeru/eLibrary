@@ -91,7 +91,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/admin/category', 'index')->name('admin.category');
             Route::get('/admin/category/create', 'create')->name('admin.category.create');
             Route::post('/admin/category', 'store')->name('admin.category.store');
-            Route::delete('/admin/category/{category:id}', 'destroy')->name('admin.category.destroy');
+            Route::delete('/admin/category/{category:slug}', 'destroy')->name('admin.category.destroy');
         });
     });
 });

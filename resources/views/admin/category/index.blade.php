@@ -60,9 +60,9 @@
                                                     <a href="#" class="btn btn-primary btn-sm mr-2">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <a href="#" class="btn btn-danger btn-sm">
+                                                    <button onclick="deleteCategory('{{ $category->slug }}')" class="btn btn-danger btn-sm">
                                                         <i class="fas fa-trash"></i>
-                                                    </a>
+                                                    </button>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -150,5 +150,61 @@
                 }
             });
         });
+
+        function deleteCategory(category) {
+            swal({
+                dangerMode: true,
+                title: "Apakah anda yakin?",
+                text: "Data buku akan dihapus!",
+                icon: "warning",
+                buttons: ["Batal", "Hapus"],
+            }).then((result) => {
+                if (result) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: `{{ url('/admin/category/${category}') }}`,
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                        },
+                        success: function(response) {
+                            swal({
+                                    title: "Berhasil!",
+                                    text: response.meta.message,
+                                    icon: "success",
+                                    buttons: {
+                                        ok: "OK",
+                                    },
+                                })
+                                .then((value) => {
+                                    if (value === "ok") {
+                                        location.reload();
+                                    }
+                                });
+
+                            setTimeout(function() {
+                                location.reload();
+                            }, 4000);
+                        },
+                        error: function(xhr, status, error) {
+                            if (xhr.responseJSON) {
+                                swal({
+                                    title: "GAGAL!",
+                                    text: xhr.responseJSON.meta.message + ", Error : " + xhr
+                                        .responseJSON.data.error,
+                                    icon: "error",
+                                });
+                            } else {
+                                swal({
+                                    title: "GAGAL!",
+                                    text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " +
+                                        error,
+                                    icon: "error",
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        }
     </script>
 @endsection
