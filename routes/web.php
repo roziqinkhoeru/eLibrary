@@ -99,6 +99,12 @@ Route::group(['middleware' => ['auth']], function () {
     });
 });
 
+Route::get('/', function () {
+    return view('user.home', [
+        'title' => 'Perpus Digital',
+    ]);
+});
+
 // Route::get('/admin/student', function () {
 //     return view('admin.students.index', [
 //         'title' => 'Data Siswa | Perpus Digital',

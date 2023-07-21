@@ -8,7 +8,7 @@
                 <h4 class="page-title">Ubah Kategori</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/admin">
+                        <a href="/admin/dashboard">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -33,7 +33,7 @@
                                 Form ini digunakan untuk mengubah kategori
                             </div>
                         </div>
-                        <form id="formAddCategory">
+                        <form id="formEditCategory">
                             @csrf
                             @method('PUT')
                             <div class="card-body">
@@ -49,11 +49,12 @@
                                 </div>
                                 {{-- Description --}}
                                 <div class="form-group form-show-validation row">
-                                    <label for="description" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Deskripsi
+                                    <label for="description"
+                                        class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Deskripsi
                                         <span class="required-label">*</span></label>
                                     <div class="col-lg-4 col-md-9 col-sm-8">
-                                        <input type="text" class="form-control" id="description" name="description" value="{{ $category->description }}"
-                                            placeholder="Masukkan Deskripsi" required>
+                                        <input type="text" class="form-control" id="description" name="description"
+                                            value="{{ $category->description }}" placeholder="Masukkan Deskripsi" required>
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +63,7 @@
                                     <div class="col-md-12 text-right">
                                         <button id="backToCategory" class="btn btn-default btn-outline-dark"
                                             role="presentation">Batal</button>
-                                        <button class="btn btn-primary ml-3" id="formAddCategoryButton"
+                                        <button class="btn btn-primary ml-3" id="formEditCategoryButton"
                                             type="submit">Kirim</button>
                                     </div>
                                 </div>
@@ -83,10 +84,7 @@
         integrity="sha512-6S5LYNn3ZJCIm0f9L6BCerqFlQ4f5MwNKq+EthDXabtaJvg3TuFLhpno9pcm+5Ynm6jdA9xfpQoMz2fcjVMk9g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        $(document).ready(function() {
-        });
-
-        $("#formAddCategory").validate({
+        $("#formEditCategory").validate({
             rules: {
                 name: {
                     required: true,
@@ -106,35 +104,45 @@
             submitHandler: function(form, event) {
                 event.preventDefault();
                 var formData = new FormData(form);
-                $('#formAddCategoryButton').html('<i class="fas fa-circle-notch text-lg spinners-2"></i>');
-                $('#formAddCategoryButton').prop('disabled', true);
+                $('#formEditCategoryButton').html('<i class="fas fa-circle-notch text-lg spinners-2"></i>');
+                $('#formEditCategoryButton').prop('disabled', true);
                 $.ajax({
                     type: "POST",
-                    url: `{{ url('/admin/category/'. $category->slug) }}`,
+                    url: `{{ url('/admin/category/' . $category->slug) }}`,
                     data: formData,
                     processData: false,
                     contentType: false,
                     success: function(response) {
-                        $('#formAddCategoryButton').html('Kirim');
-                        $('#formAddCategoryButton').prop('disabled', false);
-                        $.notify({
-                            icon: 'flaticon-alarm-1',
-                            title: 'Perpus Digital Admin',
-                            message: response.meta.message,
-                        }, {
-                            type: 'secondary',
-                            placement: {
-                                from: "bottom",
-                                align: "right"
-                            },
-                            time: 2000,
-                        });
-                        window.location.href = response.data.redirect
+                        $('#formEditCategoryButton').html('Kirim');
+                        $('#formEditCategoryButton').prop('disabled', false);
+                        swal({
+                                title: "Berhasil!",
+                                text: response.meta.message,
+                                icon: "success",
+                                buttons: {
+                                    confirm: {
+                                        text: "Okay",
+                                        value: "confirm",
+                                        visible: true,
+                                        className: "btn btn-success",
+                                        closeModal: true,
+                                    }
+                                }
+                            })
+                            .then((value) => {
+                                if (value === "confirm") {
+                                    window.location.href = response.data.redirect
+                                }
+                            });
+
+                        setTimeout(function() {
+                            window.location.href = response.data.redirect
+                        }, 4000);
                     },
                     error: function(xhr, status, error) {
                         console.log(xhr);
-                        $('#formAddCategoryButton').html('Kirim');
-                        $('#formAddCategoryButton').prop('disabled', false);
+                        $('#formEditCategoryButton').html('Kirim');
+                        $('#formEditCategoryButton').prop('disabled', false);
                         if (xhr.responseJSON) {
                             swal({
                                 title: "GAGAL!",

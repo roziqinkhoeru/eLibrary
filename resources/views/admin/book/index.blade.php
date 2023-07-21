@@ -8,7 +8,7 @@
                 <h4 class="page-title">Buku Perpustakaan</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/admin">
+                        <a href="/admin/dashboard">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -236,11 +236,11 @@
             });
         }
 
-$("#bookTable_category_select").on('change', function () {
-    getBooks();
-});
+        $("#bookTable_category_select").on('change', function() {
+            getBooks();
+        });
 
-function deleteBook(id) {
+        function deleteBook(id) {
             swal({
                 dangerMode: true,
                 title: "Apakah anda yakin?",
