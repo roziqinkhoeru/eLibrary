@@ -108,18 +108,20 @@
                         <div class="card-body">
                             <div class="card-title">Statistik Kelas</div>
                             <div class="card-category">Statistik Peminjaman Buku Tingkat Kelas Tahun 2023</div>
-                            <div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
-                                <div class="px-2 pb-2 pb-md-0 text-center">
-                                    <div id="circles-1"></div>
-                                    <h6 class="fw-bold mt-3 mb-0">Kelas X</h6>
-                                </div>
-                                <div class="px-2 pb-2 pb-md-0 text-center">
-                                    <div id="circles-2"></div>
-                                    <h6 class="fw-bold mt-3 mb-0">Kelas XI</h6>
-                                </div>
-                                <div class="px-2 pb-2 pb-md-0 text-center">
-                                    <div id="circles-3"></div>
-                                    <h6 class="fw-bold mt-3 mb-0">Kelas XII</h6>
+                            <div class="d-flex align-items-center w-100" style="height: calc(100% - 74px)">
+                                <div class="d-flex flex-wrap justify-content-around pb-2 pt-4 w-100">
+                                    <div class="px-2 pb-2 pb-md-0 text-center">
+                                        <div id="classX"></div>
+                                        <h6 class="fw-bold mt-3 mb-0">Kelas X</h6>
+                                    </div>
+                                    <div class="px-2 pb-2 pb-md-0 text-center">
+                                        <div id="classXI"></div>
+                                        <h6 class="fw-bold mt-3 mb-0">Kelas XI</h6>
+                                    </div>
+                                    <div class="px-2 pb-2 pb-md-0 text-center">
+                                        <div id="classXII"></div>
+                                        <h6 class="fw-bold mt-3 mb-0">Kelas XII</h6>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -142,165 +144,148 @@
             {{-- third row --}}
             <div class="row">
                 {{-- top class --}}
-                <div class="col-md-4">
+                <div class="col-md-7">
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">Top Kelas</div>
                         </div>
                         <div class="card-body pb-0">
+                            {{-- class x --}}
                             <div class="d-flex">
                                 <div class="avatar">
-                                    <img src="../assets/img/logoproduct.svg" alt="..."
-                                        class="avatar-img rounded-circle">
+                                    <img src="{{ asset('assets/img/brand/class-smkn-1.png') }}"
+                                        alt="logo SMK N 1 Sungai Menang" class="avatar-img rounded-circle">
                                 </div>
                                 <div class="flex-1 pt-1 ml-2">
                                     <h6 class="fw-bold mb-1">Kelas XXI TKJ 1</h6>
                                     <small class="text-muted">Teknik Komputer dan Jaringan</small>
                                 </div>
                                 <div class="d-flex ml-auto align-items-center">
-                                    <h3 class="text-info fw-bold">326</h3>
+                                    <h4 class="fw-bold">326 Buku</h4>
                                 </div>
                             </div>
                             <div class="separator-dashed"></div>
+                            {{-- class xi --}}
                             <div class="d-flex">
                                 <div class="avatar">
-                                    <img src="../assets/img/logoproduct.svg" alt="..."
-                                        class="avatar-img rounded-circle">
+                                    <img src="{{ asset('assets/img/brand/class-smkn-1.png') }}"
+                                        alt="logo SMK N 1 Sungai Menang" class="avatar-img rounded-circle">
                                 </div>
                                 <div class="flex-1 pt-1 ml-2">
                                     <h6 class="fw-bold mb-1">Kelas XXI TKR 1</h6>
                                     <small class="text-muted">Teknik Kendaraan Ringan</small>
                                 </div>
                                 <div class="d-flex ml-auto align-items-center">
-                                    <h3 class="text-info fw-bold">201</h3>
+                                    <h4 class="fw-bold">201 Buku</h4>
                                 </div>
                             </div>
                             <div class="separator-dashed"></div>
+                            {{-- class xii --}}
                             <div class="d-flex">
                                 <div class="avatar">
-                                    <img src="../assets/img/logoproduct3.svg" alt="..."
-                                        class="avatar-img rounded-circle">
+                                    <img src="{{ asset('assets/img/brand/class-smkn-1.png') }}"
+                                        alt="logo SMK N 1 Sungai Menang" class="avatar-img rounded-circle">
                                 </div>
                                 <div class="flex-1 pt-1 ml-2">
                                     <h6 class="fw-bold mb-1">Kelas X TSM 1</h6>
                                     <small class="text-muted">Teknik Sepeda Motor</small>
                                 </div>
                                 <div class="d-flex ml-auto align-items-center">
-                                    <h3 class="text-info fw-bold">102</h3>
+                                    <h4 class="fw-bold">102 Buku</h4>
                                 </div>
                             </div>
                             <div class="separator-dashed"></div>
                             <div class="pull-in">
-                                <canvas id="topProductsChart"></canvas>
+                                <canvas id="topClass"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
                 {{-- top student --}}
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="card">
                         <div class="card-body">
                             <div class="card-title fw-mediumbold">Siswa Rajin Membaca</div>
                             <div class="card-list">
                                 <div class="item-list">
                                     <div class="avatar">
-                                        <img src="../assets/img/jm_denis.jpg" alt="..."
-                                            class="avatar-img rounded-circle">
+                                        <img src="{{ asset('assets/img/dummy/profile-placeholder.png') }}"
+                                            alt="profile photo namaStudent" class="avatar-img rounded-circle">
                                     </div>
                                     <div class="info-user ml-3">
                                         <div class="username">Jimmy Denis</div>
                                         <div class="status">Kelas XI TKJ 1</div>
                                     </div>
-                                    <button class="btn btn-icon btn-primary btn-round btn-xs">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
+                                    <div class="d-flex ml-auto align-items-center">
+                                        <h4 class="fw-bold">181 Buku</h4>
+                                    </div>
                                 </div>
                                 <div class="item-list">
                                     <div class="avatar">
-                                        <img src="../assets/img/chadengle.jpg" alt="..."
-                                            class="avatar-img rounded-circle">
+                                        <img src="{{ asset('assets/img/dummy/profile-placeholder.png') }}"
+                                            alt="profile photo namaStudent" class="avatar-img rounded-circle">
                                     </div>
                                     <div class="info-user ml-3">
                                         <div class="username">Chad</div>
                                         <div class="status">Kelas XI TKR 1</div>
                                     </div>
-                                    <button class="btn btn-icon btn-primary btn-round btn-xs">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
+                                    <div class="d-flex ml-auto align-items-center">
+                                        <h4 class="fw-bold">120 Buku</h4>
+                                    </div>
                                 </div>
                                 <div class="item-list">
                                     <div class="avatar">
-                                        <img src="../assets/img/talha.jpg" alt="..."
-                                            class="avatar-img rounded-circle">
+                                        <img src="{{ asset('assets/img/dummy/profile-placeholder.png') }}"
+                                            alt="profile photo namaStudent" class="avatar-img rounded-circle">
                                     </div>
                                     <div class="info-user ml-3">
                                         <div class="username">Talha</div>
                                         <div class="status">Kelas X TSM 1</div>
                                     </div>
-                                    <button class="btn btn-icon btn-primary btn-round btn-xs">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
+                                    <div class="d-flex ml-auto align-items-center">
+                                        <h4 class="fw-bold">56 Buku</h4>
+                                    </div>
                                 </div>
                                 <div class="item-list">
                                     <div class="avatar">
-                                        <img src="../assets/img/mlane.jpg" alt="..."
-                                            class="avatar-img rounded-circle">
+                                        <img src="{{ asset('assets/img/dummy/profile-placeholder.png') }}"
+                                            alt="profile photo namaStudent" class="avatar-img rounded-circle">
                                     </div>
                                     <div class="info-user ml-3">
                                         <div class="username">John Doe</div>
                                         <div class="status">Kelas X TGB 1</div>
                                     </div>
-                                    <button class="btn btn-icon btn-primary btn-round btn-xs">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
+                                    <div class="d-flex ml-auto align-items-center">
+                                        <h4 class="fw-bold">42 Buku</h4>
+                                    </div>
                                 </div>
                                 <div class="item-list">
                                     <div class="avatar">
-                                        <img src="../assets/img/talha.jpg" alt="..."
-                                            class="avatar-img rounded-circle">
+                                        <img src="{{ asset('assets/img/dummy/profile-placeholder.png') }}"
+                                            alt="profile photo namaStudent" class="avatar-img rounded-circle">
                                     </div>
                                     <div class="info-user ml-3">
                                         <div class="username">Talha</div>
                                         <div class="status">Kelas X TSM 1</div>
                                     </div>
-                                    <button class="btn btn-icon btn-primary btn-round btn-xs">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
+                                    <div class="d-flex ml-auto align-items-center">
+                                        <h4 class="fw-bold">12 Buku</h4>
+                                    </div>
                                 </div>
                                 <div class="item-list">
                                     <div class="avatar">
-                                        <img src="../assets/img/jm_denis.jpg" alt="..."
-                                            class="avatar-img rounded-circle">
+                                        <img src="{{ asset('assets/img/dummy/profile-placeholder.png') }}"
+                                            alt="profile photo namaStudent" class="avatar-img rounded-circle">
                                     </div>
                                     <div class="info-user ml-3">
                                         <div class="username">Jimmy Denis</div>
                                         <div class="status">Kelas XI TKJ 1</div>
                                     </div>
-                                    <button class="btn btn-icon btn-primary btn-round btn-xs">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
+                                    <div class="d-flex ml-auto align-items-center">
+                                        <h4 class="fw-bold">6 Buku</h4>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                {{-- blom tayu --}}
-                <div class="col-md-4">
-                    <div class="card card-primary bg-primary-gradient">
-                        <div class="card-body">
-                            <h4 class="mt-3 b-b1 pb-2 mb-4 fw-bold">Active user right now</h4>
-                            <h1 class="mb-4 fw-bold">17</h1>
-                            <h4 class="mt-3 b-b1 pb-2 mb-5 fw-bold">Page view per minutes</h4>
-                            <div id="activeUsersChart"></div>
-                            <h4 class="mt-5 pb-3 mb-0 fw-bold">Top active pages</h4>
-                            <ul class="list-unstyled">
-                                <li class="d-flex justify-content-between pb-1 pt-1">
-                                    <small>/product/readypro/index.html</small> <span>7</span>
-                                </li>
-                                <li class="d-flex justify-content-between pb-1 pt-1">
-                                    <small>/product/atlantis/demo.html</small> <span>10</span>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -310,8 +295,9 @@
 @endsection
 @section('script')
     <script>
+        // class x chart
         Circles.create({
-            id: 'circles-1',
+            id: 'classX',
             radius: 45,
             value: 60,
             maxValue: 100,
@@ -324,9 +310,9 @@
             styleWrapper: true,
             styleText: true
         })
-
+        // class xi chart
         Circles.create({
-            id: 'circles-2',
+            id: 'classXI',
             radius: 45,
             value: 70,
             maxValue: 100,
@@ -339,9 +325,9 @@
             styleWrapper: true,
             styleText: true
         })
-
+        // class xii chart
         Circles.create({
-            id: 'circles-3',
+            id: 'classXII',
             radius: 45,
             value: 40,
             maxValue: 100,
@@ -396,48 +382,18 @@
         const categoryChart = document.getElementById('categoryChart').getContext('2d');
         new Chart(categoryChart, categoryConfig);
 
-        var topProductsChart = document.getElementById('topProductsChart').getContext('2d');
-
-        var myTopProductsChart = new Chart(topProductsChart, {
+        // top class chart
+        // define
+        var topClass = document.getElementById('topClass').getContext('2d');
+        // config
+        var mytopClass = new Chart(topClass, {
             type: "line",
             data: {
-                labels: ["January",
-                    "February",
-                    "March",
-                    "April",
-                    "May",
-                    "June",
-                    "July",
-                    "August",
-                    "September",
-                    "October",
-                    "January",
-                    "February",
-                    "March",
-                    "April",
-                    "May",
-                    "June",
-                    "July",
-                    "August",
-                    "September",
-                    "October",
-                    "January",
-                    "February",
-                    "March",
-                    "April",
-                    "May",
-                    "June",
-                    "July",
-                    "August",
-                    "September",
-                    "October",
-                    "January",
-                    "February",
-                    "March",
-                    "April"
+                labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli",
+                    "Agustus", "September", "Oktober", "November", "Desember"
                 ],
                 datasets: [{
-                    label: "Sales Analytics",
+                    label: "Buku Terpinjam",
                     fill: !0,
                     backgroundColor: "rgba(53, 205, 58, 0.2)",
                     borderColor: "#35cd3a",
@@ -453,9 +409,7 @@
                     pointHoverBorderWidth: 1,
                     pointRadius: 1,
                     pointHitRadius: 5,
-                    data: [20, 10, 18, 14, 32, 18, 15, 22, 8, 6, 17, 12, 17, 18, 14, 25, 18, 12, 19, 21, 16,
-                        14, 24, 21, 13, 15, 27, 29, 21, 11, 14, 19, 21, 17
-                    ]
+                    data: [20, 10, 18, 14, 32, 18, 15, 22, 8, 6, 17, 12]
                 }]
             },
             options: {
@@ -494,14 +448,6 @@
                     }]
                 }
             }
-        });
-
-        $("#activeUsersChart").sparkline([112, 109, 120, 107, 110, 85, 87, 90, 102, 109, 120, 99, 110, 85, 87, 94], {
-            type: 'bar',
-            height: '100',
-            barWidth: 9,
-            barSpacing: 10,
-            barColor: 'rgba(255,255,255,.3)'
         });
     </script>
 @endsection
