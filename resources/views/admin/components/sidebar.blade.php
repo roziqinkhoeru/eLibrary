@@ -46,17 +46,17 @@
             </a>
             <div class="collapse" id="bookMenu">
                 <ul class="nav nav-collapse">
-                    <li>
+                    <li class="@if ($currentNavChild == 'library') active @endif">
                         <a href="/admin/book">
                             <span class="sub-item">Perpustakaan</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="@if ($currentNavChild == 'ebook') active @endif">
                         <a href="/admin/ebook">
                             <span class="sub-item">E-Book</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="@if ($currentNavChild == 'addBook') active @endif">
                         <a href="/admin/book/create">
                             <span class="sub-item">Tambah Buku</span>
                         </a>
@@ -78,16 +78,16 @@
             <h4 class="text-section">Learning</h4>
         </li> --}}
         {{-- student --}}
-        {{-- <li class="nav-item @if ($currentNav == 'student') active @endif">
+        <li class="nav-item @if ($currentNav == 'student') active @endif">
             <a href="/admin/student">
                 <i class="fas fa-user-graduate"></i>
                 <p>Siswa</p>
             </a>
-        </li> --}}
-        {{-- student --}}
+        </li>
+        {{-- category --}}
         <li class="nav-item @if ($currentNav == 'category') active @endif">
             <a href="{{ route('admin.category') }}">
-                <i class="fas fa-user-graduate"></i>
+                <i class="fas fa-layer-group"></i>
                 <p>Kategori</p>
             </a>
         </li>
