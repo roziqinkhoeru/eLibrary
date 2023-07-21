@@ -16,7 +16,8 @@ class BookController extends Controller
     {
         $data = [
             'title' => 'Buku Perpustakaan | Perpus Digital',
-            'currentNav' => 'book'
+            'currentNav' => 'book',
+            'currentNavChild' => 'library',
         ];
 
         return view('admin.book.index', $data);
@@ -46,7 +47,8 @@ class BookController extends Controller
         $data =
             [
                 'title' => 'E-Book | Perpus Digital',
-                'currentNav' => 'book'
+                'currentNav' => 'book',
+                'currentNavChild' => 'ebook',
             ];
 
         return view('admin.book.ebook', $data);
@@ -87,7 +89,8 @@ class BookController extends Controller
         $data = [
             'title' => 'Tambah Buku | Perpus Digital',
             'categories' => $categories,
-            'currentNav' => 'book'
+            'currentNav' => 'book',
+            'currentNavChild' => 'addBook',
         ];
 
         return view('admin.book.addBook', $data);
@@ -181,7 +184,8 @@ class BookController extends Controller
     {
         $data = [
             'title' => 'Edit Buku | Perpus Digital',
-            'currentNav' => 'book'
+            'currentNav' => 'book',
+            'currentNavChild' => 'editBook',
         ];
 
         return view('admin.books.edit', $data);

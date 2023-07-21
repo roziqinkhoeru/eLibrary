@@ -13,7 +13,8 @@ class TransactionController extends Controller
     {
         $data = [
             'title' => 'Data Transaksi | Perpus Digital',
-            'currentNav' => 'transaction'
+            'currentNav' => 'transaction',
+            'currentNavChild' => 'transaction',
         ];
 
         return view('admin.transactions.index', $data);
