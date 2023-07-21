@@ -15,14 +15,17 @@ class CategorySeeder extends Seeder
         $categories = [
             [
                 'name' => 'TKJ',
+                'slug' => 'tkj',
                 'description' => 'Teknik Komputer Jaringan',
             ],
             [
                 'name' => 'AK',
+                'slug' => 'ak',
                 'description' => 'Asisten Keperawatan',
             ],
             [
-                'name' => 'umum',
+                'name' => 'Umum',
+                'slug' => 'umum',
                 'description' => 'Umum',
             ]
         ];

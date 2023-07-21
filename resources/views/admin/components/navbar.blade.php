@@ -134,7 +134,7 @@
                     'Anda telah keluar dari akun ini.',
                     'success'
                 )
-                window.location.href = "logout";
+                window.location.href = {{ route('logout') }};
             }
         })
     }

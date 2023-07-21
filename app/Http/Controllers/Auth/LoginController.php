@@ -176,7 +176,7 @@ class LoginController extends Controller
 
             $credentials = $request->only('email', 'password');
             if (Auth::attempt($credentials)) {
-                $redirect = redirect()->intended('/admin/dashboard');
+                $redirect = redirect()->route('admin.dashboard');
                 $request->session()->regenerate();
                 return $request->ajax() ? ResponseFormatter::success(['redirect' => $redirect->getTargetUrl()], 'Authenticated') : $redirect;
                 // return redirect()->intended();

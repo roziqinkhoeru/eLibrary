@@ -84,6 +84,13 @@
                 <p>Siswa</p>
             </a>
         </li> --}}
+        {{-- student --}}
+        <li class="nav-item @if ($currentNav == 'category') active @endif">
+            <a href="{{ route('admin.category') }}">
+                <i class="fas fa-user-graduate"></i>
+                <p>Kategori</p>
+            </a>
+        </li>
         {{-- logout --}}
         <li class="nav-item">
             <a href="/logout" onclick="logout()" class="hover-logout">

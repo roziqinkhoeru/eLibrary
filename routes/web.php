@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controller\Admin\StudentController;
 use App\Http\Controllers\Admin\BookController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TransactionController;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Route;
@@ -85,6 +86,14 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/admin/book/create', 'create')->name('admin.book.create');
             Route::post('/admin/book', 'store')->name('admin.book.store');
             Route::delete('/admin/book/{book:id}', 'destroy')->name('admin.book.destroy');
+        });
+        Route::controller(CategoryController::class)->group(function () {
+            Route::get('/admin/category', 'index')->name('admin.category');
+            Route::get('/admin/category/create', 'create')->name('admin.category.create');
+            Route::post('/admin/category', 'store')->name('admin.category.store');
+            Route::get('/admin/category/{category:slug}/edit', 'edit')->name('admin.category.edit');
+            Route::put('/admin/category/{category:slug}', 'update')->name('admin.category.update');
+            Route::delete('/admin/category/{category:slug}', 'destroy')->name('admin.category.destroy');
         });
     });
 });
