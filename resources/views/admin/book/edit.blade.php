@@ -8,7 +8,7 @@
                 <h4 class="page-title">Edit Buku</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/admin">
+                        <a href="/admin/dashboard">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -152,7 +152,8 @@
                                         <div class="input-file input-file-image">
                                             <input type="file" class="form-control form-control-file" id="ebook"
                                                 name="ebook" accept="application/pdf" value="" required>
-                                            <label for="ebook" class="label-input-file btn btn-black btn-round mt-2 mr-3 btn-upload-image-sm">
+                                            <label for="ebook"
+                                                class="label-input-file btn btn-black btn-round mt-2 mr-3 btn-upload-image-sm">
                                                 <span class="btn-label">
                                                     <i class="fa fa-file-pdf"></i>
                                                 </span>
@@ -313,19 +314,29 @@
                     success: function(response) {
                         $('#formEditBookButton').html('Terima');
                         $('#formEditBookButton').prop('disabled', false);
-                        $.notify({
-                            icon: 'flaticon-alarm-1',
-                            title: 'Perpus Digital Admin',
-                            message: response.meta.message,
-                        }, {
-                            type: 'secondary',
-                            placement: {
-                                from: "bottom",
-                                align: "right"
-                            },
-                            time: 2000,
-                        });
-                        window.location.href = response.data.redirect
+                        swal({
+                                title: "Berhasil!",
+                                text: response.meta.message,
+                                icon: "success",
+                                buttons: {
+                                    confirm: {
+                                        text: "Okay",
+                                        value: "confirm",
+                                        visible: true,
+                                        className: "btn btn-success",
+                                        closeModal: true,
+                                    }
+                                }
+                            })
+                            .then((value) => {
+                                if (value === "confirm") {
+                                    window.location.href = response.data.redirect
+                                }
+                            });
+
+                        setTimeout(function() {
+                            window.location.href = response.data.redirect
+                        }, 4000);
                     },
                     error: function(xhr, status, error) {
                         $('#formEditBookButton').html('Terima');
