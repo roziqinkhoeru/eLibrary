@@ -118,16 +118,16 @@
                                 </div>
                                 {{-- cover --}}
                                 <div class="form-group form-show-validation row">
-                                    <label for="bookCover" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Cover
+                                    <label for="cover" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Cover
                                         Buku <span class="required-label">*</span></label>
                                     <div class="col-lg-6 col-md-9 col-sm-8">
                                         <div class="input-file input-file-image">
                                             <img class="img-upload-preview" width="240"
                                                 src="http://placehold.it/240x240" alt="Book Cover Preview"
                                                 id="imagePreview">
-                                            <input type="file" class="form-control form-control-file" id="bookCover"
-                                                name="bookCover" accept="image/*" required>
-                                            <label for="bookCover"
+                                            <input type="file" class="form-control form-control-file" id="cover"
+                                                name="cover" accept="image/*" required>
+                                            <label for="cover"
                                                 class="label-input-file btn btn-black btn-round mt-2 mr-3 btn-upload-image-sm">
                                                 <span class="btn-label">
                                                     <i class="fa fa-file-image"></i>
@@ -225,13 +225,13 @@
             // define variable
             const imagePreview = $('#imagePreview');
             const filePreview = $('#filePreview');
-            const bookCover = $('#bookCover');
+            const cover = $('#cover');
             const eBook = $('#file');
             const deleteImageBtn = $('#deleteImage');
             const deleteEbookBtn = $('#deleteEbook');
             const backToBookBtn = $('#backToBook');
             const typeValue = $('#type').val();
-            const storedImage = localStorage.getItem('bookCoverPreview');
+            const storedImage = localStorage.getItem('coverPreview');
             const storedEbook = localStorage.getItem('ebookPreview');
 
             function toggleEbookContainer(e) {
@@ -260,13 +260,13 @@
                                         </div>`);
             }
 
-            bookCover.on('change', function(event) {
+            cover.on('change', function(event) {
                 const file = event.target.files[0];
                 const reader = new FileReader();
 
                 reader.onload = function(e) {
                     imagePreview.attr('src', e.target.result);
-                    localStorage.setItem('bookCoverPreview', e.target.result);
+                    localStorage.setItem('coverPreview', e.target.result);
                 };
 
                 reader.readAsDataURL(file);
@@ -294,10 +294,10 @@
             });
 
             deleteImageBtn.on('click', function() {
-                bookCover.val(null);
+                cover.val(null);
                 imagePreview.attr('src',
                     'http://placehold.it/240x240'); // Replace with your default image URL
-                localStorage.removeItem('bookCoverPreview');
+                localStorage.removeItem('coverPreview');
             });
 
             deleteEbookBtn.on('click', function() {
@@ -307,7 +307,7 @@
             });
 
             backToBookBtn.on('click', function() {
-                localStorage.removeItem('bookCoverPreview');
+                localStorage.removeItem('coverPreview');
                 localStorage.removeItem('ebookPreview');
                 window.location.href = "/admin/book";
             });
@@ -336,7 +336,7 @@
                 stock: {
                     required: true,
                 },
-                bookCover: {
+                cover: {
                     required: true,
                     maxfilesize: 2 * 1024 * 1024, // 2MB (dalam byte)
                     extension: 'jpg|jpeg|png',
@@ -372,7 +372,7 @@
                 stock: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Jumlah buku tidak boleh kosong',
                 },
-                bookCover: {
+                cover: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Cover buku tidak boleh kosong',
                     maxfilesize: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Ukuran file maksimal 2MB',
                     extension: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Format file yang diperbolehkan hanya jpg, jpeg, dan png',
@@ -381,7 +381,7 @@
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Tipe buku tidak boleh kosong',
                 },
                 file: {
-                    required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>E-Book tidak boleh kosong',
+                    required: ($('#type').val() == "online" ? '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>E-Book tidak boleh kosong' : ''),
                     maxfilesize: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Ukuran file maksimal 10MB',
                     extension: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Format file yang diperbolehkan hanya pdf',
                 },

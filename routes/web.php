@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
-use App\Http\Controller\Admin\StudentController;
+use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TransactionController;
@@ -85,6 +85,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/admin/ebook', 'ebook')->name('admin.ebook');
             Route::get('/admin/ebook/data', 'getEbook')->name('admin.ebook.data');
             Route::get('/admin/book/create', 'create')->name('admin.book.create');
+            Route::get('/admin/book/{book:id}/edit', 'edit')->name('admin.book.edit');
+            Route::put('/admin/book/{book:id}', 'update')->name('admin.book.update');
             Route::post('/admin/book', 'store')->name('admin.book.store');
             Route::delete('/admin/book/{book:id}', 'destroy')->name('admin.book.destroy');
         });

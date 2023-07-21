@@ -52,7 +52,6 @@
                                             <th class="filter-none">Penerbit</th>
                                             <th class="filter-none">Pengarang</th>
                                             <th class="">Tahun Terbit</th>
-                                            <th class="">Jumlah Buku</th>
                                             <th class="text-center filter-none text-nowrap">Aksi</th>
                                         </tr>
                                     </thead>
@@ -76,7 +75,7 @@
                                             <td>2019</td>
                                             <td>5</td>
                                             <td class="text-center text-nowrap">
-                                                <a href="#" class="btn btn-warning btn-sm mr-2">
+                                                <a href="{{ asset('storage/'.) }}" class="btn btn-warning btn-sm mr-2">
                                                     <i class="fas fa-download"></i>
                                                 </a>
                                                 <a href="#" class="btn btn-primary btn-sm mr-2">
@@ -220,7 +219,10 @@
                                 book.publisher,
                                 book.author,
                                 book.year,
-                                `<a href="#" class="btn btn-primary btn-sm mr-2">
+                                `<a href="{{ asset('storage/${book.file}') }}" class="btn btn-warning btn-sm mr-2">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                                <a href="{{ url('admin/book/${book.id}/edit') }}" class="btn btn-primary btn-sm mr-2">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <button onclick="deleteBook(${book.id})" class="btn btn-danger btn-sm">
@@ -233,7 +235,7 @@
 
                             $(rowNode).find('td').eq(0).addClass('text-center');
                             $(rowNode).find('td').eq(1).addClass('text-center');
-                            $(rowNode).find('td').eq(9).addClass('text-center text-nowrap');
+                            $(rowNode).find('td').eq(8).addClass('text-center text-nowrap');
                         });
 
                         $('.cover-book-image').magnificPopup({
