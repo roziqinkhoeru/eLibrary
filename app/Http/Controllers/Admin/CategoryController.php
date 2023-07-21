@@ -17,6 +17,7 @@ class CategoryController extends Controller
         $data = [
             'title' => 'Data Kategori | Perpus Digital',
             'currentNav' => 'category',
+            'currentNavChild' => 'category',
             'categories' => $categories
         ];
 
@@ -27,7 +28,8 @@ class CategoryController extends Controller
     {
         $data = [
             'title' => 'Tambah Kategori | Perpus Digital',
-            'currentNav' => 'category'
+            'currentNav' => 'category',
+            'currentNavChild' => 'category',
         ];
 
         return view('admin.category.create', $data);
@@ -71,7 +73,8 @@ class CategoryController extends Controller
             return ResponseFormatter::error(
                 [
                     'message' => 'Gagal menambahkan kategori'
-                ], 'Gagal menambahkan kategori',
+                ],
+                'Gagal menambahkan kategori',
             );
         }
     }
@@ -81,6 +84,7 @@ class CategoryController extends Controller
         $data = [
             'title' => 'Edit Kategori | Perpus Digital',
             'currentNav' => 'category',
+            'currentNavChild' => 'category',
             'category' => $category
         ];
 
@@ -125,7 +129,8 @@ class CategoryController extends Controller
             return ResponseFormatter::error(
                 [
                     'message' => 'Gagal mengubah kategori'
-                ], 'Gagal mengubah kategori',
+                ],
+                'Gagal mengubah kategori',
             );
         }
     }
@@ -146,7 +151,8 @@ class CategoryController extends Controller
             return ResponseFormatter::error(
                 [
                     'message' => 'Gagal menghapus kategori'
-                ], 'Gagal menghapus kategori',
+                ],
+                'Gagal menghapus kategori',
             );
         }
     }

@@ -14,7 +14,8 @@ class AdminController extends Controller
     {
         $data = [
             'title' => 'Dashboard Admin | Perpus Digital',
-            'currentNav' => 'dashboard'
+            'currentNav' => 'dashboard',
+            'currentNavChild' => 'dashboard',
         ];
         return view('admin.dashboard', $data);
     }

@@ -58,7 +58,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/', function () {
             return view('admin.dashboard', [
                 'title' => 'Dashboard | Perpus Digital',
-                'currentNav' => 'dashboard'
+                'currentNav' => 'dashboard',
+                'currentNavChild' => 'dashboard',
             ]);
         });
     });
@@ -102,11 +103,13 @@ Route::group(['middleware' => ['auth']], function () {
 //     return view('admin.students.index', [
 //         'title' => 'Data Siswa | Perpus Digital',
 //         'currentNav' => 'student'
+//         'currentNavChild' => 'student',
 //     ]);
 // });
 // Route::get('/admin/classes', function () {
 //     return view('admin.classes.index', [
 //         'title' => 'Data Kelas | Perpus Digital',
 //         'currentNav' => 'course'
+//         'currentNavChild' => 'course',
 //     ]);
 // });

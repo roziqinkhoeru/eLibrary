@@ -14,7 +14,8 @@ class StudentController extends Controller
     {
         $data = [
             'title' => 'Data Siswa | Perpus Digital',
-            'currentNav' => 'student'
+            'currentNav' => 'student',
+            'currentNavChild' => 'student',
         ];
 
         return view('admin.students.index', $data);
