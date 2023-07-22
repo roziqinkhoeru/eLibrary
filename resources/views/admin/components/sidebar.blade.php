@@ -101,17 +101,17 @@
             <div class="collapse" id="transactionMenu">
                 <ul class="nav nav-collapse">
                     <li class="@if ($currentNavChild == 'borrow') active @endif">
-                        <a href="/admin/transaction">
+                        <a href="{{ route('admin.list.transaction') }}">
                             <span class="sub-item">Pinjam Buku</span>
                         </a>
                     </li>
                     <li class="@if ($currentNavChild == 'listBorrow') active @endif">
-                        <a href="/admin/etransaction">
+                        <a href="{{ route('admin.list.transaction') }}">
                             <span class="sub-item">Daftar Pinjam</span>
                         </a>
                     </li>
                     <li class="@if ($currentNavChild == 'history') active @endif">
-                        <a href="/admin/transaction/create">
+                        <a href="{{ route('admin.list.transaction') }}">
                             <span class="sub-item">Riwayat Pinjam</span>
                         </a>
                     </li>

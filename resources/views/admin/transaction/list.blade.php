@@ -118,7 +118,7 @@
         function getStudents() {
             $.ajax({
                 type: "GET",
-                url: "{{ route('admin.transaction.data') }}",
+                url: "{{ route('admin.list.transaction.data') }}",
                 success: function(response) {
                     if (response.data.transactions.length > 0) {
                         $.each(response.data.transactions, function(index, transaction) {
@@ -128,8 +128,8 @@
                                 transaction.student.name,
                                 transaction.book.isbn,
                                 transaction.book.title,
-                                transaction.start_date,
-                                transaction.end_date,
+                                moment(transaction.start_date, 'YYYY/MM/DD').format('DD/MM/YYYY'),
+                                moment(transaction.end_date, 'YYYY/MM/DD').format('DD/MM/YYYY'),
                                 transaction.officer.name,
                                 transaction.penalty,
                                 `<a href="#" class="btn btn-primary btn-sm">Kembali</a>`
@@ -139,8 +139,8 @@
                                 .draw(
                                     false).node();
 
-                            $(rowNode).find('td').eq(4).addClass('space-nowrap text-center');
-                            $(rowNode).find('td').eq(10).addClass('space-nowrap text-center');
+                            // $(rowNode).find('td').eq(4).addClass('space-nowrap text-center');
+                            // $(rowNode).find('td').eq(10).addClass('space-nowrap text-center');
                         });
                     }
                 }

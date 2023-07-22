@@ -61,7 +61,7 @@
                                 </div>
                             </a>
                             {{-- transaction --}}
-                            <a class="col-6 col-md-4 p-0" href="{{ route('admin.transaction') }}">
+                            <a class="col-6 col-md-4 p-0" href="{{ route('admin.list.transaction') }}">
                                 <div class="quick-actions-item">
                                     <div class="avatar-item bg-warning rounded-circle">
                                         <i class="fas fa-book"></i>
