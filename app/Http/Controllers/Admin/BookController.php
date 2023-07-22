@@ -115,7 +115,6 @@ class BookController extends Controller
             $rules['file'] = 'required|mimes:pdf|max:10240';
         }
         $validator = Validator::make($request->all(), $rules);
-        // dd($validator->fails());
 
         if ($validator->fails()) {
             return ResponseFormatter::error(
@@ -239,9 +238,11 @@ class BookController extends Controller
         }
 
         if ($request->hasFile('cover')) {
-            $exist = Storage::disk('public')->exists($book->cover);
-            if ($exist) {
-                Storage::disk('public')->delete($book->cover);
+            if ($book->cover != 'covers/default.png') {
+                $exist = Storage::disk('public')->exists($book->cover);
+                if ($exist) {
+                    Storage::disk('public')->delete($book->cover);
+                }
             }
 
             $updateBook = $book->update(

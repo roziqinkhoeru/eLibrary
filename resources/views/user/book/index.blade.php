@@ -42,13 +42,13 @@
                                                     <label class="m-check-label" for="newReleaseIn">Terbaru</label>
                                                 </div>
                                             </li>
-                                            <li>
+                                            {{-- <li>
                                                 <div class="course__sidebar-check mb-10 d-flex align-items-center">
                                                     <input class="sorting m-check-input" type="radio" name="sort"
                                                         value="popular" id="popularIn">
                                                     <label class="m-check-label" for="popularIn">Paling Populer</label>
                                                 </div>
-                                            </li>
+                                            </li> --}}
                                         </ul>
                                     </div>
                                 </div>
@@ -222,6 +222,7 @@
                                                         </p>
                                                         <p class="mb-10 fw-medium text-muted text-xs">${book.author}</p>
                                                         <p class="mb-10 fw-medium text-muted text-xs">${book.publisher}(${book.year})</p>
+                                                        <p class="mb-10 fw-medium text-muted text-xs">Jumlah buku: <span class="fw-semibold">${book.stock}</span></p>
                                                     </div>
                                                 </div>
                                             </div>`
