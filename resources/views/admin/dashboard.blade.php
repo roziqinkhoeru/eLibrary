@@ -32,7 +32,7 @@
                                 <div class="col col-stats ml-3 ml-sm-0">
                                     <div class="numbers">
                                         <p class="card-category">Buku Perpustakaan</p>
-                                        <h4 class="card-title">{{ number_format(27842, 0, ',', '.') }}</h4>
+                                        <h4 class="card-title">{{ number_format($book, 0, ',', '.') }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                                 <div class="col col-stats ml-3 ml-sm-0">
                                     <div class="numbers">
                                         <p class="card-category">E-Book</p>
-                                        <h4 class="card-title">{{ number_format(274834, 0, ',', '.') }}</h4>
+                                        <h4 class="card-title">{{ number_format($ebook, 0, ',', '.') }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -72,7 +72,7 @@
                                 <div class="col col-stats ml-3 ml-sm-0">
                                     <div class="numbers">
                                         <p class="card-category">Buku Dipinjam</p>
-                                        <h4 class="card-title">{{ number_format(1562, 0, ',', '.') }}</h4>
+                                        <h4 class="card-title">{{ number_format($borrow, 0, ',', '.') }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
                                 <div class="col col-stats ml-3 ml-sm-0">
                                     <div class="numbers">
                                         <p class="card-category">Total Siswa</p>
-                                        <h4 class="card-title">{{ number_format(12121, 0, ',', '.') }}</h4>
+                                        <h4 class="card-title">{{ number_format($student, 0, ',', '.') }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -150,51 +150,22 @@
                             <div class="card-title">Top Kelas</div>
                         </div>
                         <div class="card-body pb-0">
-                            {{-- class x --}}
-                            <div class="d-flex">
-                                <div class="avatar">
-                                    <img src="{{ asset('assets/img/brand/class-smkn-1.png') }}"
-                                        alt="logo SMK N 1 Sungai Menang" class="avatar-img rounded-circle">
+                            @foreach ($statisticTopClassBorrow as $data)
+                                <div class="d-flex">
+                                    <div class="avatar">
+                                        <img src="../assets/img/logoproduct.svg" alt="..."
+                                            class="avatar-img rounded-circle">
+                                    </div>
+                                    <div class="flex-1 pt-1 ml-2">
+                                        <h6 class="fw-bold mb-1">Kelas {{ $data->name }}</h6>
+                                        <small class="text-muted">{{ $data->major }}</small>
+                                    </div>
+                                    <div class="d-flex ml-auto align-items-center">
+                                        <h3 class="text-info fw-bold">{{ $data->total }}</h3>
+                                    </div>
                                 </div>
-                                <div class="flex-1 pt-1 ml-2">
-                                    <h6 class="fw-bold mb-1">Kelas XXI TKJ 1</h6>
-                                    <small class="text-muted">Teknik Komputer dan Jaringan</small>
-                                </div>
-                                <div class="d-flex ml-auto align-items-center">
-                                    <h4 class="fw-bold">326 Buku</h4>
-                                </div>
-                            </div>
-                            <div class="separator-dashed"></div>
-                            {{-- class xi --}}
-                            <div class="d-flex">
-                                <div class="avatar">
-                                    <img src="{{ asset('assets/img/brand/class-smkn-1.png') }}"
-                                        alt="logo SMK N 1 Sungai Menang" class="avatar-img rounded-circle">
-                                </div>
-                                <div class="flex-1 pt-1 ml-2">
-                                    <h6 class="fw-bold mb-1">Kelas XXI TKR 1</h6>
-                                    <small class="text-muted">Teknik Kendaraan Ringan</small>
-                                </div>
-                                <div class="d-flex ml-auto align-items-center">
-                                    <h4 class="fw-bold">201 Buku</h4>
-                                </div>
-                            </div>
-                            <div class="separator-dashed"></div>
-                            {{-- class xii --}}
-                            <div class="d-flex">
-                                <div class="avatar">
-                                    <img src="{{ asset('assets/img/brand/class-smkn-1.png') }}"
-                                        alt="logo SMK N 1 Sungai Menang" class="avatar-img rounded-circle">
-                                </div>
-                                <div class="flex-1 pt-1 ml-2">
-                                    <h6 class="fw-bold mb-1">Kelas X TSM 1</h6>
-                                    <small class="text-muted">Teknik Sepeda Motor</small>
-                                </div>
-                                <div class="d-flex ml-auto align-items-center">
-                                    <h4 class="fw-bold">102 Buku</h4>
-                                </div>
-                            </div>
-                            <div class="separator-dashed"></div>
+                                <div class="separator-dashed"></div>
+                            @endforeach
                             <div class="pull-in">
                                 <canvas id="topClass"></canvas>
                             </div>
@@ -207,84 +178,21 @@
                         <div class="card-body">
                             <div class="card-title fw-mediumbold">Siswa Rajin Membaca</div>
                             <div class="card-list">
-                                <div class="item-list">
-                                    <div class="avatar">
-                                        <img src="{{ asset('assets/img/dummy/profile-placeholder.png') }}"
-                                            alt="profile photo namaStudent" class="avatar-img rounded-circle">
+                                @foreach ($studentTopBorrow as $data)
+                                    <div class="item-list">
+                                        <div class="avatar">
+                                            <img src="../assets/img/jm_denis.jpg" alt="..."
+                                                class="avatar-img rounded-circle">
+                                        </div>
+                                        <div class="info-user ml-3">
+                                            <div class="username">{{ $data->student_name }}</div>
+                                            <div class="status">Kelas {{ $data->class_name }}</div>
+                                        </div>
+                                        <button class="btn btn-icon btn-primary btn-round btn-xs">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
                                     </div>
-                                    <div class="info-user ml-3">
-                                        <div class="username">Jimmy Denis</div>
-                                        <div class="status">Kelas XI TKJ 1</div>
-                                    </div>
-                                    <div class="d-flex ml-auto align-items-center">
-                                        <h4 class="fw-bold">181 Buku</h4>
-                                    </div>
-                                </div>
-                                <div class="item-list">
-                                    <div class="avatar">
-                                        <img src="{{ asset('assets/img/dummy/profile-placeholder.png') }}"
-                                            alt="profile photo namaStudent" class="avatar-img rounded-circle">
-                                    </div>
-                                    <div class="info-user ml-3">
-                                        <div class="username">Chad</div>
-                                        <div class="status">Kelas XI TKR 1</div>
-                                    </div>
-                                    <div class="d-flex ml-auto align-items-center">
-                                        <h4 class="fw-bold">120 Buku</h4>
-                                    </div>
-                                </div>
-                                <div class="item-list">
-                                    <div class="avatar">
-                                        <img src="{{ asset('assets/img/dummy/profile-placeholder.png') }}"
-                                            alt="profile photo namaStudent" class="avatar-img rounded-circle">
-                                    </div>
-                                    <div class="info-user ml-3">
-                                        <div class="username">Talha</div>
-                                        <div class="status">Kelas X TSM 1</div>
-                                    </div>
-                                    <div class="d-flex ml-auto align-items-center">
-                                        <h4 class="fw-bold">56 Buku</h4>
-                                    </div>
-                                </div>
-                                <div class="item-list">
-                                    <div class="avatar">
-                                        <img src="{{ asset('assets/img/dummy/profile-placeholder.png') }}"
-                                            alt="profile photo namaStudent" class="avatar-img rounded-circle">
-                                    </div>
-                                    <div class="info-user ml-3">
-                                        <div class="username">John Doe</div>
-                                        <div class="status">Kelas X TGB 1</div>
-                                    </div>
-                                    <div class="d-flex ml-auto align-items-center">
-                                        <h4 class="fw-bold">42 Buku</h4>
-                                    </div>
-                                </div>
-                                <div class="item-list">
-                                    <div class="avatar">
-                                        <img src="{{ asset('assets/img/dummy/profile-placeholder.png') }}"
-                                            alt="profile photo namaStudent" class="avatar-img rounded-circle">
-                                    </div>
-                                    <div class="info-user ml-3">
-                                        <div class="username">Talha</div>
-                                        <div class="status">Kelas X TSM 1</div>
-                                    </div>
-                                    <div class="d-flex ml-auto align-items-center">
-                                        <h4 class="fw-bold">12 Buku</h4>
-                                    </div>
-                                </div>
-                                <div class="item-list">
-                                    <div class="avatar">
-                                        <img src="{{ asset('assets/img/dummy/profile-placeholder.png') }}"
-                                            alt="profile photo namaStudent" class="avatar-img rounded-circle">
-                                    </div>
-                                    <div class="info-user ml-3">
-                                        <div class="username">Jimmy Denis</div>
-                                        <div class="status">Kelas XI TKJ 1</div>
-                                    </div>
-                                    <div class="d-flex ml-auto align-items-center">
-                                        <h4 class="fw-bold">6 Buku</h4>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -299,10 +207,10 @@
         Circles.create({
             id: 'classX',
             radius: 45,
-            value: 60,
-            maxValue: 100,
+            value: {{ $statisticClassBorrow[0]->total }},
+            maxValue: {{ $borrow }},
             width: 7,
-            text: 5,
+            text: {{ $statisticClassBorrow[0]->total }},
             colors: ['#f1f1f1', '#FF9E27'],
             duration: 400,
             wrpClass: 'circles-wrp',
@@ -314,10 +222,10 @@
         Circles.create({
             id: 'classXI',
             radius: 45,
-            value: 70,
-            maxValue: 100,
+            value: {{ $statisticClassBorrow[1]->total }},
+            maxValue: {{ $borrow }},
             width: 7,
-            text: 36,
+            text: {{ $statisticClassBorrow[1]->total }},
             colors: ['#f1f1f1', '#2BB930'],
             duration: 400,
             wrpClass: 'circles-wrp',
@@ -329,10 +237,10 @@
         Circles.create({
             id: 'classXII',
             radius: 45,
-            value: 40,
-            maxValue: 100,
+            value: {{ $statisticClassBorrow[2]->total }},
+            maxValue: {{ $borrow }},
             width: 7,
-            text: 12,
+            text: {{ $statisticClassBorrow[2]->total }},
             colors: ['#f1f1f1', '#F25961'],
             duration: 400,
             wrpClass: 'circles-wrp',
@@ -343,8 +251,12 @@
 
         // category chart
         // data
-        let categoryName = ['Umum', 'TKJ', 'TKR', 'TSM', 'TGB'];
-        let countCourseCategory = [100, 200, 300, 400, 500, ];
+        let categoryName = [];
+        let countCourseCategory = [];
+        @foreach ($categories as $category)
+            categoryName.push('{{ $category->name }}');
+            countCourseCategory.push('{{ $category->books_count }}');
+        @endforeach
         const categoryData = {
             labels: categoryName,
             datasets: [{
