@@ -52,8 +52,8 @@
                                             <th class="">Judul</th>
                                             <th class="filter-none">Penerbit</th>
                                             <th class="filter-none">Pengarang</th>
-                                            <th class="">Tahun Terbit</th>
-                                            <th class="">Jumlah Buku</th>
+                                            <th class="text-center">Tahun Terbit</th>
+                                            <th class="text-center">Jumlah Buku</th>
                                             <th class="text-center filter-none text-nowrap">Aksi</th>
                                         </tr>
                                     </thead>
@@ -140,7 +140,7 @@
         });
 
         const showLoadingIndicator = () => {
-            $('#bookTableBody').html(tableLoader(10, `{{ asset('assets/img/loader/Ellipsis-2s-48px.svg') }}`));
+            $('#bookTableBody').html(tableLoader(11, `{{ asset('assets/img/loader/Ellipsis-2s-48px.svg') }}`));
         }
 
         function getCategories() {
@@ -188,7 +188,7 @@
                                 </div>`,
                                 book.id,
                                 book.isbn,
-                                book.category.name,
+                                book.category.description,
                                 book.title,
                                 book.publisher,
                                 book.author,
@@ -207,7 +207,9 @@
 
                             $(rowNode).find('td').eq(0).addClass('text-center');
                             $(rowNode).find('td').eq(1).addClass('text-center');
-                            $(rowNode).find('td').eq(9).addClass('text-center text-nowrap');
+                            $(rowNode).find('td').eq(8).addClass('text-center');
+                            $(rowNode).find('td').eq(9).addClass('text-center');
+                            $(rowNode).find('td').eq(10).addClass('text-center text-nowrap');
                         });
 
                         $('.cover-book-image').magnificPopup({
@@ -229,7 +231,7 @@
                             }
                         });
                     } else {
-                        $('#bookTableBody').html(tableEmpty(10, 'buku perpustakaan'));
+                        $('#bookTableBody').html(tableEmpty(11, 'buku perpustakaan'));
                     }
                 },
                 error: function(response) {
