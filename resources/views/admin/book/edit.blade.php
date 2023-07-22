@@ -154,7 +154,17 @@
                                     <div class="col-lg-6 col-md-9 col-sm-8">
                                         <div class="mb-2">
                                             <div class="d-flex flex-column flex-sm-row">
-                                                <div id="filePreview"></div>
+                                                <div id="filePreview">
+                                                    @if ($book->file)
+                                                        <div class="text-sm-center">
+                                                            <figure class="file-pdf-info">
+                                                                <img src="{{ asset('assets/img/decoration/pdf.png') }}"
+                                                                    alt="PDF New File">
+                                                            </figure>
+                                                            <p class="mb-0 line-clamp-max-w-320">{{ $book->title }}</p>
+                                                        </div>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="input-file input-file-image">
