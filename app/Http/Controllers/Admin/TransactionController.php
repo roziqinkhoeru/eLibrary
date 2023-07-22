@@ -62,4 +62,14 @@ class TransactionController extends Controller
             'Data transaksi berhasil diambil'
         );
     }
+
+    public function create() {
+        $data = [
+            'title' => 'Tambah Transaksi | Perpus Digital',
+            'currentNav' => 'transaction',
+            'currentNavChild' => 'borrow',
+        ];
+
+        return view('admin.transaction.create', $data);
+    }
 }
