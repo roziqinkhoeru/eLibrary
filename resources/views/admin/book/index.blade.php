@@ -124,6 +124,7 @@
         });
 
         $(document).ready(function() {
+            localStorage.removeItem('ebookPreview');
 
             // add button create report
             $('.bookTable_category_wrapper').prepend(
@@ -281,14 +282,14 @@
                         error: function(xhr, status, error) {
                             if (xhr.responseJSON) {
                                 swal({
-                                    title: "GAGAL!",
-                                    text: xhr.responseJSON.meta.message + ", Error : " + xhr
-                                        .responseJSON.data.error,
+                                    title: "Gagal!",
+                                    text: xhr.statusText + ", Error : " + xhr
+                                        .responseJSON.message,
                                     icon: "error",
                                 });
                             } else {
                                 swal({
-                                    title: "GAGAL!",
+                                    title: "Gagal!",
                                     text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " +
                                         error,
                                     icon: "error",
