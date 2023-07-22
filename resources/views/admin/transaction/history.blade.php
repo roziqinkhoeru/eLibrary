@@ -69,9 +69,20 @@
 
         const transactionTable = $('#transactionTable').DataTable({
             columnDefs: [{
-                targets: 'filter-none',
-                orderable: false,
-            }, ],
+                    type: 'date-eu',
+                    targets: 5
+                }, {
+                    type: 'date-eu',
+                    targets: 6
+                }, {
+                    type: 'date-eu',
+                    targets: 7
+                },
+                {
+                    targets: 'filter-none',
+                    orderable: false,
+                },
+            ],
             language: {
                 "sEmptyTable": "Tidak ada data yang tersedia di tabel",
                 "sInfo": "Menampilkan _START_ hingga _END_ dari _TOTAL_ entri",
@@ -128,9 +139,12 @@
                                 transaction.student.name,
                                 transaction.book.isbn,
                                 transaction.book.title,
-                                moment(transaction.start_date, 'YYYY/MM/DD').format('DD/MM/YYYY'),
-                                moment(transaction.end_date, 'YYYY/MM/DD').format('DD/MM/YYYY'),
-                                moment(transaction.return_date, 'YYYY/MM/DD').format('DD/MM/YYYY'),
+                                // transaction.start_date,
+                                // transaction.end_date,
+                                // transaction.return_date,
+                                moment(transaction.start_date, 'YYYY/MM/DD').format('DD/MM/YY'),
+                                moment(transaction.end_date, 'YYYY/MM/DD').format('DD/MM/YY'),
+                                moment(transaction.return_date, 'YYYY/MM/DD').format('DD/MM/YY'),
                                 transaction.officer.name,
                                 transaction.penalty,
                             ];

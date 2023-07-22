@@ -69,9 +69,17 @@
 
         const transactionTable = $('#transactionTable').DataTable({
             columnDefs: [{
-                targets: 'filter-none',
-                orderable: false,
-            }, ],
+                    type: 'date-eu',
+                    targets: 5
+                },
+                {
+                    type: 'date-eu',
+                    targets: 6
+                }, {
+                    targets: 'filter-none',
+                    orderable: false,
+                },
+            ],
             language: {
                 "sEmptyTable": "Tidak ada data yang tersedia di tabel",
                 "sInfo": "Menampilkan _START_ hingga _END_ dari _TOTAL_ entri",
