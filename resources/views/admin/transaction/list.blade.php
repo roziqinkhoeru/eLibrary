@@ -132,7 +132,7 @@
                                 moment(transaction.end_date, 'YYYY/MM/DD').format('DD/MM/YYYY'),
                                 transaction.officer.name,
                                 transaction.penalty < 0 ? '-' : transaction.penalty,
-                                `<a href="#" class="btn btn-primary btn-sm">Kembali</a>`
+                                `<a href="{{ url('/admin/transaction/${transaction.id}/return') }}" class="btn btn-primary btn-sm">Kembali</a>`
                             ];
 
                             var rowNode = transactionTable.row.add(rowData)

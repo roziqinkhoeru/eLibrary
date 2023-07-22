@@ -47,7 +47,6 @@
                                             <th>Tanggal Pengembalian</th>
                                             <th>Petugas</th>
                                             <th>Denda</th>
-                                            <th class="text-center filter-none">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -134,7 +133,6 @@
                                 moment(transaction.return_date, 'YYYY/MM/DD').format('DD/MM/YYYY'),
                                 transaction.officer.name,
                                 transaction.penalty,
-                                `<a href="#" class="btn btn-primary btn-sm">Kembali</a>`
                             ];
 
                             var rowNode = transactionTable.row.add(rowData)

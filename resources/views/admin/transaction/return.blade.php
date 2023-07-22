@@ -5,7 +5,7 @@
         <div class="page-inner">
             {{-- header --}}
             <div class="page-header">
-                <h4 class="page-title">Pinjam Buku</h4>
+                <h4 class="page-title">Pengembalian Buku</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
                         <a href="/admin/dashboard">
@@ -17,7 +17,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#">
-                            Form Pinjam Buku
+                            Form Pengembalian Buku
                         </a>
                     </li>
                 </ul>
@@ -28,48 +28,107 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">Form Pinjam Buku</div>
+                            <div class="card-title">Form Pengembalian Buku</div>
                             <div class="card-category">
                                 Form ini digunakan untuk menambah kategori
                             </div>
                         </div>
                         <form id="formAddCategory" method="POST">
                             @csrf
+                            @method('PUT')
                             <div class="card-body">
-                                {{-- student id --}}
+                                {{-- nis --}}
                                 <div class="form-group form-show-validation row">
-                                    <label for="student_id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">NIS Siswa
-                                        <span class="required-label">*</span></label>
+                                    <label for="nis" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">NIS Siswa
+                                    </label>
                                     <div class="col-lg-4 col-md-9 col-sm-8">
-                                        <input type="text" class="form-control" id="student_id" name="student_id"
-                                            placeholder="Masukkan NIS Siswa" required>
+                                        <input type="text" disabled class="form-control" id="nis" name="nis"
+                                            value="{{ $transaction->student->nis }}" placeholder="Masukkan NIS Siswa">
+                                    </div>
+                                </div>
+                                {{-- name_student --}}
+                                <div class="form-group form-show-validation row">
+                                    <label for="name_student" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Nama
+                                        Siswa
+                                    </label>
+                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                        <input type="text" disabled class="form-control" id="name_student"
+                                            name="name_student" value="{{ $transaction->student->name }}"
+                                            placeholder="Masukkan NIS Siswa">
                                     </div>
                                 </div>
                                 {{-- book id --}}
                                 <div class="form-group form-show-validation row">
-                                    <label for="book_id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">ID Buku
-                                        <span class="required-label">*</span></label>
+                                    <label for="book_id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">ID
+                                        Buku
+                                    </label>
                                     <div class="col-lg-4 col-md-9 col-sm-8">
-                                        <input type="text" class="form-control" id="book_id" name="book_id"
-                                            placeholder="Masukkan ID Buku" required>
+                                        <input type="text" disabled class="form-control" id="book_id" name="book_id"
+                                            value="{{ $transaction->book->id }}" placeholder="Masukkan ID Buku">
+                                    </div>
+                                </div>
+                                {{-- isbn --}}
+                                <div class="form-group form-show-validation row">
+                                    <label for="isbn" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">ISBN
+                                    </label>
+                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                        <input type="text" disabled class="form-control" id="isbn" name="isbn"
+                                            value="{{ $transaction->book->isbn }}" placeholder="Masukkan ID Buku">
+                                    </div>
+                                </div>
+                                {{-- title --}}
+                                <div class="form-group form-show-validation row">
+                                    <label for="title" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Judul
+                                        Buku
+                                    </label>
+                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                        <input type="text" disabled class="form-control" id="title" name="title"
+                                            value="{{ $transaction->book->title }}" placeholder="Masukkan ID Buku">
                                     </div>
                                 </div>
                                 {{-- start_date --}}
                                 <div class="form-group form-show-validation row">
-                                    <label for="start_date" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Tanggal Mulai Pinjam
-                                        <span class="required-label">*</span></label>
+                                    <label for="start_date" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Tanggal
+                                        Mulai
+                                        Pengembalian
+                                    </label>
                                     <div class="col-lg-4 col-md-9 col-sm-8">
-                                        <input type="text" class="form-control" id="start_date" name="start_date"
-                                            placeholder="Masukkan Tanggal Mulai Pinjam" required>
+                                        <input type="text" disabled class="form-control" id="start_date"
+                                            name="start_date" value="{{ date('d/m/Y', strtotime($transaction->start_date)) }}"
+                                            placeholder="Masukkan Tanggal Mulai Pengembalian">
                                     </div>
                                 </div>
                                 {{-- end_date --}}
                                 <div class="form-group form-show-validation row">
-                                    <label for="end_date" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Tanggal Batas Pinjam
+                                    <label for="end_date" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Tanggal
+                                        Batas Pinjam
+                                    </label>
+                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                        <input type="text" disabled class="form-control" id="end_date" name="end_date"
+                                            value="{{ date('d/m/Y', strtotime($transaction->end_date)) }}"
+                                            placeholder="Masukkan Tanggal Batas Pinjam">
+                                    </div>
+                                </div>
+                                {{-- return_date --}}
+                                <div class="form-group form-show-validation row">
+                                    <label for="return_date"
+                                        class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Tanggal Pengembalian
                                         <span class="required-label">*</span></label>
                                     <div class="col-lg-4 col-md-9 col-sm-8">
-                                        <input type="text" class="form-control" id="end_date" name="end_date"
-                                            placeholder="Masukkan Tanggal Batas Pinjam" required>
+                                        <input type="text" class="form-control" id="return_date" name="return_date"
+                                            value="{{ old('return_date') }}" placeholder="Masukkan Tanggal Pengembalian"
+                                            required>
+                                    </div>
+                                </div>
+                                {{-- penalty --}}
+                                <div class="form-group form-show-validation row">
+                                    <label for="penalty"
+                                        class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Denda
+                                        <span class="required-label">*</span></label>
+                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                        <input type="number" class="form-control" id="penalty" name="penalty"
+                                            value="{{ $penalty }}" placeholder="Masukkan Denda"
+                                            required>
                                     </div>
                                 </div>
                             </div>
@@ -99,49 +158,30 @@
         integrity="sha512-6S5LYNn3ZJCIm0f9L6BCerqFlQ4f5MwNKq+EthDXabtaJvg3TuFLhpno9pcm+5Ynm6jdA9xfpQoMz2fcjVMk9g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             var today = moment().format('YYYY/MM/DD');;
-            $('#start_date').datetimepicker({
+            $('#return_date').datetimepicker({
                 format: 'DD/MM/YYYY',
                 defaultDate: today
-            });
-            $('#end_date').datetimepicker({
-                format: 'DD/MM/YYYY',
             });
         });
         $("#formAddCategory").validate({
             rules: {
-                student_id: {
-                    required: true,
-                    number: true,
-                    minlength: 6,
-                    maxlength: 6,
-                },
-                book_id: {
-                    required: true,
-                    number: true,
-                },
-                start_date: {
+                return_date: {
                     required: true,
                 },
-                end_date: {
+                penalty: {
                     required: true,
+                    number: true
                 },
             },
             messages: {
-                student_id: {
-                    required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>NIS Siswa tidak boleh kosong',
-                    number: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>NIS Siswa harus berupa angka',
+                return_date: {
+                    required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Tanggal Pengembalian tidak boleh kosong',
                 },
-                book_id: {
-                    required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>ID Buku tidak boleh kosong',
-                    number: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>ID Buku harus berupa angka',
-                },
-                start_date: {
-                    required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Tanggal Mulai Pinjam tidak boleh kosong',
-                },
-                end_date: {
-                    required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Tanggal Batas Pinjam tidak boleh kosong',
+                penalty: {
+                    required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Denda tidak boleh kosong',
+                    number: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Denda harus berupa angka'
                 },
             },
             submitHandler: function(form, event) {
@@ -150,13 +190,12 @@
                 $('#formAddCategoryButton').prop('disabled', true);
                 $.ajax({
                     type: "POST",
-                    url: `{{ route('admin.transaction.store') }}`,
+                    url: `{{ url("/admin/transaction/$transaction->id/return") }}`,
                     data: {
                         _token: '{{ csrf_token() }}',
-                        student_id: $('#student_id').val(),
-                        book_id: $('#book_id').val(),
-                        start_date: moment($('#start_date').val(), 'DD/MM/YYYY').format('YYYY/MM/DD'),
-                        end_date: moment($('#end_date').val(), 'DD/MM/YYYY').format('YYYY/MM/DD'),
+                        _method: 'PUT',
+                        return_date: moment($('#return_date').val(), 'DD/MM/YYYY').format('YYYY/MM/DD'),
+                        penalty: $('#penalty').val(),
                     },
                     success: function(response) {
                         $('#formAddCategoryButton').html('Kirim');

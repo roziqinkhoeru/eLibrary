@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
+use Carbon\Carbon;
+use Carbon\Doctrine\DateTimeType;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -65,7 +68,8 @@ class TransactionController extends Controller
         );
     }
 
-    public function create() {
+    public function create()
+    {
         $data = [
             'title' => 'Tambah Transaksi | Perpus Digital',
             'currentNav' => 'transaction',
@@ -75,7 +79,8 @@ class TransactionController extends Controller
         return view('admin.transaction.create', $data);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $rules = [
             'student_id' => 'required|exists:students,nis',
             'book_id' => 'required|exists:books,id',
@@ -118,6 +123,66 @@ class TransactionController extends Controller
                 'error' => 'Data gagal ditambahkan'
             ],
             'Data gagal ditambahkan',
+            422
+        );
+    }
+
+    public function returnBook(Transaction $transaction)
+    {
+        $transaction->load(['student:nis,name', 'book:id,isbn,title']);
+        $penalty = 0;
+        $end_date = Carbon::parse($transaction->end_date);
+        if ($end_date < now()) {
+            $penalty = now()->diffInDays($end_date) * 1000;
+        }
+
+        $data = [
+            'title' => 'Pengembalian Buku | Perpus Digital',
+            'currentNav' => 'transaction',
+            'currentNavChild' => 'return',
+            'transaction' => $transaction,
+            'penalty' => $penalty,
+        ];
+
+        return view('admin.transaction.return', $data);
+    }
+
+    public function updateReturnBook(Transaction $transaction, Request $request) {
+        $rules = [
+            'return_date' => 'required|date',
+            'penalty' => 'required|numeric',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return ResponseFormatter::error(
+                [
+                    'error' => $validator->errors()->first()
+                ],
+                'Data gagal ditambahkan',
+                422
+            );
+        }
+
+        $update = $transaction->update([
+            'return_date' => $request->return_date,
+            'penalty' => $request->penalty,
+            'status' => 'kembali',
+        ]);
+
+        if ($update) {
+            return ResponseFormatter::success(
+                [
+                    'redirect' => route('admin.history.transaction')
+                ],
+                'Buku berhasil dikembalikan'
+            );
+        }
+
+        return ResponseFormatter::error(
+            [
+                'error' => 'Buku gagal dikembalikan'
+            ],
+            'Buku gagal dikembalikan',
             422
         );
     }
