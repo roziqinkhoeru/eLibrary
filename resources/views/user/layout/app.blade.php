@@ -3,18 +3,17 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     <meta name="description"
-        content="Website UMKMPlus. Pelajari keterampilan bisnis berharga dengan kursus komprehensif kami. Tingkatkan karier Anda dan tingkatkan pengetahuan bisnis Anda, hanya di UMKMPlus">
-    <meta name="keywords"
-        content="business courses, business academy, career development, business skills, kursus bisnis, akademi bisnis, pengembangan karier, keterampilan bisnis, umkmplus, umkm">
-    <meta name="author" content="UMKMPlus">
+        content="Jelajahi koleksi buku digital dan sumber daya luas di eLibrary. Tingkatkan pengetahuan Anda dan temukan dunia baru melalui perpustakaan online komprehensif kami.">
+    <meta name="keywords" content="eLibrary, buku digital, perpustakaan online, pengetahuan, sumber daya, membaca, ebook">
+    <meta name="author" content="eLibrary">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="UMKMPlus - Learn Valuable Business Skills">
+    <meta property="og:title" content="eLibrary - Temukan Dunia Pengetahuan">
     <meta property="og:description"
-        content="Tingkatkan karier Anda dan tingkatkan pengetahuan bisnis Anda dengan kursus komprehensif kami.">
+        content="Tingkatkan pengetahuan Anda dan jelajahi koleksi buku digital dan sumber daya luas di eLibrary.">
     <meta property="og:image" content="{{ asset('assets/icon/apple-touch-icon.png') }}">
-    <meta property="og:url" content="https://www.umkmplus.site">
+    <meta property="og:url" content="https://www.elibrary.site">
 
     {{-- Place favicon.ico in the root directory --}}
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
@@ -75,7 +74,7 @@
                 <svg id="loader">
                     <path id="corners" d="m 0 12.5 l 0 -12.5 l 50 0 l 0 50 l -50 0 l 0 -37.5" />
                 </svg>
-                <img src="{{ asset('assets/img/brand/umkmplus-loader-logo.svg') }}" alt="umkmplus-logo">
+                <img src="{{ asset('assets/img/brand/eLibrary-loader-logo.png') }}" alt="eLibrary logo loader">
             </div>
         </div>
     </div>
