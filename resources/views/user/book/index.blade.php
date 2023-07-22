@@ -14,7 +14,7 @@
                                 {{-- category --}}
                                 <div class="course__sidebar-widget white-bg">
                                     <div class="course__sidebar-info">
-                                        <h3 class="course__sidebar-title">Category Filter</h3>
+                                        <h3 class="course__sidebar-title">Filter Kategori</h3>
                                         <ul id="categoryFilter">
                                             @foreach ($categories as $category)
                                                 <li>
@@ -33,7 +33,7 @@
                                 {{-- sort --}}
                                 <div class="course__sidebar-widget white-bg">
                                     <div class="course__sidebar-info">
-                                        <h3 class="course__sidebar-title">Sorting</h3>
+                                        <h3 class="course__sidebar-title">Urut</h3>
                                         <ul id="sorting">
                                             <li>
                                                 <div class="course__sidebar-check mb-10 d-flex align-items-center">
