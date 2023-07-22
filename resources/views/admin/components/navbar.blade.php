@@ -60,6 +60,15 @@
                                     <span class="text">E-Book</span>
                                 </div>
                             </a>
+                            {{-- transaction --}}
+                            <a class="col-6 col-md-4 p-0" href="{{ route('admin.transaction') }}">
+                                <div class="quick-actions-item">
+                                    <div class="avatar-item bg-warning rounded-circle">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <span class="text">Transaction</span>
+                                </div>
+                            </a>
                             {{-- course --}}
                             {{-- <a class="col-6 col-md-4 p-0" href="/admin/classes">
                                 <div class="quick-actions-item">

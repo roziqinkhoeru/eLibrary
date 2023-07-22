@@ -17,7 +17,7 @@ class TransactionController extends Controller
             'currentNavChild' => 'transaction',
         ];
 
-        return view('admin.transactions.index', $data);
+        return view('admin.transaction.index', $data);
     }
 
     public function getTransaction()

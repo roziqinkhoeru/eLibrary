@@ -91,6 +91,33 @@
                 <p>Kategori</p>
             </a>
         </li>
+        {{-- transaction --}}
+        <li class="nav-item @if ($currentNav == 'transaction') active @endif">
+            <a data-toggle="collapse" href="#transactionMenu">
+                <i class="fas fa-book"></i>
+                <p>Peminjaman</p>
+                <span class="caret"></span>
+            </a>
+            <div class="collapse" id="transactionMenu">
+                <ul class="nav nav-collapse">
+                    <li class="@if ($currentNavChild == 'borrow') active @endif">
+                        <a href="/admin/transaction">
+                            <span class="sub-item">Pinjam Buku</span>
+                        </a>
+                    </li>
+                    <li class="@if ($currentNavChild == 'listBorrow') active @endif">
+                        <a href="/admin/etransaction">
+                            <span class="sub-item">Daftar Pinjam</span>
+                        </a>
+                    </li>
+                    <li class="@if ($currentNavChild == 'history') active @endif">
+                        <a href="/admin/transaction/create">
+                            <span class="sub-item">Riwayat Pinjam</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
         {{-- logout --}}
         <li class="nav-item">
             <a href="/logout" onclick="logout()" class="hover-logout">
