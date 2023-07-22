@@ -1249,6 +1249,7 @@ class BookSeeder extends Seeder
                 'year' => null,
                 'stock' => 1,
                 'cover' => 'covers/antropologi-sosial-budaya.jpg',
+                'file' => 'books/antropologi-sosial-budaya.pdf',
             ],
             [
                 'id' => "902",
@@ -1261,6 +1262,7 @@ class BookSeeder extends Seeder
                 'year' => null,
                 'stock' => 1,
                 'cover' => 'covers/desain-dan-pemrograman-multimedia.jpg',
+                'file' => 'books/desain-dan-pemrograman-multimedia.pdf',
             ],
             [
                 'id' => "903",
@@ -1273,6 +1275,7 @@ class BookSeeder extends Seeder
                 'year' => null,
                 'stock' => 1,
                 'cover' => 'covers/admisnistrasi-sistem-jaringan.jpg',
+                'file' => 'books/admisnistrasi-sistem-jaringan.pdf',
             ],
             [
                 'id' => "904",
@@ -1285,6 +1288,7 @@ class BookSeeder extends Seeder
                 'year' => null,
                 'stock' => 1,
                 'cover' => 'covers/etika-dan-perilaku-kesehatan.jpg',
+                'file' => 'books/etika-dan-perilaku-kesehatan.pdf',
             ],
             [
                 'id' => "905",
@@ -1297,6 +1301,7 @@ class BookSeeder extends Seeder
                 'year' => null,
                 'stock' => 1,
                 'cover' => 'covers/filsafat-ilmu-dan-logika.jpg',
+                'file' => 'books/filsafat-ilmu-dan-logika.pdf',
             ],
             [
                 'id' => "906",
@@ -1309,6 +1314,7 @@ class BookSeeder extends Seeder
                 'year' => null,
                 'stock' => 1,
                 'cover' => 'covers/filsafat-logika.jpg',
+                'file' => 'books/filsafat-logika.pdf',
             ],
             [
                 'id' => "907",
@@ -1321,6 +1327,7 @@ class BookSeeder extends Seeder
                 'year' => null,
                 'stock' => 1,
                 'cover' => 'covers/informatika-kesehatan.jpg',
+                'file' => 'books/informatika-kesehatan.pdf',
             ],
             [
                 'id' => "908",
@@ -1333,6 +1340,7 @@ class BookSeeder extends Seeder
                 'year' => null,
                 'stock' => 1,
                 'cover' => 'covers/kajian-tanah-dalam-perspektif-geografi.jpg',
+                'file' => 'books/kajian-tanah-dalam-perspektif-geografi.pdf',
             ],
             [
                 'id' => "909",
@@ -1345,6 +1353,7 @@ class BookSeeder extends Seeder
                 'year' => null,
                 'stock' => 1,
                 'cover' => 'covers/keperawatan-krisis.jpg',
+                'file' => 'books/keperawatan-krisis.pdf',
             ],
             [
                 'id' => "910",
@@ -1357,6 +1366,7 @@ class BookSeeder extends Seeder
                 'year' => null,
                 'stock' => 1,
                 'cover' => 'covers/kewirausahaantheopreneurship.jpg',
+                'file' => 'books/kewirausahaantheopreneurship.pdf',
             ],
             [
                 'id' => "911",
@@ -1369,6 +1379,7 @@ class BookSeeder extends Seeder
                 'year' => null,
                 'stock' => 1,
                 'cover' => 'covers/sejarah-hukum-indonesia.jpg',
+                'file' => 'books/sejarah-hukum-indonesia.pdf',
             ],
         ];
 

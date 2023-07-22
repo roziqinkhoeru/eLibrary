@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Student\StudentDashboardController;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Route;
 
@@ -55,12 +56,8 @@ Route::controller(NewPasswordController::class)->group(function () {
 Route::group(['middleware' => ['auth', 'web']], function () {
     // student
     Route::group(['middleware' => ['checkRole:student']], function () {
-        Route::get('/', function () {
-            return view('admin.dashboard', [
-                'title' => 'Dashboard | Perpus Digital',
-                'currentNav' => 'dashboard',
-                'currentNavChild' => 'dashboard',
-            ]);
+        Route::controller(StudentDashboardController::class)->group(function () {
+            Route::get('/', 'index')->name('dashboard');
         });
     });
 
@@ -99,12 +96,6 @@ Route::group(['middleware' => ['auth', 'web']], function () {
             Route::delete('/admin/category/{category:slug}', 'destroy')->name('admin.category.destroy');
         });
     });
-});
-
-Route::get('/', function () {
-    return view('user.home', [
-        'title' => 'Perpus Digital',
-    ]);
 });
 
 // Route::get('/admin/student', function () {
