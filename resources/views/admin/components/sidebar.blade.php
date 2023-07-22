@@ -100,8 +100,8 @@
             </a>
             <div class="collapse" id="transactionMenu">
                 <ul class="nav nav-collapse">
-                    <li class="@if ($currentNavChild == 'borrow') active @endif">
-                        <a href="{{ route('admin.list.transaction') }}">
+                    <li class="@if ($currentNavChild == 'create') active @endif">
+                        <a href="{{ route('admin.transaction.create') }}">
                             <span class="sub-item">Pinjam Buku</span>
                         </a>
                     </li>
