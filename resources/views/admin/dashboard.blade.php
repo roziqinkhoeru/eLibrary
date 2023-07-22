@@ -296,6 +296,10 @@
 
         // top class chart
         // define
+        let revenueMonths = [];
+        @foreach ($revenueMonth as $revenue)
+            revenueMonths.push('{{ $revenue }}');
+        @endforeach
         var topClass = document.getElementById('topClass').getContext('2d');
         // config
         var mytopClass = new Chart(topClass, {
@@ -321,7 +325,7 @@
                     pointHoverBorderWidth: 1,
                     pointRadius: 1,
                     pointHitRadius: 5,
-                    data: [20, 10, 18, 14, 32, 18, 15, 22, 8, 6, 17, 12]
+                    data: revenueMonths
                 }]
             },
             options: {

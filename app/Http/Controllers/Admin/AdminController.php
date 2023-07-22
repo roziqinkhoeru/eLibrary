@@ -47,6 +47,23 @@ class AdminController extends Controller
             ->limit(5)
             ->get();
 
+        $statisticMonthBorrow = Transaction::select(DB::raw('count(*) as total, month(transactions.start_date) as month'))
+            ->whereYear('transactions.start_date', date('Y'))
+            ->groupBy('month')
+            ->orderBy('month', 'asc')
+            ->get()
+            ->keyBy('month');
+
+        $month = range(1, 12);
+        $revenueMonth = [];
+        foreach ($month as $mnt) {
+            $total = 0;
+            if (isset($statisticMonthBorrow[$mnt])) {
+                $total = $statisticMonthBorrow[$mnt]->total;
+            }
+            $revenueMonth[$mnt] = $total;
+        }
+
         $data = [
             'title' => 'Dashboard Admin | Perpus Digital',
             'currentNav' => 'dashboard',
@@ -59,6 +76,7 @@ class AdminController extends Controller
             'statisticClassBorrow' => $statisticClassBorrow,
             'statisticTopClassBorrow' => $statisticTopClassBorrow,
             'categories' => $categories,
+            'revenueMonth' => $revenueMonth,
         ];
         return view('admin.dashboard', $data);
     }
