@@ -57,7 +57,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['checkRole:student']], function () {
         Route::get('/', function () {
             return view('admin.dashboard', [
-                'title' => 'Dashboard | Perpus Digital',
+                'title' => 'Dashboard | Admin Perpus Digital',
                 'currentNav' => 'dashboard',
                 'currentNavChild' => 'dashboard',
             ]);
@@ -102,6 +102,11 @@ Route::group(['middleware' => ['auth']], function () {
 Route::get('/', function () {
     return view('user.home', [
         'title' => 'Perpus Digital',
+    ]);
+});
+Route::get('/ebook', function () {
+    return view('user.book.ebook', [
+        'title' => 'E-Book | Perpus Digital',
     ]);
 });
 
