@@ -84,7 +84,29 @@
                     success: function(response) {
                         $('#resetPasswordButton').html('Reset password');
                         $('#resetPasswordButton').prop('disabled', false);
-                        window.location.href = response.data.redirect
+                        new swal({
+                                title: "Berhasil!",
+                                text: response.meta.message,
+                                icon: "success",
+                                buttons: {
+                                    confirm: {
+                                        text: "Okay",
+                                        value: "confirm",
+                                        visible: true,
+                                        className: "btn btn-success",
+                                        closeModal: true,
+                                    }
+                                }
+                            })
+                            .then((value) => {
+                                if (value === "confirm") {
+                                    window.location.href = response.data.redirect
+                                }
+                            });
+
+                        setTimeout(function() {
+                            window.location.href = response.data.redirect
+                        }, 4000);
                     },
                     error: function(xhr, status, error) {
                         $('#resetPasswordButton').html('Reset password');
@@ -92,13 +114,13 @@
                         if (xhr.responseJSON)
                             Swal.fire({
                                 icon: 'error',
-                                title: 'RESET PASSWORD GAGAL!',
+                                title: 'Reset Password Gagal!',
                                 text: xhr.responseJSON.meta.message,
                             })
                         else
                             Swal.fire({
                                 icon: 'error',
-                                title: 'RESET PASSWORD GAGAL!',
+                                title: 'Reset Password Gagal!',
                                 text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " +
                                     error,
                             })
