@@ -46,6 +46,7 @@
                                         <tr class="space-nowrap">
                                             <th class="text-center">#</th>
                                             <th class="filter-none text-center">Cover</th>
+                                            <th class="filter-none">ID</th>
                                             <th class="filter-none">ISBN</th>
                                             <th class="filter-none">Kategori</th>
                                             <th class="">Judul</th>
@@ -185,6 +186,7 @@
                                             class="img-fluid">
                                     </a>
                                 </div>`,
+                                book.id,
                                 book.isbn,
                                 book.category.name,
                                 book.title,

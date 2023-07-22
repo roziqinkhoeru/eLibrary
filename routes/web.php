@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Student\StudentDashboardController;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Route;
 
@@ -55,12 +56,8 @@ Route::controller(NewPasswordController::class)->group(function () {
 Route::group(['middleware' => ['auth', 'web']], function () {
     // student
     Route::group(['middleware' => ['checkRole:student']], function () {
-        Route::get('/', function () {
-            return view('admin.dashboard', [
-                'title' => 'Dashboard | Perpus Digital',
-                'currentNav' => 'dashboard',
-                'currentNavChild' => 'dashboard',
-            ]);
+        Route::controller(StudentDashboardController::class)->group(function () {
+            Route::get('/', 'index')->name('dashboard');
         });
     });
 
@@ -75,8 +72,14 @@ Route::group(['middleware' => ['auth', 'web']], function () {
             Route::get('/admin/student/data', 'getStudent')->name('admin.student.data');
         });
         Route::controller(TransactionController::class)->group(function () {
-            Route::get('/admin/transaction', 'transaction')->name('admin.transaction');
-            Route::get('/admin/transaction/data', 'getTransaction')->name('admin.transaction.data');
+            Route::get('/admin/transaction/list', 'listTransaction')->name('admin.list.transaction');
+            Route::get('/admin/transaction/list/data', 'getListTransaction')->name('admin.list.transaction.data');
+            Route::get('/admin/transaction/history', 'historyTransaction')->name('admin.history.transaction');
+            Route::get('/admin/transaction/history/data', 'getHistoryTransaction')->name('admin.history.transaction.data');
+            Route::get('/admin/transaction/create', 'create')->name('admin.transaction.create');
+            Route::post('/admin/transaction', 'store')->name('admin.transaction.store');
+            Route::get('/admin/transaction/{transaction:id}/return', 'returnBook')->name('admin.transaction.return');
+            Route::put('/admin/transaction/{transaction:id}/return', 'updateReturnBook')->name('admin.transaction.return.update');
         });
         Route::controller(BookController::class)->group(function () {
             Route::get('/admin/book', 'book')->name('admin.book');
@@ -99,12 +102,6 @@ Route::group(['middleware' => ['auth', 'web']], function () {
             Route::delete('/admin/category/{category:slug}', 'destroy')->name('admin.category.destroy');
         });
     });
-});
-
-Route::get('/', function () {
-    return view('user.home', [
-        'title' => 'Perpus Digital',
-    ]);
 });
 
 // Route::get('/admin/student', function () {

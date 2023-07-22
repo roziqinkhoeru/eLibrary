@@ -46,23 +46,6 @@ class AdminController extends Controller
             ->limit(5)
             ->get();
 
-        // Calculate the session timeout in seconds (30 minutes in this example)
-        $sessionTimeout = 1800; // 30 minutes in seconds
-
-        // Get the current time
-        $currentTimestamp = time();
-
-        // Loop through the session data to count active users
-        $activeUserCount = 0;
-
-        // Count active users based on session timeout
-        // $activeUserCount = Session::where('last_activity', '>=', $activeThreshold)->count();
-        dd(session()->put('last_activity', time()));
-        foreach (session('last_activity') as $user => $lastActivityTime) {
-            if (($currentTimestamp - $lastActivityTime) <= $sessionTimeout) {
-                $activeUserCount++;
-            }
-        }
         $data = [
             'title' => 'Dashboard Admin | Perpus Digital',
             'currentNav' => 'dashboard',
