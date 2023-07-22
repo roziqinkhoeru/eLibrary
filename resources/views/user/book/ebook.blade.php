@@ -14,9 +14,9 @@
                                 {{-- category --}}
                                 <div class="course__sidebar-widget white-bg">
                                     <div class="course__sidebar-info">
-                                        <h3 class="course__sidebar-title">Category Filter</h3>
+                                        <h3 class="course__sidebar-title">Filter Kategori</h3>
                                         <ul id="categoryFilter">
-                                            {{-- @foreach ($categories as $category)
+                                            @foreach ($categories as $category)
                                                 <li>
                                                     <div class="course__sidebar-check mb-10 d-flex align-items-center">
                                                         <input class="categoryFilter m-check-input" type="radio"
@@ -26,14 +26,14 @@
                                                             for="{{ $category->name }}CourseIn">{{ $category->name }}</label>
                                                     </div>
                                                 </li>
-                                            @endforeach --}}
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
                                 {{-- sort --}}
                                 <div class="course__sidebar-widget white-bg">
                                     <div class="course__sidebar-info">
-                                        <h3 class="course__sidebar-title">Sorting</h3>
+                                        <h3 class="course__sidebar-title">Urut</h3>
                                         <ul id="sorting">
                                             <li>
                                                 <div class="course__sidebar-check mb-10 d-flex align-items-center">
@@ -53,7 +53,7 @@
                                     </div>
                                 </div>
                                 {{-- price --}}
-                                <div class="course__sidebar-widget white-bg">
+                                {{-- <div class="course__sidebar-widget white-bg">
                                     <div class="course__sidebar-info">
                                         <h3 class="course__sidebar-title">Class Filter</h3>
                                         <ul id="classFilter">
@@ -80,7 +80,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> --}}
                             </form>
                         </div>
                     </div>
@@ -112,8 +112,8 @@
                                     </ul>
                                 </div>
                                 {{-- count view course --}}
-                                <div class="course__view" id="countCourse">
-                                    <h4>Showing 0 E-Books</h4>
+                                <div class="course__view" id="countBook">
+                                    <h4>Menampilkan 0 E-Book</h4>
                                 </div>
                             </div>
                         </div>
@@ -139,7 +139,7 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            getCourse()
+            getBook()
         });
 
         const x = Object.fromEntries(
@@ -150,11 +150,11 @@
 
         $(".formSearchDesktop").submit(function(e) {
             e.preventDefault();
-            getCourse()
+            getBook()
         });
         $(".formSearchMobile").submit(function(e) {
             e.preventDefault();
-            getCourse()
+            getBook()
         });
 
         function createSlug(title) {
@@ -163,28 +163,28 @@
             return slug;
         }
 
-        function getCourse(device) {
+        function getBook(device) {
             // loading state
             $("#courseCategory").html(
                 `<div class="text-center text-4xl col-span-full pt-100 pb-65"><i class="fas fa-spinner-third spinners-3"></i></div>`
             );
             let search = "";
             if (device == "desktop") {
-                $("#searchCourseMobile").val("");
-                search = $("#searchCourseDesktop").val();
+                $("#searchBookMobile").val("");
+                search = $("#searchBookDesktop").val();
             } else if (device == "mobile") {
-                $("#searchCourseDesktop").val("");
-                search = $("#searchCourseMobile").val();
+                $("#searchBookDesktop").val("");
+                search = $("#searchBookMobile").val();
             } else {
-                if ($("#searchCourseDesktop").val() != "") {
-                    search = $("#searchCourseDesktop").val();
-                } else if ($("#searchCourseMobile").val() != "") {
-                    search = $("#searchCourseMobile").val();
+                if ($("#searchBookDesktop").val() != "") {
+                    search = $("#searchBookDesktop").val();
+                } else if ($("#searchBookMobile").val() != "") {
+                    search = $("#searchBookMobile").val();
                 }
             }
             $.ajax({
                 type: "GET",
-                url: "{{ url('/course/data') }}",
+                url: "{{ route('ebook.data') }}",
                 data: {
                     sort: $("input[name='sort']:checked").val(),
                     category: $("input[name='categorySort']:checked").val(),
@@ -192,48 +192,36 @@
                 },
                 success: function(response) {
                     let htmlString = ``;
-                    $("#countCourse").html(`<h4>Showing ${response.courseCount} Courses</h4>`);
-                    if (response.courseCount === 0) {
+                    $("#countBook").html(`<h4>Menampilkan ${response.data.bookCount} E-Book</h4>`);
+                    if (response.data.bookCount === 0) {
                         // empty state
-                        htmlString = emptyState('Maaf, kelas belum tersedia');
+                        htmlString = emptyState('Maaf, buku belum tersedia');
                     } else {
-                        const currencyOption = {
-                            style: 'currency',
-                            currency: 'IDR',
-                            currencyDisplay: 'symbol',
-                            useGrouping: true,
-                            minimumFractionDigits: 0,
-                            maximumFractionDigits: 0,
-                        };
                         const dateOption = {
                             day: '2-digit',
                             month: 'long',
                             year: 'numeric'
                         };
                         // success state
-                        $.map(response.data, function(courseData, index) {
-                            let coursePrice = parseInt(courseData.price);
-                            let coursePriceDiscount = courseData.price - Math.ceil(courseData.price *
-                                courseData.discount / 100);
-                            let date = new Date(courseData.created_at);
-                            let createAt = date.toLocaleDateString('id-ID', dateOption);
+                        $.map(response.data.books, function(book, index) {
                             htmlString += `<div class="col-span-2-book">
                                                 <div class="mb-30 h-100">
                                                     <div class="course__item-2 transition-3 white-bg fix">
                                                         <div class="course__thumb-2 w-img fix">
                                                             <figure class="mb-0 position-relative">
-                                                                <img src="{{ asset('assets/img/dummy/Brown modern history book cover.png') }}"
-                                                                    alt="${book.name} book thumbnail">
+                                                                <img src="{{ asset('storage/${book.cover}') }}"
+                                                                    alt="${book.title} book thumbnail">
                                                             </figure>
                                                         </div>
                                                     </div>
                                                     <div class="course__content-2 px-0" style="padding-top: 10px">
                                                         <p
                                                             class="course__title-2 line-clamp-3-hover text-sm leading-lg mb-0">
-                                                            ${book.name}
+                                                            ${book.title}
                                                         </p>
                                                         <p class="mb-10 fw-medium text-muted text-xs">${book.author}</p>
-                                                        <p class="mb-10 fw-medium text-muted text-xs">Jumlah: <span class="fw-semibold">${book.quantity}</span></p>
+                                                        <p class="mb-10 fw-medium text-muted text-xs">${book.publisher}(${book.year})</p>
+                                                        <p class="mb-10 fw-medium text-muted text-xs">Jumlah download: <span class="fw-semibold">${book.download}</span></p>
                                                     </div>
                                                 </div>
                                             </div>`
@@ -242,10 +230,10 @@
                     $("#courseCategory").html(htmlString);
 
                     if (device == "desktop") {
-                        $("#searchCourseMobile").val("");
+                        $("#searchBookMobile").val("");
                     } else if (device == "mobile") {
                         $('#offcanvasmodal').modal('hide');
-                        $("#searchCourseDesktop").val("");
+                        $("#searchBookDesktop").val("");
                     }
                 },
                 // error state
@@ -256,13 +244,13 @@
         }
 
         $('#categoryFilter').on('change', '.categoryFilter', function() {
-            getCourse();
+            getBook();
         });
         $('#sorting').on('change', '.sorting', function() {
-            getCourse();
+            getBook();
         });
         $('#priceFilter').on('change', '.priceFilter', function() {
-            getCourse();
+            getBook();
         });
     </script>
 @endsection
