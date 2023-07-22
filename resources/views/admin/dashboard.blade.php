@@ -208,7 +208,7 @@
             id: 'classX',
             radius: 45,
             value: {{ $statisticClassBorrow[0]->total }},
-            maxValue: {{ $borrow }},
+            maxValue: {{ array_sum($statisticClassBorrow->pluck('total')->toArray()) }},
             width: 7,
             text: {{ $statisticClassBorrow[0]->total }},
             colors: ['#f1f1f1', '#FF9E27'],
@@ -223,7 +223,7 @@
             id: 'classXI',
             radius: 45,
             value: {{ $statisticClassBorrow[1]->total }},
-            maxValue: {{ $borrow }},
+            maxValue: {{ array_sum($statisticClassBorrow->pluck('total')->toArray()) }},
             width: 7,
             text: {{ $statisticClassBorrow[1]->total }},
             colors: ['#f1f1f1', '#2BB930'],
@@ -238,7 +238,7 @@
             id: 'classXII',
             radius: 45,
             value: {{ $statisticClassBorrow[2]->total }},
-            maxValue: {{ $borrow }},
+            maxValue: {{ array_sum($statisticClassBorrow->pluck('total')->toArray()) }},
             width: 7,
             text: {{ $statisticClassBorrow[2]->total }},
             colors: ['#f1f1f1', '#F25961'],
@@ -296,6 +296,10 @@
 
         // top class chart
         // define
+        let revenueMonths = [];
+        @foreach ($revenueMonth as $revenue)
+            revenueMonths.push('{{ $revenue }}');
+        @endforeach
         var topClass = document.getElementById('topClass').getContext('2d');
         // config
         var mytopClass = new Chart(topClass, {
@@ -321,7 +325,7 @@
                     pointHoverBorderWidth: 1,
                     pointRadius: 1,
                     pointHitRadius: 5,
-                    data: [20, 10, 18, 14, 32, 18, 15, 22, 8, 6, 17, 12]
+                    data: revenueMonths
                 }]
             },
             options: {
