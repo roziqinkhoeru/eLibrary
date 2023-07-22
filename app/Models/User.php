@@ -55,6 +55,6 @@ class User extends Authenticatable
 
     public function officer()
     {
-        return $this->hasOne(Officer::class);
+        return $this->hasOne(Officer::class, 'nip', 'officer_id');
     }
 }

@@ -10,8 +10,8 @@
                             Menang</h5>
                     </div>
                     <div class="ml-md-auto py-2 py-md-0">
-                        <a href="#" class="btn btn-white btn-border btn-round mr-2">Data Buku</a>
-                        <a href="#" class="btn btn-secondary btn-round">Lihat Kategori</a>
+                        <a href="{{ route('admin.book') }}" class="btn btn-white btn-border btn-round mr-2">Data Buku</a>
+                        <a href="{{ route('admin.category') }}" class="btn btn-secondary btn-round">Lihat Kategori</a>
                     </div>
                 </div>
             </div>
