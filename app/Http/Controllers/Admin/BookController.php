@@ -58,7 +58,7 @@ class BookController extends Controller
     {
         $category = $request->category;
         $books = Book::with('category:id,name')
-            ->select('id', 'category_id', 'isbn', 'title', 'author', 'publisher', 'year', 'stock', 'cover')
+            ->select('id', 'category_id', 'isbn', 'title', 'author', 'publisher', 'year', 'stock', 'cover', 'file')
             ->where('type', 'online')
             ->when($category != 'all', function ($query) use ($category) {
                 return $query->where('category_id', $category);
@@ -180,15 +180,18 @@ class BookController extends Controller
         }
     }
 
-    public function edit()
+    public function edit(Book $book)
     {
+        $categories = Category::select('id', 'name')->get();
         $data = [
             'title' => 'Edit Buku | Admin Perpus Digital',
             'currentNav' => 'book',
             'currentNavChild' => 'editBook',
+            'book' => $book,
+            'categories' => $categories,
         ];
 
-        return view('admin.books.edit', $data);
+        return view('admin.book.edit', $data);
     }
 
     public function update(Request $request, Book $book)
@@ -269,10 +272,16 @@ class BookController extends Controller
             );
         }
 
+        if ($request->type == "offline") {
+            $redirect = route('admin.book');
+        } else {
+            $redirect = route('admin.ebook');
+        }
+
         if ($updateBook) {
             return ResponseFormatter::success(
                 [
-                    'redirect' => route('admin.book'),
+                    'redirect' => $redirect,
                 ],
                 'Berhasil mengubah buku'
             );

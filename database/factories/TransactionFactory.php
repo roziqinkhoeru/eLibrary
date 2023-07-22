@@ -29,7 +29,7 @@ class TransactionFactory extends Factory
         $status = 'kembali';
 
         if ($return_date > $end_date) {
-            $penalty = $this->faker->numberBetween(1000, 10000);
+            $penalty = $end_date->diff($return_date)->days * 1000;
         } else if ($end_date->diff($return_date)->days < 7) {
             $return_date = null;
             $status = 'pinjam';

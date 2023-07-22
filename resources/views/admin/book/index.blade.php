@@ -46,6 +46,7 @@
                                         <tr class="space-nowrap">
                                             <th class="text-center">#</th>
                                             <th class="filter-none text-center">Cover</th>
+                                            <th class="filter-none">ID</th>
                                             <th class="filter-none">ISBN</th>
                                             <th class="filter-none">Kategori</th>
                                             <th class="">Judul</th>
@@ -185,6 +186,7 @@
                                             class="img-fluid">
                                     </a>
                                 </div>`,
+                                book.id,
                                 book.isbn,
                                 book.category.name,
                                 book.title,
@@ -192,12 +194,12 @@
                                 book.author,
                                 book.year,
                                 book.stock,
-                                `<a href="#" class="btn btn-primary btn-sm mr-2">
+                                `<a href="{{ url('admin/book/${book.id}/edit') }}" class="btn btn-primary btn-sm mr-2">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="#" class="btn btn-danger btn-sm">
+                                <button onclick="deleteBook('${book.id}')" class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>
-                                </a>`,
+                                </button>`,
                             ];
                             var rowNode = bookTable.row.add(rowData).draw(
                                     false)

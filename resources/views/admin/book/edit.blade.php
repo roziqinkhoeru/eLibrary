@@ -33,7 +33,9 @@
                                 Form ini digunakan untuk mengubah data buku maupun e-book
                             </div>
                         </div>
-                        <form id="formEditBook" action="" method="POST">
+                        <form id="formEditBook" method="POST">
+                            @csrf
+                            @method('PUT')
                             <div class="card-body">
                                 {{-- Title --}}
                                 <div class="form-group form-show-validation row">
@@ -42,7 +44,7 @@
                                         <span class="required-label">*</span></label>
                                     <div class="col-lg-4 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="title" name="title"
-                                            placeholder="Masukkan Judul Buku" value="" required>
+                                            placeholder="Masukkan Judul Buku" value="{{ $book->title }}" required>
                                     </div>
                                 </div>
                                 {{-- ISBN --}}
@@ -51,19 +53,21 @@
                                         <span class="required-label">*</span></label>
                                     <div class="col-lg-4 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="isbn" name="isbn"
-                                            placeholder="Masukkan ISBN" value="" required>
+                                            placeholder="Masukkan ISBN" value="{{ $book->isbn }}" required>
                                     </div>
                                 </div>
                                 {{-- Kategori --}}
                                 <div class="form-group form-show-validation row">
-                                    <label for="category" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Kategori
+                                    <label for="category_id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Kategori
                                         <span class="required-label">*</span></label>
                                     <div class="col-lg-4 col-md-9 col-sm-8">
-                                        <select class="form-control" id="category" name="category" required>
+                                        <select class="form-control" id="category_id" name="category_id" required>
                                             <option value="">Pilih Kategori</option>
-                                            <option value="1">Kategori 1</option>
-                                            <option value="2">Kategori 2</option>
-                                            <option value="3">Kategori 3</option>
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}"
+                                                    {{ $book->category_id == $category->id ? 'selected' : '' }}>
+                                                    {{ $category->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -73,7 +77,7 @@
                                         <span class="required-label">*</span></label>
                                     <div class="col-lg-4 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="publisher" name="publisher"
-                                            placeholder="Masukkan Nama Penerbit" value="" required>
+                                            placeholder="Masukkan Nama Penerbit" value="{{ $book->publisher }}" required>
                                     </div>
                                 </div>
                                 {{-- Pengarang --}}
@@ -82,7 +86,7 @@
                                         <span class="required-label">*</span></label>
                                     <div class="col-lg-4 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="author" name="author"
-                                            placeholder="Masukkan Nama Pengarang" value="" required>
+                                            placeholder="Masukkan Nama Pengarang" value="{{ $book->author }}" required>
                                     </div>
                                 </div>
                                 {{-- Tahun Terbit --}}
@@ -91,32 +95,32 @@
                                         Terbit
                                         <span class="required-label">*</span></label>
                                     <div class="col-lg-4 col-md-9 col-sm-8">
-                                        <input type="number" class="form-control" id="year" name="year"
-                                            placeholder="Masukkan Tahun Terbit" value="" required>
+                                        <input type="number" class="form-control" id="year" name="year" max="{{ date('Y') }}"
+                                            placeholder="Masukkan Tahun Terbit" value="{{ $book->year }}" required>
                                     </div>
                                 </div>
                                 {{-- Jumlah Buku --}}
                                 <div class="form-group form-show-validation row">
-                                    <label for="qty" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Jumlah
+                                    <label for="stock" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Jumlah
                                         Buku
                                         <span class="required-label">*</span></label>
                                     <div class="col-lg-4 col-md-9 col-sm-8">
-                                        <input type="number" class="form-control" id="qty" name="qty"
-                                            placeholder="Masukkan Jumlah Buku" value="" required>
+                                        <input type="number" class="form-control" id="stock" name="stock"
+                                            placeholder="Masukkan Jumlah Buku" value="{{ $book->stock }}" required>
                                     </div>
                                 </div>
                                 {{-- cover --}}
                                 <div class="form-group form-show-validation row">
-                                    <label for="bookCover" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Cover
+                                    <label for="cover" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Cover
                                         Buku <span class="required-label">*</span></label>
                                     <div class="col-lg-4 col-md-9 col-sm-8">
                                         <div class="input-file input-file-image">
                                             <img class="img-upload-preview" width="240"
-                                                src="http://placehold.it/240x240" alt="Book Cover Preview"
+                                                src="{{ asset('storage/'. $book->cover) }}" alt="Book Cover Preview"
                                                 id="imagePreview">
-                                            <input type="file" class="form-control form-control-file" id="bookCover"
-                                                name="bookCover" accept="image/*" value="" required>
-                                            <label for="bookCover"
+                                            <input type="file" class="form-control form-control-file" id="cover"
+                                                name="cover" accept="image/*" value="">
+                                            <label for="cover"
                                                 class="label-input-file btn btn-black btn-round mt-2 mr-3 btn-upload-image-sm">
                                                 <span class="btn-label">
                                                     <i class="fa fa-file-image"></i>
@@ -134,8 +138,8 @@
                                     <div class="col-lg-4 col-md-9 col-sm-8">
                                         <select class="form-control" id="type" name="type" required>
                                             <option value="">Pilih Tipe Buku</option>
-                                            <option value="1">Buku</option>
-                                            <option value="2" selected>E-Book</option>
+                                            <option value="offline" {{ $book->type == 'offline' ? 'selected':'' }}>Buku</option>
+                                            <option value="online" {{ $book->type == 'online' ? 'selected':'' }}>E-Book</option>
                                         </select>
                                     </div>
                                 </div>
@@ -150,10 +154,9 @@
                                             </div>
                                         </div>
                                         <div class="input-file input-file-image">
-                                            <input type="file" class="form-control form-control-file" id="ebook"
-                                                name="ebook" accept="application/pdf" value="" required>
-                                            <label for="ebook"
-                                                class="label-input-file btn btn-black btn-round mt-2 mr-3 btn-upload-image-sm">
+                                            <input type="file" class="form-control form-control-file" id="file"
+                                                name="file" accept="application/pdf" value="{{ asset('storage/'.$book->file) }}">
+                                            <label for="file" class="label-input-file btn btn-black btn-round mt-2 mr-3 btn-upload-image-sm">
                                                 <span class="btn-label">
                                                     <i class="fa fa-file-pdf"></i>
                                                 </span>
@@ -187,13 +190,13 @@
             // define variable
             const imagePreview = $('#imagePreview');
             const filePreview = $('#filePreview');
-            const bookCover = $('#bookCover');
-            const eBook = $('#ebook');
+            const cover = $('#cover');
+            const eBook = $('#file');
             const backToBookBtn = $('#backToBook');
             const typeValue = $('#type').val();
 
             function toggleEbookContainer(e) {
-                if (e === "2") {
+                if (e === "online") {
                     $("#uploadEbookContainer").show();
                 } else {
                     $("#uploadEbookContainer").hide();
@@ -206,7 +209,7 @@
                 toggleEbookContainer(selectedValue);
             });
 
-            bookCover.on('change', function(event) {
+            cover.on('change', function(event) {
                 const file = event.target.files[0];
                 const reader = new FileReader();
 
@@ -247,7 +250,7 @@
                 title: {
                     required: true,
                 },
-                category: {
+                category_id: {
                     required: true,
                 },
                 publisher: {
@@ -259,16 +262,10 @@
                 year: {
                     required: true,
                 },
-                qty: {
-                    required: true,
-                },
-                bookCover: {
+                stock: {
                     required: true,
                 },
                 type: {
-                    required: true,
-                },
-                ebook: {
                     required: true,
                 },
             },
@@ -276,7 +273,7 @@
                 title: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Judul buku tidak boleh kosong',
                 },
-                category: {
+                category_id: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Kategori buku tidak boleh kosong',
                 },
                 publisher: {
@@ -288,31 +285,26 @@
                 year: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Tahun terbit buku tidak boleh kosong',
                 },
-                qty: {
+                stock: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Jumlah buku tidak boleh kosong',
-                },
-                bookCover: {
-                    required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Cover buku tidak boleh kosong',
                 },
                 type: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Tipe buku tidak boleh kosong',
                 },
-                ebook: {
-                    required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>E-Book tidak boleh kosong',
-                },
             },
             submitHandler: function(form, event) {
                 event.preventDefault();
+                var formData = new FormData(form);
                 $('#formEditBookButton').html('<i class="fas fa-circle-notch text-lg spinners-2"></i>');
                 $('#formEditBookButton').prop('disabled', true);
                 $.ajax({
-                    type: "PUT",
-                    url: `#`,
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                    },
+                    type: "POST",
+                    url: `{{ url('admin/book/'. $book->id) }}`,
+                    data: formData,
+                    processData: false,
+                    contentType: false,
                     success: function(response) {
-                        $('#formEditBookButton').html('Terima');
+                        $('#formEditBookButton').html('Kirim');
                         $('#formEditBookButton').prop('disabled', false);
                         swal({
                                 title: "Berhasil!",
@@ -339,19 +331,19 @@
                         }, 4000);
                     },
                     error: function(xhr, status, error) {
-                        $('#formEditBookButton').html('Terima');
+                        $('#formEditBookButton').html('Kirim');
                         $('#formEditBookButton').prop('disabled', false);
                         if (xhr.responseJSON)
-                            Swal.fire({
+                            swal({
                                 icon: 'error',
-                                title: 'TAMBAH KELAS GAGAL!',
+                                title: 'GAGAL!',
                                 text: xhr.responseJSON.meta.message + " Error: " + xhr
                                     .responseJSON.data.error,
                             })
                         else
-                            Swal.fire({
+                            swal({
                                 icon: 'error',
-                                title: 'TAMBAH KELAS GAGAL!',
+                                title: 'GAGAL!',
                                 text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " +
                                     error,
                             })
