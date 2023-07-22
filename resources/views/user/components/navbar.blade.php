@@ -7,8 +7,8 @@
                     <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-6 col-6">
                         <div class="logo">
                             <a href="/">
-                                <img src="{{ asset('assets/img/brand/umkmplus-letter-logo.svg') }}"
-                                    alt="umkm-letter-logo">
+                                <img src="{{ asset('assets/img/brand/eLibrary-letter-3.png') }}"
+                                    alt="eLibrary Letter Logo">
                             </a>
                         </div>
                     </div>
@@ -16,26 +16,26 @@
                         <div class="main-menu">
                             <nav id="mobile-menu">
                                 <ul>
-                                    <li class="">
+                                    <li class="{{ request()->is('book*') ? 'active' : '' }}">
+                                        <a href="/book">Buku Perpustakaan</a>
+                                    </li>
+                                    <li class="{{ request()->is('ebook*') ? 'active' : '' }}">
                                         <a href="/ebook">E-Book</a>
                                     </li>
-                                    {{-- <li class="{{ request()->is('course/category*') ? 'active' : '' }}">
-                                        <a href="{{ route('category') }}">Kategori Kelas</a>
-                                    </li> --}}
                                     {{-- @if (!Auth::check()) --}}
                                     <li class="d-block d-sm-none">
                                         <a href="/login">Masuk</a>
                                     </li>
-                                    {{-- @else
-                                        @if (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 1)
+                                    {{-- @else --}}
+                                    {{-- @if (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 1)
                                             <li class="d-block d-sm-none">
                                                 <a href="/admin">Profile</a>
                                             </li>
-                                        @else
-                                            <li class="d-block d-sm-none">
+                                        @else --}}
+                                    {{-- <li class="d-block d-sm-none">
                                                 <a href="/profile">Profile</a>
-                                            </li>
-                                        @endif
+                                            </li> --}}
+                                    {{-- @endif
                                         <li class="d-block d-sm-none">
                                             <a href="/logout" onclick="logout()" class="menu-logout">Keluar</a>
                                         </li>
@@ -46,12 +46,14 @@
                     </div>
                     <div class="col-xxl-5 col-xl-5 col-lg-2 col-md-6 col-6">
                         <div class="header__bottom-right d-flex justify-content-end align-items-center pl-30">
-                            {{-- <div class="header__search w-100 d-none d-xl-block">
-                                <form action="{{ url('/course') }}" method="GET" class="formSearchDesktop">
+                            <div class="header__search w-100 d-none d-xl-block">
+                                <form action="#" method="GET" class="formSearchDesktop">
                                     <div class="header__search-input">
-                                        <input type="text" placeholder="Cari kelas..." class="rounded-pill"
+                                        <input type="text" placeholder="Cari buku..." class="rounded-pill"
+                                            id="searchCourseDesktop" name="search">
+                                        {{-- <input type="text" placeholder="Cari buku..." class="rounded-pill"
                                             id="searchCourseDesktop" name="search"
-                                            @if (request()->has('search')) value="{{ request()->search }}" @endif>
+                                            @if (request()->has('search')) value="{{ request()->search }}" @endif> --}}
                                         <button class="header__search-btn r-5" onclick="getCourse('desktop')"><svg
                                                 width="18" height="18" viewBox="0 0 18 18" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -65,13 +67,13 @@
                                         </button>
                                     </div>
                                 </form>
-                            </div> --}}
+                            </div>
                             {{-- condition::isloggedIn=false --}}
-                            {{-- @if (!Auth::check())
-                                <div class="ms-4 d-none d-sm-block"><a href="/login"
-                                        class="tp-btn tp-btn-login rounded-pill" role="button">Masuk</a>
-                                </div>
-                            @else
+                            {{-- @if (!Auth::check()) --}}
+                            <div class="ms-4 d-none d-sm-block"><a href="/login"
+                                    class="tp-btn tp-btn-login rounded-pill" role="button">Masuk</a>
+                            </div>
+                            {{-- @else
                                 <div class="ms-4">
                                     @if (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 3)
                                         <a href="/cart" onclick="getCart()" id="cart"
@@ -130,8 +132,8 @@
                         <div class="offcanvas__top mb-40 d-flex justify-content-between align-items-center">
                             <div class="offcanvas__logo logo">
                                 <a href="/">
-                                    <img src="{{ asset('assets/img/brand/umkmplus-letter-logo.svg') }}"
-                                        alt="umkmplus-letter-logo">
+                                    <img src="{{ asset('assets/img/brand/eLibrary-letter-3.png') }}"
+                                        alt="eLibrary Letter Logo" style="width: 180px">
                                 </a>
                             </div>
                             <div class="offcanvas__close">
@@ -142,17 +144,20 @@
                             </div>
                         </div>
                         <div class="offcanvas__search mb-25">
-                            {{-- <form form action="{{ url('/course') }}" method="GET" class="formSearchMobile">
-                                <input type="text" placeholder="Cari kelas..." id="searchCourseMobile" name="search"
-                                    @if (request()->has('search')) value="{{ request()->search }}" @endif>
+                            <form form action="{{ url('/course') }}" method="GET" class="formSearchMobile">
+                                <input type="text" placeholder="Cari buku..." id="searchCourseMobile" name="search">
+                                {{-- <input type="text" placeholder="Cari buku..." id="searchCourseMobile" name="search"
+                                    @if (request()->has('search')) value="{{ request()->search }}" @endif> --}}
                                 <button type="submit" onclick="getCourse('mobile')"><i
                                         class="far fa-search"></i></button>
-                            </form> --}}
+                            </form>
                         </div>
                         <div class="mobile-menu fix"></div>
                         <div class="offcanvas__text d-none d-lg-block">
-                            <p>Kembangkan bisnis anda dengan belajar di umkmverse dengan bisnis expert untuk membangun
-                                bisnis anda yang profitable dan sustainable.</p>
+                            <p>
+                                eLibrary adalah platform pembelajaran online yang menyediakan berbagai macam materi
+                                pembelajaran untuk meningkatkan kualitas SDM di Indonesia.
+                            </p>
                         </div>
                         <div class="offcanvas__map d-none d-lg-block mb-15">
                             <iframe
@@ -188,7 +193,7 @@
                                         <i class="fal fa-envelope"></i>
                                     </div>
                                     <div class="offcanvas__contact-text">
-                                        <a href="mailto:info@umkmplus.site">info@umkmplus.site</a>
+                                        <a href="mailto:info@elibsmkn1sm.site">info@elibsmkn1sm.site</a>
                                     </div>
                                 </li>
                             </ul>
