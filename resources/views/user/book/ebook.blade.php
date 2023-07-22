@@ -120,12 +120,11 @@
                         {{-- course item --}}
                         <div class="row">
                             <div class="col-xxl-12">
-                                <div class="course__tab-conent">
+                                <div class="course__tab-content">
                                     <div class="tab-content" id="courseTabContent">
                                         <div class="tab-pane fade show active" id="grid" role="tabpanel"
                                             aria-labelledby="grid-tab">
-                                            <div class="d-grid gap-5 grid-cols-12" id="courseCategory">
-                                            </div>
+                                            <div class="d-grid gap-5 grid-cols-12" id="courseCategory"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -218,97 +217,26 @@
                                 courseData.discount / 100);
                             let date = new Date(courseData.created_at);
                             let createAt = date.toLocaleDateString('id-ID', dateOption);
-                            htmlString += `<div class="col-span-4-course">
-                                                    <a class="course__item-2 transition-3 white-bg mb-30 fix h-100 d-block"
-                                                        href="{{ url('/course/${createSlug(courseData.title)}') }}">
-                                                        {{-- course item image --}}
+                            htmlString += `<div class="col-span-2-book">
+                                                <div class="mb-30 h-100">
+                                                    <div class="course__item-2 transition-3 white-bg fix">
                                                         <div class="course__thumb-2 w-img fix">
                                                             <figure class="mb-0 position-relative">
-                                                                <img src="{{ asset('storage/${courseData.thumbnail}') }}" alt="${courseData.slug}-course-thumbnail">
-                                                                <div class="course-tag-wrapper">
-                                                                    <div class="course__tag">
-                                                                        <span class="course-badge">${courseData.category.name}</span>
-                                                                    </div>
-                                                                </div>
+                                                                <img src="{{ asset('assets/img/dummy/Brown modern history book cover.png') }}"
+                                                                    alt="${book.name} book thumbnail">
                                                             </figure>
                                                         </div>
-                                                        {{-- course item content --}}
-                                                        <div class="course__content-2" style="padding: 18px 24px 0">
-                                                            <h3
-                                                                class="course__title-2 line-clamp-3-hover text-lg leading-lg mb-2">
-                                                                ${courseData.title}
-                                                            </h3>
-                                                            <p class="mb-10 fw-medium text-green-2">${courseData.price != 0 ? coursePriceDiscount.toLocaleString('id-ID', currencyOption) : 'Gratis'}
-                                                            <span class="text-decoration-line-through text-xs text-green-3">${courseData.discount != 0 ? coursePrice.toLocaleString('id-ID', currencyOption) : ''}</span>
+                                                    </div>
+                                                    <div class="course__content-2 px-0" style="padding-top: 10px">
+                                                        <p
+                                                            class="course__title-2 line-clamp-3-hover text-sm leading-lg mb-0">
+                                                            ${book.name}
                                                         </p>
-                                                            <div
-                                                                class="course__bottom-2 d-flex align-items-center justify-content-between">
-                                                                <div class="course__action">
-                                                                    <ul>
-                                                                        <li>
-                                                                            <div
-                                                                                class="course__action-item d-flex align-items-center">
-                                                                                <div class="course__action-icon mr-5">
-                                                                                    <span>
-                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                            width="16" height="16"
-                                                                                            fill="currentColor"
-                                                                                            class="bi bi-mortarboard"
-                                                                                            viewBox="0 0 16 16">
-                                                                                            <path
-                                                                                                d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917l-7.5-3.5ZM8 8.46 1.758 5.965 8 3.052l6.242 2.913L8 8.46Z" />
-                                                                                            <path
-                                                                                                d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466 4.176 9.032Zm-.068 1.873.22-.748 3.496 1.311a.5.5 0 0 0 .352 0l3.496-1.311.22.748L8 12.46l-3.892-1.556Z" />
-                                                                                        </svg>
-
-                                                                                    </span>
-                                                                                </div>
-                                                                                <div class="course__action-content">
-                                                                                    <span>${courseData.modules_count} Modul</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div
-                                                                                class="course__action-item d-flex align-items-center">
-                                                                                <div class="course__action-icon mr-5">
-                                                                                    <span>
-                                                                                        <svg width="10" height="12"
-                                                                                            viewBox="0 0 10 12"
-                                                                                            fill="none"
-                                                                                            xmlns="http://www.w3.org/2000/svg">
-                                                                                            <path
-                                                                                                d="M5.00004 5.5833C6.28592 5.5833 7.32833 4.5573 7.32833 3.29165C7.32833 2.02601 6.28592 1 5.00004 1C3.71416 1 2.67175 2.02601 2.67175 3.29165C2.67175 4.5573 3.71416 5.5833 5.00004 5.5833Z"
-                                                                                                stroke="#5F6160"
-                                                                                                stroke-width="1.5"
-                                                                                                stroke-linecap="round"
-                                                                                                stroke-linejoin="round" />
-                                                                                            <path
-                                                                                                d="M9 11.0001C9 9.22632 7.20722 7.79175 5 7.79175C2.79278 7.79175 1 9.22632 1 11.0001"
-                                                                                                stroke="#5F6160"
-                                                                                                stroke-width="1.5"
-                                                                                                stroke-linecap="round"
-                                                                                                stroke-linejoin="round" />
-                                                                                        </svg>
-                                                                                    </span>
-                                                                                </div>
-                                                                                <div class="course__action-content">
-                                                                                    <span>${courseData.course_enrolls_count}</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="course__tutor-2">
-                                                                    <div>
-                                                                        <img src="{{ asset('storage/${courseData.mentor.profile_picture}') }}"
-                                                                        alt="${courseData.mentor.slug}-mentor-profile" class="object-cover-center">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </div>`
+                                                        <p class="mb-10 fw-medium text-muted text-xs">${book.author}</p>
+                                                        <p class="mb-10 fw-medium text-muted text-xs">Jumlah: <span class="fw-semibold">${book.quantity}</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>`
                         });
                     }
                     $("#courseCategory").html(htmlString);

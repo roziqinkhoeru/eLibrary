@@ -109,6 +109,11 @@ Route::get('/', function () {
         'title' => 'Perpus Digital',
     ]);
 });
+Route::get('/book', function () {
+    return view('user.book.index', [
+        'title' => 'Buku Perpustakaan | Perpus Digital',
+    ]);
+});
 Route::get('/ebook', function () {
     return view('user.book.ebook', [
         'title' => 'E-Book | Perpus Digital',
