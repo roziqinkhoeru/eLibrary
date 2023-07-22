@@ -57,7 +57,7 @@ class BookController extends Controller
     public function getEBook(Request $request)
     {
         $category = $request->category;
-        $books = Book::with('category:id,name')
+        $books = Book::with('category:id,name,description')
             ->select('id', 'category_id', 'isbn', 'title', 'author', 'publisher', 'year', 'stock', 'cover', 'file')
             ->where('type', 'online')
             ->when($category != 'all', function ($query) use ($category) {

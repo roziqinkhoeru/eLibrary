@@ -52,7 +52,7 @@
                                             <th class="">Judul</th>
                                             <th class="filter-none">Penerbit</th>
                                             <th class="filter-none">Pengarang</th>
-                                            <th class="">Tahun Terbit</th>
+                                            <th class="text-center">Tahun Terbit</th>
                                             <th class="text-center filter-none text-nowrap">Aksi</th>
                                         </tr>
                                     </thead>
@@ -75,7 +75,7 @@
             $('.eBookTable_category_wrapper').prepend(
                 `<div id="eBookTable_category" class="text-right mr-5">
                     <label class="text-nowrap" for="eBookTable_category">Kategori:
-                        <select name="eBookTable_category" onclick="getEBooks()" id="bookTable_category_select" class="form-control form-filter-datatable d-inline-block ml-1" aria-controls="eBookTable">
+                        <select name="eBookTable_category" onchange="getEBooks()" id="bookTable_category_select" class="form-control form-filter-datatable d-inline-block ml-1" aria-controls="eBookTable">
                             <option value="all">Semua Kategori</option>
                         </select></label>
                 </div>`
@@ -163,7 +163,7 @@
 
         function getEBooks() {
             eBookTable.clear().draw();
-            // showLoadingIndicator();
+            showLoadingIndicator();
 
             $.ajax({
                 type: "GET",
@@ -186,7 +186,7 @@
                                 </div>`,
                                 book.id,
                                 book.isbn,
-                                book.category.name,
+                                book.category.description,
                                 book.title,
                                 book.publisher,
                                 book.author,
@@ -207,7 +207,8 @@
 
                             $(rowNode).find('td').eq(0).addClass('text-center');
                             $(rowNode).find('td').eq(1).addClass('text-center');
-                            $(rowNode).find('td').eq(8).addClass('text-center text-nowrap');
+                            $(rowNode).find('td').eq(8).addClass('text-center');
+                            $(rowNode).find('td').eq(9).addClass('text-center text-nowrap');
                         });
 
                         $('.cover-book-image').magnificPopup({
@@ -275,14 +276,14 @@
                         error: function(xhr, status, error) {
                             if (xhr.responseJSON) {
                                 swal({
-                                    title: "GAGAL!",
+                                    title: "Gagal!",
                                     text: xhr.responseJSON.meta.message + ", Error : " + xhr
                                         .responseJSON.data.error,
                                     icon: "error",
                                 });
                             } else {
                                 swal({
-                                    title: "GAGAL!",
+                                    title: "Gagal!",
                                     text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " +
                                         error,
                                     icon: "error",
