@@ -83,3 +83,8 @@
 .eBookTable_category_wrapper > div {
     display: inline-block;
 }
+
+/* SWEET ALERT */
+.swal-text {
+    text-align: center !important;
+}
