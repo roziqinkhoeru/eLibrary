@@ -15,7 +15,7 @@ class CategoryController extends Controller
     {
         $categories = Category::get();
         $data = [
-            'title' => 'Data Kategori | Perpus Digital',
+            'title' => 'Data Kategori | Admin Perpus Digital',
             'currentNav' => 'category',
             'currentNavChild' => 'category',
             'categories' => $categories
@@ -27,7 +27,7 @@ class CategoryController extends Controller
     public function create()
     {
         $data = [
-            'title' => 'Tambah Kategori | Perpus Digital',
+            'title' => 'Tambah Kategori | Admin Perpus Digital',
             'currentNav' => 'category',
             'currentNavChild' => 'category',
         ];
@@ -82,7 +82,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         $data = [
-            'title' => 'Edit Kategori | Perpus Digital',
+            'title' => 'Edit Kategori | Admin Perpus Digital',
             'currentNav' => 'category',
             'currentNavChild' => 'category',
             'category' => $category

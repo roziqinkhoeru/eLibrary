@@ -13,7 +13,7 @@ class AdminController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Dashboard Admin | Perpus Digital',
+            'title' => 'Dashboard Admin | Admin Perpus Digital',
             'currentNav' => 'dashboard',
             'currentNavChild' => 'dashboard',
         ];

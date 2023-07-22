@@ -13,7 +13,7 @@ class StudentController extends Controller
     public function student()
     {
         $data = [
-            'title' => 'Data Siswa | Perpus Digital',
+            'title' => 'Data Siswa | Admin Perpus Digital',
             'currentNav' => 'student',
             'currentNavChild' => 'student',
         ];

@@ -81,7 +81,7 @@ class PasswordResetLinkController extends Controller
     public function adminCreate(): View
     {
         $data = [
-            'title' => 'Lupa Password | Perpus Digital'
+            'title' => 'Lupa Password | Admin Perpus Digital'
         ];
         return view('admin.auth.forgotPassword', $data);
     }
