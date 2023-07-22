@@ -108,18 +108,20 @@
                         <div class="card-body">
                             <div class="card-title">Statistik Kelas</div>
                             <div class="card-category">Statistik Peminjaman Buku Tingkat Kelas Tahun 2023</div>
-                            <div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
-                                <div class="px-2 pb-2 pb-md-0 text-center">
-                                    <div id="circles-1"></div>
-                                    <h6 class="fw-bold mt-3 mb-0">Kelas X</h6>
-                                </div>
-                                <div class="px-2 pb-2 pb-md-0 text-center">
-                                    <div id="circles-2"></div>
-                                    <h6 class="fw-bold mt-3 mb-0">Kelas XI</h6>
-                                </div>
-                                <div class="px-2 pb-2 pb-md-0 text-center">
-                                    <div id="circles-3"></div>
-                                    <h6 class="fw-bold mt-3 mb-0">Kelas XII</h6>
+                            <div class="d-flex align-items-center w-100" style="height: calc(100% - 74px)">
+                                <div class="d-flex flex-wrap justify-content-around pb-2 pt-4 w-100">
+                                    <div class="px-2 pb-2 pb-md-0 text-center">
+                                        <div id="classX"></div>
+                                        <h6 class="fw-bold mt-3 mb-0">Kelas X</h6>
+                                    </div>
+                                    <div class="px-2 pb-2 pb-md-0 text-center">
+                                        <div id="classXI"></div>
+                                        <h6 class="fw-bold mt-3 mb-0">Kelas XI</h6>
+                                    </div>
+                                    <div class="px-2 pb-2 pb-md-0 text-center">
+                                        <div id="classXII"></div>
+                                        <h6 class="fw-bold mt-3 mb-0">Kelas XII</h6>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -142,7 +144,7 @@
             {{-- third row --}}
             <div class="row">
                 {{-- top class --}}
-                <div class="col-md-4">
+                <div class="col-md-7">
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">Top Kelas</div>
@@ -165,13 +167,13 @@
                                 <div class="separator-dashed"></div>
                             @endforeach
                             <div class="pull-in">
-                                <canvas id="topProductsChart"></canvas>
+                                <canvas id="topClass"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
                 {{-- top student --}}
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="card">
                         <div class="card-body">
                             <div class="card-title fw-mediumbold">Siswa Rajin Membaca</div>
@@ -195,34 +197,15 @@
                         </div>
                     </div>
                 </div>
-                {{-- blom tayu --}}
-                <div class="col-md-4">
-                    <div class="card card-primary bg-primary-gradient">
-                        <div class="card-body">
-                            <h4 class="mt-3 b-b1 pb-2 mb-4 fw-bold">Active user right now</h4>
-                            <h1 class="mb-4 fw-bold">17</h1>
-                            <h4 class="mt-3 b-b1 pb-2 mb-5 fw-bold">Page view per minutes</h4>
-                            <div id="activeUsersChart"></div>
-                            <h4 class="mt-5 pb-3 mb-0 fw-bold">Top active pages</h4>
-                            <ul class="list-unstyled">
-                                <li class="d-flex justify-content-between pb-1 pt-1">
-                                    <small>/product/readypro/index.html</small> <span>7</span>
-                                </li>
-                                <li class="d-flex justify-content-between pb-1 pt-1">
-                                    <small>/product/atlantis/demo.html</small> <span>10</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 @endsection
 @section('script')
     <script>
+        // class x chart
         Circles.create({
-            id: 'circles-1',
+            id: 'classX',
             radius: 45,
             value: {{ $statisticClassBorrow[0]->total }},
             maxValue: {{ $borrow }},
@@ -235,9 +218,9 @@
             styleWrapper: true,
             styleText: true
         })
-
+        // class xi chart
         Circles.create({
-            id: 'circles-2',
+            id: 'classXI',
             radius: 45,
             value: {{ $statisticClassBorrow[1]->total }},
             maxValue: {{ $borrow }},
@@ -250,9 +233,9 @@
             styleWrapper: true,
             styleText: true
         })
-
+        // class xii chart
         Circles.create({
-            id: 'circles-3',
+            id: 'classXII',
             radius: 45,
             value: {{ $statisticClassBorrow[2]->total }},
             maxValue: {{ $borrow }},
@@ -311,48 +294,18 @@
         const categoryChart = document.getElementById('categoryChart').getContext('2d');
         new Chart(categoryChart, categoryConfig);
 
-        var topProductsChart = document.getElementById('topProductsChart').getContext('2d');
-
-        var myTopProductsChart = new Chart(topProductsChart, {
+        // top class chart
+        // define
+        var topClass = document.getElementById('topClass').getContext('2d');
+        // config
+        var mytopClass = new Chart(topClass, {
             type: "line",
             data: {
-                labels: ["January",
-                    "February",
-                    "March",
-                    "April",
-                    "May",
-                    "June",
-                    "July",
-                    "August",
-                    "September",
-                    "October",
-                    "January",
-                    "February",
-                    "March",
-                    "April",
-                    "May",
-                    "June",
-                    "July",
-                    "August",
-                    "September",
-                    "October",
-                    "January",
-                    "February",
-                    "March",
-                    "April",
-                    "May",
-                    "June",
-                    "July",
-                    "August",
-                    "September",
-                    "October",
-                    "January",
-                    "February",
-                    "March",
-                    "April"
+                labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli",
+                    "Agustus", "September", "Oktober", "November", "Desember"
                 ],
                 datasets: [{
-                    label: "Sales Analytics",
+                    label: "Buku Terpinjam",
                     fill: !0,
                     backgroundColor: "rgba(53, 205, 58, 0.2)",
                     borderColor: "#35cd3a",
@@ -368,9 +321,7 @@
                     pointHoverBorderWidth: 1,
                     pointRadius: 1,
                     pointHitRadius: 5,
-                    data: [20, 10, 18, 14, 32, 18, 15, 22, 8, 6, 17, 12, 17, 18, 14, 25, 18, 12, 19, 21, 16,
-                        14, 24, 21, 13, 15, 27, 29, 21, 11, 14, 19, 21, 17
-                    ]
+                    data: [20, 10, 18, 14, 32, 18, 15, 22, 8, 6, 17, 12]
                 }]
             },
             options: {
@@ -409,14 +360,6 @@
                     }]
                 }
             }
-        });
-
-        $("#activeUsersChart").sparkline([112, 109, 120, 107, 110, 85, 87, 90, 102, 109, 120, 99, 110, 85, 87, 94], {
-            type: 'bar',
-            height: '100',
-            barWidth: 9,
-            barSpacing: 10,
-            barColor: 'rgba(255,255,255,.3)'
         });
     </script>
 @endsection

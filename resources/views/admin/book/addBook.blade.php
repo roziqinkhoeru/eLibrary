@@ -8,7 +8,7 @@
                 <h4 class="page-title">Tambah Buku</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/admin">
+                        <a href="/admin/dashboard">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -400,19 +400,29 @@
                     success: function(response) {
                         $('#formAddBookButton').html('Kirim');
                         $('#formAddBookButton').prop('disabled', false);
-                        $.notify({
-                            icon: 'flaticon-alarm-1',
-                            title: 'Perpus Digital Admin',
-                            message: response.meta.message,
-                        }, {
-                            type: 'secondary',
-                            placement: {
-                                from: "bottom",
-                                align: "right"
-                            },
-                            time: 2000,
-                        });
-                        window.location.href = response.data.redirect
+                        swal({
+                                title: "Berhasil!",
+                                text: response.meta.message,
+                                icon: "success",
+                                buttons: {
+                                    confirm: {
+                                        text: "Okay",
+                                        value: "confirm",
+                                        visible: true,
+                                        className: "btn btn-success",
+                                        closeModal: true,
+                                    }
+                                }
+                            })
+                            .then((value) => {
+                                if (value === "confirm") {
+                                    window.location.href = response.data.redirect
+                                }
+                            });
+
+                        setTimeout(function() {
+                            window.location.href = response.data.redirect
+                        }, 4000);
                     },
                     error: function(xhr, status, error) {
                         console.log(xhr);

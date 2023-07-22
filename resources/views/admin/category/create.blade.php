@@ -8,7 +8,7 @@
                 <h4 class="page-title">Tambah Kategori</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/admin">
+                        <a href="/admin/dashboard">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -33,7 +33,7 @@
                                 Form ini digunakan untuk menambah kategori
                             </div>
                         </div>
-                        <form id="formAddCategory" method="POST" >
+                        <form id="formAddCategory" method="POST">
                             @csrf
                             <div class="card-body">
                                 {{-- Name --}}
@@ -48,7 +48,8 @@
                                 </div>
                                 {{-- Description --}}
                                 <div class="form-group form-show-validation row">
-                                    <label for="description" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Deskripsi
+                                    <label for="description"
+                                        class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Deskripsi
                                         <span class="required-label">*</span></label>
                                     <div class="col-lg-4 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="description" name="description"
@@ -59,8 +60,8 @@
                             <div class="card-action">
                                 <div class="row">
                                     <div class="col-md-12 text-right">
-                                        <button id="backToCategory" class="btn btn-default btn-outline-dark"
-                                            role="presentation">Batal</button>
+                                        <a href="/admin/category" class="btn btn-default btn-outline-dark"
+                                            role="presentation">Batal</a>
                                         <button class="btn btn-primary ml-3" id="formAddCategoryButton"
                                             type="submit">Kirim</button>
                                     </div>
@@ -82,9 +83,6 @@
         integrity="sha512-6S5LYNn3ZJCIm0f9L6BCerqFlQ4f5MwNKq+EthDXabtaJvg3TuFLhpno9pcm+5Ynm6jdA9xfpQoMz2fcjVMk9g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        $(document).ready(function() {
-        });
-
         $("#formAddCategory").validate({
             rules: {
                 name: {
@@ -116,19 +114,29 @@
                     success: function(response) {
                         $('#formAddCategoryButton').html('Kirim');
                         $('#formAddCategoryButton').prop('disabled', false);
-                        $.notify({
-                            icon: 'flaticon-alarm-1',
-                            title: 'Perpus Digital Admin',
-                            message: response.meta.message,
-                        }, {
-                            type: 'secondary',
-                            placement: {
-                                from: "bottom",
-                                align: "right"
-                            },
-                            time: 2000,
-                        });
-                        window.location.href = response.data.redirect
+                        swal({
+                                title: "Berhasil!",
+                                text: response.meta.message,
+                                icon: "success",
+                                buttons: {
+                                    confirm: {
+                                        text: "Okay",
+                                        value: "confirm",
+                                        visible: true,
+                                        className: "btn btn-success",
+                                        closeModal: true,
+                                    }
+                                }
+                            })
+                            .then((value) => {
+                                if (value === "confirm") {
+                                    window.location.href = response.data.redirect
+                                }
+                            });
+
+                        setTimeout(function() {
+                            window.location.href = response.data.redirect
+                        }, 4000);
                     },
                     error: function(xhr, status, error) {
                         console.log(xhr);

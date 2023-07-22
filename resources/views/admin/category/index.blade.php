@@ -8,7 +8,7 @@
                 <h4 class="page-title">Kategori Perpustakaan</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/admin">
+                        <a href="/admin/dashboard">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -53,14 +53,16 @@
                                     <tbody id="categoryTableBody">
                                         @foreach ($categories as $category)
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td>
+                                                <td class="text-center">{{ $loop->iteration }}</td>
                                                 <td>{{ $category->name }}</td>
                                                 <td>{{ $category->description }}</td>
-                                                <td>
-                                                    <a href="{{ url('/admin/category/'.$category->slug.'/edit') }}" class="btn btn-primary btn-sm mr-2">
+                                                <td class="text-center text-nowrap">
+                                                    <a href="{{ url('/admin/category/' . $category->slug . '/edit') }}"
+                                                        class="btn btn-primary btn-sm mr-2">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <button onclick="deleteCategory('{{ $category->slug }}')" class="btn btn-danger btn-sm">
+                                                    <button onclick="deleteCategory('{{ $category->slug }}')"
+                                                        class="btn btn-danger btn-sm">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </td>
@@ -126,29 +128,6 @@
             },
             lengthMenu: [5, 10, 25, 50, 100],
             pageLength: 10, // default page length
-            dom: "<'row pb-0 py-2'<'col-sm-12 col-xl-4'l><'col-sm-12 col-xl-8 categoryTable_category_wrapper'f>>" +
-                "<'row'<'col-sm-12'tr>>" +
-                "<'row pt-2'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-        });
-
-        $(document).ready(function() {
-            $('.cover-category-image').magnificPopup({
-                delegate: 'a',
-                type: 'image',
-                removalDelay: 300,
-                gallery: {
-                    enabled: false,
-                },
-                mainClass: 'mfp-with-zoom',
-                zoom: {
-                    enabled: true,
-                    duration: 300,
-                    easing: 'ease-in-out',
-                    opener: function(openerElement) {
-                        return openerElement.is('img') ? openerElement : openerElement.find('img');
-                    }
-                }
-            });
         });
 
         function deleteCategory(category) {
