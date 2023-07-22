@@ -951,3 +951,8 @@
 .btn-anchor:hover {
     color: #6861ce;
 }
+
+/* EBOOK */
+.col-span-2-book {
+    grid-column: span 2 / span 2;
+}

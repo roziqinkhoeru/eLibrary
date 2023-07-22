@@ -15,7 +15,7 @@ class BookController extends Controller
     public function book()
     {
         $data = [
-            'title' => 'Buku Perpustakaan | Perpus Digital',
+            'title' => 'Buku Perpustakaan | Admin Perpus Digital',
             'currentNav' => 'book',
             'currentNavChild' => 'library',
         ];
@@ -46,7 +46,7 @@ class BookController extends Controller
     {
         $data =
             [
-                'title' => 'E-Book | Perpus Digital',
+                'title' => 'E-Book | Admin Perpus Digital',
                 'currentNav' => 'book',
                 'currentNavChild' => 'ebook',
             ];
@@ -87,7 +87,7 @@ class BookController extends Controller
     {
         $categories = Category::select('id', 'name')->get();
         $data = [
-            'title' => 'Tambah Buku | Perpus Digital',
+            'title' => 'Tambah Buku | Admin Perpus Digital',
             'categories' => $categories,
             'currentNav' => 'book',
             'currentNavChild' => 'addBook',
@@ -184,7 +184,7 @@ class BookController extends Controller
     {
         $categories = Category::select('id', 'name')->get();
         $data = [
-            'title' => 'Edit Buku | Perpus Digital',
+            'title' => 'Edit Buku | Admin Perpus Digital',
             'currentNav' => 'book',
             'currentNavChild' => 'editBook',
             'book' => $book,

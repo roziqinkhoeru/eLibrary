@@ -17,7 +17,7 @@ class TransactionController extends Controller
     public function listTransaction()
     {
         $data = [
-            'title' => 'Data Transaksi | Perpus Digital',
+            'title' => 'Data Transaksi | Admin Perpus Digital',
             'currentNav' => 'transaction',
             'currentNavChild' => 'listBorrow',
         ];

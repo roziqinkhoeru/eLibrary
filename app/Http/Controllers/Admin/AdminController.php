@@ -47,7 +47,7 @@ class AdminController extends Controller
             ->get();
 
         $data = [
-            'title' => 'Dashboard Admin | Perpus Digital',
+            'title' => 'Dashboard Admin | Admin Perpus Digital',
             'currentNav' => 'dashboard',
             'currentNavChild' => 'dashboard',
             'book' => $book,

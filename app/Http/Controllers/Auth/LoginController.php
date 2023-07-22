@@ -74,7 +74,7 @@ class LoginController extends Controller
                         )
                         : back()->withErrors($msg);
                 } else if ($role == 2) {
-                $student = Student::where('nis', $user->student_id)->first();
+                    $student = Student::where('nis', $user->student_id)->first();
                     // check if student is nonactive
                     if ($student->status == 0) {
                         // Logout
@@ -147,7 +147,7 @@ class LoginController extends Controller
         }
 
         $data =  [
-            'title' => 'Login | Perpus Digital',
+            'title' => 'Login | Admin Perpus Digital',
         ];
 
         return view('admin.auth.login', $data);
