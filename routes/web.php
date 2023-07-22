@@ -74,6 +74,8 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         Route::controller(TransactionController::class)->group(function () {
             Route::get('/admin/transaction/list', 'listTransaction')->name('admin.list.transaction');
             Route::get('/admin/transaction/list/data', 'getListTransaction')->name('admin.list.transaction.data');
+            Route::get('/admin/transaction/history', 'historyTransaction')->name('admin.history.transaction');
+            Route::get('/admin/transaction/history/data', 'getHistoryTransaction')->name('admin.history.transaction.data');
         });
         Route::controller(BookController::class)->group(function () {
             Route::get('/admin/book', 'book')->name('admin.book');

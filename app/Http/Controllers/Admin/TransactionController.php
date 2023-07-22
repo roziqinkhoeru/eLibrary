@@ -27,7 +27,34 @@ class TransactionController extends Controller
             ->select('id', 'status', 'start_date', 'end_date', 'student_id', 'officer_id', 'book_id', DB::raw('DATEDIFF(NOW(),end_date) * 1000 as penalty'))
             ->where('status', 'pinjam')
             ->get();
-        // dd($transactions);
+
+        return ResponseFormatter::success(
+            [
+                'transactions' => $transactions
+            ],
+            'Data transaksi berhasil diambil'
+        );
+    }
+
+    public function historyTransaction()
+    {
+        $data = [
+            'title' => 'Data Transaksi | Perpus Digital',
+            'currentNav' => 'transaction',
+            'currentNavChild' => 'history',
+        ];
+
+        return view('admin.transaction.history', $data);
+    }
+
+    public function getHistoryTransaction()
+    {
+        $transactions = Transaction::with(['student:nis,name,class_school_id', 'student.class_school', 'book:id,title,isbn', 'officer:nip,name'])
+            ->select('id', 'status', 'start_date', 'end_date', 'return_date', 'student_id', 'officer_id', 'book_id', 'penalty')
+            ->where('status', 'kembali')
+            ->orderBy('return_date', 'desc')
+            ->get();
+
         return ResponseFormatter::success(
             [
                 'transactions' => $transactions

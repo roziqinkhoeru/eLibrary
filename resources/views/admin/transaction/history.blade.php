@@ -5,7 +5,7 @@
         <div class="page-inner">
             {{-- header --}}
             <div class="page-header">
-                <h4 class="page-title">Peminjaman</h4>
+                <h4 class="page-title" Riwayat>Peminjaman</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
                         <a href="/admin/dashboard">
@@ -17,7 +17,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#">
-                            Data Seluruh Peminjaman
+                            Data Seluruh Riwayat Peminjaman
                         </a>
                     </li>
                 </ul>
@@ -29,7 +29,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-head-row">
-                                <div class="card-title">Data Seluruh Peminjaman</div>
+                                <div class="card-title">Data Seluruh Riwayat Peminjaman</div>
                             </div>
                         </div>
                         <div class="card-body">
@@ -44,6 +44,7 @@
                                             <th>Nama Buku</th>
                                             <th>Tanggal Pinjam</th>
                                             <th>Tanggal Batas Pinjam</th>
+                                            <th>Tanggal Pengembalian</th>
                                             <th>Petugas</th>
                                             <th>Denda</th>
                                             <th class="text-center filter-none">Aksi</th>
@@ -118,7 +119,7 @@
         function getStudents() {
             $.ajax({
                 type: "GET",
-                url: "{{ route('admin.list.transaction.data') }}",
+                url: "{{ route('admin.history.transaction.data') }}",
                 success: function(response) {
                     if (response.data.transactions.length > 0) {
                         $.each(response.data.transactions, function(index, transaction) {
@@ -130,8 +131,9 @@
                                 transaction.book.title,
                                 moment(transaction.start_date, 'YYYY/MM/DD').format('DD/MM/YYYY'),
                                 moment(transaction.end_date, 'YYYY/MM/DD').format('DD/MM/YYYY'),
+                                moment(transaction.return_date, 'YYYY/MM/DD').format('DD/MM/YYYY'),
                                 transaction.officer.name,
-                                transaction.penalty < 0 ? '-' : transaction.penalty,
+                                transaction.penalty,
                                 `<a href="#" class="btn btn-primary btn-sm">Kembali</a>`
                             ];
 
