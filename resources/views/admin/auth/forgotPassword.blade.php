@@ -43,12 +43,12 @@
                     $('#forgotPasswordButton').prop('disabled', true);
                     Swal.fire({
                         icon: 'success',
-                        title: 'KIRIM TAUTAN BERHASIL!',
-                        text: '{{ session('success') }}',
+                        title: 'Kirim Tautan Berhasil!',
+                        text: 'Tautan untuk reset password telah dikirim ke email Anda!',
                     });
                     if (isResend) {
                         $('#resend_link').html(
-                            'Masih belum menerima email?<br/>Periksa spam Anda atau <a href="#">coba alamat email lain</a>.'
+                            'Masih belum menerima email?<br/>Periksa spam Anda atau <a href="{{ route('admin.forgot.password.create') }}">coba alamat email lain</a>.'
                         );
                     } else {
                         $('#forgotPasswordSuccess').html(
@@ -80,13 +80,13 @@
                     if (xhr.responseJSON)
                         Swal.fire({
                             icon: 'error',
-                            title: 'KIRIM TAUTAN GAGAL!',
-                            text: xhr.responseJSON.meta.message,
+                            title: 'Kirim Tautan Gagal!',
+                            text: xhr.responseJSON.message,
                         })
                     else
                         Swal.fire({
                             icon: 'error',
-                            title: 'KIRIM TAUTAN GAGAL!',
+                            title: 'Kirim Tautan Gagal!',
                             text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " + error,
                         })
                     return false;
