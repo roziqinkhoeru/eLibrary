@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('cover', 255)->nullable();
             $table->enum('type', ['online', 'offline']);
             $table->string('file', 255)->nullable();
+            $table->integer('download')->default(0);
             $table->timestamps();
         });
     }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Student\StudentBookController;
 use App\Http\Controllers\Student\StudentDashboardController;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +52,14 @@ Route::controller(PasswordResetLinkController::class)->group(function () {
 Route::controller(NewPasswordController::class)->group(function () {
     Route::get('/reset-password/{token}', 'create')->name('password.reset');
     Route::post('/reset-password', 'store')->name('password.reset.store');
+});
+
+// user
+Route::controller(StudentBookController::class)->group(function () {
+    Route::get('/book', 'book')->name('book');
+    Route::get('/book/data', 'getBook')->name('book.data');
+    Route::get('/ebook', 'ebook')->name('ebook');
+    Route::get('/ebook/data', 'getEbook')->name('ebook.data');
 });
 
 Route::group(['middleware' => ['auth', 'web']], function () {
@@ -107,16 +116,6 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 Route::get('/', function () {
     return view('user.home', [
         'title' => 'Perpus Digital',
-    ]);
-});
-Route::get('/book', function () {
-    return view('user.book.index', [
-        'title' => 'Buku Perpustakaan | Perpus Digital',
-    ]);
-});
-Route::get('/ebook', function () {
-    return view('user.book.ebook', [
-        'title' => 'E-Book | Perpus Digital',
     ]);
 });
 // Route::get('/admin/student', function () {

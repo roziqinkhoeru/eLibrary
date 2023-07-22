@@ -47,13 +47,13 @@
                     <div class="col-xxl-5 col-xl-5 col-lg-2 col-md-6 col-6">
                         <div class="header__bottom-right d-flex justify-content-end align-items-center pl-30">
                             <div class="header__search w-100 d-none d-xl-block">
-                                <form action="#" method="GET" class="formSearchDesktop">
+                                <form action="{{ request()->is('ebook*') ? route('ebook') : route('book') }}" method="GET" class="formSearchDesktop">
                                     <div class="header__search-input">
-                                        <input type="text" placeholder="Cari buku..." class="rounded-pill"
-                                            id="searchCourseDesktop" name="search">
                                         {{-- <input type="text" placeholder="Cari buku..." class="rounded-pill"
-                                            id="searchCourseDesktop" name="search"
-                                            @if (request()->has('search')) value="{{ request()->search }}" @endif> --}}
+                                            id="searchBookDesktop" name="search"> --}}
+                                        <input type="text" placeholder="Cari buku..." class="rounded-pill"
+                                            id="searchBookDesktop" name="search"
+                                            @if (request()->has('search')) value="{{ request()->search }}" @endif>
                                         <button class="header__search-btn r-5" onclick="getCourse('desktop')"><svg
                                                 width="18" height="18" viewBox="0 0 18 18" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -144,10 +144,9 @@
                             </div>
                         </div>
                         <div class="offcanvas__search mb-25">
-                            <form form action="{{ url('/course') }}" method="GET" class="formSearchMobile">
-                                <input type="text" placeholder="Cari buku..." id="searchCourseMobile" name="search">
-                                {{-- <input type="text" placeholder="Cari buku..." id="searchCourseMobile" name="search"
-                                    @if (request()->has('search')) value="{{ request()->search }}" @endif> --}}
+                            <form form action="{{ request()->is('ebook*') ? route('ebook') : route('book') }}" method="GET" class="formSearchMobile">
+                                <input type="text" placeholder="Cari buku..." id="searchBookMobile" name="search"
+                                    @if (request()->has('search')) value="{{ request()->search }}" @endif>
                                 <button type="submit" onclick="getCourse('mobile')"><i
                                         class="far fa-search"></i></button>
                             </form>
