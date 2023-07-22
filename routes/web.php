@@ -52,7 +52,7 @@ Route::controller(NewPasswordController::class)->group(function () {
     Route::post('/reset-password', 'store')->name('password.reset.store');
 });
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth', 'web']], function () {
     // student
     Route::group(['middleware' => ['checkRole:student']], function () {
         Route::get('/', function () {
