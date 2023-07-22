@@ -353,8 +353,8 @@
                             swal({
                                 icon: 'error',
                                 title: 'Gagal!',
-                                text: xhr.responseJSON.meta.message + " Error: " + xhr
-                                    .responseJSON.data.error,
+                                text: xhr.statusText + ", Error : " + xhr
+                                    .responseJSON.message,
                             })
                         else
                             swal({
