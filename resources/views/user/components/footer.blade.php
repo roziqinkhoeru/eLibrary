@@ -60,7 +60,7 @@
                     <div class="col-xxl-4 col-xl-4 col-lg-4 d-noneo d-lg-block"></div>
                     <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-5 col-sm-5">
                         <div class="footer__widget mb-50">
-                            <h4 class="footer__widget-title fw-bold">Perpus Digital</h4>
+                            <h5 class="footer__widget-title fw-bold text-lg">Perpus Digital</h5>
                             <div class="footer__widget-content">
                                 <ul>
                                     <li class="hover-right">
