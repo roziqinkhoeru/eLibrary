@@ -58,7 +58,8 @@
                                 </div>
                                 {{-- Kategori --}}
                                 <div class="form-group form-show-validation row">
-                                    <label for="category_id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Kategori
+                                    <label for="category_id"
+                                        class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Kategori
                                         <span class="required-label">*</span></label>
                                     <div class="col-lg-4 col-md-9 col-sm-8">
                                         <select class="form-control" id="category_id" name="category_id" required>
@@ -95,8 +96,9 @@
                                         Terbit
                                         <span class="required-label">*</span></label>
                                     <div class="col-lg-4 col-md-9 col-sm-8">
-                                        <input type="number" class="form-control" id="year" name="year" max="{{ date('Y') }}"
-                                            placeholder="Masukkan Tahun Terbit" value="{{ $book->year }}" required>
+                                        <input type="number" class="form-control" id="year" name="year"
+                                            max="{{ date('Y') }}" placeholder="Masukkan Tahun Terbit"
+                                            value="{{ $book->year }}" required>
                                     </div>
                                 </div>
                                 {{-- Jumlah Buku --}}
@@ -116,7 +118,7 @@
                                     <div class="col-lg-4 col-md-9 col-sm-8">
                                         <div class="input-file input-file-image">
                                             <img class="img-upload-preview" width="240"
-                                                src="{{ asset('storage/'. $book->cover) }}" alt="Book Cover Preview"
+                                                src="{{ asset('storage/' . $book->cover) }}" alt="Book Cover Preview"
                                                 id="imagePreview">
                                             <input type="file" class="form-control form-control-file" id="cover"
                                                 name="cover" accept="image/*" value="">
@@ -138,8 +140,10 @@
                                     <div class="col-lg-4 col-md-9 col-sm-8">
                                         <select class="form-control" id="type" name="type" required>
                                             <option value="">Pilih Tipe Buku</option>
-                                            <option value="offline" {{ $book->type == 'offline' ? 'selected':'' }}>Buku</option>
-                                            <option value="online" {{ $book->type == 'online' ? 'selected':'' }}>E-Book</option>
+                                            <option value="offline" {{ $book->type == 'offline' ? 'selected' : '' }}>Buku
+                                            </option>
+                                            <option value="online" {{ $book->type == 'online' ? 'selected' : '' }}>E-Book
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -150,13 +154,25 @@
                                     <div class="col-lg-6 col-md-9 col-sm-8">
                                         <div class="mb-2">
                                             <div class="d-flex flex-column flex-sm-row">
-                                                <div id="filePreview"></div>
+                                                <div id="filePreview">
+                                                    @if ($book->file)
+                                                        <div class="text-sm-center">
+                                                            <figure class="file-pdf-info">
+                                                                <img src="{{ asset('assets/img/decoration/pdf.png') }}"
+                                                                    alt="PDF New File">
+                                                            </figure>
+                                                            <p class="mb-0 line-clamp-max-w-320">{{ $book->title }}</p>
+                                                        </div>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="input-file input-file-image">
                                             <input type="file" class="form-control form-control-file" id="file"
-                                                name="file" accept="application/pdf" value="{{ asset('storage/'.$book->file) }}">
-                                            <label for="file" class="label-input-file btn btn-black btn-round mt-2 mr-3 btn-upload-image-sm">
+                                                name="file" accept="application/pdf"
+                                                value="{{ asset('storage/' . $book->file) }}">
+                                            <label for="file"
+                                                class="label-input-file btn btn-black btn-round mt-2 mr-3 btn-upload-image-sm">
                                                 <span class="btn-label">
                                                     <i class="fa fa-file-pdf"></i>
                                                 </span>
@@ -299,7 +315,7 @@
                 $('#formEditBookButton').prop('disabled', true);
                 $.ajax({
                     type: "POST",
-                    url: `{{ url('admin/book/'. $book->id) }}`,
+                    url: `{{ url('admin/book/' . $book->id) }}`,
                     data: formData,
                     processData: false,
                     contentType: false,
@@ -336,14 +352,14 @@
                         if (xhr.responseJSON)
                             swal({
                                 icon: 'error',
-                                title: 'GAGAL!',
-                                text: xhr.responseJSON.meta.message + " Error: " + xhr
-                                    .responseJSON.data.error,
+                                title: 'Gagal!',
+                                text: xhr.statusText + ", Error : " + xhr
+                                    .responseJSON.message,
                             })
                         else
                             swal({
                                 icon: 'error',
-                                title: 'GAGAL!',
+                                title: 'Gagal!',
                                 text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " +
                                     error,
                             })
