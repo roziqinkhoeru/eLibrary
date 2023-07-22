@@ -27,6 +27,7 @@ class AdminController extends Controller
             ->join('class_schools', 'class_schools.id', '=', 'students.class_school_id')
             ->whereYear('transactions.created_at', date('Y'))
             ->groupBy('grade')
+            ->orderBy('grade', 'asc')
             ->get();
 
         $statisticTopClassBorrow = Transaction::select(DB::raw('count(*) as total, class_schools.name, class_schools.major'))

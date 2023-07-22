@@ -14,12 +14,12 @@ class ClassSchoolSeeder extends Seeder
     {
         $classes = [
             [
-                'grade' => 'X 1',
+                'grade' => 'X',
                 'major' => 'Teknik Komputer Jaringan',
                 'name' => 'X TKJ 1',
             ],
             [
-                'grade' => 'X 2',
+                'grade' => 'X',
                 'major' => 'Teknik Komputer Jaringan',
                 'name' => 'X TKJ 2',
             ],
@@ -34,12 +34,12 @@ class ClassSchoolSeeder extends Seeder
                 'name' => 'XII TKJ',
             ],
             [
-                'grade' => 'X 1',
+                'grade' => 'X',
                 'major' => 'Asisten Keperawatan',
                 'name' => 'X AK 1',
             ],
             [
-                'grade' => 'X 2',
+                'grade' => 'X',
                 'major' => 'Asisten Keperawatan',
                 'name' => 'X AK 2',
             ],
