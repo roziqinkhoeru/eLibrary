@@ -46,47 +46,17 @@
                                         <tr class="space-nowrap">
                                             <th class="text-center">#</th>
                                             <th class="filter-none text-center">Cover</th>
+                                            <th class="filter-none">ID</th>
                                             <th class="filter-none">ISBN</th>
                                             <th class="filter-none">Kategori</th>
                                             <th class="">Judul</th>
                                             <th class="filter-none">Penerbit</th>
                                             <th class="filter-none">Pengarang</th>
                                             <th class="">Tahun Terbit</th>
-                                            <th class="">Jumlah Buku</th>
                                             <th class="text-center filter-none text-nowrap">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody id="bookTableBody">
-                                        {{-- <tr>
-                                            <td class="text-center">1</td>
-                                            <td class="text-center">
-                                                <div class="cover-book-image">
-                                                    <a href="{{ asset('assets/img/dummy/Brown modern history book cover.png') }}"
-                                                        class="">
-                                                        <img src="{{ asset('assets/img/dummy/Brown modern history book cover.png') }}"
-                                                            class="img-fluid">
-                                                    </a>
-                                                </div>
-                                            </td>
-                                            <td class="">978-1-56619-909-4</td>
-                                            <td class="">Fiksi</td>
-                                            <td class="">The Great Gatsby</td>
-                                            <td>Jhon Doe</td>
-                                            <td>Scott Fitzgerald</td>
-                                            <td>2019</td>
-                                            <td>5</td>
-                                            <td class="text-center text-nowrap">
-                                                <a href="#" class="btn btn-warning btn-sm mr-2">
-                                                    <i class="fas fa-download"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-primary btn-sm mr-2">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-sm">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr> --}}
                                     </tbody>
                                 </table>
                             </div>
@@ -214,13 +184,17 @@
                                             class="img-fluid">
                                     </a>
                                 </div>`,
+                                book.id,
                                 book.isbn,
                                 book.category.name,
                                 book.title,
                                 book.publisher,
                                 book.author,
                                 book.year,
-                                `<a href="#" class="btn btn-primary btn-sm mr-2">
+                                `<a href="{{ asset('storage/${book.file}') }}" class="btn btn-warning btn-sm mr-2">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                                <a href="{{ url('admin/book/${book.id}/edit') }}" class="btn btn-primary btn-sm mr-2">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <button onclick="deleteBook(${book.id})" class="btn btn-danger btn-sm">
@@ -233,7 +207,7 @@
 
                             $(rowNode).find('td').eq(0).addClass('text-center');
                             $(rowNode).find('td').eq(1).addClass('text-center');
-                            $(rowNode).find('td').eq(9).addClass('text-center text-nowrap');
+                            $(rowNode).find('td').eq(8).addClass('text-center text-nowrap');
                         });
 
                         $('.cover-book-image').magnificPopup({

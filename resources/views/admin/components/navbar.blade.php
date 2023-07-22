@@ -60,6 +60,15 @@
                                     <span class="text">E-Book</span>
                                 </div>
                             </a>
+                            {{-- transaction --}}
+                            <a class="col-6 col-md-4 p-0" href="{{ route('admin.list.transaction') }}">
+                                <div class="quick-actions-item">
+                                    <div class="avatar-item bg-warning rounded-circle">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <span class="text">Transaction</span>
+                                </div>
+                            </a>
                             {{-- course --}}
                             {{-- <a class="col-6 col-md-4 p-0" href="/admin/classes">
                                 <div class="quick-actions-item">
@@ -87,7 +96,7 @@
         <li class="nav-item dropdown hidden-caret">
             <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                 <div class="avatar-sm">
-                    <img src="{{ asset('assets/template/admin/img/profile.jpg') }}" alt="profile photo admin"
+                    <img src="{{ asset('assets/'. auth()->user()->officer->profile_picture) }}" alt="profile photo admin"
                         class="avatar-img rounded-circle">
                 </div>
             </a>
@@ -96,12 +105,12 @@
                     <li>
                         <div class="user-box">
                             <div class="avatar-lg">
-                                <img src="{{ asset('assets/template/admin/img/profile.jpg') }}"
+                                <img src="{{ asset('assets/'. auth()->user()->officer->profile_picture) }}"
                                     alt="profile photo admin" class="avatar-img rounded">
                             </div>
                             <div class="u-text">
-                                {{-- <h4>{{ Auth::user()->username }}</h4> --}}
-                                {{-- <p class="text-muted">{{ Auth::user()->email }}</p> --}}
+                                <h4>{{ Auth::user()->officer->name }}</h4>
+                                <p class="text-muted">{{ Auth::user()->email }}</p>
                                 <a href="/admin/profile" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
                             </div>
                         </div>
@@ -134,7 +143,7 @@
                     'Anda telah keluar dari akun ini.',
                     'success'
                 )
-                window.location.href = {{ route('logout') }};
+                window.location.href = "/logout";
             }
         })
     }
