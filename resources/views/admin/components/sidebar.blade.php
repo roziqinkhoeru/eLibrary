@@ -2,7 +2,7 @@
     {{-- user --}}
     <div class="user">
         <div class="avatar-sm float-left mr-2">
-            <img src="{{ asset('assets/'. auth()->user()->officer->profile_picture) }}" alt="profile photo admin"
+            <img src="{{ asset('assets/' . auth()->user()->officer->profile_picture) }}" alt="profile photo admin"
                 class="avatar-img rounded-circle">
         </div>
         <div class="info">
@@ -100,19 +100,14 @@
             </a>
             <div class="collapse" id="transactionMenu">
                 <ul class="nav nav-collapse">
-                    <li class="@if ($currentNavChild == 'create') active @endif">
-                        <a href="{{ route('admin.transaction.create') }}">
-                            <span class="sub-item">Pinjam Buku</span>
-                        </a>
-                    </li>
-                    {{-- <li class="@if ($currentNavChild == 'borrow') active @endif">
-                        <a href="{{ route('admin.list.transaction') }}">
-                            <span class="sub-item">Pengembalian Buku</span>
-                        </a>
-                    </li> --}}
                     <li class="@if ($currentNavChild == 'listBorrow') active @endif">
                         <a href="{{ route('admin.list.transaction') }}">
                             <span class="sub-item">Daftar Pinjam</span>
+                        </a>
+                    </li>
+                    <li class="@if ($currentNavChild == 'create') active @endif">
+                        <a href="{{ route('admin.transaction.create') }}">
+                            <span class="sub-item">Pinjam Buku</span>
                         </a>
                     </li>
                     <li class="@if ($currentNavChild == 'history') active @endif">

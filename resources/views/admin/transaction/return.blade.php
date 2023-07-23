@@ -8,8 +8,16 @@
                 <h4 class="page-title">Pengembalian Buku</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/admin/dashboard">
+                        <a href="{{ route('admin.dashboard') }}">
                             <i class="flaticon-home"></i>
+                        </a>
+                    </li>
+                    <li class="separator">
+                        <i class="flaticon-right-arrow"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.list.transaction') }}">
+                            Data Peminjaman Buku
                         </a>
                     </li>
                     <li class="separator">
@@ -30,7 +38,7 @@
                         <div class="card-header">
                             <div class="card-title">Form Pengembalian Buku</div>
                             <div class="card-category">
-                                Form ini digunakan untuk menambah kategori
+                                Form ini digunakan untuk mengembalikan buku yang dipinjam oleh siswa
                             </div>
                         </div>
                         <form id="formAddCategory" method="POST">
@@ -41,7 +49,7 @@
                                 <div class="form-group form-show-validation row">
                                     <label for="nis" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">NIS Siswa
                                     </label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="text" disabled class="form-control" id="nis" name="nis"
                                             value="{{ $transaction->student->nis }}" placeholder="Masukkan NIS Siswa">
                                     </div>
@@ -51,7 +59,7 @@
                                     <label for="name_student" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Nama
                                         Siswa
                                     </label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="text" disabled class="form-control" id="name_student"
                                             name="name_student" value="{{ $transaction->student->name }}"
                                             placeholder="Masukkan NIS Siswa">
@@ -62,7 +70,7 @@
                                     <label for="book_id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">ID
                                         Buku
                                     </label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="text" disabled class="form-control" id="book_id" name="book_id"
                                             value="{{ $transaction->book->id }}" placeholder="Masukkan ID Buku">
                                     </div>
@@ -71,7 +79,7 @@
                                 <div class="form-group form-show-validation row">
                                     <label for="isbn" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">ISBN
                                     </label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="text" disabled class="form-control" id="isbn" name="isbn"
                                             value="{{ $transaction->book->isbn }}" placeholder="Masukkan ID Buku">
                                     </div>
@@ -81,7 +89,7 @@
                                     <label for="title" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Judul
                                         Buku
                                     </label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="text" disabled class="form-control" id="title" name="title"
                                             value="{{ $transaction->book->title }}" placeholder="Masukkan ID Buku">
                                     </div>
@@ -92,9 +100,10 @@
                                         Mulai
                                         Pengembalian
                                     </label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="text" disabled class="form-control" id="start_date"
-                                            name="start_date" value="{{ date('d/m/Y', strtotime($transaction->start_date)) }}"
+                                            name="start_date"
+                                            value="{{ date('d/m/Y', strtotime($transaction->start_date)) }}"
                                             placeholder="Masukkan Tanggal Mulai Pengembalian">
                                     </div>
                                 </div>
@@ -103,7 +112,7 @@
                                     <label for="end_date" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Tanggal
                                         Batas Pinjam
                                     </label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="text" disabled class="form-control" id="end_date" name="end_date"
                                             value="{{ date('d/m/Y', strtotime($transaction->end_date)) }}"
                                             placeholder="Masukkan Tanggal Batas Pinjam">
@@ -114,7 +123,7 @@
                                     <label for="return_date"
                                         class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Tanggal Pengembalian
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="return_date" name="return_date"
                                             value="{{ old('return_date') }}" placeholder="Masukkan Tanggal Pengembalian"
                                             required>
@@ -122,13 +131,11 @@
                                 </div>
                                 {{-- penalty --}}
                                 <div class="form-group form-show-validation row">
-                                    <label for="penalty"
-                                        class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Denda
+                                    <label for="penalty" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Denda
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="number" class="form-control" id="penalty" name="penalty"
-                                            value="{{ $penalty }}" placeholder="Masukkan Denda"
-                                            required>
+                                            value="{{ $penalty }}" placeholder="Masukkan Denda" required>
                                     </div>
                                 </div>
                             </div>
@@ -225,19 +232,18 @@
                         }, 4000);
                     },
                     error: function(xhr, status, error) {
-                        console.log(xhr);
                         $('#formAddCategoryButton').html('Kirim');
                         $('#formAddCategoryButton').prop('disabled', false);
                         if (xhr.responseJSON) {
                             swal({
-                                title: "GAGAL!",
+                                title: "Gagal!",
                                 text: xhr.responseJSON.meta.message + " Error : " + xhr
                                     .responseJSON.data.error,
                                 icon: "error",
                             });
                         } else {
                             swal({
-                                title: "GAGAL!",
+                                title: "Gagal!",
                                 text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: ",
                                 error,
                                 icon: "error",
