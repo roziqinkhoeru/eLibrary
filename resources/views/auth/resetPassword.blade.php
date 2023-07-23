@@ -17,8 +17,9 @@
                 <div class="row">
                     <div class="col-xxl-8 offset-xxl-2 col-xl-8 offset-xl-2">
                         <div class="section__title-wrapper text-center" style="margin-bottom: 44px">
-                            <a href="/"><img src="{{ asset('assets/img/brand/umkmplus-letter-logo.svg') }}"
-                                    alt="umkmplus-logo" style="margin-bottom: 30px; width: 200px; margin-top: 30px"></a>
+                            <a href="/"><img src="{{ asset('assets/img/brand/eLibrary-letter-2.svg') }}"
+                                    alt="eLibrary letter logo"
+                                    style="margin-bottom: 30px; width: 200px; margin-top: 30px"></a>
                             <h2 class="section__title">Reset Password</h2>
                             <p>Masukkan kata sandi baru Anda</p>
                         </div>
@@ -28,7 +29,7 @@
                     <div class="col-xxl-6 offset-xxl-3 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
                         <div class="sign__wrapper white-bg">
                             <div class="sign__form">
-                                <form action="{{ url('reset-password') }}" method="POST" id="resetPasswordForm">
+                                <form id="resetPasswordForm">
                                     @csrf
                                     <input hidden type="text" name="token" id="token" value="{{ $token }}">
                                     <input hidden type="email" name="email" id="email" value="{{ $email }}">
@@ -60,7 +61,7 @@
                                     <button type="submit" class="tp-btn w-100 rounded-pill" id="resetPasswordButton">Reset
                                         password</button>
                                     <div class="sign__new text-center mt-20">
-                                        <p>Mengalami kesulitan? Hubungi<a href="#"> kami</a></p>
+                                        <p>Mengalami kesulitan? Hubungi<a href="mailto:info@elibsmkn1sm.site"> kami</a></p>
                                     </div>
                                 </form>
                             </div>
@@ -105,7 +106,7 @@
                 $('#resetPasswordButton').html('<i class="fas fa-circle-notch text-lg spinners-2"></i>');
                 $('#resetPasswordButton').prop('disabled', true);
                 $.ajax({
-                    url: "{{ route('resetPassword') }}",
+                    url: "{{ route('password.reset.store') }}",
                     type: "POST",
                     data: {
                         email: $('#email').val(),
@@ -117,7 +118,29 @@
                     success: function(response) {
                         $('#resetPasswordButton').html('Reset password');
                         $('#resetPasswordButton').prop('disabled', false);
-                        window.location.href = response.data.redirect
+                        new swal({
+                                title: "Berhasil!",
+                                text: response.meta.message,
+                                icon: "success",
+                                buttons: {
+                                    confirm: {
+                                        text: "Okay",
+                                        value: "confirm",
+                                        visible: true,
+                                        className: "btn btn-success",
+                                        closeModal: true,
+                                    }
+                                }
+                            })
+                            .then((value) => {
+                                if (value === "confirm") {
+                                    window.location.href = response.data.redirect
+                                }
+                            });
+
+                        setTimeout(function() {
+                            window.location.href = response.data.redirect
+                        }, 4000);
                     },
                     error: function(xhr, status, error) {
                         $('#resetPasswordButton').html('Reset password');
@@ -125,13 +148,13 @@
                         if (xhr.responseJSON)
                             Swal.fire({
                                 icon: 'error',
-                                title: 'RESET PASSWORD GAGAL!',
+                                title: 'Reset Password Gagal!',
                                 text: xhr.responseJSON.meta.message,
                             })
                         else
                             Swal.fire({
                                 icon: 'error',
-                                title: 'RESET PASSWORD GAGAL!',
+                                title: 'Reset Password Gagal!',
                                 text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " +
                                     error,
                             })
