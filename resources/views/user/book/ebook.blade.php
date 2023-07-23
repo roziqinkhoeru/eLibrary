@@ -124,7 +124,7 @@
                                     <div class="tab-content" id="courseTabContent">
                                         <div class="tab-pane fade show active" id="grid" role="tabpanel"
                                             aria-labelledby="grid-tab">
-                                            <div class="d-grid gap-5 grid-cols-12" id="bookCategory"></div>
+                                            <div class="d-grid gap-5 grid-cols-10" id="bookCategory"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -205,25 +205,21 @@
                         // success state
                         $.map(response.data.books, function(book, index) {
                             htmlString += `<div class="col-span-2-book">
-                                                <div class="mb-30 h-100">
+                                                <div class="mb-20 cursor-pointer">
                                                     <div class="course__item-2 transition-3 white-bg fix">
-                                                        <div class="course__thumb-2 w-img fix">
+                                                        <div class="course__thumb-2 w-img fix cursor-pointer">
                                                             <figure class="mb-0 position-relative">
                                                                 <img src="{{ asset('storage/${book.cover}') }}"
                                                                     alt="${book.title} book thumbnail">
                                                             </figure>
                                                         </div>
                                                     </div>
-                                                    <div class="course__content-2 px-0" style="padding-top: 10px">
-                                                        <button onclick="download(${book.id})">
-                                                            <p
-                                                            class="course__title-2 line-clamp-3-hover text-sm leading-lg mb-0">
+                                                    <div class="course__content-2 px-0 pb-0" style="padding-top: 10px">
+                                                        <p class="book__title-2 course__title-2 line-clamp-3-hover text-capitalize text-sm leading-lg mb-2 cursor-pointer" onclick="download(${book.id})" role="presentation">
                                                             ${book.title}
-                                                            </p>
-                                                        </button>
-                                                        <p class="mb-10 fw-medium text-muted text-xs">${book.author}</p>
-                                                        <p class="mb-10 fw-medium text-muted text-xs">${book.publisher}(${book.year})</p>
-                                                        <p class="mb-10 fw-medium text-muted text-xs">Jumlah download: <span class="fw-semibold">${book.download}</span></p>
+                                                        </p>
+                                                        <p class="mb-0 fw-medium text-muted text-xs leading-xl">${book.author} (${book.year})</p>
+                                                        <p class="mb-0 fw-medium text-muted text-xs">${book.download} Unduhan</p>
                                                     </div>
                                                 </div>
                                             </div>`
@@ -250,7 +246,7 @@
                 type: "GET",
                 url: `{{ url('ebook/download/${ebook}') }}`,
                 success: function(response) {
-                    window.location.href= response.data.url;
+                    window.location.href = response.data.url;
                 },
                 // error state
                 error: function(response) {
