@@ -206,6 +206,7 @@
 
                             $(rowNode).find('td').eq(0).addClass('text-center');
                             $(rowNode).find('td').eq(1).addClass('text-center');
+                            $(rowNode).find('td').eq(3).addClass('text-nowrap');
                             $(rowNode).find('td').eq(8).addClass('text-center');
                             $(rowNode).find('td').eq(9).addClass('text-center text-nowrap');
                         });

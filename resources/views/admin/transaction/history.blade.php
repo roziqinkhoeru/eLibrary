@@ -169,9 +169,9 @@
                     } else {
                         $('#transactionTableBody').html(tableEmpty(10, 'buku perpustakaan'));
                     }
-                }
+                },
                 error: function(error) {
-                    $('#transactionTableBody').html(tableError(10, `${response.responseJSON.message}`));
+                    $('#bookTableBody').html(tableError(10, `${response.responseJSON.message}`));
                 }
             });
         }
