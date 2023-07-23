@@ -23,7 +23,7 @@
                                                             name="categorySort" value="{{ $category->slug }}"
                                                             id="{{ $category->name }}CourseIn">
                                                         <label class="m-check-label"
-                                                            for="{{ $category->name }}CourseIn">{{ $category->name }}</label>
+                                                            for="{{ $category->name }}CourseIn">{{ $category->description }}</label>
                                                     </div>
                                                 </li>
                                             @endforeach
@@ -42,45 +42,9 @@
                                                     <label class="m-check-label" for="newReleaseIn">Terbaru</label>
                                                 </div>
                                             </li>
-                                            {{-- <li>
-                                                <div class="course__sidebar-check mb-10 d-flex align-items-center">
-                                                    <input class="sorting m-check-input" type="radio" name="sort"
-                                                        value="popular" id="popularIn">
-                                                    <label class="m-check-label" for="popularIn">Paling Populer</label>
-                                                </div>
-                                            </li> --}}
                                         </ul>
                                     </div>
                                 </div>
-                                {{-- price --}}
-                                {{-- <div class="course__sidebar-widget white-bg">
-                                    <div class="course__sidebar-info">
-                                        <h3 class="course__sidebar-title">Class Filter</h3>
-                                        <ul id="classFilter">
-                                            <li>
-                                                <div class="course__sidebar-check mb-10 d-flex align-items-center">
-                                                    <input class="classFilter m-check-input" type="radio" name="sort"
-                                                        value="class10" id="class10In">
-                                                    <label class="m-check-label" for="class10In">Kelas X</label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="course__sidebar-check mb-10 d-flex align-items-center">
-                                                    <input class="classFilter m-check-input" type="radio" value="class11"
-                                                        name="sort" id="class11In">
-                                                    <label class="m-check-label" for="class11In">Kelas XI</label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="course__sidebar-check mb-10 d-flex align-items-center">
-                                                    <input class="classFilter m-check-input" type="radio" value="class12"
-                                                        name="sort" id="class12In">
-                                                    <label class="m-check-label" for="class12In">Kelas XII</label>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> --}}
                             </form>
                         </div>
                     </div>
@@ -124,7 +88,7 @@
                                     <div class="tab-content" id="courseTabContent">
                                         <div class="tab-pane fade show active" id="grid" role="tabpanel"
                                             aria-labelledby="grid-tab">
-                                            <div class="d-grid gap-5 grid-cols-12" id="courseCategory"></div>
+                                            <div class="d-grid gap-5 grid-cols-10" id="bookContainer"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -166,7 +130,7 @@
 
         function getBook(device) {
             // loading state
-            $("#courseCategory").html(
+            $("#bookContainer").html(
                 `<div class="text-center text-4xl col-span-full pt-100 pb-65"><i class="fas fa-spinner-third spinners-3"></i></div>`
             );
             let search = "";
@@ -206,29 +170,27 @@
                         // success state
                         $.map(response.data.books, function(book, index) {
                             htmlString += `<div class="col-span-2-book">
-                                                <div class="mb-30 h-100">
+                                                <div class="mb-20 cursor-pointer">
                                                     <div class="course__item-2 transition-3 white-bg fix">
-                                                        <div class="course__thumb-2 w-img fix">
+                                                        <div class="course__thumb-2 w-img fix cursor-pointer">
                                                             <figure class="mb-0 position-relative">
                                                                 <img src="{{ asset('storage/${book.cover}') }}"
                                                                     alt="${book.title} book thumbnail">
                                                             </figure>
                                                         </div>
                                                     </div>
-                                                    <div class="course__content-2 px-0" style="padding-top: 10px">
-                                                        <p
-                                                            class="course__title-2 line-clamp-3-hover text-sm leading-lg mb-0">
+                                                    <div class="course__content-2 px-0 pb-0" style="padding-top: 10px">
+                                                        <p class="book__title-2 course__title-2 line-clamp-3-hover text-capitalize text-sm leading-lg mb-2 cursor-pointer">
                                                             ${book.title}
                                                         </p>
-                                                        <p class="mb-10 fw-medium text-muted text-xs">${book.author}</p>
-                                                        <p class="mb-10 fw-medium text-muted text-xs">${book.publisher}(${book.year})</p>
-                                                        <p class="mb-10 fw-medium text-muted text-xs">Jumlah buku: <span class="fw-semibold">${book.stock}</span></p>
+                                                        <p class="mb-0 fw-medium text-muted text-xs leading-xl">${book.author} (${book.year})</p>
+                                                        <p class="mb-0 fw-medium text-muted text-xs">${book.stock} Buku</p>
                                                     </div>
                                                 </div>
                                             </div>`
                         });
                     }
-                    $("#courseCategory").html(htmlString);
+                    $("#bookContainer").html(htmlString);
 
                     if (device == "desktop") {
                         $("#searchBookMobile").val("");
@@ -239,7 +201,7 @@
                 },
                 // error state
                 error: function() {
-                    $("#courseCategory").html(errorState());
+                    $("#bookContainer").html(errorState());
                 }
             });
         }

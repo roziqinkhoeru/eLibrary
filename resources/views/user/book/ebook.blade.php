@@ -23,7 +23,7 @@
                                                             name="categorySort" value="{{ $category->slug }}"
                                                             id="{{ $category->name }}CourseIn">
                                                         <label class="m-check-label"
-                                                            for="{{ $category->name }}CourseIn">{{ $category->name }}</label>
+                                                            for="{{ $category->name }}CourseIn">{{ $category->description }}</label>
                                                     </div>
                                                 </li>
                                             @endforeach
@@ -195,7 +195,7 @@
                     $("#countBook").html(`<h4>Menampilkan ${response.data.bookCount} E-Book</h4>`);
                     if (response.data.bookCount === 0) {
                         // empty state
-                        htmlString = emptyState('Maaf, buku belum tersedia');
+                        htmlString = emptyState('Maaf, E-Book belum tersedia');
                     } else {
                         const dateOption = {
                             day: '2-digit',
