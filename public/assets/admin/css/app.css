@@ -60,3 +60,40 @@ table .cover-book-image img {
 .file-pdf-info img {
     height: 64px;
 }
+
+/* STUDENT */
+#collapseBook .table th,
+#collapseProfile.table th {
+    padding: 10px 18px !important;
+    height: 32px;
+}
+#collapseBook table td,
+#collapseProfile table td {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    min-height: 32px !important;
+    height: auto !important;
+}
+.btn-collapse {
+    background: white !important;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: block !important;
+    width: 100% !important;
+    text-align: left;
+    background-color: white !important;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    font-size: 16px;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
