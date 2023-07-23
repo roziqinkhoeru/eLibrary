@@ -17,7 +17,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('admin.list.transaction') }}">
-                            Daftar Pinjaman Buku
+                            Daftar Peminjaman Buku
                         </a>
                     </li>
                     <li class="separator">
