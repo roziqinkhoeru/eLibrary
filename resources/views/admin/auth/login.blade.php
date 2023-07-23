@@ -75,13 +75,13 @@
                         if (xhr.responseJSON)
                             Swal.fire({
                                 icon: 'error',
-                                title: 'LOGIN GAGAL!',
+                                title: 'Login Gagal!',
                                 text: xhr.responseJSON.meta.message,
                             })
                         else
                             Swal.fire({
                                 icon: 'error',
-                                title: 'LOGIN GAGAL!',
+                                title: 'Login Gagal!',
                                 text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " +
                                     error,
                             })

@@ -3,13 +3,13 @@
     <div class="container">
         <div class="panel-header bg-primary-gradient">
             <div class="page-inner py-5">
-                <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+                <div class="d-flex align-items-left align-items-xl-center flex-column flex-xl-row">
                     <div>
                         <h2 class="text-white pb-2 fw-bold">Dashboard</h2>
                         <h5 class="text-white op-7 mb-2">Selamat Datang di Dashboard Admin Perpus Digital SMK Negeri 1 Sungai
                             Menang</h5>
                     </div>
-                    <div class="ml-md-auto py-2 py-md-0">
+                    <div class="ml-xl-auto py-2 py-xl-0">
                         <a href="{{ route('admin.book') }}" class="btn btn-white btn-border btn-round mr-2">Data Buku</a>
                         <a href="{{ route('admin.category') }}" class="btn btn-secondary btn-round">Lihat Kategori</a>
                     </div>
@@ -153,8 +153,8 @@
                             @foreach ($statisticTopClassBorrow as $data)
                                 <div class="d-flex">
                                     <div class="avatar">
-                                        <img src="../assets/img/logoproduct.svg" alt="..."
-                                            class="avatar-img rounded-circle">
+                                        <img src="{{ asset('assets/img/brand/class-smkn-1.png') }}"
+                                            alt="SMKN 1 Sungai Menang Logo" class="avatar-img rounded-circle">
                                     </div>
                                     <div class="flex-1 pt-1 ml-2">
                                         <h6 class="fw-bold mb-1">Kelas {{ $data->name }}</h6>
@@ -181,7 +181,12 @@
                                 @foreach ($studentTopBorrow as $data)
                                     <div class="item-list">
                                         <div class="avatar">
+<<<<<<< HEAD
                                             <img src="{{ asset('storage/'. $data->profile_picture) }}" alt="..."
+=======
+                                            <img src="{{ asset('assets/img/dummy/profile-placeholder.png') }}"
+                                                alt="{{ $data->student_name }} Profile"
+>>>>>>> development
                                                 class="avatar-img rounded-circle">
                                         </div>
                                         <div class="info-user ml-3">
@@ -267,6 +272,13 @@
                     '#FFD966',
                     '#66CC99',
                     '#B46CE8',
+                    '#FF6666',
+                    '#FFCC66',
+                    '#99CCFF',
+                    '#FF99CC',
+                    '#FFCC99',
+                    '#FFCCFF',
+                    '#CCFF99',
                 ],
             }],
         }
@@ -278,7 +290,7 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 legend: {
-                    position: 'bottom'
+                    position: 'bottom',
                 },
                 layout: {
                     padding: {
@@ -286,7 +298,7 @@
                         right: 20,
                         top: 20,
                         bottom: 20
-                    }
+                    },
                 }
             }
         }
@@ -300,9 +312,9 @@
         @foreach ($revenueMonth as $revenue)
             revenueMonths.push('{{ $revenue }}');
         @endforeach
-        var topClass = document.getElementById('topClass').getContext('2d');
+        const topClass = document.getElementById('topClass').getContext('2d');
         // config
-        var mytopClass = new Chart(topClass, {
+        const mytopClass = new Chart(topClass, {
             type: "line",
             data: {
                 labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli",

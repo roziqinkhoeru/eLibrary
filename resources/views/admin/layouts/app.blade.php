@@ -123,7 +123,9 @@
 
     {{-- Datatables --}}
     <script src="{{ asset('assets/template/admin/js/plugin/datatables/datatables.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-plugins/1.13.5/sorting/date-eu.min.js" integrity="sha512-tSxzl8YqRAh+L1KC5jn1AAdgFgn2+9gnUkUKe8xGVd5tM7cfOizp7wdQJF3ND3FwbHmTPS47S0HCy1jNG6q6wA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-plugins/1.13.5/sorting/date-eu.min.js"
+        integrity="sha512-tSxzl8YqRAh+L1KC5jn1AAdgFgn2+9gnUkUKe8xGVd5tM7cfOizp7wdQJF3ND3FwbHmTPS47S0HCy1jNG6q6wA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     {{-- Bootstrap Notify --}}
     <script src="{{ asset('assets/template/admin/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 
@@ -185,6 +187,7 @@
 
     <script src="{{ asset('assets/js/empty.js') }}"></script>
     <script src="{{ asset('assets/js/loader.js') }}"></script>
+    <script src="{{ asset('assets/js/currency.js') }}"></script>
 
     @yield('script')
 </body>

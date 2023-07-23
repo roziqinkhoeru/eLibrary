@@ -8,7 +8,7 @@
                 <h4 class="page-title">Peminjaman</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/admin/dashboard">
+                        <a href="{{ route('admin.dashboard') }}">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -17,7 +17,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#">
-                            Data Seluruh Peminjaman
+                            Data Peminjaman Buku
                         </a>
                     </li>
                 </ul>
@@ -29,7 +29,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-head-row">
-                                <div class="card-title">Data Seluruh Peminjaman</div>
+                                <div class="card-title">Data Peminjaman Buku</div>
                             </div>
                         </div>
                         <div class="card-body">
@@ -91,6 +91,7 @@
                 "sLoadingRecords": "Memuat...",
                 "sProcessing": "Memproses...",
                 "sSearch": "Cari:",
+                "sSearchPlaceholder": "Masukkan Keyword...",
                 "sZeroRecords": "Tidak ditemukan data yang cocok",
                 "oPaginate": {
                     "sFirst": "Pertama",
@@ -139,16 +140,14 @@
                                 moment(transaction.start_date, 'YYYY/MM/DD').format('DD/MM/YYYY'),
                                 moment(transaction.end_date, 'YYYY/MM/DD').format('DD/MM/YYYY'),
                                 transaction.officer.name,
-                                transaction.penalty < 0 ? '-' : transaction.penalty,
-                                `<a href="{{ url('/admin/transaction/${transaction.id}/return') }}" class="btn btn-primary btn-sm">Kembali</a>`
+                                transaction.penalty < 0 ? '-' : localCurrencyIDR(transaction
+                                    .penalty),
+                                `<a href="{{ url('/admin/transaction/${transaction.id}/return') }}" class="btn btn-warning btn-sm">Pengembalian</a>`
                             ];
 
                             var rowNode = transactionTable.row.add(rowData)
                                 .draw(
                                     false).node();
-
-                            // $(rowNode).find('td').eq(4).addClass('space-nowrap text-center');
-                            // $(rowNode).find('td').eq(10).addClass('space-nowrap text-center');
                         });
                     }
                 }

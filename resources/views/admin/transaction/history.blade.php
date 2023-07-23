@@ -5,10 +5,10 @@
         <div class="page-inner">
             {{-- header --}}
             <div class="page-header">
-                <h4 class="page-title" Riwayat>Peminjaman</h4>
+                <h4 class="page-title">Riwayat Peminjaman</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/admin/dashboard">
+                        <a href="{{ route('admin.dashboard') }}">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -16,8 +16,16 @@
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('admin.list.transaction') }}">
+                            Data Peminjaman Buku
+                        </a>
+                    </li>
+                    <li class="separator">
+                        <i class="flaticon-right-arrow"></i>
+                    </li>
+                    <li class="nav-item">
                         <a href="#">
-                            Data Seluruh Riwayat Peminjaman
+                            Data Riwayat Peminjaman Buku
                         </a>
                     </li>
                 </ul>
@@ -94,6 +102,7 @@
                 "sLoadingRecords": "Memuat...",
                 "sProcessing": "Memproses...",
                 "sSearch": "Cari:",
+                "sSearchPlaceholder": "Masukkan Keyword...",
                 "sZeroRecords": "Tidak ditemukan data yang cocok",
                 "oPaginate": {
                     "sFirst": "Pertama",
@@ -139,22 +148,17 @@
                                 transaction.student.name,
                                 transaction.book.isbn,
                                 transaction.book.title,
-                                // transaction.start_date,
-                                // transaction.end_date,
-                                // transaction.return_date,
                                 moment(transaction.start_date, 'YYYY/MM/DD').format('DD/MM/YY'),
                                 moment(transaction.end_date, 'YYYY/MM/DD').format('DD/MM/YY'),
                                 moment(transaction.return_date, 'YYYY/MM/DD').format('DD/MM/YY'),
                                 transaction.officer.name,
-                                transaction.penalty,
+                                transaction.penalty !== 0 ? localCurrencyIDR(transaction
+                                    .penalty) : '-',
                             ];
 
                             var rowNode = transactionTable.row.add(rowData)
                                 .draw(
                                     false).node();
-
-                            // $(rowNode).find('td').eq(4).addClass('space-nowrap text-center');
-                            // $(rowNode).find('td').eq(10).addClass('space-nowrap text-center');
                         });
                     }
                 }

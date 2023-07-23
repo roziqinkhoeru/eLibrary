@@ -187,8 +187,8 @@
                             <div class="card-action">
                                 <div class="row">
                                     <div class="col-md-12 text-right">
-                                        <button id="backToBook" class="btn btn-default btn-outline-dark"
-                                            role="presentation">Batal</button>
+                                        <a href="javascript:void(0)" id="backToBook"
+                                            class="btn btn-default btn-outline-dark" role="presentation">Batal</a>
                                         <button class="btn btn-primary ml-3" id="formAddBookButton"
                                             type="submit">Kirim</button>
                                     </div>
@@ -381,7 +381,9 @@
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Tipe buku tidak boleh kosong',
                 },
                 file: {
-                    required: ($('#type').val() == "online" ? '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>E-Book tidak boleh kosong' : ''),
+                    required: ($('#type').val() == "online" ?
+                        '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>E-Book tidak boleh kosong' :
+                        ''),
                     maxfilesize: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Ukuran file maksimal 10MB',
                     extension: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Format file yang diperbolehkan hanya pdf',
                 },
@@ -400,6 +402,7 @@
                     success: function(response) {
                         $('#formAddBookButton').html('Kirim');
                         $('#formAddBookButton').prop('disabled', false);
+                        localStorage.removeItem('ebookPreview');
                         swal({
                                 title: "Berhasil!",
                                 text: response.meta.message,
@@ -431,14 +434,15 @@
                         if (xhr.responseJSON) {
                             new swal({
                                 title: "GAGAL!",
-                                text: xhr.responseJSON.meta.message + " Error : " + xhr
-                                    .responseJSON.data.error,
+                                text: xhr.statusText + ", Error : " + xhr
+                                    .responseJSON.message,
                                 icon: "error",
                             });
                         } else {
                             new swal({
                                 title: "GAGAL!",
-                                text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: ",
+                                text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " +
+                                    xhr.statusText,
                                 error,
                                 icon: "error",
                             });
