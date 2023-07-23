@@ -253,11 +253,11 @@
             }
             if (storedEbook) {
                 filePreview.html(`<div class="text-sm-center">
-                                            <figure class="file-pdf-info">
-                                            <img src="{{ asset('assets/img/decoration/pdf.png') }}" alt="pdf-file-new">
-                                            </figure>
-                                            <p class="mb-0 line-clamp-max-w-320">${JSON.parse(storedEbook).name}</p>
-                                        </div>`);
+                                    <figure class="file-pdf-info">
+                                        <img src="{{ asset('assets/img/decoration/pdf.png') }}" alt="PDF New File">
+                                    </figure>
+                                    <p class="mb-0 line-clamp-max-w-320">${JSON.parse(storedEbook).name}</p>
+                                </div>`);
             }
 
             cover.on('change', function(event) {
