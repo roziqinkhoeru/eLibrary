@@ -84,11 +84,6 @@
             });
         </script>
     @endif
-    @error('email')
-        <script>
-            console.log({{ $message }});
-        </script>
-    @enderror
     <script>
         let isResendLinkResetPassword = false;
 

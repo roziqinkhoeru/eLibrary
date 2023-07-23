@@ -434,7 +434,6 @@
                         }, 4000);
                     },
                     error: function(xhr, status, error) {
-                        console.log(xhr);
                         $('#formAddBookButton').html('Kirim');
                         $('#formAddBookButton').prop('disabled', false);
                         if (xhr.responseJSON) {

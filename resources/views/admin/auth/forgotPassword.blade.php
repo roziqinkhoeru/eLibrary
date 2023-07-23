@@ -76,7 +76,6 @@
                 error: function(xhr, status, error) {
                     $('#forgotPasswordButton').html('Kirim tautan');
                     $('#forgotPasswordButton').prop('disabled', false);
-                    console.log(xhr.responseJSON);
                     if (xhr.responseJSON)
                         Swal.fire({
                             icon: 'error',

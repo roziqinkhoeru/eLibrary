@@ -158,9 +158,7 @@
                         });
                     }
                 },
-                error: function(response) {
-                    console.log(response);
-                }
+                error: function(response) {}
             });
         }
 
@@ -235,9 +233,7 @@
                         $('#bookTableBody').html(tableEmpty(11, 'buku perpustakaan'));
                     }
                 },
-                error: function(response) {
-                    console.log(response);
-                }
+                error: function(response) {}
             });
         }
 

@@ -155,9 +155,7 @@
                         });
                     }
                 },
-                error: function(response) {
-                    console.log(response);
-                }
+                error: function(response) {}
             });
         }
 
@@ -233,9 +231,7 @@
                         $('#bookTableBody').html(tableEmpty(10, 'e-book'));
                     }
                 },
-                error: function(response) {
-                    console.log(response);
-                }
+                error: function(response) {}
             });
         }
 
