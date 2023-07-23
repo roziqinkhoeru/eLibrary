@@ -110,7 +110,7 @@
                     });
                     if (isResend) {
                         $('#resend_link').html(
-                            'Masih belum menerima email?<br/>Periksa spam Anda atau <a href="#" class="btn-anchor">coba alamat email lain</a>.'
+                            'Masih belum menerima email?<br/>Periksa spam Anda atau <a href="{{ route('password.request') }}" class="btn-anchor">coba alamat email lain</a>.'
                         );
                     } else {
                         $('#forgotPasswordSuccess').html(

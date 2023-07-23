@@ -40,8 +40,8 @@
                                         </label>
                                         <div class="sign__input">
                                             <i class="fal fa-user icon-form"></i>
-                                            <input type="text" placeholder="Masukan email" name="email"
-                                                id="email" required value="" class="input-form">
+                                            <input type="text" placeholder="Masukan email" name="email" id="email"
+                                                required value="" class="input-form">
                                         </div>
                                     </div>
                                     <div class="sign__input-wrapper mb-15">
@@ -65,7 +65,7 @@
                                     </div>
                                     <button id="loginButton" class="tp-btn w-100 rounded-pill">Masuk</button>
                                     <div class="sign__new text-center mt-20">
-                                        <p>Lupa Kata Sandi? <a href="/forgot-password">Klik disini!</a></p>
+                                        <p>Lupa Kata Sandi? <a href="{{ route('password.request') }}">Klik disini!</a></p>
                                     </div>
                                 </form>
                             </div>
