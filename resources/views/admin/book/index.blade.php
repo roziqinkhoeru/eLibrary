@@ -234,7 +234,9 @@
                         $('#bookTableBody').html(tableEmpty(11, 'buku perpustakaan'));
                     }
                 },
-                error: function(response) {}
+                error: function(response) {
+                    $('#bookTableBody').html(tableError(11, `${response.responseJSON.message}`));
+                }
             });
         }
 

@@ -232,7 +232,9 @@
                         $('#bookTableBody').html(tableEmpty(10, 'e-book'));
                     }
                 },
-                error: function(response) {}
+                error: function(response) {
+                    $('#bookTableBody').html(tableError(10, `${response.responseJSON.message}`));
+                }
             });
         }
 
