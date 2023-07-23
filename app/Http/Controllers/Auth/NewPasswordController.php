@@ -32,7 +32,7 @@ class NewPasswordController extends Controller
         if ($user->role_id == 1) {
             return view('admin.auth.resetPassword', $data);
         }
-        return view('admin.auth.resetPassword', $data);
+        return view('auth.resetPassword', $data);
     }
 
     /**
