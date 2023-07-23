@@ -8,8 +8,16 @@
                 <h4 class="page-title">Tambah Kategori</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/admin/dashboard">
+                        <a href="{{ route('admin.dashboard') }}">
                             <i class="flaticon-home"></i>
+                        </a>
+                    </li>
+                    <li class="separator">
+                        <i class="flaticon-right-arrow"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.category') }}">
+                            Data Kategori Perpustakaan
                         </a>
                     </li>
                     <li class="separator">
@@ -41,7 +49,7 @@
                                     <label for="name" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Nama
                                         Kategori
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="name" name="name"
                                             placeholder="Masukkan Judul Kategori" required>
                                     </div>
@@ -51,7 +59,7 @@
                                     <label for="description"
                                         class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Deskripsi
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="description" name="description"
                                             placeholder="Masukkan Deskripsi" required>
                                     </div>
@@ -60,7 +68,7 @@
                             <div class="card-action">
                                 <div class="row">
                                     <div class="col-md-12 text-right">
-                                        <a href="/admin/category" class="btn btn-default btn-outline-dark"
+                                        <a href="{{ route('admin.category') }}" class="btn btn-default btn-outline-dark"
                                             role="presentation">Batal</a>
                                         <button class="btn btn-primary ml-3" id="formAddCategoryButton"
                                             type="submit">Kirim</button>
@@ -144,14 +152,14 @@
                         $('#formAddCategoryButton').prop('disabled', false);
                         if (xhr.responseJSON) {
                             swal({
-                                title: "GAGAL!",
+                                title: "Gagal!",
                                 text: xhr.responseJSON.meta.message + " Error : " + xhr
                                     .responseJSON.data.error,
                                 icon: "error",
                             });
                         } else {
                             swal({
-                                title: "GAGAL!",
+                                title: "Gagal!",
                                 text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: ",
                                 error,
                                 icon: "error",
