@@ -69,9 +69,6 @@
                                     <li class="hover-right">
                                         <a href="{{ route('ebook') }}">E-Book</a>
                                     </li>
-                                    <li class="hover-right">
-                                        <a href="#">Tentang Kami</a>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
