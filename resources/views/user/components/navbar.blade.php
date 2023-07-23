@@ -17,29 +17,29 @@
                             <nav id="mobile-menu">
                                 <ul>
                                     <li class="{{ request()->is('book*') ? 'active' : '' }}">
-                                        <a href="/book">Buku Perpustakaan</a>
+                                        <a href="{{ route('book') }}">Buku Perpustakaan</a>
                                     </li>
                                     <li class="{{ request()->is('ebook*') ? 'active' : '' }}">
-                                        <a href="/ebook">E-Book</a>
+                                        <a href="{{ route('ebook') }}">E-Book</a>
                                     </li>
-                                    {{-- @if (!Auth::check()) --}}
-                                    <li class="d-block d-sm-none">
-                                        <a href="/login">Masuk</a>
-                                    </li>
-                                    {{-- @else --}}
-                                    {{-- @if (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 1)
+                                    @if (!Auth::check())
+                                        <li class="d-block d-sm-none">
+                                            <a href="{{ route('login') }}">Masuk</a>
+                                        </li>
+                                    @else
+                                        @if (auth()->user()->role_id == 1)
                                             <li class="d-block d-sm-none">
-                                                <a href="/admin">Profile</a>
+                                                <a href="{{ route('admin.dashboard') }}">Dashboard</a>
                                             </li>
-                                        @else --}}
-                                    {{-- <li class="d-block d-sm-none">
+                                        @else
+                                            <li class="d-block d-sm-none">
                                                 <a href="/profile">Profile</a>
-                                            </li> --}}
-                                    {{-- @endif
+                                            </li>
+                                        @endif
                                         <li class="d-block d-sm-none">
                                             <a href="/logout" onclick="logout()" class="menu-logout">Keluar</a>
                                         </li>
-                                    @endif --}}
+                                    @endif
                                 </ul>
                             </nav>
                         </div>
@@ -47,16 +47,15 @@
                     <div class="col-xxl-5 col-xl-5 col-lg-2 col-md-6 col-6">
                         <div class="header__bottom-right d-flex justify-content-end align-items-center pl-30">
                             <div class="header__search w-100 d-none d-xl-block">
-                                <form action="{{ request()->is('ebook*') ? route('ebook') : route('book') }}" method="GET" class="formSearchDesktop">
+                                <form action="{{ request()->is('ebook*') ? route('ebook') : route('book') }}"
+                                    method="GET" class="formSearchDesktop">
                                     <div class="header__search-input">
-                                        {{-- <input type="text" placeholder="Cari buku..." class="rounded-pill"
-                                            id="searchBookDesktop" name="search"> --}}
-                                        <input type="text" placeholder="Cari buku..." class="rounded-pill"
-                                            id="searchBookDesktop" name="search"
+                                        <input type="text"
+                                            placeholder="{{ request()->is('ebook*') ? 'Cari eBook...' : 'Cari buku...' }}"
+                                            class="rounded-pill" id="searchBookDesktop" name="search"
                                             @if (request()->has('search')) value="{{ request()->search }}" @endif>
-                                        <button class="header__search-btn r-5" onclick="getCourse('desktop')"><svg
-                                                width="18" height="18" viewBox="0 0 18 18" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
+                                        <button class="header__search-btn r-5"><svg width="18" height="18"
+                                                viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M8.11117 15.2222C12.0385 15.2222 15.2223 12.0385 15.2223 8.11111C15.2223 4.18375 12.0385 1 8.11117 1C4.18381 1 1.00006 4.18375 1.00006 8.11111C1.00006 12.0385 4.18381 15.2222 8.11117 15.2222Z"
                                                     stroke="#031220" stroke-width="2" stroke-linecap="round"
@@ -69,26 +68,15 @@
                                 </form>
                             </div>
                             {{-- condition::isloggedIn=false --}}
-                            {{-- @if (!Auth::check()) --}}
-                            <div class="ms-4 d-none d-sm-block"><a href="/login"
-                                    class="tp-btn tp-btn-login rounded-pill" role="button">Masuk</a>
-                            </div>
-                            {{-- @else
-                                <div class="ms-4">
-                                    @if (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 3)
-                                        <a href="/cart" onclick="getCart()" id="cart"
-                                            class="d-flex align-items-center nav-icon-cart position-relative">
-                                            <i class="fa-solid fa-cart-shopping" style="font-size: 19px;"></i>
-                                        </a>
-                                    @endif
+                            @if (!Auth::check())
+                                <div class="ms-4 d-none d-sm-block"><a href="{{ route('login') }}"
+                                        class="tp-btn tp-btn-login rounded-pill" role="button">Masuk</a>
                                 </div>
+                            @else
                                 <div class="ms-4 d-none d-sm-block">
-                                    @if (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 1)
-                                        <a href="/admin" class="d-flex align-items-center nav-icon-user">
-                                            <i class="fa-solid fa-circle-user" style="font-size: 20px"></i>
-                                        </a>
-                                    @elseif (auth()->user()->roles()->first()->getOriginal()['pivot_role_id'] == 2)
-                                        <a href="/mentor/dashboard" class="d-flex align-items-center nav-icon-user">
+                                    @if (auth()->user()->role_id == 1)
+                                        <a href="{{ route('admin.dashboard') }}"
+                                            class="d-flex align-items-center nav-icon-user">
                                             <i class="fa-solid fa-circle-user" style="font-size: 20px"></i>
                                         </a>
                                     @else
@@ -103,7 +91,7 @@
                                         <i class="fa-sharp fa-solid fa-right-from-bracket" style="font-size: 20px"></i>
                                     </a>
                                 </div>
-                            @endif --}}
+                            @endif
 
                             <div class="header__hamburger ms-4 ms-sm-5 d-xl-none">
                                 <button type="button" data-bs-toggle="modal" data-bs-target="#offcanvasmodal"
@@ -144,11 +132,13 @@
                             </div>
                         </div>
                         <div class="offcanvas__search mb-25">
-                            <form form action="{{ request()->is('ebook*') ? route('ebook') : route('book') }}" method="GET" class="formSearchMobile">
-                                <input type="text" placeholder="Cari buku..." id="searchBookMobile" name="search"
+                            <form form action="{{ request()->is('ebook*') ? route('ebook') : route('book') }}"
+                                method="GET" class="formSearchMobile">
+                                <input type="text"
+                                    placeholder="{{ request()->is('ebook*') ? 'Cari eBook...' : 'Cari buku...' }}"
+                                    id="searchBookMobile" name="search"
                                     @if (request()->has('search')) value="{{ request()->search }}" @endif>
-                                <button type="submit" onclick="getCourse('mobile')"><i
-                                        class="far fa-search"></i></button>
+                                <button type="submit"><i class="far fa-search"></i></button>
                             </form>
                         </div>
                         <div class="mobile-menu fix"></div>
