@@ -181,7 +181,7 @@
                                 @foreach ($studentTopBorrow as $data)
                                     <div class="item-list">
                                         <div class="avatar">
-                                            <img src="../assets/img/jm_denis.jpg" alt="..."
+                                            <img src="{{ asset('storage/'. $data->profile_picture) }}" alt="..."
                                                 class="avatar-img rounded-circle">
                                         </div>
                                         <div class="info-user ml-3">
