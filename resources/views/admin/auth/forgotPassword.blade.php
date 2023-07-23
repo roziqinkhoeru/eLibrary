@@ -18,7 +18,7 @@
                 </div>
                 <div class="login-account">
                     <span class="msg">Ingat kata sandi?</span>
-                    <a href="/admin/login" class="link"> Masuk</a>
+                    <a href="{{ route('admin.login') }}" class="link"> Masuk</a>
                 </div>
             </form>
         </div>
@@ -76,7 +76,6 @@
                 error: function(xhr, status, error) {
                     $('#forgotPasswordButton').html('Kirim tautan');
                     $('#forgotPasswordButton').prop('disabled', false);
-                    console.log(xhr.responseJSON);
                     if (xhr.responseJSON)
                         Swal.fire({
                             icon: 'error',

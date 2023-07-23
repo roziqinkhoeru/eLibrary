@@ -142,7 +142,7 @@
                             <div class="card-action">
                                 <div class="row">
                                     <div class="col-md-12 text-right">
-                                        <a href="/admin/category" class="btn btn-default btn-outline-dark"
+                                        <a href="{{ route('admin.category') }}" class="btn btn-default btn-outline-dark"
                                             role="presentation">Batal</a>
                                         <button class="btn btn-primary ml-3" id="formAddCategoryButton"
                                             type="submit">Kirim</button>
