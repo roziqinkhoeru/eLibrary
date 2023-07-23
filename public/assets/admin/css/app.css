@@ -97,3 +97,18 @@ table .cover-book-image img {
     margin-bottom: 16px;
     font-weight: 600;
 }
+
+/* SEARCH */
+.search-container {
+    width: 100% !important;
+    height: 100vh !important;
+    min-height: 540px !important;
+}
+.seacrh-image-container {
+    width: 200px;
+    display: block;
+    margin: 0 auto 8px;
+}
+.seacrh-image-container img {
+    width: 100%;
+}
