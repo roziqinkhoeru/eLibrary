@@ -161,7 +161,7 @@
                                         <small class="text-muted">{{ $data->major }}</small>
                                     </div>
                                     <div class="d-flex ml-auto align-items-center">
-                                        <h3 class="text-info fw-bold">{{ $data->total }}</h3>
+                                        <h3 class="text-info fw-bold text-lg">{{ $data->total }} Buku</h3>
                                     </div>
                                 </div>
                                 <div class="separator-dashed"></div>
@@ -189,9 +189,9 @@
                                             <div class="username">{{ $data->student_name }}</div>
                                             <div class="status">Kelas {{ $data->class_name }}</div>
                                         </div>
-                                        <button class="btn btn-icon btn-primary btn-round btn-xs">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
+                                        <div class="d-flex ml-auto align-items-center">
+                                            <h3 class="text-info fw-bold text-lg">{{ $data->total }} Buku</h3>
+                                        </div>
                                     </div>
                                 @endforeach
                             </div>
