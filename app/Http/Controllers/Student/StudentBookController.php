@@ -15,7 +15,7 @@ class StudentBookController extends Controller
 {
     public function book()
     {
-        $categories = Category::select('slug', 'name')->get();
+        $categories = Category::select('slug', 'name', 'description')->get();
         $data = [
             'title' => 'Buku Perpustakaan | Perpus Digital',
             'categories' => $categories,
@@ -56,7 +56,7 @@ class StudentBookController extends Controller
     public function ebook()
     {
         Log::info("ebook");
-        $categories = Category::select('slug', 'name')->get();
+        $categories = Category::select('slug', 'name', 'description')->get();
         $data = [
             'title' => 'E-book Perpustakaan | Perpus Digital',
             'categories' => $categories,
