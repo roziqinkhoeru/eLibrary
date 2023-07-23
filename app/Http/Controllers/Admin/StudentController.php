@@ -23,11 +23,16 @@ class StudentController extends Controller
 
     public function getStudent()
     {
-        $students = Student::with('class_school:id,name', 'user:student_id,email')
-            ->join('transactions', 'transactions.student_id', '=', 'students.nis')
-            ->where('transactions.status', 'pinjam')
-            ->select('students.*', DB::raw('count(transactions.id) as transaction_id'))
-            ->groupBy('students.nis')
+        $students = Student::with('class_school:id,name', 'user:student_id,email', 'transactions.book:id,title')
+        ->with(['transactions' => function ($query) {
+            $query->where('status', 'pinjam');
+        }])
+            ->whereHas('transactions', function ($query) {
+                $query->where('status', 'pinjam');
+            })
+            ->withCount(['transactions' => function ($query) {
+                $query->where('status', 'pinjam');
+            }])
             ->get();
 
         return ResponseFormatter::success(

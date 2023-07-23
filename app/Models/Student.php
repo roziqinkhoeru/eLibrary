@@ -21,4 +21,9 @@ class Student extends Model
     {
         return $this->hasOne(User::class, 'student_id', 'nis');
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'student_id', 'nis');
+    }
 }

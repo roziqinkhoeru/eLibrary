@@ -133,15 +133,15 @@
                         $.each(response.data.students, function(index, student) {
                             var rowData = [
                                 index + 1,
-                                `<img src="{{ asset('assets/${student.profile_picture}') }}"
+                                `<img src="{{ asset('storage/${student.profile_picture}') }}"
                                                     alt="${student.name} Profile" class="img-fluid rounded-circle" width="50"
                                                     height="50">`,
                                 student.nis,
                                 student.name,
                                 student.class_school.name,
-                                '?',
+                                student.transactions_count,
                                 `<td>
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#${student.nis}Modal">Detai</button>
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#${student.nis}Modal">Detail</button>
                                 </td>`
                             ];
 
@@ -186,14 +186,14 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <tr class="">
-                                                                        <td scope="row" class="text-center">1</td>
-                                                                        <td>Buku 1</td>
-                                                                    </tr>
-                                                                    <tr class="">
-                                                                        <td scope="row" class="text-center">2</td>
-                                                                        <td>Buku 2</td>
-                                                                    </tr>
+                                                                    ${student.transactions.map((transaction, index) => {
+                                                                        return `
+                                                                        <tr class="">
+                                                                            <td scope="row" class="text-center">${index + 1}</td>
+                                                                            <td>${transaction.book.title}</td>
+                                                                        </tr>
+                                                                        `;
+                                                                    }).join('') }
                                                                 </tbody>
                                                             </table>
                                                         </div>
