@@ -47,7 +47,7 @@
                                 </form>
                             </div>
                             <div class="sign__new text-center mt-20">
-                                <p>Ingat kata sandi? <a href="/login"> Masuk</a></p>
+                                <p>Ingat kata sandi? <a href="{{ route('login') }}"> Masuk</a></p>
                             </div>
                         </div>
                         <div id="forgotPasswordSuccess"></div>

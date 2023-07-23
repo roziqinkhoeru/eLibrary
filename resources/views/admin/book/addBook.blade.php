@@ -8,7 +8,7 @@
                 <h4 class="page-title">Tambah Buku</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/admin/dashboard">
+                        <a href="{{ route('admin.dashboard') }}">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>

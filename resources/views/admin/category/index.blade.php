@@ -8,7 +8,7 @@
                 <h4 class="page-title">Kategori Perpustakaan</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/admin/dashboard">
+                        <a href="{{ route('admin.dashboard') }}">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -31,7 +31,8 @@
                             <div class="card-head-row">
                                 <div class="card-title">Data Kategori Perpustakaan</div>
                                 <div class="card-tools">
-                                    <a href="/admin/category/create" class="btn btn-info btn-border btn-round btn-sm mr-2">
+                                    <a href="{{ route('admin.category.create') }}"
+                                        class="btn btn-info btn-border btn-round btn-sm mr-2">
                                         <span class="btn-label">
                                         </span>
                                         Tambah Kategori
