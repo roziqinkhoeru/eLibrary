@@ -74,7 +74,6 @@ Route::group(['middleware' => ['auth', 'web']], function () {
     Route::group(['middleware' => ['checkRole:admin']], function () {
         Route::controller(AdminController::class)->group(function () {
             Route::get('/admin/dashboard', 'index')->name('admin.dashboard');
-            Route::get('/admin/classes', 'classes')->name('admin.classes');
         });
         Route::controller(StudentController::class)->group(function () {
             Route::get('/admin/student', 'student')->name('admin.student');
@@ -118,17 +117,3 @@ Route::get('/', function () {
         'title' => 'Perpus Digital',
     ]);
 });
-// Route::get('/admin/student', function () {
-//     return view('admin.students.index', [
-//         'title' => 'Data Siswa | Perpus Digital',
-//         'currentNav' => 'student'
-//         'currentNavChild' => 'student',
-//     ]);
-// });
-// Route::get('/admin/classes', function () {
-//     return view('admin.classes.index', [
-//         'title' => 'Data Kelas | Perpus Digital',
-//         'currentNav' => 'course'
-//         'currentNavChild' => 'course',
-//     ]);
-// });
