@@ -87,6 +87,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/admin/transaction/history', 'historyTransaction')->name('admin.history.transaction');
             Route::get('/admin/transaction/history/data', 'getHistoryTransaction')->name('admin.history.transaction.data');
             Route::get('/admin/transaction/create', 'create')->name('admin.transaction.create');
+            Route::get('/admin/transaction/create/book/data', 'getBookDataCreate')->name('admin.transaction.create.book.data');
+            Route::get('/admin/transaction/create/student/data', 'getStudentDataCreate')->name('admin.transaction.create.student.data');
             Route::post('/admin/transaction', 'store')->name('admin.transaction.store');
             Route::get('/admin/transaction/{transaction:id}/return', 'returnBook')->name('admin.transaction.return');
             Route::put('/admin/transaction/{transaction:id}/return', 'updateReturnBook')->name('admin.transaction.return.update');
