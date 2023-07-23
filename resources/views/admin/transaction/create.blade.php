@@ -49,18 +49,28 @@
                                     <label for="student_id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">NIS
                                         Siswa
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-6 col-md-9 col-sm-8">
-                                        <input type="text" class="form-control" id="student_id" name="student_id"
-                                            placeholder="Masukkan NIS Siswa" required>
+                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                        {{-- <input type="text" class="form-control" id="student_id" name="student_id"
+                                            placeholder="Masukkan NIS Siswa" required> --}}
+                                        <div class="select2-input">
+                                            <select class="form-control" id="student_id" name="student_id" required>
+                                                <option value="">Pilih Siswa</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 {{-- book id --}}
                                 <div class="form-group form-show-validation row">
                                     <label for="book_id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">ID Buku
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-6 col-md-9 col-sm-8">
-                                        <input type="text" class="form-control" id="book_id" name="book_id"
-                                            placeholder="Masukkan ID Buku" required>
+                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                        {{-- <input type="text" class="form-control" id="book_id" name="book_id"
+                                            placeholder="Masukkan ID Buku" required> --}}
+                                        <div class="select2-input">
+                                            <select class="form-control" id="book_id" name="book_id" required>
+                                                <option value="">Pilih Buku</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 {{-- start_date --}}
@@ -111,6 +121,45 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(document).ready(function() {
+            $('#book_id').select2({
+                ajax: {
+                    url: `{{ route('admin.transaction.create.book.data') }}`,
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function(data) {
+                        return {
+                            results: $.map(data.data.books, function(item) {
+                                return {
+                                    text: item.title,
+                                    id: item.id,
+                                    value: item.id
+                                }
+                            })
+                        };
+                    },
+                    cache: true
+                }
+            });
+
+            $('#student_id').select2({
+                ajax: {
+                    url: `{{ route('admin.transaction.create.student.data') }}`,
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function(data) {
+                        return {
+                            results: $.map(data.data.students, function(item) {
+                                return {
+                                    text: item.name,
+                                    id: item.nis,
+                                    value: item.nis
+                                }
+                            })
+                        };
+                    },
+                    cache: true
+                }
+            });
             var today = moment().format('YYYY/MM/DD');;
             $('#start_date').datetimepicker({
                 format: 'DD/MM/YYYY',
@@ -120,13 +169,16 @@
                 format: 'DD/MM/YYYY',
             });
         });
+
+        // function getData() {
+
+        // }
+
         $("#formAddCategory").validate({
             rules: {
                 student_id: {
                     required: true,
                     number: true,
-                    minlength: 6,
-                    maxlength: 6,
                 },
                 book_id: {
                     required: true,

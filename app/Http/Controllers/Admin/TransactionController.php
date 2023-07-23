@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
+use App\Models\Book;
+use App\Models\Student;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Carbon\Doctrine\DateTimeType;
@@ -77,6 +79,32 @@ class TransactionController extends Controller
         ];
 
         return view('admin.transaction.create', $data);
+    }
+
+    public function getBookDataCreate()
+    {
+        $books = Book::select('id', 'title')
+            ->where('type', 'offline')
+            ->get();
+
+        return ResponseFormatter::success(
+            [
+                'books' => $books
+            ],
+            'Data Buku Berhasil Diambil'
+        );
+    }
+
+    public function getStudentDataCreate()
+    {
+        $students = Student::select('nis', 'name')->get();
+
+        return ResponseFormatter::success(
+            [
+                'students' => $students
+            ],
+            'Data Siswa Berhasil Diambil'
+        );
     }
 
     public function store(Request $request)
