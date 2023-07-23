@@ -5,11 +5,19 @@
         <div class="page-inner">
             {{-- header --}}
             <div class="page-header">
-                <h4 class="page-title">Pinjam Buku</h4>
+                <h4 class="page-title">Peminjaman Buku</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/admin/dashboard">
+                        <a href="{{ route('admin.dashboard') }}">
                             <i class="flaticon-home"></i>
+                        </a>
+                    </li>
+                    <li class="separator">
+                        <i class="flaticon-right-arrow"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.list.transaction') }}">
+                            Daftar Pinjaman Buku
                         </a>
                     </li>
                     <li class="separator">
@@ -28,9 +36,9 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">Form Pinjam Buku</div>
+                            <div class="card-title">Form Peminjaman Buku</div>
                             <div class="card-category">
-                                Form ini digunakan untuk menambah kategori
+                                Form ini digunakan untuk meminjam buku pada perpustakaan SMK Negeri 1 Sungai Menang
                             </div>
                         </div>
                         <form id="formAddCategory" method="POST">
@@ -38,9 +46,10 @@
                             <div class="card-body">
                                 {{-- student id --}}
                                 <div class="form-group form-show-validation row">
-                                    <label for="student_id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">NIS Siswa
+                                    <label for="student_id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">NIS
+                                        Siswa
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="student_id" name="student_id"
                                             placeholder="Masukkan NIS Siswa" required>
                                     </div>
@@ -49,25 +58,27 @@
                                 <div class="form-group form-show-validation row">
                                     <label for="book_id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">ID Buku
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="book_id" name="book_id"
                                             placeholder="Masukkan ID Buku" required>
                                     </div>
                                 </div>
                                 {{-- start_date --}}
                                 <div class="form-group form-show-validation row">
-                                    <label for="start_date" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Tanggal Mulai Pinjam
+                                    <label for="start_date" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Tanggal
+                                        Mulai Pinjam
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="start_date" name="start_date"
                                             placeholder="Masukkan Tanggal Mulai Pinjam" required>
                                     </div>
                                 </div>
                                 {{-- end_date --}}
                                 <div class="form-group form-show-validation row">
-                                    <label for="end_date" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Tanggal Batas Pinjam
+                                    <label for="end_date" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Tanggal
+                                        Batas Pinjam
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <input type="text" class="form-control" id="end_date" name="end_date"
                                             placeholder="Masukkan Tanggal Batas Pinjam" required>
                                     </div>
@@ -76,8 +87,8 @@
                             <div class="card-action">
                                 <div class="row">
                                     <div class="col-md-12 text-right">
-                                        <a href="/admin/category" class="btn btn-default btn-outline-dark"
-                                            role="presentation">Batal</a>
+                                        <a href="{{ route('admin.list.transaction') }}"
+                                            class="btn btn-default btn-outline-dark" role="presentation">Batal</a>
                                         <button class="btn btn-primary ml-3" id="formAddCategoryButton"
                                             type="submit">Kirim</button>
                                     </div>
@@ -99,7 +110,7 @@
         integrity="sha512-6S5LYNn3ZJCIm0f9L6BCerqFlQ4f5MwNKq+EthDXabtaJvg3TuFLhpno9pcm+5Ynm6jdA9xfpQoMz2fcjVMk9g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             var today = moment().format('YYYY/MM/DD');;
             $('#start_date').datetimepicker({
                 format: 'DD/MM/YYYY',
@@ -186,7 +197,6 @@
                         }, 4000);
                     },
                     error: function(xhr, status, error) {
-                        console.log(xhr);
                         $('#formAddCategoryButton').html('Kirim');
                         $('#formAddCategoryButton').prop('disabled', false);
                         if (xhr.responseJSON) {
