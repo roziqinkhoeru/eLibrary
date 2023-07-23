@@ -60,9 +60,10 @@ Route::controller(StudentBookController::class)->group(function () {
     Route::get('/book/data', 'getBook')->name('book.data');
     Route::get('/ebook', 'ebook')->name('ebook');
     Route::get('/ebook/data', 'getEbook')->name('ebook.data');
+    Route::get('/ebook/download/{book:id}', 'downloadEbook')->name('ebook.download');
 });
 
-Route::group(['middleware' => ['auth', 'web']], function () {
+Route::group(['middleware' => ['auth']], function () {
     // student
     Route::group(['middleware' => ['checkRole:student']], function () {
         Route::controller(StudentDashboardController::class)->group(function () {

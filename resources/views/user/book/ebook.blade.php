@@ -124,7 +124,7 @@
                                     <div class="tab-content" id="courseTabContent">
                                         <div class="tab-pane fade show active" id="grid" role="tabpanel"
                                             aria-labelledby="grid-tab">
-                                            <div class="d-grid gap-5 grid-cols-12" id="courseCategory"></div>
+                                            <div class="d-grid gap-5 grid-cols-12" id="bookCategory"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -165,7 +165,7 @@
 
         function getBook(device) {
             // loading state
-            $("#courseCategory").html(
+            $("#bookCategory").html(
                 `<div class="text-center text-4xl col-span-full pt-100 pb-65"><i class="fas fa-spinner-third spinners-3"></i></div>`
             );
             let search = "";
@@ -215,10 +215,12 @@
                                                         </div>
                                                     </div>
                                                     <div class="course__content-2 px-0" style="padding-top: 10px">
-                                                        <p
+                                                        <button onclick="download(${book.id})">
+                                                            <p
                                                             class="course__title-2 line-clamp-3-hover text-sm leading-lg mb-0">
                                                             ${book.title}
-                                                        </p>
+                                                            </p>
+                                                        </button>
                                                         <p class="mb-10 fw-medium text-muted text-xs">${book.author}</p>
                                                         <p class="mb-10 fw-medium text-muted text-xs">${book.publisher}(${book.year})</p>
                                                         <p class="mb-10 fw-medium text-muted text-xs">Jumlah download: <span class="fw-semibold">${book.download}</span></p>
@@ -227,7 +229,7 @@
                                             </div>`
                         });
                     }
-                    $("#courseCategory").html(htmlString);
+                    $("#bookCategory").html(htmlString);
 
                     if (device == "desktop") {
                         $("#searchBookMobile").val("");
@@ -238,7 +240,26 @@
                 },
                 // error state
                 error: function() {
-                    $("#courseCategory").html(errorState());
+                    $("#bookCategory").html(errorState());
+                }
+            });
+        }
+
+        function download(ebook) {
+            $.ajax({
+                type: "GET",
+                url: `{{ url('ebook/download/${ebook}') }}`,
+                success: function(response) {
+                    window.location.href= response.data.url;
+                },
+                // error state
+                error: function(response) {
+                    swal({
+                        title: "Gagal",
+                        text: response.responseJSON.message,
+                        icon: "error",
+                        button: "Tutup",
+                    });
                 }
             });
         }
