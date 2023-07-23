@@ -64,13 +64,13 @@
                             <div class="footer__widget-content">
                                 <ul>
                                     <li class="hover-right">
-                                        <a href="/book">Buku Perpustakaan</a>
+                                        <a href="{{ route('book') }}">Buku Perpustakaan</a>
                                     </li>
                                     <li class="hover-right">
-                                        <a href="/ebook">E-Book</a>
+                                        <a href="{{ route('ebook') }}">E-Book</a>
                                     </li>
                                     <li class="hover-right">
-                                        <a href="/about">Tentang Kami</a>
+                                        <a href="#">Tentang Kami</a>
                                     </li>
                                 </ul>
                             </div>
