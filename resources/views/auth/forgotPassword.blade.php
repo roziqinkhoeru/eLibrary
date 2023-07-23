@@ -105,8 +105,8 @@
                     $('#forgotPasswordButton').prop('disabled', true);
                     Swal.fire({
                         icon: 'success',
-                        title: 'KIRIM TAUTAN BERHASIL!',
-                        text: '{{ session('success') }}',
+                        title: 'Sukses',
+                        text: 'Kirim Tautan Berhail!',
                     });
                     if (isResend) {
                         $('#resend_link').html(
@@ -138,13 +138,13 @@
                     if (xhr.responseJSON)
                         Swal.fire({
                             icon: 'error',
-                            title: 'KIRIM TAUTAN GAGAL!',
+                            title: 'Kirim Tautan Gagal!',
                             text: xhr.responseJSON.meta.message,
                         })
                     else
                         Swal.fire({
                             icon: 'error',
-                            title: 'KIRIM TAUTAN GAGAL!',
+                            title: 'Kirim Tautan Gagal!',
                             text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " + error,
                         })
                     return false;

@@ -167,14 +167,14 @@
                         error: function(xhr, status, error) {
                             if (xhr.responseJSON) {
                                 swal({
-                                    title: "GAGAL!",
+                                    title: "Gagal!",
                                     text: xhr.responseJSON.meta.message + ", Error : " + xhr
                                         .responseJSON.data.error,
                                     icon: "error",
                                 });
                             } else {
                                 swal({
-                                    title: "GAGAL!",
+                                    title: "Gagal!",
                                     text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " +
                                         error,
                                     icon: "error",

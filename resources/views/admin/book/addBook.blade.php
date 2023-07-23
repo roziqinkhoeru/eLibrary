@@ -439,14 +439,14 @@
                         $('#formAddBookButton').prop('disabled', false);
                         if (xhr.responseJSON) {
                             new swal({
-                                title: "GAGAL!",
+                                title: "Gagal!",
                                 text: xhr.statusText + ", Error : " + xhr
                                     .responseJSON.message,
                                 icon: "error",
                             });
                         } else {
                             new swal({
-                                title: "GAGAL!",
+                                title: "Gagal!",
                                 text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " +
                                     xhr.statusText,
                                 error,
