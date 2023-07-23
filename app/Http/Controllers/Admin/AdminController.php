@@ -8,9 +8,13 @@ use App\Models\Book;
 use App\Models\Category;
 use App\Models\Student;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -79,5 +83,86 @@ class AdminController extends Controller
             'revenueMonth' => $revenueMonth,
         ];
         return view('admin.dashboard', $data);
+    }
+
+    public function profile()
+    {
+        $admin = User::with('officer')->where('officer_id', Auth::user()->officer_id)->first();
+        $data = [
+            'title' => 'Profile Saya | Admin Perpus Digital',
+            'currentNav' => 'profile',
+            'currentNavChild' => 'profile',
+            'admin' => $admin,
+        ];
+
+        return view('admin.profile.index', $data);
+    }
+
+    public function adminEditPassword()
+    {
+        $admin = User::with('officer:nip,name')->where('officer_id', Auth::user()->officer_id)->first();
+        $data = [
+            'title' => 'Edit Password | Admin Perpus Digital',
+            'currentNav' => 'profile',
+            'currentNavChild' => 'profile',
+            'admin' => $admin,
+        ];
+
+        return view('admin.profile.editPassword', $data);
+    }
+
+    public function adminChangePassword(Request $request)
+    {
+        $user = Auth::user();
+        $rules = [
+            'old_password' => 'required',
+            'password' => 'required|min:8|confirmed',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            // Form salah diisi
+            return $request->ajax()
+                ? ResponseFormatter::error(
+                    [
+                        'error' => $validator->errors()->first(),
+                    ],
+                    'Harap isi form dengan benar',
+                    400,
+                )
+                : back()->with(['error' => $validator->errors()]);
+        }
+
+        if (!Hash::check($request->old_password, $user->password)) {
+            return $request->ajax()
+                ? ResponseFormatter::error(
+                    [
+                        'error' => 'Password lama tidak sesuai',
+                    ],
+                    'Password lama tidak sesuai',
+                    400,
+                )
+                : back()->with(['error' => 'Password lama tidak sesuai']);
+        }
+
+        $update = User::whereId($user->id)->update([
+            'password' => Hash::make($request->password),
+        ]);
+
+        if ($update) {
+            return $request->ajax()
+                ? ResponseFormatter::success(
+                    [
+                        'redirect' => redirect('/admin/profile')->getTargetUrl(),
+                    ],
+                    'Update password berhasil',
+                ) : redirect('/admin/profile')->with('success', 'Update password berhasil');
+        }
+
+        return $request->ajax()
+            ? ResponseFormatter::error(
+                null,
+                'Update password gagal',
+                500
+            ) : back()->with(['error' => 'Update password gagal']);
     }
 }

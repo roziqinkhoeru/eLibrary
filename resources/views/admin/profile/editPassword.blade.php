@@ -25,8 +25,9 @@
                         </div>
                         {{-- form profile --}}
                         <div class="card-body">
-                            <form action="#" method="POST" id="formChangePassword">
+                            <form method="POST" id="formChangePassword">
                                 @csrf
+                                @method('PUT')
                                 <div class="row mt-3">
                                     {{-- old password --}}
                                     <div class="col-md-12">
@@ -74,9 +75,9 @@
                         </div>
                         <div class="card-body">
                             <div class="user-profile text-center">
-                                <div class="name">{{ $admin->customer->name }}</div>
+                                <div class="name">{{ $admin->officer->name }}</div>
                                 <div class="job">admin</div>
-                                <div class="desc">Mengelola Data UMKMPlus</div>
+                                <div class="desc">Mengelola Data Perpus Digital</div>
                             </div>
                         </div>
                     </div>
@@ -126,26 +127,26 @@
                 },
             },
             submitHandler: function(form) {
-                Swal.fire({
+                swal({
+                    dangerMode: true,
                     title: 'Apakah anda yakin?',
                     text: "Anda akan mengubah password anda",
                     icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
+                    buttons: ["Batal", "Ubah"],
                 }).then((result) => {
-                    if (result.isConfirmed) {
+                    if (result) {
                         $('#updatePasswordButton').html(
                             '<i class="fas fa-circle-notch text-lg spinners-2"></i>');
                         $('#updatePasswordButton').prop('disabled', true);
                         $.ajax({
                             url: "{{ route('admin.change.password') }}",
-                            type: "PUT",
+                            type: "POST",
                             data: {
                                 old_password: $('#old_password').val(),
                                 password: $('#password').val(),
                                 password_confirmation: $('#password_confirmation').val(),
-                                _token: "{{ csrf_token() }}"
+                                _token: "{{ csrf_token() }}",
+                                _method: 'PUT'
                             },
                             success: function(response) {
                                 $('#updatePasswordButton').html('Update password');
@@ -153,31 +154,43 @@
                                 $('#old_password').val("");
                                 $('#password').val("");
                                 $('#password_confirmation').val("");
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'UBAH PASSWORD BERHASIL!',
-                                    text: response.meta.message,
-                                })
-                                window.location.href = response.data.redirect;
+                                swal({
+                                        title: "Berhasil!",
+                                        text: response.meta.message,
+                                        icon: "success",
+                                        buttons: {
+                                            ok: "OK",
+                                        },
+                                    })
+                                    .then((value) => {
+                                        if (value === "ok") {
+                                            window.location.href = response.data
+                                                .redirect;
+                                        }
+                                    });
+
+                                setTimeout(function() {
+                                    window.location.href = response.data.redirect;
+                                }, 4000);
                             },
                             error: function(xhr, status, error) {
                                 $('#updatePasswordButton').html('Update password');
                                 $('#updatePasswordButton').prop('disabled', false);
                                 if (xhr.responseJSON) {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'UBAH PASSWORD GAGAL!',
+                                    swal({
+                                        title: "Gagal!",
                                         text: xhr.responseJSON.meta.message +
-                                            " Error: " + xhr
+                                            ", Error : " + xhr
                                             .responseJSON.data.error,
-                                    })
+                                        icon: "error",
+                                    });
                                 } else {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'UBAH PASSWORD GAGAL!',
+                                    swal({
+                                        title: "Gagal!",
                                         text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " +
                                             error,
-                                    })
+                                        icon: "error",
+                                    });
                                 }
                                 return false;
                             }

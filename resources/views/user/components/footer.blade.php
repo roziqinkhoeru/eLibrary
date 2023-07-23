@@ -17,8 +17,7 @@
                             <div class="footer__widget-content">
                                 <div class="footer__widget-info">
                                     <p class="mb-4">
-                                        eLibrary adalah platform pembelajaran online yang menyediakan berbagai macam
-                                        materi pembelajaran untuk meningkatkan kualitas SDM di Indonesia.
+                                        eLibrary adalah sebuah perpustakaan digital yang didedikasikan untuk memberikan akses mudah dan luas kepada pengetahuan, informasi, dan sumber daya pendidikan berkualitas bagi semua kalangan.
                                     </p>
                                     <div class="footer__social">
                                         <h4>Follow Us</h4>

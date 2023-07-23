@@ -19,7 +19,7 @@
             <div class="collapse in" id="collapseExample">
                 <ul class="nav">
                     <li>
-                        <a href="/admin/profile">
+                        <a href="{{ route('admin.profile') }}">
                             <span class="link-collapse">Profil Saya</span>
                         </a>
                     </li>

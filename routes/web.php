@@ -75,6 +75,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['checkRole:admin']], function () {
         Route::controller(AdminController::class)->group(function () {
             Route::get('/admin/dashboard', 'index')->name('admin.dashboard');
+            Route::get('/admin/profile', 'profile')->name('admin.profile');
+            Route::get('/admin/profile/edit-password', 'adminEditPassword')->name('admin.edit.password');
+            Route::put('/admin/profile/change-password', 'adminChangePassword')->name('admin.change.password');
         });
         Route::controller(StudentController::class)->group(function () {
             Route::get('/admin/student', 'student')->name('admin.student');
