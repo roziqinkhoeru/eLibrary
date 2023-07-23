@@ -185,8 +185,8 @@
                             <div class="card-action">
                                 <div class="row">
                                     <div class="col-md-12 text-right">
-                                        <button id="backToBook" class="btn btn-default btn-outline-dark"
-                                            role="presentation">Batal</button>
+                                        <a href="javascript:void(0)" id="backToBook"
+                                            class="btn btn-default btn-outline-dark" role="presentation">Batal</a>
                                         <button class="btn btn-primary ml-3" id="formEditBookButton"
                                             type="submit">Kirim</button>
                                     </div>

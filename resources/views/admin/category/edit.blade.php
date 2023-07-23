@@ -61,8 +61,8 @@
                             <div class="card-action">
                                 <div class="row">
                                     <div class="col-md-12 text-right">
-                                        <button id="backToCategory" class="btn btn-default btn-outline-dark"
-                                            role="presentation">Batal</button>
+                                        <a href="javascript:void(0)" id="backToCategory"
+                                            class="btn btn-default btn-outline-dark" role="presentation">Batal</a>
                                         <button class="btn btn-primary ml-3" id="formEditCategoryButton"
                                             type="submit">Kirim</button>
                                     </div>
