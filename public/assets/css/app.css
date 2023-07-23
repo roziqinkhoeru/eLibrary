@@ -956,3 +956,11 @@
 .col-span-2-book {
     grid-column: span 2 / span 2;
 }
+.book__title-2:hover {
+    color: #272727;
+    transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+}

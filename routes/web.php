@@ -115,6 +115,15 @@ Route::group(['middleware' => ['auth']], function () {
     });
 });
 
+Route::get('/admin/search/{search}', function () {
+    $search = request()->search;
+    return view('admin.search', [
+        'title' => "Search | Admin Perpus Digital",
+        'currentNav' => 'search',
+        'currentNavChild' => 'search',
+        'search' => $search,
+    ]);
+});
 Route::get('/', function () {
     return view('user.home', [
         'title' => 'Perpus Digital',

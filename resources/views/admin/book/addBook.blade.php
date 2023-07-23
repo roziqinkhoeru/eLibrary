@@ -317,6 +317,9 @@
             rules: {
                 id: {
                     required: true,
+                    minlength: 3,
+                    maxlength: 3,
+                    number: true,
                 },
                 title: {
                     required: true,
@@ -353,6 +356,9 @@
             messages: {
                 id: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>ID buku tidak boleh kosong',
+                    minlength: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>ID buku harus 3 karakter',
+                    maxlength: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>ID buku harus 3 karakter',
+                    number: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>ID buku harus berupa angka',
                 },
                 title: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Judul buku tidak boleh kosong',

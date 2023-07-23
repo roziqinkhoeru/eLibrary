@@ -117,7 +117,8 @@
 
 @media screen and (max-width: 767px) {
     /* UTILITIES */
-    .grid-cols-12 {
+    .grid-cols-12,
+    .grid-cols-10 {
         grid-template-columns: repeat(6, minmax(0, 1fr));
     }
 
@@ -354,5 +355,8 @@
     }
     .slider__content-button .tp-btn.tp-btn-2 {
         margin-right: 18px !important;
+    }
+    .grid-cols-10 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 }

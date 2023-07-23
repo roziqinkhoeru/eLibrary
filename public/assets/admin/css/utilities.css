@@ -246,6 +246,9 @@ label.error {
 .grid-cols-12 {
     grid-template-columns: repeat(12, minmax(0, 1fr));
 }
+.grid-cols-10 {
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+}
 .grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
 }
