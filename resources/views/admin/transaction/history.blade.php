@@ -165,6 +165,8 @@
                             var rowNode = transactionTable.row.add(rowData)
                                 .draw(
                                     false).node();
+
+                            $(rowNode).find('td').eq(3).addClass('text-nowrap');
                         });
                     } else {
                         $('#transactionTableBody').html(tableEmpty(10, 'buku perpustakaan'));
