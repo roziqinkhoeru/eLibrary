@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     public function student()
     {
-        return $this->hasOne(Student::class);
+        return $this->hasOne(Student::class, 'nis', 'student_id');
     }
 
     public function officer()

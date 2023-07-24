@@ -157,6 +157,10 @@
     @yield('content')
     @include('user.components.footer')
 
+
+    {{-- Moment JS --}}
+    <script src="{{ asset('assets/template/admin/js/plugin/moment/moment.min.js') }}"></script>
+
     {{-- scripts --}}
     <script src="{{ asset('assets/template/js/vendor/jquery.js') }}"></script>
     <script src="{{ asset('assets/template/js/vendor/waypoints.js') }}"></script>
@@ -188,6 +192,8 @@
     <script src="{{ asset('assets/template/admin/js/plugin/chart-circle/circles.min.js') }}"></script>
 
     {{-- script custom --}}
+    <script src="{{ asset('assets/js/currency.js') }}"></script>
+
     @yield('script')
     <script>
         $(document).ready(function() {

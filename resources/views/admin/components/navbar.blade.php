@@ -111,13 +111,13 @@
                             <div class="u-text">
                                 <h4>{{ Auth::user()->officer->name }}</h4>
                                 <p class="text-muted">{{ Auth::user()->email }}</p>
-                                <a href="/admin/profile" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                                <a href="{{ route('admin.profile') }}" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/">Home</a>
+                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Home</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item hover-logout" href="{{ url('logout') }}"
                             onclick="logout()">Logout</a>

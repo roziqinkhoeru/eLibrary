@@ -69,12 +69,26 @@ Route::group(['middleware' => ['auth']], function () {
         Route::controller(StudentDashboardController::class)->group(function () {
             Route::get('/', 'index')->name('dashboard');
         });
+
+        Route::controller(StudentDashboardController::class)->group(function () {
+            Route::get('/profile', 'profile')->name('profile');
+            // Route::get('/profile/get-dashboard', 'getDashboard')->name('get.dashboard');
+            Route::get('/profile/get-profile', 'getProfile')->name('get.profile');
+            Route::put('/profile/update-profile', 'updateProfile')->name('update.profile');
+            Route::put('/profile/update-photo-profile', 'updatePhotoProfile')->name('update.photo.profile');
+            Route::get('/profile/get-books', 'getBookProfile')->name('get.profile.book');
+            Route::get('/profile/get-transaction-history', 'getTransactionHistory')->name('get.profile.transaction.history');
+            Route::put('/profile/change-password', 'changePassword')->name('profile.change.password');
+        });
     });
 
     // Admin
     Route::group(['middleware' => ['checkRole:admin']], function () {
         Route::controller(AdminController::class)->group(function () {
             Route::get('/admin/dashboard', 'index')->name('admin.dashboard');
+            Route::get('/admin/profile', 'profile')->name('admin.profile');
+            Route::get('/admin/profile/edit-password', 'adminEditPassword')->name('admin.edit.password');
+            Route::put('/admin/profile/change-password', 'adminChangePassword')->name('admin.change.password');
         });
         Route::controller(StudentController::class)->group(function () {
             Route::get('/admin/student', 'student')->name('admin.student');

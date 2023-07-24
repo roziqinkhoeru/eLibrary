@@ -21,7 +21,7 @@ class OfficerSeeder extends Seeder
                 'address' => "Dirumah",
                 'gender' => 'L',
                 'date_of_birth' => '2000-01-01',
-                'profile_picture' => 'template/admin/img/profile.jpg',
+                'profile_picture' => 'img/profile.jpg',
             ]
         ];
 
