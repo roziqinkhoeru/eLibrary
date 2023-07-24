@@ -121,44 +121,13 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(document).ready(function() {
+            getBookData();
+            getStudentData();
             $('#book_id').select2({
-                ajax: {
-                    url: `{{ route('admin.transaction.create.book.data') }}`,
-                    dataType: 'json',
-                    delay: 250,
-                    processResults: function(data) {
-                        return {
-                            results: $.map(data.data.books, function(item) {
-                                return {
-                                    text: item.title,
-                                    id: item.id,
-                                    value: item.id
-                                }
-                            })
-                        };
-                    },
-                    cache: true
-                }
+
             });
 
             $('#student_id').select2({
-                ajax: {
-                    url: `{{ route('admin.transaction.create.student.data') }}`,
-                    dataType: 'json',
-                    delay: 250,
-                    processResults: function(data) {
-                        return {
-                            results: $.map(data.data.students, function(item) {
-                                return {
-                                    text: item.name,
-                                    id: item.nis,
-                                    value: item.nis
-                                }
-                            })
-                        };
-                    },
-                    cache: true
-                }
             });
             var today = moment().format('YYYY/MM/DD');;
             $('#start_date').datetimepicker({
@@ -170,9 +139,51 @@
             });
         });
 
-        // function getData() {
+        function getBookData() {
+            var htmlstring = '';
+            $.ajax({
+                type: "GET",
+                url: `{{ route('admin.transaction.create.book.data') }}`,
+                dataType: "json",
+                success: function(response) {
+                    $.each(response.data.books, function(index, item) {
+                        htmlstring += `<option value="${item.id}">${item.title}</option>`;
+                    });
+                    $('#book_id').html(htmlstring);
+                },
+                error: function(xhr, status, error) {
+                    swal({
+                        title: "Gagal!",
+                        text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " + error,
+                        icon: "error",
+                    });
+                    return false;
+                },
+            });
+        }
 
-        // }
+        function getStudentData() {
+            var htmlstring = '';
+            $.ajax({
+                type: "GET",
+                url: `{{ route('admin.transaction.create.student.data') }}`,
+                dataType: "json",
+                success: function(response) {
+                    $.each(response.data.students, function(index, item) {
+                        htmlstring += `<option value="${item.id}">${item.name}</option>`;
+                    });
+                    $('#student_id').html(htmlstring);
+                },
+                error: function(xhr, status, error) {
+                    swal({
+                        title: "Gagal!",
+                        text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " + error,
+                        icon: "error",
+                    });
+                    return false;
+                },
+            });
+        }
 
         $("#formAddCategory").validate({
             rules: {
