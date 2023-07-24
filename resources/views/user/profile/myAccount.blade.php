@@ -63,7 +63,7 @@
             if (contentBeforeURL) {
                 getContent(contentBeforeURL)
             } else {
-                getContent('dashboard')
+                getContent('profile')
             }
         });
 

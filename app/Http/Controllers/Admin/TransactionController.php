@@ -159,7 +159,7 @@ class TransactionController extends Controller
     {
         $transaction->load(['student:nis,name', 'book:id,isbn,title']);
         $penalty = 0;
-        $end_date = Carbon::parse($transaction->end_date);
+        $end_date = Carbon::parse($transaction->end_date)->format('Y-m-d');
         if ($end_date < now()) {
             $penalty = now()->diffInDays($end_date) * 1000;
         }
