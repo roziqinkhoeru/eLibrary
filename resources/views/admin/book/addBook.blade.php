@@ -8,7 +8,7 @@
                 <h4 class="page-title">Tambah Buku</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/admin/dashboard">
+                        <a href="{{ route('admin.dashboard') }}">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -253,11 +253,11 @@
             }
             if (storedEbook) {
                 filePreview.html(`<div class="text-sm-center">
-                                            <figure class="file-pdf-info">
-                                            <img src="{{ asset('assets/img/decoration/pdf.png') }}" alt="pdf-file-new">
-                                            </figure>
-                                            <p class="mb-0 line-clamp-max-w-320">${JSON.parse(storedEbook).name}</p>
-                                        </div>`);
+                                    <figure class="file-pdf-info">
+                                        <img src="{{ asset('assets/img/decoration/pdf.png') }}" alt="PDF New File">
+                                    </figure>
+                                    <p class="mb-0 line-clamp-max-w-320">${JSON.parse(storedEbook).name}</p>
+                                </div>`);
             }
 
             cover.on('change', function(event) {
@@ -317,6 +317,9 @@
             rules: {
                 id: {
                     required: true,
+                    minlength: 3,
+                    maxlength: 3,
+                    number: true,
                 },
                 title: {
                     required: true,
@@ -353,6 +356,9 @@
             messages: {
                 id: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>ID buku tidak boleh kosong',
+                    minlength: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>ID buku harus 3 karakter',
+                    maxlength: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>ID buku harus 3 karakter',
+                    number: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>ID buku harus berupa angka',
                 },
                 title: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Judul buku tidak boleh kosong',
@@ -428,19 +434,18 @@
                         }, 4000);
                     },
                     error: function(xhr, status, error) {
-                        console.log(xhr);
                         $('#formAddBookButton').html('Kirim');
                         $('#formAddBookButton').prop('disabled', false);
                         if (xhr.responseJSON) {
                             new swal({
-                                title: "GAGAL!",
+                                title: "Gagal!",
                                 text: xhr.statusText + ", Error : " + xhr
                                     .responseJSON.message,
                                 icon: "error",
                             });
                         } else {
                             new swal({
-                                title: "GAGAL!",
+                                title: "Gagal!",
                                 text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " +
                                     xhr.statusText,
                                 error,

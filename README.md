@@ -106,3 +106,33 @@ cp .env.example .env
 ```bash
 php artisan key:generate
 ```
+
+-   In the .env file, add database information to allow Laravel to connect to the database
+
+```bash
+...
+```
+
+-   Migrate the database
+
+```bash
+php artisan migrate
+```
+
+-   Seed the database
+
+```bash
+php artisan db:seed
+```
+
+-   storage link
+
+```bash
+php artisan storage:link
+```
+
+-   Have fun running your project
+
+```bash
+php artisan serve --port=8000
+```

@@ -2,15 +2,13 @@
     {{-- user --}}
     <div class="user">
         <div class="avatar-sm float-left mr-2">
-            <img src="{{ asset('assets/' . auth()->user()->officer->profile_picture) }}" alt="profile photo admin"
+            <img src="{{ asset('storage/' . auth()->user()->officer->profile_picture) }}" alt="profile photo admin"
                 class="avatar-img rounded-circle">
         </div>
         <div class="info">
             <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
-                <span>
-                    {{-- {{ auth()->user()->username }} --}}
-
-                    <span class="user-level">Petugas</span>
+                <span>Petugas
+                    <span class="user-level">Administrator</span>
                     <span class="caret"></span>
                 </span>
             </a>
@@ -32,7 +30,7 @@
     <ul class="nav nav-primary">
         {{-- dashboard --}}
         <li class="nav-item @if ($currentNav == 'dashboard') active @endif">
-            <a href="/admin/dashboard">
+            <a href="{{ route('admin.dashboard') }}">
                 <i class="fas fa-home"></i>
                 <p>Dashboard</p>
             </a>
@@ -47,39 +45,26 @@
             <div class="collapse" id="bookMenu">
                 <ul class="nav nav-collapse">
                     <li class="@if ($currentNavChild == 'library') active @endif">
-                        <a href="/admin/book">
+                        <a href="{{ route('admin.book') }}">
                             <span class="sub-item">Perpustakaan</span>
                         </a>
                     </li>
                     <li class="@if ($currentNavChild == 'ebook') active @endif">
-                        <a href="/admin/ebook">
+                        <a href="{{ route('admin.ebook') }}">
                             <span class="sub-item">E-Book</span>
                         </a>
                     </li>
                     <li class="@if ($currentNavChild == 'addBook') active @endif">
-                        <a href="/admin/book/create">
+                        <a href="{{ route('admin.book.create') }}">
                             <span class="sub-item">Tambah Buku</span>
                         </a>
                     </li>
                 </ul>
             </div>
         </li>
-        {{-- classes --}}
-        {{-- <li class="nav-item @if ($currentNav == 'course') active @endif">
-            <a href="/admin/classes">
-                <i class="fas fa-book"></i>
-                <p>Kelas</p>
-            </a>
-        </li> --}}
-        {{-- <li class="nav-section">
-            <span class="sidebar-mini-icon">
-                <i class="fa fa-ellipsis-h"></i>
-            </span>
-            <h4 class="text-section">Learning</h4>
-        </li> --}}
         {{-- student --}}
         <li class="nav-item @if ($currentNav == 'student') active @endif">
-            <a href="/admin/student">
+            <a href="{{ route('admin.student') }}">
                 <i class="fas fa-user-graduate"></i>
                 <p>Siswa</p>
             </a>
@@ -94,7 +79,7 @@
         {{-- transaction --}}
         <li class="nav-item @if ($currentNav == 'transaction') active @endif">
             <a data-toggle="collapse" href="#transactionMenu">
-                <i class="fas fa-book"></i>
+                <i class="fas fa-box"></i>
                 <p>Peminjaman</p>
                 <span class="caret"></span>
             </a>

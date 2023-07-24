@@ -57,7 +57,7 @@
                                             <th>Denda</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="transactionTableBody">
                                     </tbody>
                                 </table>
                             </div>
@@ -135,7 +135,13 @@
             pageLength: 10, // default page length
         });
 
+        const showLoadingIndicator = () => {
+            $('#transactionTableBody').html(tableLoader(10, `{{ asset('assets/img/loader/Ellipsis-2s-48px.svg') }}`));
+        }
+
         function getStudents() {
+            showLoadingIndicator();
+
             $.ajax({
                 type: "GET",
                 url: "{{ route('admin.history.transaction.data') }}",
@@ -160,7 +166,12 @@
                                 .draw(
                                     false).node();
                         });
+                    } else {
+                        $('#transactionTableBody').html(tableEmpty(10, 'buku perpustakaan'));
                     }
+                },
+                error: function(error) {
+                    $('#bookTableBody').html(tableError(10, `${response.responseJSON.message}`));
                 }
             });
         }

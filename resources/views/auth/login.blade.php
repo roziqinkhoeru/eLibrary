@@ -40,8 +40,8 @@
                                         </label>
                                         <div class="sign__input">
                                             <i class="fal fa-user icon-form"></i>
-                                            <input type="text" placeholder="Masukan email" name="email"
-                                                id="email" required value="" class="input-form">
+                                            <input type="text" placeholder="Masukan email" name="email" id="email"
+                                                required value="" class="input-form">
                                         </div>
                                     </div>
                                     <div class="sign__input-wrapper mb-15">
@@ -65,7 +65,7 @@
                                     </div>
                                     <button id="loginButton" class="tp-btn w-100 rounded-pill">Masuk</button>
                                     <div class="sign__new text-center mt-20">
-                                        <p>Lupa Kata Sandi? <a href="/forgot-password">Klik disini!</a></p>
+                                        <p>Lupa Kata Sandi? <a href="{{ route('password.request') }}">Klik disini!</a></p>
                                     </div>
                                 </form>
                             </div>
@@ -121,21 +121,21 @@
                             if (xhr.responseJSON.message == "CSRF token mismatch.") {
                                 Swal.fire({
                                     icon: 'error',
-                                    title: 'LOGIN GAGAL!',
+                                    title: 'Login Gagal!',
                                     text: "Mohon maaf email/password Anda tidak sesuai",
                                 })
                                 location.reload()
                             } else {
                                 Swal.fire({
                                     icon: 'error',
-                                    title: 'LOGIN GAGAL!',
+                                    title: 'Login Gagal!',
                                     text: xhr.responseJSON.meta.message,
                                 })
                             }
                         } else {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'LOGIN GAGAL!',
+                                title: 'Login Gagal!',
                                 text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " +
                                     error,
                             })

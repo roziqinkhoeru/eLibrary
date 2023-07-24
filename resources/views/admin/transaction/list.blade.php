@@ -49,7 +49,7 @@
                                             <th class="text-center filter-none">Aksi</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="transactionTableBody">
                                     </tbody>
                                 </table>
                             </div>
@@ -124,7 +124,13 @@
             pageLength: 10, // default page length
         });
 
+        const showLoadingIndicator = () => {
+            $('#transactionTableBody').html(tableLoader(10, `{{ asset('assets/img/loader/Ellipsis-2s-48px.svg') }}`));
+        }
+
         function getStudents() {
+            showLoadingIndicator();
+
             $.ajax({
                 type: "GET",
                 url: "{{ route('admin.list.transaction.data') }}",
@@ -148,8 +154,15 @@
                             var rowNode = transactionTable.row.add(rowData)
                                 .draw(
                                     false).node();
+
+                            $(rowNode).find('td').eq(3).addClass('text-nowrap');
                         });
+                    } else {
+                        $('#transactionTableBody').html(tableEmpty(10, 'buku perpustakaan'));
                     }
+                },
+                error: function(response) {
+                    $('#transactionTableBody').html(tableError(10, `${response.responseJSON.message}`));
                 }
             });
         }

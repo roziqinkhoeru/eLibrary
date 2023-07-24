@@ -34,7 +34,7 @@
                     <div class="quick-actions-items">
                         <div class="row m-0">
                             {{-- dashboard --}}
-                            <a class="col-6 col-md-4 p-0" href="/admin/dashboard">
+                            <a class="col-6 col-md-4 p-0" href="{{ route('admin.dashboard') }}">
                                 <div class="quick-actions-item">
                                     <div class="avatar-item rounded-circle" style="background: #6861ce">
                                         <i class="fas fa-home"></i>
@@ -43,7 +43,7 @@
                                 </div>
                             </a>
                             {{-- book --}}
-                            <a class="col-6 col-md-4 p-0" href="/admin/book">
+                            <a class="col-6 col-md-4 p-0" href="{{ route('admin.book') }}">
                                 <div class="quick-actions-item">
                                     <div class="avatar-item bg-info rounded-circle">
                                         <i class="fas fa-book"></i>
@@ -52,7 +52,7 @@
                                 </div>
                             </a>
                             {{-- ebook --}}
-                            <a class="col-6 col-md-4 p-0" href="/admin/ebook">
+                            <a class="col-6 col-md-4 p-0" href="{{ route('admin.ebook') }}">
                                 <div class="quick-actions-item">
                                     <div class="avatar-item bg-warning rounded-circle">
                                         <i class="fas fa-book"></i>
@@ -63,30 +63,30 @@
                             {{-- transaction --}}
                             <a class="col-6 col-md-4 p-0" href="{{ route('admin.list.transaction') }}">
                                 <div class="quick-actions-item">
-                                    <div class="avatar-item bg-warning rounded-circle">
-                                        <i class="fas fa-book"></i>
+                                    <div class="avatar-item bg-dark rounded-circle">
+                                        <i class="fas fa-box"></i>
                                     </div>
-                                    <span class="text">Transaction</span>
+                                    <span class="text">Peminjaman</span>
                                 </div>
                             </a>
-                            {{-- course --}}
-                            {{-- <a class="col-6 col-md-4 p-0" href="/admin/classes">
-                                <div class="quick-actions-item">
-                                    <div class="avatar-item bg-dark rounded-circle">
-                                        <i class="fas fa-book"></i>
-                                    </div>
-                                    <span class="text">Kelas</span>
-                                </div>
-                            </a> --}}
                             {{-- student --}}
-                            {{-- <a class="col-6 col-md-4 p-0" href="/admin/student">
+                            <a class="col-6 col-md-4 p-0" href="{{ route('admin.student') }}">
                                 <div class="quick-actions-item">
                                     <div class="avatar-item bg-danger rounded-circle">
                                         <i class="fas fa-user-graduate"></i>
                                     </div>
                                     <span class="text">Siswa</span>
                                 </div>
-                            </a> --}}
+                            </a>
+                            {{-- category --}}
+                            <a class="col-6 col-md-4 p-0" href="{{ route('admin.category') }}">
+                                <div class="quick-actions-item">
+                                    <div class="avatar-item bg-success rounded-circle">
+                                        <i class="fas fa-layer-group"></i>
+                                    </div>
+                                    <span class="text">Kategori</span>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -96,8 +96,8 @@
         <li class="nav-item dropdown hidden-caret">
             <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                 <div class="avatar-sm">
-                    <img src="{{ asset('assets/'. auth()->user()->officer->profile_picture) }}" alt="profile photo admin"
-                        class="avatar-img rounded-circle">
+                    <img src="{{ asset('storage/' . auth()->user()->officer->profile_picture) }}"
+                        alt="profile photo admin" class="avatar-img rounded-circle">
                 </div>
             </a>
             <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -105,7 +105,7 @@
                     <li>
                         <div class="user-box">
                             <div class="avatar-lg">
-                                <img src="{{ asset('assets/'. auth()->user()->officer->profile_picture) }}"
+                                <img src="{{ asset('storage/' . auth()->user()->officer->profile_picture) }}"
                                     alt="profile photo admin" class="avatar-img rounded">
                             </div>
                             <div class="u-text">
@@ -119,7 +119,8 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Home</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item hover-logout" href="{{ url('logout') }}" onclick="logout()">Logout</a>
+                        <a class="dropdown-item hover-logout" href="{{ url('logout') }}"
+                            onclick="logout()">Logout</a>
                     </li>
                 </div>
             </ul>
@@ -135,7 +136,7 @@
             title: 'Apakah anda yakin?',
             text: "Anda akan keluar dari akun ini!",
             icon: 'warning',
-                buttons: ["Batal", "Ya, Keluar!"],
+            buttons: ["Batal", "Ya, Keluar!"],
         }).then((result) => {
             if (result) {
                 swal(
@@ -152,13 +153,13 @@
         e.preventDefault();
         const search = document.getElementById('searchNavbar').value;
         if (search == '') {
-            Swal.fire({
+            swal({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Kata kunci tidak boleh kosong!',
             })
         } else {
-            window.location.href = `/dashboard/search/${search}`;
+            window.location.href = `/admin/search/${search}`;
         }
     }
 </script>

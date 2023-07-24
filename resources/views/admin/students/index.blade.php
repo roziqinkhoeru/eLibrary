@@ -257,7 +257,12 @@
 
                         });
                         $("#detailModal").html(modalHtml);
-                    } else {}
+                    } else {
+                        $('#studentTableBody').html(tableEmpty(7, 'siswa'));
+                    }
+                },
+                error: function(error) {
+                    $('#studentTableBody').html(tableError(7, `${response.responseJSON.message}`));
                 }
             });
         }

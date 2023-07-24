@@ -148,7 +148,6 @@
                         }, 4000);
                     },
                     error: function(xhr, status, error) {
-                        console.log(xhr);
                         $('#formEditCategoryButton').html('Kirim');
                         $('#formEditCategoryButton').prop('disabled', false);
                         if (xhr.responseJSON) {

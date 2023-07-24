@@ -19,7 +19,7 @@ class TransactionController extends Controller
     public function listTransaction()
     {
         $data = [
-            'title' => 'Data Transaksi | Admin Perpus Digital',
+            'title' => 'Data Peminjaman Buku | Admin Perpus Digital',
             'currentNav' => 'transaction',
             'currentNavChild' => 'listBorrow',
         ];
@@ -46,7 +46,7 @@ class TransactionController extends Controller
     public function historyTransaction()
     {
         $data = [
-            'title' => 'Data Transaksi | Perpus Digital',
+            'title' => 'Riwayat Peminjaman Buku | Admin Perpus Digital',
             'currentNav' => 'transaction',
             'currentNavChild' => 'history',
         ];
@@ -73,7 +73,7 @@ class TransactionController extends Controller
     public function create()
     {
         $data = [
-            'title' => 'Tambah Transaksi | Perpus Digital',
+            'title' => 'Tambah Peminjaman Buku | Admin Perpus Digital',
             'currentNav' => 'transaction',
             'currentNavChild' => 'create',
         ];
@@ -165,7 +165,7 @@ class TransactionController extends Controller
         }
 
         $data = [
-            'title' => 'Pengembalian Buku | Perpus Digital',
+            'title' => 'Pengembalian Buku | Admin Perpus Digital',
             'currentNav' => 'transaction',
             'currentNavChild' => 'return',
             'transaction' => $transaction,
@@ -175,7 +175,8 @@ class TransactionController extends Controller
         return view('admin.transaction.return', $data);
     }
 
-    public function updateReturnBook(Transaction $transaction, Request $request) {
+    public function updateReturnBook(Transaction $transaction, Request $request)
+    {
         $rules = [
             'return_date' => 'required|date',
             'penalty' => 'required|numeric',

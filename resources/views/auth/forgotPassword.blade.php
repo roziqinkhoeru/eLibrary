@@ -47,7 +47,7 @@
                                 </form>
                             </div>
                             <div class="sign__new text-center mt-20">
-                                <p>Ingat kata sandi? <a href="/login"> Masuk</a></p>
+                                <p>Ingat kata sandi? <a href="{{ route('login') }}"> Masuk</a></p>
                             </div>
                         </div>
                         <div id="forgotPasswordSuccess"></div>
@@ -84,11 +84,6 @@
             });
         </script>
     @endif
-    @error('email')
-        <script>
-            console.log({{ $message }});
-        </script>
-    @enderror
     <script>
         let isResendLinkResetPassword = false;
 
@@ -105,12 +100,12 @@
                     $('#forgotPasswordButton').prop('disabled', true);
                     Swal.fire({
                         icon: 'success',
-                        title: 'KIRIM TAUTAN BERHASIL!',
-                        text: '{{ session('success') }}',
+                        title: 'Sukses',
+                        text: 'Kirim Tautan Berhail!',
                     });
                     if (isResend) {
                         $('#resend_link').html(
-                            'Masih belum menerima email?<br/>Periksa spam Anda atau <a href="#" class="btn-anchor">coba alamat email lain</a>.'
+                            'Masih belum menerima email?<br/>Periksa spam Anda atau <a href="{{ route('password.request') }}" class="btn-anchor">coba alamat email lain</a>.'
                         );
                     } else {
                         $('#forgotPasswordSuccess').html(
@@ -138,13 +133,13 @@
                     if (xhr.responseJSON)
                         Swal.fire({
                             icon: 'error',
-                            title: 'KIRIM TAUTAN GAGAL!',
+                            title: 'Kirim Tautan Gagal!',
                             text: xhr.responseJSON.meta.message,
                         })
                     else
                         Swal.fire({
                             icon: 'error',
-                            title: 'KIRIM TAUTAN GAGAL!',
+                            title: 'Kirim Tautan Gagal!',
                             text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " + error,
                         })
                     return false;
