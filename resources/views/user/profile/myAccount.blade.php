@@ -125,10 +125,10 @@
             // Display loading state
             $("#nav-tabContent").html(`<div class="tab-pane fade show active" role="tabpanel">
                                         <div class="order__info">
-                                            <div class="profile__info-top d-flex justify-content-between align-items-center px-9">
+                                            <div class="profile__info-top d-flex justify-content-between align-items-center px-9 rounded-2-5">
                                                 <h3 class="profile__info-title">Informasi Akun</h3>
                                             </div>
-                                            <div class="order__list white-bg px-9">
+                                            <div class="order__list white-bg px-9 rounded-2-5">
                                                 <div class="d-flex align-items-center justify-content-center pt-35 pb-60">
                                                     <i class="fas fa-circle-notch spinners-2" style="font-size: 54px"></i>
                                                 </div>
@@ -144,10 +144,10 @@
                 success: function(response) {
                     htmlString = `<div class="tab-pane fade show active" role="tabpanel">
                             <div class="profile__info" id="profileInfo">
-                                <div class="profile__info-top d-flex justify-content-between align-items-center px-9">
+                                <div class="profile__info-top d-flex justify-content-between align-items-center px-9 rounded-2-5">
                                     <h3 class="profile__info-title">Informasi Akun</h3>
                                 </div>
-                                <div class="profile__info-wrapper white-bg px-9">
+                                <div class="profile__info-wrapper white-bg px-9 rounded-2-5">
                                     <div class="profile__info-item">
                                         <p>NIS</p>
                                         <h4>${response.data.student.nis}</h4>
@@ -188,10 +188,10 @@
             // Display loading state
             $("#nav-tabContent").html(`<div class="tab-pane fade show active" role="tabpanel">
                                         <div class="order__info">
-                                            <div class="order__info-top d-flex justify-content-between align-items-center px-9">
+                                            <div class="order__info-top d-flex justify-content-between align-items-center px-9 rounded-2-5">
                                                 <h3 class="order__info-title">Buku Pinjam</h3>
                                             </div>
-                                            <div class="order__list white-bg px-9">
+                                            <div class="order__list white-bg px-9 rounded-2-5">
                                                 <div class="d-flex align-items-center justify-content-center pt-35 pb-60">
                                                     <i class="fas fa-circle-notch spinners-2" style="font-size: 54px"></i>
                                                 </div>
@@ -206,23 +206,11 @@
                 success: function(response) {
                     htmlString = `<div class="tab-pane fade show active" role="tabpanel">
                                     <div class="order__info">
-                                        <div class="order__info-top d-flex justify-content-between align-items-center px-9">
+                                        <div class="order__info-top d-flex justify-content-between align-items-center px-9 rounded-2-5">
                                             <h3 class="order__info-title">Buku Pinjam</h3>
                                         </div>
-                                        <div class="order__list white-bg px-9 pb-9">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                        <th scope="col">#</th>
-                                                        <th scope="col">Buku</th>
-                                                        <th scope="col">Tanggal</th>
-                                                        <th scope="col">Denda</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    ${getMyBook(response.data.transactions)}
-                                                    </tbody>
-                                                </table>
+                                        <div class="order__list white-bg px-9 pb-9 rounded-2-5">
+                                            ${getMyBook(response.data.transactions)}
                                         </div>
                                     </div>
                                 </div>`
@@ -236,6 +224,7 @@
         // get my book data
         function getMyBook(data) {
             let myBook = '';
+            let myBookBody = '';
             if (data.length === 0) {
                 myBook = `<div class="col-span-full pt-50 pb-45">
                                 <div class="text-center">
@@ -253,37 +242,51 @@
                         default:
                             break;
                     }
-                    myBook += `<tr>
-                                            <th scope="row">${index+1}</th>
-                                            <td>
-                                                <div>Judul : ${transaction.book.title}</div>
-                                                <div>Penulis : ${transaction.book.author}</div>
-                                                <div>Penerbit : ${transaction.book.publisher}</div>
+                    myBookBody += `<tr>
+                                        <td class="text-center">${index+1}</td>
+                                        <td>
+                                            <div>Judul : ${transaction.book.title}</div>
+                                            <div>Penulis : ${transaction.book.author}</div>
+                                            <div>Penerbit : ${transaction.book.publisher}</div>
+                                        </td>
+                                        <td>
+                                            <div>Pinjam : ${moment(transaction.start_date, 'YYYY/MM/DD').format('DD/MM/YYYY')}</div>
+                                            <div>Batas : ${moment(transaction.end_date, 'YYYY/MM/DD H:i:s').format('DD/MM/YYYY')}</div>
+                                        </td>
+                                        <td>
+                                            <div class="${ parseInt(transaction.penalty) < 0 ? '' : 'text-danger'} : ${Math.abs(transaction.penalty_day)}">${ parseInt(transaction.penalty) < 0 ? 'Tersisa' : 'Terlambat'} : ${Math.abs(transaction.penalty_day)} Hari</div>
+                                            <div><span class="badge badge-danger bg-danger">${ parseInt(transaction.penalty) < 0 ? '' : 'Denda : ' + localCurrencyIDR(transaction.penalty)}</span></div>
                                             </td>
-                                            <td>
-                                                <div>Tanggal Pinjam : ${moment(transaction.start_date, 'YYYY/MM/DD').format('DD/MM/YYYY')}</div>
-                                                <div>Tanggal Batas : ${moment(transaction.end_date, 'YYYY/MM/DD H:i:s').format('DD/MM/YYYY')}</div>
-                                            </td>
-                                            <td>${ parseInt(transaction.penalty) < 0 ? '-' : localCurrencyIDR(transaction.penalty)}</td>
-                                            </tr>
-                            `;
-                })
+                                    </tr>`;
+                });
+                myBook = `<div class="table-responsive">
+                            <table class="table profileBookTable">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="text-center">#</th>
+                                            <th scope="col">Buku</th>
+                                            <th scope="col">Tanggal</th>
+                                            <th scope="col">Masa Pinjam</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${myBookBody}
+                                    </tbody>
+                                </table>
+                        </div>`;
             }
             return myBook;
         }
-
 
         // menu transaction
         function getTransactionHistory() {
             // Display loading state
             $("#nav-tabContent").html(`<div class="tab-pane fade show active" role="tabpanel">
                                         <div class="order__info">
-                                            <div
-                                                class="order__info-top d-flex justify-content-between align-items-center px-9"
-                                            >
+                                            <div class="order__info-top d-flex justify-content-between align-items-center px-9 rounded-2-5">
                                                 <h3 class="order__info-title">Riwayat Pinjam</h3>
                                             </div>
-                                            <div class="order__list white-bg">
+                                            <div class="order__list white-bg rounded-2-5">
                                                 <div class="d-flex align-items-center justify-content-center pt-35 pb-60 px-9">
                                                     <i class="fas fa-circle-notch spinners-2" style="font-size: 54px"></i>
                                                 </div>
@@ -298,31 +301,16 @@
                 dataType: "JSON",
                 success: function(response) {
                     htmlString = `<div class="tab-pane fade show active" role="tabpanel">
-                            <div class="order__info">
-                                <div
-                                    class="order__info-top d-flex justify-content-between align-items-center px-9"
-                                >
-                                    <h3 class="order__info-title">Riwayat Pinjam</h3>
-                                </div>
-                                <div class="order__list white-bg px-9">
-                                    <div>
-                                        <table class="table">
-                                        <thead>
-                                            <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Buku</th>
-                                            <th scope="col">Tanggal</th>
-                                            <th scope="col">Denda</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        ${getMyTransaction(response.data.transactions)}
-                                        </tbody>
-                                    </table>
+                                    <div class="order__info">
+                                        <div
+                                            class="order__info-top d-flex justify-content-between align-items-center px-9 rounded-2-5">
+                                            <h3 class="order__info-title">Riwayat Pinjam</h3>
+                                        </div>
+                                        <div class="order__list white-bg px-9 rounded-2-5">
+                                            <div>${getMyTransaction(response.data.transactions)}</div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>`
+                                </div>`
                     $("#nav-tabContent").html(htmlString);
                 },
                 error: function(xhr, status, error) {
@@ -333,12 +321,13 @@
         // get my transaction
         function getMyTransaction(data) {
             let myTransaction = '';
-            if (data === 0) {
+            let myTransactionBody = '';
+            if (data.length === 0) {
                 myTransaction = `<div class="col-span-full pt-50 pb-75">
                                     <div class="text-center">
-                                        <h3 class="text-2xl">Transaksi Kosong</h3>
-                                        <p class="text-base">Kamu belum melakukan transaksi  apapun</p>
-                                        <a href="/course" class="tp-btn tp-btn-4 rounded-2">Beli Kelas</a>
+                                        <h3 class="text-2xl">Riwayat Pinjam Kosong</h3>
+                                        <p class="text-base">Kamu belum melakukan peminjaman buku apapun</p>
+                                        <a href="/book" class="tp-btn tp-btn-4 rounded-2">Pinjam Buku</a>
                                     </div>
                                 </div>`;
             } else {
@@ -353,22 +342,33 @@
                         default:
                             break;
                     }
-                    myTransaction += `
-                                            <tr>
-                                            <th scope="row">${index+1}</th>
+                    myTransactionBody += `<tr>
+                                            <td class="text-center">${index+1}</td>
                                             <td>
                                                 <div>Judul : ${transaction.book.title}</div>
                                                 <div>Penulis : ${transaction.book.author}</div>
                                                 <div>Penerbit : ${transaction.book.publisher}</div>
                                             </td>
                                             <td>
-                                                <div>Tanggal Pinjam : ${moment(transaction.start_date, 'YYYY/MM/DD').format('DD/MM/YY')}</div>
-                                                <div>Tanggal Kembali : ${moment(transaction.return_date, 'YYYY/MM/DD').format('DD/MM/YY')}</div>
+                                                <div>Pinjam : ${moment(transaction.start_date, 'YYYY/MM/DD').format('DD/MM/YY')}</div>
+                                                <div>Kembali : ${moment(transaction.return_date, 'YYYY/MM/DD').format('DD/MM/YY')}</div>
                                             </td>
-                                            <td>${transaction.penalty}</td>
+                                            <td><span class="badge ${ parseInt(transaction.penalty) === 0 ? 'badge-primary bg-primary' : 'badge-danger bg-danger'}">${ parseInt(transaction.penalty) === 0 ? 'Tepat Waktu' : 'Denda : ' + localCurrencyIDR(transaction.penalty)}</span></td>
+                                        </tr>`;
+                });
+                myTransaction = `<div class="table-responsive">
+                                    <table class="table profileBookTable">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="text-center">#</th>
+                                                <th scope="col">Buku</th>
+                                                <th scope="col">Tanggal</th>
+                                                <th scope="col">Ket.</th>
                                             </tr>
-                `;
-                })
+                                        </thead>
+                                        <tbody>${myTransactionBody}</tbody>
+                                    </table>
+                                </div>`
             }
             return myTransaction;
         }
@@ -377,10 +377,10 @@
         function formChangePassword() {
             htmlString = `<div class="tab-pane fade show active" role="tabpanel">
                         <div class="password__change">
-                            <div class="password__change-top px-9">
+                            <div class="password__change-top px-9 rounded-2-5">
                                 <h3 class="password__change-title">Ubah Kata Sandi</h3>
                             </div>
-                            <div class="password__form white-bg px-9">
+                            <div class="password__form white-bg px-9 rounded-2-5">
                                 <form action="{{ route('profile.change.password') }}" method="POST" id="formChangePassword">
                                     @csrf @method('PUT')
                                     <div class="password__input">
@@ -396,7 +396,7 @@
                                         <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" >
                                     </div>
                                     <div class="password__input mb-5 text-right">
-                                        <button type="submit "id="updatePasswordButton" class="tp-btn">Update password</button>
+                                        <button type="submit "id="updatePasswordButton" class="tp-btn tp-btn-4 rounded-3">Update password</button>
                                     </div>
                                 </form>
                             </div>
@@ -455,7 +455,7 @@
                             $('#password_confirmation').val("");
                             Swal.fire({
                                 icon: 'success',
-                                title: 'UBAH PASSWORD BERHASIL!',
+                                title: 'Sukses!',
                                 text: response.meta.message,
                             })
                         },
@@ -465,7 +465,7 @@
                             if (xhr.responseJSON) {
                                 Swal.fire({
                                     icon: 'error',
-                                    title: 'UBAH PASSWORD GAGAL!',
+                                    title: 'Ubah Password Gagal!',
                                     text: xhr.responseJSON.meta.message +
                                         " Error: " + xhr
                                         .responseJSON.data.error,
@@ -473,7 +473,7 @@
                             } else {
                                 Swal.fire({
                                     icon: 'error',
-                                    title: 'UBAH PASSWORD GAGAL!',
+                                    title: 'Ubah Password Gagal!',
                                     text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " +
                                         error,
                                 })
@@ -484,7 +484,6 @@
                 }
             });
         }
-
 
         // Menambahkan aturan validasi kustom untuk ukuran maksimum file
         $.validator.addMethod('maxfilesize', function(value, element, param) {
@@ -534,7 +533,7 @@
                         $('#image_profile_edit_modal').modal('hide');
                         Swal.fire({
                             icon: 'success',
-                            title: 'UBAH FOTO PROFIL BERHASIL!',
+                            title: 'Sukses!',
                             text: response.meta.message,
                         })
                         $("#photoProfile").attr('src',
@@ -551,7 +550,7 @@
                         if (xhr.responseJSON) {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'UBAH FOTO PROFIL GAGAL!',
+                                title: 'Gagal!',
                                 text: xhr.responseJSON.meta
                                     .message + ", Error: " +
                                     xhr
@@ -561,7 +560,7 @@
                         } else {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'UBAH FOTO PROFIL GAGAL!',
+                                title: 'Gagal!',
                                 text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " +
                                     error,
                             })

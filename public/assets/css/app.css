@@ -964,3 +964,30 @@
     -ms-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
 }
+
+/* PROFILE */
+.profileBookTable {
+    width: 100%;
+    border-collapse: collapse !important;
+    border-spacing: 0;
+    clear: both;
+    max-width: none !important;
+}
+.profileBookTable thead tr th {
+    border: 1.5px solid #dee2e6 !important;
+    white-space: nowrap;
+    border-color: #ebedf2 !important;
+    padding: 0 14px !important;
+    height: 48px;
+    vertical-align: middle !important;
+}
+.profileBookTable tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+.profileBookTable tbody tr td {
+    border: 1.5px solid #dee2e6 !important;
+    padding: 14px !important;
+    height: 48px;
+    min-height: 48px !important;
+    height: auto !important;
+}
