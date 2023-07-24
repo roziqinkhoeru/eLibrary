@@ -54,8 +54,9 @@
                                             placeholder="{{ request()->is('ebook*') ? 'Cari eBook...' : 'Cari buku...' }}"
                                             class="rounded-pill" id="searchBookDesktop" name="search"
                                             @if (request()->has('search')) value="{{ request()->search }}" @endif>
-                                        <button class="header__search-btn r-5"><svg width="18" height="18"
-                                                viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <button class="header__search-btn r-5" onclick="getBook('dekstop')"><svg
+                                                width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M8.11117 15.2222C12.0385 15.2222 15.2223 12.0385 15.2223 8.11111C15.2223 4.18375 12.0385 1 8.11117 1C4.18381 1 1.00006 4.18375 1.00006 8.11111C1.00006 12.0385 4.18381 15.2222 8.11117 15.2222Z"
                                                     stroke="#031220" stroke-width="2" stroke-linecap="round"
@@ -138,7 +139,8 @@
                                     placeholder="{{ request()->is('ebook*') ? 'Cari eBook...' : 'Cari buku...' }}"
                                     id="searchBookMobile" name="search"
                                     @if (request()->has('search')) value="{{ request()->search }}" @endif>
-                                <button type="submit"><i class="far fa-search"></i></button>
+                                <button type="submit" onclick="getBook('mobile')"><i
+                                        class="far fa-search"></i></button>
                             </form>
                         </div>
                         <div class="mobile-menu fix"></div>

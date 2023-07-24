@@ -9,7 +9,7 @@
                     <div
                         class="slider__item swiper-slide p-relative slider__height slider__height-3 d-flex align-items-center z-index-1">
                         <div class="slider__bg slider__overlay slider__overlay-3 include-bg"
-                            data-background="assets/img/slider/3/slider-1.jpg"></div>
+                            data-background="{{ asset('assets/img/decoration/pexels-pixabay-159740.jpg') }}"></div>
                         <div class="container">
                             <div class="row">
                                 <div class="col-xxl-6 col-xl-7 col-lg-8 col-md-10 col-sm-10">
@@ -23,16 +23,19 @@
                                                 <path d="M6.375 9.99251L8.785 12.4125L13.615 7.57251" stroke="white"
                                                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
-                                            GET 30% off on fast enroll</span>
-                                        <h2 class="slider__title-3" data-animation="fadeInUp" data-delay=".6s">Launch Your
-                                            <br> Own online learning Platform</h2>
+                                            Tingkatkan Pengetahuamu Disini</span>
+                                        <h2 class="slider__title-3" data-animation="fadeInUp" data-delay=".6s">
+                                            Selamat Datang di Perpus Digital SMKN 1 Sungai Menang
+                                        </h2>
 
                                         <div class="slider__search mb-20" data-animation="fadeInUp" data-delay=".9s">
-                                            <form action="#">
+                                            <form id="searchBookHeaderForm">
                                                 <div class="slider__search-input p-relative">
-                                                    <input type="text" placeholder="Course title here...">
-                                                    <button type="submit">Search</button>
-                                                    <div class="slider__search-input-icon">
+                                                    <input type="text" placeholder="Temukan bacaanmu..."
+                                                        id="searchBookHeader" name="search"
+                                                        @if (request()->has('search')) value="{{ request()->search }}" @endif>
+                                                    <button type="submit" class="blue">Search</button>
+                                                    <div class="slider__search-input-icon d-flex">
                                                         <svg width="18" height="18" viewBox="0 0 18 18"
                                                             fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -61,7 +64,8 @@
                     <div
                         class="slider__item swiper-slide p-relative slider__height slider__height-3 d-flex align-items-center z-index-1">
                         <div class="slider__bg slider__overlay slider__overlay-3 include-bg"
-                            data-background="assets/img/slider/3/slider-2.jpg"></div>
+                            data-background="{{ asset('assets/img/decoration/pexels-rafael-cosquiere-2041540.jpg') }}">
+                        </div>
                         <div class="container">
                             <div class="row">
                                 <div class="col-xxl-6 col-xl-7 col-lg-8 col-md-10 col-sm-10">
@@ -75,22 +79,25 @@
                                                 <path d="M6.375 9.99251L8.785 12.4125L13.615 7.57251" stroke="white"
                                                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
-                                            GET 30% off on fast enroll</span>
-                                        <h2 class="slider__title-3" data-animation="fadeInUp" data-delay=".6s">Launch Your
-                                            <br> Own online learning Platform</h2>
+                                            Buku Adalah Jendela Dunia</span>
+                                        <h2 class="slider__title-3" data-animation="fadeInUp" data-delay=".6s">
+                                            Sedikit Bacaan, Banyak Ilmu Yang Didapat
+                                        </h2>
 
                                         <div class="slider__search mb-20" data-animation="fadeInUp" data-delay=".9s">
-                                            <form action="#">
+                                            <form id="searchEBookHeaderForm">
                                                 <div class="slider__search-input p-relative">
-                                                    <input type="text" placeholder="Course title here...">
-                                                    <button type="submit">Search</button>
-                                                    <div class="slider__search-input-icon">
+                                                    <input type="text" placeholder="Temukan bacaanmu..."
+                                                        id="searchEBookHeader" name="search"
+                                                        @if (request()->has('search')) value="{{ request()->search }}" @endif>
+                                                    <button type="submit" class="blue">Search</button>
+                                                    <div class="slider__search-input-icon d-flex">
                                                         <svg width="18" height="18" viewBox="0 0 18 18"
                                                             fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path
                                                                 d="M8.625 15.75C12.56 15.75 15.75 12.56 15.75 8.625C15.75 4.68997 12.56 1.5 8.625 1.5C4.68997 1.5 1.5 4.68997 1.5 8.625C1.5 12.56 4.68997 15.75 8.625 15.75Z"
-                                                                stroke="#828282" stroke-width="1.5" stroke-linecap="round"
-                                                                stroke-linejoin="round" />
+                                                                stroke="#828282" stroke-width="1.5"
+                                                                stroke-linecap="round" stroke-linejoin="round" />
                                                             <path d="M16.5 16.5L15 15" stroke="#828282"
                                                                 stroke-width="1.5" stroke-linecap="round"
                                                                 stroke-linejoin="round" />
@@ -123,5 +130,14 @@
 @endsection
 
 @section('script')
-    <script></script>
+    <script>
+        $("#searchBookHeaderForm").submit(function(e) {
+            e.preventDefault();
+            window.location.href = "{{ url('/book?search=') }}" + $("#searchBookHeader").val();
+        });
+        $("#searchEBookHeaderForm").submit(function(e) {
+            e.preventDefault();
+            window.location.href = "{{ url('/ebook?search=') }}" + $("#searchEBookHeader").val();
+        });
+    </script>
 @endsection

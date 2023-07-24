@@ -1976,7 +1976,7 @@ input[type="color"] {
     }
 }
 .slider__height-3 {
-    min-height: 775px;
+    min-height: 640px;
 }
 @media only screen and (min-width: 576px) and (max-width: 767px),
     (max-width: 575px) {
