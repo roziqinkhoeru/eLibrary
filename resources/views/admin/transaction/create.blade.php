@@ -45,30 +45,24 @@
                             @csrf
                             <div class="card-body">
                                 {{-- student id --}}
-                                <div class="form-group form-show-validation row">
-                                    <label for="student_id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">NIS
+                                <div class="form-group form-show-validation row select2-form-input">
+                                    <label for="student_id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Nama
                                         Siswa
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
-                                        {{-- <input type="text" class="form-control" id="student_id" name="student_id"
-                                            placeholder="Masukkan NIS Siswa" required> --}}
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <div class="select2-input">
                                             <select class="form-control" id="student_id" name="student_id" required>
-                                                <option value="">Pilih Siswa</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 {{-- book id --}}
-                                <div class="form-group form-show-validation row">
-                                    <label for="book_id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">ID Buku
+                                <div class="form-group form-show-validation row select2-form-input">
+                                    <label for="book_id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Buku
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
-                                        {{-- <input type="text" class="form-control" id="book_id" name="book_id"
-                                            placeholder="Masukkan ID Buku" required> --}}
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <div class="select2-input">
                                             <select class="form-control" id="book_id" name="book_id" required>
-                                                <option value="">Pilih Buku</option>
                                             </select>
                                         </div>
                                     </div>
@@ -124,10 +118,10 @@
             getBookData();
             getStudentData();
             $('#book_id').select2({
-
+                theme: "bootstrap",
             });
-
             $('#student_id').select2({
+                theme: "bootstrap"
             });
             var today = moment().format('YYYY/MM/DD');;
             $('#start_date').datetimepicker({
@@ -140,7 +134,7 @@
         });
 
         function getBookData() {
-            var htmlstring = '';
+            var htmlstring = '<option value="">Pilih Buku</option>';
             $.ajax({
                 type: "GET",
                 url: `{{ route('admin.transaction.create.book.data') }}`,
@@ -163,7 +157,7 @@
         }
 
         function getStudentData() {
-            var htmlstring = '';
+            var htmlstring = '<option value="">Pilih Siswa</option>';
             $.ajax({
                 type: "GET",
                 url: `{{ route('admin.transaction.create.student.data') }}`,
@@ -189,11 +183,9 @@
             rules: {
                 student_id: {
                     required: true,
-                    number: true,
                 },
                 book_id: {
                     required: true,
-                    number: true,
                 },
                 start_date: {
                     required: true,
@@ -205,11 +197,9 @@
             messages: {
                 student_id: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>NIS Siswa tidak boleh kosong',
-                    number: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>NIS Siswa harus berupa angka',
                 },
                 book_id: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>ID Buku tidak boleh kosong',
-                    number: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>ID Buku harus berupa angka',
                 },
                 start_date: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Tanggal Mulai Pinjam tidak boleh kosong',
@@ -217,6 +207,9 @@
                 end_date: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Tanggal Batas Pinjam tidak boleh kosong',
                 },
+            },
+            highlight: function(element) {
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
             },
             submitHandler: function(form, event) {
                 event.preventDefault();
