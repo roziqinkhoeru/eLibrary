@@ -42,11 +42,11 @@ class AdminController extends Controller
             ->orderBy('total', 'desc')
             ->get();
 
-        $studentTopBorrow = Transaction::select(DB::raw('count(*) as total, students.name as student_name, students.nis, students.profile_picture, class_schools.name as class_name, class_schools.major'))
+        $studentTopBorrow = Transaction::select(DB::raw('count(*) as total'), 'students.name as student_name', 'students.nis', 'students.profile_picture', 'class_schools.name as class_name', 'class_schools.major')
             ->join('students', 'students.nis', '=', 'transactions.student_id')
             ->join('class_schools', 'class_schools.id', '=', 'students.class_school_id')
             ->whereYear('transactions.created_at', date('Y'))
-            ->groupBy('students.name', 'students.nis')
+            ->groupBy('transactions.student_id')
             ->orderBy('total', 'desc')
             ->limit(5)
             ->get();
