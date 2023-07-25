@@ -42,14 +42,23 @@ class AdminController extends Controller
             ->orderBy('total', 'desc')
             ->get();
 
-        $studentTopBorrow = Transaction::select(DB::raw('count(*) as total'), 'students.name as student_name', 'students.nis', 'students.profile_picture', 'class_schools.name as class_name', 'class_schools.major')
-            ->join('students', 'students.nis', '=', 'transactions.student_id')
-            ->join('class_schools', 'class_schools.id', '=', 'students.class_school_id')
-            ->whereYear('transactions.created_at', date('Y'))
-            ->groupBy('transactions.student_id')
-            ->orderBy('total', 'desc')
-            ->limit(5)
-            ->get();
+        // $studentTopBorrow = Transaction::select(DB::raw('count(*) as total'), 'students.name as student_name', 'students.nis', 'students.profile_picture', 'class_schools.name as class_name', 'class_schools.major')
+        //     ->join('students', 'students.nis', '=', 'transactions.student_id')
+        //     ->join('class_schools', 'class_schools.id', '=', 'students.class_school_id')
+        //     ->whereYear('transactions.created_at', date('Y'))
+        //     ->groupBy('transactions.student_id')
+        //     ->orderBy('total', 'desc')
+        //     ->limit(5)
+        //     ->get();
+
+        $studentTopBorrow = Student::select('students.name as student_name', 'students.nis', 'students.profile_picture')
+        ->with('class_school:id,name,major')
+        ->withCount(['transactions as transactions_count' => function ($query) {
+            $query->whereYear('created_at', date('Y'));
+        }])
+        ->orderBy('transactions_count', 'desc')
+        ->limit(5)
+        ->get();
 
         $statisticMonthBorrow = Transaction::select(DB::raw('count(*) as total, month(transactions.start_date) as month'))
             ->whereYear('transactions.start_date', date('Y'))

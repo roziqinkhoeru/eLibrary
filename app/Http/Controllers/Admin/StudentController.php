@@ -24,9 +24,9 @@ class StudentController extends Controller
     public function getStudent()
     {
         $students = Student::with('class_school:id,name', 'user:student_id,email', 'transactions.book:id,title')
-        ->with(['transactions' => function ($query) {
-            $query->where('status', 'pinjam');
-        }])
+            ->with(['transactions' => function ($query) {
+                $query->where('status', 'pinjam');
+            }])
             ->whereHas('transactions', function ($query) {
                 $query->where('status', 'pinjam');
             })
