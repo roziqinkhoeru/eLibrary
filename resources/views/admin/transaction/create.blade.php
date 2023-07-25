@@ -45,30 +45,24 @@
                             @csrf
                             <div class="card-body">
                                 {{-- student id --}}
-                                <div class="form-group form-show-validation row">
-                                    <label for="student_id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">NIS
+                                <div class="form-group form-show-validation row select2-form-input">
+                                    <label for="student_id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Nama
                                         Siswa
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
-                                        {{-- <input type="text" class="form-control" id="student_id" name="student_id"
-                                            placeholder="Masukkan NIS Siswa" required> --}}
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <div class="select2-input">
                                             <select class="form-control" id="student_id" name="student_id" required>
-                                                <option value="">Pilih Siswa</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 {{-- book id --}}
-                                <div class="form-group form-show-validation row">
-                                    <label for="book_id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">ID Buku
+                                <div class="form-group form-show-validation row select2-form-input">
+                                    <label for="book_id" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Buku
                                         <span class="required-label">*</span></label>
-                                    <div class="col-lg-4 col-md-9 col-sm-8">
-                                        {{-- <input type="text" class="form-control" id="book_id" name="book_id"
-                                            placeholder="Masukkan ID Buku" required> --}}
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
                                         <div class="select2-input">
                                             <select class="form-control" id="book_id" name="book_id" required>
-                                                <option value="">Pilih Buku</option>
                                             </select>
                                         </div>
                                     </div>
@@ -121,44 +115,13 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(document).ready(function() {
+            getBookData();
+            getStudentData();
             $('#book_id').select2({
-                ajax: {
-                    url: `{{ route('admin.transaction.create.book.data') }}`,
-                    dataType: 'json',
-                    delay: 250,
-                    processResults: function(data) {
-                        return {
-                            results: $.map(data.data.books, function(item) {
-                                return {
-                                    text: item.title,
-                                    id: item.id,
-                                    value: item.id
-                                }
-                            })
-                        };
-                    },
-                    cache: true
-                }
+                theme: "bootstrap",
             });
-
             $('#student_id').select2({
-                ajax: {
-                    url: `{{ route('admin.transaction.create.student.data') }}`,
-                    dataType: 'json',
-                    delay: 250,
-                    processResults: function(data) {
-                        return {
-                            results: $.map(data.data.students, function(item) {
-                                return {
-                                    text: item.name,
-                                    id: item.nis,
-                                    value: item.nis
-                                }
-                            })
-                        };
-                    },
-                    cache: true
-                }
+                theme: "bootstrap"
             });
             var today = moment().format('YYYY/MM/DD');;
             $('#start_date').datetimepicker({
@@ -170,19 +133,59 @@
             });
         });
 
-        // function getData() {
+        function getBookData() {
+            var htmlstring = '<option value="">Pilih Buku</option>';
+            $.ajax({
+                type: "GET",
+                url: `{{ route('admin.transaction.create.book.data') }}`,
+                dataType: "json",
+                success: function(response) {
+                    $.each(response.data.books, function(index, item) {
+                        htmlstring += `<option value="${item.id}">${item.title}</option>`;
+                    });
+                    $('#book_id').html(htmlstring);
+                },
+                error: function(xhr, status, error) {
+                    swal({
+                        title: "Gagal!",
+                        text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " + error,
+                        icon: "error",
+                    });
+                    return false;
+                },
+            });
+        }
 
-        // }
+        function getStudentData() {
+            var htmlstring = '<option value="">Pilih Siswa</option>';
+            $.ajax({
+                type: "GET",
+                url: `{{ route('admin.transaction.create.student.data') }}`,
+                dataType: "json",
+                success: function(response) {
+                    $.each(response.data.students, function(index, item) {
+                        htmlstring += `<option value="${item.id}">${item.name}</option>`;
+                    });
+                    $('#student_id').html(htmlstring);
+                },
+                error: function(xhr, status, error) {
+                    swal({
+                        title: "Gagal!",
+                        text: "Terjadi kegagalan, silahkan coba beberapa saat lagi! Error: " + error,
+                        icon: "error",
+                    });
+                    return false;
+                },
+            });
+        }
 
         $("#formAddCategory").validate({
             rules: {
                 student_id: {
                     required: true,
-                    number: true,
                 },
                 book_id: {
                     required: true,
-                    number: true,
                 },
                 start_date: {
                     required: true,
@@ -194,11 +197,9 @@
             messages: {
                 student_id: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>NIS Siswa tidak boleh kosong',
-                    number: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>NIS Siswa harus berupa angka',
                 },
                 book_id: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>ID Buku tidak boleh kosong',
-                    number: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>ID Buku harus berupa angka',
                 },
                 start_date: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Tanggal Mulai Pinjam tidak boleh kosong',
@@ -206,6 +207,9 @@
                 end_date: {
                     required: '<i class="fas fa-exclamation-circle mr-6 text-sm icon-error"></i>Tanggal Batas Pinjam tidak boleh kosong',
                 },
+            },
+            highlight: function(element) {
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
             },
             submitHandler: function(form, event) {
                 event.preventDefault();

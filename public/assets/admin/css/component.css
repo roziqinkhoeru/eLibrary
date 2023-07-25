@@ -88,3 +88,19 @@
 .swal-text {
     text-align: center !important;
 }
+
+/* SELECT2 */
+.select2-input .select2.select2-container.select2-container--bootstrap {
+    margin-bottom: 0;
+}
+.form-group.form-show-validation.row.select2-form-input.has-error {
+    margin-bottom: 20px;
+}
+.form-group.form-show-validation.row.select2-form-input.has-error label.error {
+    margin-top: 0;
+    bottom: -24px !important;
+}
+.form-group.form-show-validation.row.select2-form-input
+    .select2.select2-container.select2-container--bootstrap {
+    width: 100%;
+}
