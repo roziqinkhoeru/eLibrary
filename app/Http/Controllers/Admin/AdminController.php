@@ -53,10 +53,10 @@ class AdminController extends Controller
 
         $studentTopBorrow = Student::select('students.name as student_name', 'students.nis', 'students.profile_picture')
         ->with('class_school:id,name,major')
-        ->withCount(['transactions as transactions_count' => function ($query) {
+        ->withCount(['transactions as total' => function ($query) {
             $query->whereYear('created_at', date('Y'));
         }])
-        ->orderBy('transactions_count', 'desc')
+        ->orderBy('total', 'desc')
         ->limit(5)
         ->get();
 
