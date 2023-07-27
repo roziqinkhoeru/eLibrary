@@ -68,7 +68,6 @@
             class="login-aside w-50 d-flex flex-column align-items-center justify-content-center text-center bg-secondary-gradient">
             <div class="d-flex justify-content-center mb-4">
                 <figure class="auth-image-wrapper">
-                    {{-- <a href="{{ route('dashboard') }}"> --}}
                     <a href="/">
                         <img src="{{ asset('assets/img/brand/eLibrary-letter-2.svg') }}" alt="eLibrary letter logo">
                     </a>

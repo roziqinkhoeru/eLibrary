@@ -52,35 +52,6 @@
                                         </ul>
                                     </div>
                                 </div>
-                                {{-- price --}}
-                                {{-- <div class="course__sidebar-widget white-bg">
-                                    <div class="course__sidebar-info">
-                                        <h3 class="course__sidebar-title">Class Filter</h3>
-                                        <ul id="classFilter">
-                                            <li>
-                                                <div class="course__sidebar-check mb-10 d-flex align-items-center">
-                                                    <input class="classFilter m-check-input" type="radio" name="sort"
-                                                        value="class10" id="class10In">
-                                                    <label class="m-check-label" for="class10In">Kelas X</label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="course__sidebar-check mb-10 d-flex align-items-center">
-                                                    <input class="classFilter m-check-input" type="radio" value="class11"
-                                                        name="sort" id="class11In">
-                                                    <label class="m-check-label" for="class11In">Kelas XI</label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="course__sidebar-check mb-10 d-flex align-items-center">
-                                                    <input class="classFilter m-check-input" type="radio" value="class12"
-                                                        name="sort" id="class12In">
-                                                    <label class="m-check-label" for="class12In">Kelas XII</label>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> --}}
                             </form>
                         </div>
                     </div>
