@@ -67,7 +67,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Author
 
-[Verdian Galang Pratama](https://github.com/)
+[Verdian Galang Pratama](https://github.com/vrdn15)
 
 ## How to install
 

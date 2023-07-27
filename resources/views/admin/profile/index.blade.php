@@ -31,27 +31,21 @@
                                     <div class="col-md-4">
                                         <div class="form-group form-group-default">
                                             <label for="name">Nama</label>
-                                            {{-- <input disabled type="text" class="form-control" name="name" id="name"
-                                                placeholder="Nama" value="{{ $admin->officer->name }}"> --}}
-                                                <div class="form-control">{{ $admin->officer->name }}</div>
+                                            <div class="form-control">{{ $admin->officer->name }}</div>
                                         </div>
                                     </div>
                                     {{-- username --}}
                                     <div class="col-md-4">
                                         <div class="form-group form-group-default">
                                             <label for="username">username</label>
-                                            {{-- <input disabled type="username" class="form-control" name="username" id="username"
-                                                placeholder="username" value="{{ $admin->username }}" disabled> --}}
-                                                <div class="form-control">{{ $admin->username }}</div>
+                                            <div class="form-control">{{ $admin->username }}</div>
                                         </div>
                                     </div>
                                     {{-- email --}}
                                     <div class="col-md-4">
                                         <div class="form-group form-group-default">
                                             <label for="email">Email</label>
-                                            {{-- <input disabled type="email" class="form-control" name="email" id="email"
-                                                placeholder="email" value="{{ $admin->email }}" disabled> --}}
-                                                <div class="form-control">{{ $admin->email }}</div>
+                                            <div class="form-control">{{ $admin->email }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -60,34 +54,22 @@
                                     <div class="col-md-4">
                                         <div class="form-group form-group-default">
                                             <label for="dob">Tanggal Lahir</label>
-                                            {{-- <input disabled type="text" class="form-control" id="dob" name="dob"
-                                                value="{{ date('d/m/Y', strtotime($admin->officer->dob)) }}"
-                                                placeholder="Birth Date"> --}}
-                                                <div class="form-control">{{ $admin->officer->date_of_birth }}</div>
+                                            <div class="form-control">{{ $admin->officer->date_of_birth }}</div>
                                         </div>
                                     </div>
                                     {{-- gender --}}
                                     <div class="col-md-4">
                                         <div class="form-group form-group-default">
                                             <label for="gender">Jenis Kelamin</label>
-                                            {{-- <select disabled class="form-control" id="gender" name="gender">
-                                                <option value="Laki-laki"
-                                                    {{ $admin->officer->gender == 'laki-laki' ? 'selected' : '' }}>
-                                                    Laki-laki</option>
-                                                <option value="perempuan"
-                                                    {{ $admin->officer->gender == 'perempuan' ? 'selected' : '' }}>
-                                                    perempuan</option>
-                                            </select> --}}
-                                            <div class="form-control">{{ $admin->officer->gender == 'L' ? 'laki-laki' : 'Perempuan' }}</div>
+                                            <div class="form-control">
+                                                {{ $admin->officer->gender == 'L' ? 'laki-laki' : 'Perempuan' }}</div>
                                         </div>
                                     </div>
                                     {{-- phone --}}
                                     <div class="col-md-4">
                                         <div class="form-group form-group-default">
                                             <label for="phone">No Telepon</label>
-                                            {{-- <input disabled type="text" class="form-control" id="phone"
-                                                value="{{ $admin->officer->phone }}" name="phone" placeholder="Phone"> --}}
-                                                <div class="form-control">{{ $admin->officer->phone_number }}</div>
+                                            <div class="form-control">{{ $admin->officer->phone_number }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -96,17 +78,10 @@
                                     <div class="col-md-12">
                                         <div class="form-group form-group-default">
                                             <label for="address">Alamat</label>
-                                            {{-- <input disabled type="text" class="form-control"
-                                                value="{{ $admin->officer->address }}" id="address" name="address"
-                                                placeholder="Address"> --}}
-                                                <div class="form-control">{{ $admin->officer->address }}</div>
+                                            <div class="form-control">{{ $admin->officer->address }}</div>
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <div class="text-right mt-3 mb-3">
-                                    <button class="btn btn-success" type="submit" id="updateButton">Perbarui
-                                        Profil</button>
-                                </div> --}}
                             </form>
                         </div>
                     </div>

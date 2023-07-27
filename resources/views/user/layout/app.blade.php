@@ -88,72 +88,44 @@
     {{-- back to top end --}}
 
     @include('user.components.navbar')
-    {{-- condition: profile user not complete yet --}}
-    {{-- @if (Auth::check()) --}}
-    {{-- get first name --}}
-    {{-- @php
-            $name = explode(' ', auth()->user()->customer->name);
+    @if (Auth::check())
+        {{-- get first name --}}
+        @php
+            $countBookOverdue = auth()
+                ->user()
+                ->student->transactions->where('status', 'pinjam')
+                ->where('end_date', '<', now())
+                ->count();
         @endphp
-        @if (auth()->user()->customer->phone == '00000000000' || auth()->user()->customer->address == null || auth()->user()->customer->gender == null)
-            <section class="pt-20 pb-20" style="background: #6151FB">
-                <div class="container">
-                    <div class="d-flex align-items-lg-center justify-content-between flex-column flex-lg-row">
-                        <div class="mb-3 mb-lg-0">
-                            <div class="d-flex align-items-sm-center flex-column flex-sm-row">
-                                <div class="mr-20 mb-3 mb-sm-0">
-                                    <img src="{{ asset('assets/img/decoration/check-and-good.png') }}"
-                                        alt="check-and-good" style="height: 72px">
-                                </div>
-                                <div class="">
-                                    <p class="mb-5 text-white text-xl fw-bold">Hi,
-                                        {{ $name[0] }}. Kamu
-                                        belum
-                                        melengkapi
-                                        data profil!</p>
-                                    <p class="mb-0" style="color: #e9e9e9">Lengkapi data profil kamu agar
-                                        mempermudah dalam
-                                        mengakses website kami.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ml-92-btn">
-                            <a href="/profile?content=profile" class="tp-btn tp-btn-3 btn-darks rounded-pill">Lengkapi
-                                Profil</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        @endif --}}
-
-    {{-- condition: the user must complete the payment --}}
-    {{-- @if (auth()->user()->customer->studentCourseEnrolls->where('status', 'menunggu pembayaran')->count() > 0)
+        {{-- condition: the user must complete the transaction --}}
+        @if ($countBookOverdue > 0)
             <section class="pt-20 pb-20" style="background: #8d51fb">
                 <div class="container">
                     <div class="d-flex align-items-xl-center justify-content-between flex-column flex-xl-row">
                         <div class="mb-3 mb-xl-0">
                             <div class="d-flex align-items-sm-center flex-column flex-sm-row">
                                 <div class="mr-20 mb-3 mb-sm-0">
-                                    <img src="{{ asset('assets/img/decoration/card-money.png') }}"
-                                        alt="check-and-good" style="width: 72px">
+                                    <img src="{{ asset('assets/img/decoration/books.png') }}" alt="books"
+                                        style="width: 72px">
                                 </div>
                                 <div class="">
-                                    <p class="mb-5 text-white text-xl fw-bold">Hi,
-                                        {{ $name[0] }}. Kamu
-                                        belum masih memliki transaksi yang belum diselesaikan!</p>
-                                    <p class="mb-0" style="color: #e9e9e9">Selesaikan transaksinya agar kamu bisa
-                                        mengakses produk yang kamu pilih.</p>
+                                    <p class="mb-5 text-white text-xl fw-bold">Hi, Kamu
+                                        memliki peminjaman yang melebihi waktu kembali!</p>
+                                    <p class="mb-0" style="color: #e9e9e9">Kembalikan buku yang kamu pinjam dan
+                                        hubungi
+                                        petugas untuk memproses denda.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="ml-92-btn">
-                            <a href="/profile?content=transaction-history"
-                                class="tp-btn tp-btn-3 btn-darks rounded-pill">Selesaikan Transaksi</a>
+                            <a href="/profile?content=book" class="tp-btn tp-btn-3 btn-darks rounded-pill">Lihat
+                                Buku</a>
                         </div>
                     </div>
                 </div>
             </section>
-        @endif --}}
-    {{-- @endif --}}
+        @endif
+    @endif
     @yield('content')
     @include('user.components.footer')
 
@@ -195,29 +167,7 @@
     <script src="{{ asset('assets/js/currency.js') }}"></script>
 
     @yield('script')
-    <script>
-        $(document).ready(function() {
-            getCart();
-        });
-
-        function getCart() {
-            // event.preventDefault();
-            // $.ajax({
-            //     url: "#",
-            //     type: "GET",
-            //     success: function(response) {
-            //         if (response.data.countCart > 0) {
-            //             $('#cart').html(`<i class="fa-solid fa-cart-shopping" style="font-size: 19px;"></i><span
-        //                                     class="position-absolute top-0 start-100 translate-middle p-1 bg-danger rounded-circle">
-        //                                     <span class="visually-hidden">New alerts</span>
-        //                                 </span>`);
-            //         } else {
-            //             $('#cart').html(`<i class="fa-solid fa-cart-shopping" style="font-size: 19px;"></i>`);
-            //         }
-            //     }
-            // });
-        }
-    </script>
+    <script></script>
 </body>
 
 </html>

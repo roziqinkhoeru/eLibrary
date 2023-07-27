@@ -61,9 +61,6 @@
     <link rel="stylesheet" href="{{ asset('assets/template/admin/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/template/admin/css/atlantis.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/app.css') }}">
-
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    {{-- <link rel="stylesheet" href="{{ asset('assets/template/admin/css/demo.css') }}"> --}}
 </head>
 
 <body>
@@ -175,10 +172,6 @@
 
     {{-- Atlantis JS --}}
     <script src="{{ asset('assets/template/admin/js/atlantis.min.js') }}"></script>
-
-    <!-- Atlantis DEMO methods, don't include it in your project! -->
-    {{-- <script src="{{ asset('assets/template/admin/js/setting-demo.js') }}"></script>
-    <script src="{{ asset('assets/template/admin/js/demo.js') }}"></script> --}}
     {{-- Sweet Alert --}}
     {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
 
