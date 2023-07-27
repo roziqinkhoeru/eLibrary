@@ -163,8 +163,9 @@
                 url: `{{ route('admin.transaction.create.student.data') }}`,
                 dataType: "json",
                 success: function(response) {
+                    console.log(response);
                     $.each(response.data.students, function(index, item) {
-                        htmlstring += `<option value="${item.id}">${item.name}</option>`;
+                        htmlstring += `<option value="${item.nis}">${item.name}</option>`;
                     });
                     $('#student_id').html(htmlstring);
                 },
