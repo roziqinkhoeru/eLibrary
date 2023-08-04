@@ -64,10 +64,25 @@
         </li>
         {{-- student --}}
         <li class="nav-item @if ($currentNav == 'student') active @endif">
-            <a href="{{ route('admin.student') }}">
+            <a data-toggle="collapse" href="#studentMenu">
                 <i class="fas fa-user-graduate"></i>
                 <p>Siswa</p>
+                <span class="caret"></span>
             </a>
+            <div class="collapse" id="studentMenu">
+                <ul class="nav nav-collapse">
+                    <li class="@if ($currentNavChild == 'student') active @endif">
+                        <a href="{{ route('admin.student') }}">
+                            <span class="sub-item">Pinjam</span>
+                        </a>
+                    </li>
+                    <li class="@if ($currentNavChild == 'fines') active @endif">
+                        <a href="{{ route('admin.student.fines') }}">
+                            <span class="sub-item">Denda</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </li>
         {{-- category --}}
         <li class="nav-item @if ($currentNav == 'category') active @endif">
