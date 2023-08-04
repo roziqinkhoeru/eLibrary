@@ -117,7 +117,7 @@
         });
 
         const showLoadingIndicator = () => {
-            $('#studentTableBody').html(tableLoader(11, `{{ asset('assets/img/loader/Ellipsis-2s-48px.svg') }}`));
+            $('#studentTableBody').html(tableLoader(7, `{{ asset('assets/img/loader/Ellipsis-2s-48px.svg') }}`));
         }
 
         function getStudents() {
@@ -188,11 +188,11 @@
                                                                 <tbody>
                                                                     ${student.transactions.map((transaction, index) => {
                                                                         return `
-                                                                        <tr class="">
-                                                                            <td scope="row" class="text-center">${index + 1}</td>
-                                                                            <td>${transaction.book.title}</td>
-                                                                        </tr>
-                                                                        `;
+                                                                            <tr class="">
+                                                                                <td scope="row" class="text-center">${index + 1}</td>
+                                                                                <td>${transaction.book.title}</td>
+                                                                            </tr>
+                                                                            `;
                                                                     }).join('') }
                                                                 </tbody>
                                                             </table>
