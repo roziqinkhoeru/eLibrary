@@ -93,6 +93,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::controller(StudentController::class)->group(function () {
             Route::get('/admin/student', 'student')->name('admin.student');
             Route::get('/admin/student/data', 'getStudent')->name('admin.student.data');
+            Route::get('/admin/student/fines', 'fines')->name('admin.student.fines');
+            Route::get('/admin/student/fines/data', 'getFines')->name('admin.student.fines.data');
         });
         Route::controller(TransactionController::class)->group(function () {
             Route::get('/admin/transaction/list', 'listTransaction')->name('admin.list.transaction');
