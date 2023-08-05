@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\CustomDate;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
@@ -67,7 +68,7 @@ class StudentController extends Controller
             ->whereHas('transactions', function ($query) use ($request) {
                 $query->where('status', 'kembali')->where('penalty', '>', 0)
                     ->whereMonth('return_date', $request->finesMonth)
-                    ->whereYear('return_date', $request->finesYear);;
+                    ->whereYear('return_date', $request->finesYear);
             })
             ->get();
 
@@ -79,12 +80,30 @@ class StudentController extends Controller
         );
     }
 
-    public function finesPrint()
+    public function finesPrint(Request $request)
     {
-        $finesMonth = '';
-        $finesYear = '';
+        $fines = Student::withSum(['transactions' => function ($query) use ($request) {
+            $query->where('status', 'kembali')
+                ->where('penalty', '>', 0)
+                ->whereMonth('return_date', $request->month)
+                ->whereYear('return_date', $request->year);
+        }], 'penalty')
+            ->with('class_school:id,name')
+            ->whereHas('transactions', function ($query) use ($request) {
+                $query->where('status', 'kembali')->where('penalty', '>', 0)
+                    ->whereMonth('return_date', $request->month)
+                    ->whereYear('return_date', $request->year);
+            })
+            ->get();
+        $finesMonth = $request->month;
+        $finesYear = $request->year;
+        $finesMonthText = CustomDate::bulanDariAngka($finesMonth);
+
         $data = [
-            'title' => "Rekap Denda Siswa Perpustakaan Per $finesMonth $finesYear",
+            'title' => "Rekap Denda Siswa Perpustakaan Per $finesMonthText $finesYear",
+            'finesMonth' => $finesMonthText,
+            'finesYear' => $finesYear,
+            'fines' => $fines
         ];
 
         return view('admin.students.printFines', $data);
