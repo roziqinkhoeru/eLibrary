@@ -70,6 +70,8 @@ class StudentController extends Controller
                     ->whereMonth('return_date', $request->finesMonth)
                     ->whereYear('return_date', $request->finesYear);
             })
+            ->orderBy('class_school_id', 'asc')
+            ->orderBy('name', 'asc')
             ->get();
 
         return ResponseFormatter::success(
@@ -94,6 +96,8 @@ class StudentController extends Controller
                     ->whereMonth('return_date', $request->month)
                     ->whereYear('return_date', $request->year);
             })
+            ->orderBy('class_school_id', 'asc')
+            ->orderBy('name', 'asc')
             ->get();
         $finesMonth = $request->month;
         $finesYear = $request->year;
