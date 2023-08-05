@@ -95,6 +95,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/admin/student/data', 'getStudent')->name('admin.student.data');
             Route::get('/admin/student/fines', 'fines')->name('admin.student.fines');
             Route::get('/admin/student/fines/data', 'getFines')->name('admin.student.fines.data');
+            Route::get('/admin/student/fines/print', 'finesPrint')->name('admin.student.fines.print');
         });
         Route::controller(TransactionController::class)->group(function () {
             Route::get('/admin/transaction/list', 'listTransaction')->name('admin.list.transaction');
