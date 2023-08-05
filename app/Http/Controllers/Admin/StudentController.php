@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\CustomDate;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
@@ -55,14 +56,19 @@ class StudentController extends Controller
         return view('admin.students.fines', $data);
     }
 
-    public function getFines()
+    public function getFines(Request $request)
     {
-        $fines = Student::withSum(['transactions' => function ($query) {
-            $query->where('status', 'kembali')->where('penalty', '>', 0);
+        $fines = Student::withSum(['transactions' => function ($query) use ($request) {
+            $query->where('status', 'kembali')
+                ->where('penalty', '>', 0)
+                ->whereMonth('return_date', $request->finesMonth)
+                ->whereYear('return_date', $request->finesYear);
         }], 'penalty')
             ->with('class_school:id,name')
-            ->whereHas('transactions', function ($query) {
-                $query->where('status', 'kembali')->where('penalty', '>', 0);
+            ->whereHas('transactions', function ($query) use ($request) {
+                $query->where('status', 'kembali')->where('penalty', '>', 0)
+                    ->whereMonth('return_date', $request->finesMonth)
+                    ->whereYear('return_date', $request->finesYear);
             })
             ->get();
 
@@ -72,5 +78,34 @@ class StudentController extends Controller
             ],
             'Data transaksi berhasil diambil'
         );
+    }
+
+    public function finesPrint(Request $request)
+    {
+        $fines = Student::withSum(['transactions' => function ($query) use ($request) {
+            $query->where('status', 'kembali')
+                ->where('penalty', '>', 0)
+                ->whereMonth('return_date', $request->month)
+                ->whereYear('return_date', $request->year);
+        }], 'penalty')
+            ->with('class_school:id,name')
+            ->whereHas('transactions', function ($query) use ($request) {
+                $query->where('status', 'kembali')->where('penalty', '>', 0)
+                    ->whereMonth('return_date', $request->month)
+                    ->whereYear('return_date', $request->year);
+            })
+            ->get();
+        $finesMonth = $request->month;
+        $finesYear = $request->year;
+        $finesMonthText = CustomDate::bulanDariAngka($finesMonth);
+
+        $data = [
+            'title' => "Rekap Denda Siswa Perpustakaan Per $finesMonthText $finesYear",
+            'finesMonth' => $finesMonthText,
+            'finesYear' => $finesYear,
+            'fines' => $fines
+        ];
+
+        return view('admin.students.printFines', $data);
     }
 }
