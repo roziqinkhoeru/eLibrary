@@ -301,7 +301,19 @@
         });
 
         function printContent2() {
-            window.open("{{ route('admin.student.fines.print') }}", "_blank");
+            const finesYear = $('#finesTable_year').val();
+            const finesMonth = $('#finesTable_month').val();
+
+            if (finesYear && finesMonth) {
+                window.open(`/admin/student/fines/print?year=${finesYear}&month=${finesMonth}`, "_blank");
+            } else {
+                swal({
+                    title: 'Tahun dan Bulan Kosong',
+                    text: 'Silahkan pilih tahun dan bulan terlebih dahulu',
+                    icon: "error",
+                    dangerMode: true,
+                });
+            }
         }
     </script>
 @endsection

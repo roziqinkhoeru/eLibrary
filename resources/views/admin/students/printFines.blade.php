@@ -41,7 +41,7 @@
 
 <body>
     <main id="bodyPrint">
-        <h4 class="text-center">REKAP DENDA PERPUSTAKAAN PER BULAN MONTH YEAR</h4>
+        <h4 class="text-center">REKAP DENDA PERPUSTAKAAN PER {{ $finesMonth }} {{ $finesYear }}</h4>
         <div class="w-100 mb-4">
             <table class="w-100 table" id="finesTableReport">
                 <thead>
@@ -54,19 +54,15 @@
                     </tr>
                 </thead>
                 <tbody id="finesTableReportBody">
-                    <tr>
-                        <td class="text-center">1</td>
-                        <td>123456789</td>
-                        <td>John Doe</td>
-                        <td class="text-center">XII</td>
-                        <td class="text-center">Rp. 100.000</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">2</td>
-                        <td>123456789</td>
-                        <td>John Doe</td>
-                        <td class="text-center">XII</td>
-                        <td class="text-center">Rp. 100.000</td>
+                    @foreach ($fines as $finesData)
+                        <tr>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td>{{ $finesData->nis }}</td>
+                            <td>{{ $finesData->name }}</td>
+                            <td class="text-center">{{ $finesData->class_school->name }}</td>
+                            <td class="text-center">{{ format_idr($finesData->transactions_sum_penalty) }}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -116,7 +112,7 @@
                 return number.toString().padStart(2, '0');
             }
 
-            const titlePrint = `Rekap Denda Siswa Perpustakaan Per Month Year`;
+            const titlePrint = "Rekap Denda Siswa Perpustakaan Per {{ $finesMonth }} {{ $finesYear }}";
             var prtContent = document.getElementById("bodyPrint");
 
             if (prtContent) {
@@ -143,6 +139,15 @@
                 });
             }
         });
+
+        const intToMonth = (month) => {
+            const months = [
+                'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+            ];
+
+            return months[(month - 1) % 12];
+        };
     </script>
 </body>
 
