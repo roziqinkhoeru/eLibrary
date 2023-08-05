@@ -23,6 +23,10 @@ span,
     text-align: center !important;
 }
 
+.text-right {
+    text-align: right !important;
+}
+
 .mb-4 {
     margin-bottom: 18px !important;
 }
