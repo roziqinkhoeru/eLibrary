@@ -81,10 +81,10 @@ class StudentController extends Controller
 
     public function finesPrint()
     {
+        $finesMonth = '';
+        $finesYear = '';
         $data = [
-            'title' => 'Data Denda Siswa | Admin Perpus Digital',
-            'currentNav' => 'student',
-            'currentNavChild' => 'fines',
+            'title' => "Rekap Denda Siswa Perpustakaan Per $finesMonth $finesYear",
         ];
 
         return view('admin.students.printFines', $data);
