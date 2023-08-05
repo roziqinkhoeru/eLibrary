@@ -1,3 +1,6 @@
+<?php
+use App\Helpers\CustomCurrency;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,7 +44,8 @@
 
 <body>
     <main id="bodyPrint">
-        <h4 class="text-center">REKAP DENDA PERPUSTAKAAN PER {{ $finesMonth }} {{ $finesYear }}</h4>
+        <h4 class="text-center">REKAP DENDA PERPUSTAKAAN PER {{ $finesMonth }}
+            {{ $finesYear }}</h4>
         <div class="w-100 mb-4">
             <table class="w-100 table" id="finesTableReport">
                 <thead>
@@ -60,7 +64,8 @@
                             <td>{{ $finesData->nis }}</td>
                             <td>{{ $finesData->name }}</td>
                             <td class="text-center">{{ $finesData->class_school->name }}</td>
-                            <td class="text-center">{{ format_idr($finesData->transactions_sum_penalty) }}</td>
+                            <td class="text-center">
+                                {{ CustomCurrency::format_idr($finesData->transactions_sum_penalty) }}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -119,7 +124,7 @@
                 // Buat elemen style untuk CSS khusus cetak
                 var customStyle = document.createElement('style');
                 customStyle.innerHTML =
-                    `@page{size:A4;margin:1cm;transform:scale(0.8);-webkit-transform:scale(0.8);-moz-transform:scale(0.8);-ms-transform:scale(0.8);-o-transform:scale(0.8)}h4{text-transform:uppercase;font-size:14px!important}p,span,.body-print .table-desc{font-size:12px!important}.text-center{text-align:center!important}.mb-4{margin-bottom:18px!important}.text-italic{font-style:italic!important}.w-100{width:100%!important}#finesTableReport.table{border-collapse:collapse!important;width:100%;font-size:12px!important}#finesTableReport th,#finesTableReport td{border:1px solid #000;padding:4px;text-align:left}#finesTableReport th{background-color:#f2f2f2;font-size:11px!important;text-transform:uppercase}`;
+                    `@page{size:A4;margin:1cm;transform:scale(0.8);-webkit-transform:scale(0.8);-moz-transform:scale(0.8);-ms-transform:scale(0.8);-o-transform:scale(0.8)}h4{text-transform:uppercase;font-size:14px!important}p,span,.body-print .table-desc{font-size:12px!important}.text-center{text-align:center!important}.text-right{text-align:right!important;}.mb-4{margin-bottom:18px!important}.text-italic{font-style:italic!important}.w-100{width:100%!important}#finesTableReport.table{border-collapse:collapse!important;width:100%;font-size:12px!important}#finesTableReport th,#finesTableReport td{border:1px solid #000;padding:4px;text-align:left}#finesTableReport th{background-color:#f2f2f2;font-size:11px!important;text-transform:uppercase}`;
 
                 var WinPrint = window.open('', '',
                     'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
@@ -129,7 +134,6 @@
                 WinPrint.document.close();
                 WinPrint.focus();
                 WinPrint.print();
-                WinPrint.close();
             } else {
                 swal({
                     title: "Gagal!",
