@@ -2,67 +2,41 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Rekap Denda Siswa Perpustakaan Per Month Year</title>
-    <style>
-        @page {
-            size: A4;
-            margin: 1cm;
-            transform: scale(0.8);
-            -webkit-transform: scale(0.8);
-            -moz-transform: scale(0.8);
-            -ms-transform: scale(0.8);
-            -o-transform: scale(0.8);
-        }
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <meta name="description"
+        content="Jelajahi koleksi buku digital dan sumber daya luas di eLibrary. Tingkatkan pengetahuan Anda dan temukan dunia baru melalui perpustakaan online komprehensif kami.">
+    <meta name="keywords"
+        content="eLibrary, buku digital, perpustakaan online, pengetahuan, sumber daya, membaca, ebook">
+    <meta name="author" content="eLibrary">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="eLibrary - Temukan Dunia Pengetahuan">
+    <meta property="og:description"
+        content="Tingkatkan pengetahuan Anda dan jelajahi koleksi buku digital dan sumber daya luas di eLibrary.">
+    <meta property="og:image" content="{{ asset('assets/icon/apple-touch-icon.png') }}">
+    <meta property="og:url" content="https://www.elibrary.site">
 
-        h4 {
-            text-transform: uppercase;
-            font-size: 14px !important;
-        }
+    <title>{{ $title }}</title>
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
 
-        p,
-        span,
-        .body-print .table-desc {
-            font-size: 12px !important;
-        }
+    {{-- apple touch icon --}}
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('assets/icon/apple-touch-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('assets/icon/apple-touch-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/icon/apple-touch-icon-76x76.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('assets/icon/apple-touch-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('assets/icon/apple-touch-icon-120x120.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('assets/icon/apple-touch-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('assets/icon/apple-touch-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/icon/apple-touch-icon-180x180.png') }}">
 
-        .text-center {
-            text-align: center !important;
-        }
+    {{-- microsoft touch icon --}}
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ asset('assets/icon/apple-touch-icon-144x144.png') }}">
+    <meta name="theme-color" content="#ffffff">
 
-        .mb-4 {
-            margin-bottom: 18px !important;
-        }
-
-        .text-italic {
-            font-style: italic !important;
-        }
-
-        .w-100 {
-            width: 100% !important;
-        }
-
-        #finesTableReport.table {
-            border-collapse: collapse !important;
-            width: 100%;
-            font-size: 10px !important;
-        }
-
-        #finesTableReport th,
-        #finesTableReport td {
-            border: 1px solid #000000;
-            padding: 4px;
-            text-align: left;
-        }
-
-        #finesTableReport th {
-            background-color: #f2f2f2;
-            font-size: 9px !important;
-            text-transform: uppercase;
-        }
-    </style>
+    {{-- CSS Files --}}
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/print.css') }}">
 </head>
 
 <body>
@@ -104,6 +78,8 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    {{-- Sweet Alert --}}
+    <script src="{{ asset('assets/template/admin/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
     <script>
         $(document).ready(function() {
             // Cache the jQuery objects for better performance
