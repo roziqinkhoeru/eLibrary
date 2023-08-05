@@ -1,0 +1,77 @@
+@page {
+    size: A4;
+    margin: 1cm;
+    transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    -o-transform: scale(0.8);
+}
+
+h4 {
+    text-transform: uppercase;
+    font-size: 14px !important;
+}
+
+p,
+span,
+.body-print .table-desc {
+    font-size: 12px !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.mb-4 {
+    margin-bottom: 18px !important;
+}
+
+.text-italic {
+    font-style: italic !important;
+}
+
+.w-100 {
+    width: 100% !important;
+}
+
+#finesTableReport.table {
+    border-collapse: collapse !important;
+    width: 100%;
+    font-size: 10px !important;
+}
+
+#finesTableReport th,
+#finesTableReport td {
+    border: 1px solid #000000;
+    padding: 4px;
+    text-align: left;
+}
+
+#finesTableReport th {
+    background-color: #f2f2f2;
+    font-size: 9px !important;
+    text-transform: uppercase;
+}
+
+.swal-modal * {
+    font-family: "Poppins", sans-serif !important;
+}
+
+.swal-title {
+    font-weight: 700;
+    padding-top: 0 !important;
+}
+
+.swal-text {
+    text-align: center !important;
+}
+
+.swal-footer {
+    text-align: center !important;
+    margin-top: 4px !important;
+}
