@@ -84,6 +84,27 @@
     display: inline-block;
 }
 
+/* datatable */
+.info-table {
+    display: flex;
+    align-items: center;
+}
+
+.form-filter-datatable {
+    padding: 0.375rem 0.75rem !important;
+}
+
+input.form-filter-datatable,
+select.form-filter-datatable {
+    height: 35px !important;
+    appearance: none !important;
+}
+
+input[aria-controls="finesTable"],
+select[aria-controls="finesTable"] {
+    width: 1% !important;
+}
+
 /* SWEET ALERT */
 .swal-text {
     text-align: center !important;
