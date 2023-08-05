@@ -55,14 +55,19 @@ class StudentController extends Controller
         return view('admin.students.fines', $data);
     }
 
-    public function getFines()
+    public function getFines(Request $request)
     {
-        $fines = Student::withSum(['transactions' => function ($query) {
-            $query->where('status', 'kembali')->where('penalty', '>', 0);
+        $fines = Student::withSum(['transactions' => function ($query) use ($request) {
+            $query->where('status', 'kembali')
+                ->where('penalty', '>', 0)
+                ->whereMonth('return_date', $request->finesMonth)
+                ->whereYear('return_date', $request->finesYear);
         }], 'penalty')
             ->with('class_school:id,name')
-            ->whereHas('transactions', function ($query) {
-                $query->where('status', 'kembali')->where('penalty', '>', 0);
+            ->whereHas('transactions', function ($query) use ($request) {
+                $query->where('status', 'kembali')->where('penalty', '>', 0)
+                    ->whereMonth('return_date', $request->finesMonth)
+                    ->whereYear('return_date', $request->finesYear);;
             })
             ->get();
 
@@ -72,5 +77,16 @@ class StudentController extends Controller
             ],
             'Data transaksi berhasil diambil'
         );
+    }
+
+    public function finesPrint()
+    {
+        $data = [
+            'title' => 'Data Denda Siswa | Admin Perpus Digital',
+            'currentNav' => 'student',
+            'currentNavChild' => 'fines',
+        ];
+
+        return view('admin.students.printFines', $data);
     }
 }
