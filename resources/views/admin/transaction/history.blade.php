@@ -53,6 +53,7 @@
                                             <th>Tanggal Pinjam</th>
                                             <th>Tanggal Batas Pinjam</th>
                                             <th>Tanggal Pengembalian</th>
+                                            <th>Tanggal Batas Pembayaran</th>
                                             <th>Petugas</th>
                                             <th>Denda</th>
                                         </tr>
@@ -136,7 +137,7 @@
         });
 
         const showLoadingIndicator = () => {
-            $('#transactionTableBody').html(tableLoader(10, `{{ asset('assets/img/loader/Ellipsis-2s-48px.svg') }}`));
+            $('#transactionTableBody').html(tableLoader(11, `{{ asset('assets/img/loader/Ellipsis-2s-48px.svg') }}`));
         }
 
         function getStudents() {
@@ -157,6 +158,8 @@
                                 moment(transaction.start_date, 'YYYY/MM/DD').format('DD/MM/YY'),
                                 moment(transaction.end_date, 'YYYY/MM/DD').format('DD/MM/YY'),
                                 moment(transaction.return_date, 'YYYY/MM/DD').format('DD/MM/YY'),
+                                moment(transaction.return_date, 'YYYY/MM/DD').add(3, 'days').format(
+                                    'DD/MM/YY'),
                                 transaction.officer.name,
                                 transaction.penalty !== 0 ? localCurrencyIDR(transaction
                                     .penalty) : '-',
@@ -169,11 +172,11 @@
                             $(rowNode).find('td').eq(3).addClass('text-nowrap');
                         });
                     } else {
-                        $('#transactionTableBody').html(tableEmpty(10, 'buku perpustakaan'));
+                        $('#transactionTableBody').html(tableEmpty(11, 'buku perpustakaan'));
                     }
                 },
                 error: function(error) {
-                    $('#bookTableBody').html(tableError(10, `${response.responseJSON.message}`));
+                    $('#bookTableBody').html(tableError(11, `${response.responseJSON.message}`));
                 }
             });
         }
