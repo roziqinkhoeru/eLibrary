@@ -68,6 +68,10 @@ use App\Helpers\CustomCurrency;
                                 {{ CustomCurrency::format_idr($finesData->transactions_sum_penalty) }}</td>
                         </tr>
                     @endforeach
+                    <tr>
+                        <td colspan="4" class="text-bold">TOTAL</td>
+                        <td class="text-center text-bold">{{ CustomCurrency::format_idr($totalFines) }}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

@@ -99,6 +99,8 @@ class StudentController extends Controller
             ->orderBy('class_school_id', 'asc')
             ->orderBy('name', 'asc')
             ->get();
+
+        $totalFines = $fines->sum('transactions_sum_penalty');
         $finesMonth = $request->month;
         $finesYear = $request->year;
         $finesMonthText = CustomDate::bulanDariAngka($finesMonth);
@@ -107,7 +109,8 @@ class StudentController extends Controller
             'title' => "Rekap Denda Siswa Perpustakaan Per $finesMonthText $finesYear",
             'finesMonth' => $finesMonthText,
             'finesYear' => $finesYear,
-            'fines' => $fines
+            'fines' => $fines,
+            'totalFines' => $totalFines
         ];
 
         return view('admin.students.printFines', $data);
