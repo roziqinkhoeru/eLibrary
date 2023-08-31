@@ -181,7 +181,7 @@
                                 @foreach ($studentTopBorrow as $data)
                                     <div class="item-list">
                                         <div class="avatar">
-                                            <img src="{{ asset('storage/'. $data->profile_picture) }}"
+                                            <img src="{{ asset('storage/' . $data->profile_picture) }}"
                                                 alt="{{ $data->student_name }} Profile"
                                                 class="avatar-img rounded-circle">
                                         </div>
@@ -211,7 +211,7 @@
             value: {{ $statisticClassBorrow[0]->total }},
             maxValue: {{ array_sum($statisticClassBorrow->pluck('total')->toArray()) }},
             width: 7,
-            text: {{ $statisticClassBorrow[0]->total }},
+            text: '{{ $statisticClassBorrow[0]->total }}',
             colors: ['#f1f1f1', '#FF9E27'],
             duration: 400,
             wrpClass: 'circles-wrp',
@@ -226,7 +226,7 @@
             value: {{ $statisticClassBorrow[1]->total }},
             maxValue: {{ array_sum($statisticClassBorrow->pluck('total')->toArray()) }},
             width: 7,
-            text: {{ $statisticClassBorrow[1]->total }},
+            text: '{{ $statisticClassBorrow[1]->total }}',
             colors: ['#f1f1f1', '#2BB930'],
             duration: 400,
             wrpClass: 'circles-wrp',
@@ -241,7 +241,7 @@
             value: {{ $statisticClassBorrow[2]->total }},
             maxValue: {{ array_sum($statisticClassBorrow->pluck('total')->toArray()) }},
             width: 7,
-            text: {{ $statisticClassBorrow[2]->total }},
+            text: '{{ $statisticClassBorrow[2]->total }}',
             colors: ['#f1f1f1', '#F25961'],
             duration: 400,
             wrpClass: 'circles-wrp',

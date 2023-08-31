@@ -6,6 +6,7 @@ use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\ClassSchool;
 use App\Models\Student;
 use App\Models\Transaction;
 use App\Models\User;
@@ -25,13 +26,11 @@ class AdminController extends Controller
         $borrow = Transaction::where('status', 'pinjam')->count();
         $student = Student::count();
         $categories = Category::withCount('books')->get();
-        // dd($categories);
-        $statisticClassBorrow = Transaction::select(DB::raw('count(*) as total, grade'))
-            ->join('students', 'students.nis', '=', 'transactions.student_id')
-            ->join('class_schools', 'class_schools.id', '=', 'students.class_school_id')
-            ->whereYear('transactions.created_at', date('Y'))
+
+        $statisticClassBorrow = ClassSchool::select('class_schools.grade', DB::raw('count(transactions.id) as total'))
+            ->leftJoin('students', 'students.class_school_id', '=', 'class_schools.id')
+            ->leftJoin('transactions', 'transactions.student_id', '=', 'students.nis')
             ->groupBy('grade')
-            ->orderBy('grade', 'asc')
             ->get();
 
         $statisticTopClassBorrow = Transaction::select(DB::raw('count(*) as total, class_schools.name, class_schools.major'))
@@ -41,6 +40,7 @@ class AdminController extends Controller
             ->groupBy('class_schools.name', 'class_schools.major')
             ->orderBy('total', 'desc')
             ->get();
+
 
         // $studentTopBorrow = Transaction::select(DB::raw('count(*) as total'), 'students.name as student_name', 'students.nis', 'students.profile_picture', 'class_schools.name as class_name', 'class_schools.major')
         //     ->join('students', 'students.nis', '=', 'transactions.student_id')
@@ -52,13 +52,13 @@ class AdminController extends Controller
         //     ->get();
 
         $studentTopBorrow = Student::select('students.name as student_name', 'students.nis', 'students.profile_picture')
-        ->with('class_school:id,name,major')
-        ->withCount(['transactions as total' => function ($query) {
-            $query->whereYear('created_at', date('Y'));
-        }])
-        ->orderBy('total', 'desc')
-        ->limit(5)
-        ->get();
+            ->with('class_school:id,name,major')
+            ->withCount(['transactions as total' => function ($query) {
+                $query->whereYear('created_at', date('Y'));
+            }])
+            ->orderBy('total', 'desc')
+            ->limit(5)
+            ->get();
 
         $statisticMonthBorrow = Transaction::select(DB::raw('count(*) as total, month(transactions.start_date) as month'))
             ->whereYear('transactions.start_date', date('Y'))
