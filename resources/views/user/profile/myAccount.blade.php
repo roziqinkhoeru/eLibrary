@@ -265,8 +265,8 @@
                                         <tr>
                                             <th scope="col" class="text-center">#</th>
                                             <th scope="col">Buku</th>
-                                            <th scope="col">Tanggal</th>
-                                            <th scope="col">Masa Pinjam</th>
+                                            <th scope="col" style="min-width: 160px;">Tanggal</th>
+                                            <th scope="col" style="min-width: 170px;">Masa Pinjam</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -334,6 +334,8 @@
                 $.map(data, function(transaction, index) {
                     let badgeStatus = '';
                     let badgeText = '';
+                    let penaltyDiffDay = moment(transaction.return_date, 'YYYY/MM/DD').diff(moment(transaction
+                        .end_date, 'YYYY/MM/DD'), 'days');
                     switch (transaction.status) {
                         case 'kembali':
                             badgeStatus = 'text-bg-success';
@@ -351,9 +353,13 @@
                                             </td>
                                             <td>
                                                 <div>Pinjam : ${moment(transaction.start_date, 'YYYY/MM/DD').format('DD/MM/YY')}</div>
+                                                <div>Batas : ${moment(transaction.end_date, 'YYYY/MM/DD').format('DD/MM/YY')}</div>
                                                 <div>Kembali : ${moment(transaction.return_date, 'YYYY/MM/DD').format('DD/MM/YY')}</div>
                                             </td>
-                                            <td><span class="badge ${ parseInt(transaction.penalty) === 0 ? 'badge-primary bg-primary' : 'badge-danger bg-danger'}">${ parseInt(transaction.penalty) === 0 ? 'Tepat Waktu' : 'Denda : ' + localCurrencyIDR(transaction.penalty)}</span></td>
+                                            <td>
+                                                <span class="badge ${ parseInt(transaction.penalty) === 0 ? 'badge-primary bg-primary' : 'badge-danger bg-danger'}">${ parseInt(transaction.penalty) === 0 ? 'Tepat Waktu' : 'Denda : ' + localCurrencyIDR(transaction.penalty)}</span><br/>
+                                                ${ penaltyDiffDay > 0 ? 'Terlambat : ' + penaltyDiffDay + ' Hari' : ''}
+                                            </td>
                                         </tr>`;
                 });
                 myTransaction = `<div class="table-responsive">
@@ -362,8 +368,8 @@
                                             <tr>
                                                 <th scope="col" class="text-center">#</th>
                                                 <th scope="col">Buku</th>
-                                                <th scope="col">Tanggal</th>
-                                                <th scope="col">Ket.</th>
+                                                <th scope="col" style="min-width: 160px;">Tanggal</th>
+                                                <th scope="col" style="min-width: 170px;">Ket.</th>
                                             </tr>
                                         </thead>
                                         <tbody>${myTransactionBody}</tbody>
