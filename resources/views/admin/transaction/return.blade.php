@@ -134,8 +134,28 @@
                                     <label for="penalty" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right">Denda
                                         <span class="required-label">*</span></label>
                                     <div class="col-lg-6 col-md-9 col-sm-8">
-                                        <input type="number" class="form-control" id="penalty" name="penalty"
-                                            value="{{ $penalty }}" placeholder="Masukkan Denda" required>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Rp</span>
+                                            </div>
+                                            <input type="text" class="form-control" id="penalty" name="penalty"
+                                                value="{{ $penalty }}" placeholder="Masukkan Denda" required
+                                                readonly>
+                                        </div>
+                                        <small id="penaltyHelp" class="form-text text-muted">Ket. : <span
+                                                id="penaltyDay">{{ $penaltyDiffDay > 0 ? 'Pengembalian telah lewat ' . $penaltyDiffDay . ' hari' : 'Pengembalian tidak melebihi batas waktu' }}</span></small>
+                                    </div>
+                                </div>
+                                {{-- edit penalty --}}
+                                <div class="form-group form-show-validation row">
+                                    <label for="editPenalty"
+                                        class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-sm-right"></label>
+                                    <div class="col-lg-6 col-md-9 col-sm-8">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="editPenalty"
+                                                name="editPenalty">
+                                            <label class="custom-control-label" for="editPenalty">Ubah Denda</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -171,7 +191,11 @@
                 format: 'DD/MM/YYYY',
                 defaultDate: today
             });
+
+            $('#penalty').val(formatCurrency('{{ $penalty }}'));
+            formatCurrencyInput('penalty');
         });
+
         $("#formAddCategory").validate({
             rules: {
                 return_date: {
@@ -202,7 +226,7 @@
                         _token: '{{ csrf_token() }}',
                         _method: 'PUT',
                         return_date: moment($('#return_date').val(), 'DD/MM/YYYY').format('YYYY/MM/DD'),
-                        penalty: $('#penalty').val(),
+                        penalty: convertCurrencyToNumber($('#penalty').val()),
                     },
                     success: function(response) {
                         $('#formAddCategoryButton').html('Kirim');
@@ -252,6 +276,63 @@
                         return false;
                     },
                 });
+            }
+        });
+
+        const formatCurrencyInput = (inputId) => {
+            var inputElement = document.getElementById(inputId);
+
+            inputElement.addEventListener('input', function() {
+                // Remove non-numeric characters
+                var value = this.value.replace(/[^0-9]/g, '');
+
+                if (value === '') {
+                    this.value = '0';
+                } else {
+                    var formattedValue = parseFloat(value).toLocaleString('en-US');
+                    this.value = formattedValue;
+                }
+            });
+        }
+
+        const formatCurrency = (currency) => {
+            if (currency === '') {
+                return '0';
+            } else {
+                var formattedValue = parseFloat(currency).toLocaleString('en-US');
+                return formattedValue;
+            }
+        }
+
+        const convertCurrencyToNumber = (currencyString) => {
+            var cleanedValue = currencyString.replace(/[^\d.-]/g, '');
+            var numericValue = parseFloat(cleanedValue);
+            return numericValue;
+        }
+
+        $(function() {
+            $('#return_date').on('dp.change', function() {
+                var returnDate = moment($(this).val(), 'DD/MM/YYYY');
+                var endDate = moment('{{ $transaction->end_date }}', 'YYYY/MM/DD');
+                var diff = returnDate.diff(endDate, 'days');
+                var newPenalty = 0;
+
+                if (diff > 0) {
+                    newPenalty = diff * 2000;
+                    $('#penaltyDay').text(`Pengembalian telah lewat ${diff} hari`);
+                } else {
+                    $('#penaltyDay').text('Pengembalian tidak melebihi batas waktu');
+                }
+
+                $('#penalty').val(formatCurrency(newPenalty));
+            });
+        });
+
+        $('#editPenalty').change(function() {
+            if ($(this).is(':checked')) {
+                $('#penalty').prop('readonly', false);
+            } else {
+                $('#penalty').prop('readonly', true);
             }
         });
     </script>

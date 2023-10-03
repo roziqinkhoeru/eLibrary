@@ -30,7 +30,7 @@ class TransactionController extends Controller
     public function getListTransaction()
     {
         $transactions = Transaction::with(['student:nis,name,class_school_id', 'student.class_school', 'book:id,title,isbn', 'officer:nip,name'])
-            ->select('id', 'status', 'start_date', 'end_date', 'student_id', 'officer_id', 'book_id', DB::raw('DATEDIFF(NOW(),end_date) * 1000 as penalty'))
+            ->select('id', 'status', 'start_date', 'end_date', 'student_id', 'officer_id', 'book_id', DB::raw('DATEDIFF(NOW(),end_date) * 2000 as penalty'))
             ->where('status', 'pinjam')
             ->orderBy('end_date', 'asc')
             ->get();
@@ -161,8 +161,9 @@ class TransactionController extends Controller
         $penalty = 0;
         $end_date = Carbon::parse($transaction->end_date)->format('Y-m-d');
         if ($end_date < now()) {
-            $penalty = now()->diffInDays($end_date) * 1000;
+            $penalty = now()->diffInDays($end_date) * 2000;
         }
+        $penaltyDiffDay = now()->diffInDays($end_date);
 
         $data = [
             'title' => 'Pengembalian Buku | Admin Perpus Digital',
@@ -170,6 +171,7 @@ class TransactionController extends Controller
             'currentNavChild' => 'return',
             'transaction' => $transaction,
             'penalty' => $penalty,
+            'penaltyDiffDay' => $penaltyDiffDay,
         ];
 
         return view('admin.transaction.return', $data);
