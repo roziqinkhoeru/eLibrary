@@ -61,7 +61,7 @@ class StudentDashboardController extends Controller
             ->select('id', 'status', 'start_date', 'end_date', 'student_id', 'book_id', DB::raw('DATEDIFF(NOW(),end_date) * 2000 as penalty'), DB::raw('DATEDIFF(end_date,NOW()) as penalty_day'))
             ->where('status', 'pinjam')
             ->where('student_id', Auth::user()->student_id)
-            ->orderBy('end_date', 'asc')
+            ->orderBy('start_date', 'desc')
             ->get();
         // dd($transactions);
         return ResponseFormatter::success([
@@ -74,6 +74,7 @@ class StudentDashboardController extends Controller
         $transactions = Transaction::with('book:id,title,cover,category_id,author,publisher', 'book.category:id,name')
             ->where('student_id', Auth::user()->student_id)
             ->where('status', 'kembali')
+            ->orderBy('start_date', 'desc')
             ->get();
 
         return ResponseFormatter::success([
